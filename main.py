@@ -132,6 +132,9 @@ def diagramas():
     matplotlib.pyplot.scatter(indice_de_cor, mg, s=size, marker=".", edgecolors='black', alpha=transparency)
     matplotlib.pyplot.xlim(0, 4)
     matplotlib.pyplot.ylim(45, 30)
+    matplotlib.pyplot.title("M(G) x índice de cor")
+    matplotlib.pyplot.ylabel("M(G)")
+    matplotlib.pyplot.xlabel("índice de cor")
     matplotlib.pyplot.savefig('static/images/mg_indice_de_cor.png')
 
     return render_template("diagramas.html", data=(mg, mrp, indice_de_cor), name='Diagramas', zip=zip)
