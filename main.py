@@ -9,7 +9,7 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='ca
 
 cursor = connection.cursor()
 
-app = Flask(__name__, static_folder='/home/h/PycharmProjects/Catalogo_GAIA/static')
+app = Flask(__name__, static_folder='/home/h/Área de trabalho/Catalogo_GAIA/static')
 @app.route("/")
 def index():
     return render_template("index.html")
