@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+    <h1>{{name}}</h1>
+    <table border="1">
+        <tr>
+        <td><b>número ordinal do registro</b></td>
+        <td><b>identificação GAIA</b></td>
+        <td><b>ruwe</b></td>
+        <td><b>G</b></td>
+        <td><b>Rp</b></td>
+        <td><b>índice de cor</b></td>
+        <td><b>M(G)</b></td>
+        <td><b>erro de M(G)</b></td>
+        <td><b>M(Rp)</b></td>
+        <td><b>erro de M(Rp)</b></td>
+        <td><b>distância (parsecs)</b></td>
+        <td><b>erro da distância (parsecs)</b></td>
+        <td><b>Teff</b></td>
+        <td><b>erro de Teff</b></td>
+        <td><b>logg</b></td>
+        <td><b>erro de logg</b></td>
+        <td><b>mh</b></td>
+        <td><b>erro de mh</b></td>
+        </tr>
+
+        {%for (numero_ordinal_do_registro, designation, ruwe, phot_g_mean_mag, phot_rp_mean_mag, indice_de_cor, mg, erro_de_mg, mrp, erro_de_mrp, distance_gspphot, erro_de_distancia, teff_gspphot, erro_de_teff, logg_gspphot, erro_de_logg, mh_gspphot, erro_de_mh) in zip(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7], data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15], data[16], data[17])%}
+        <tr>
+        <td>{{numero_ordinal_do_registro}}</td>
+        <td>{{designation}}</td>
+        <td>{{ruwe}}</td>
+        <td>{{phot_g_mean_mag}}</td>
+        <td>{{phot_rp_mean_mag}}</td>
+        <td>{{indice_de_cor}}</td>
+        <td>{{mg}}</td>
+        <td>{{erro_de_mg}}</td>
+        <td>{{mrp}}</td>
+        <td>{{erro_de_mrp}}</td>
+        <td>{{distance_gspphot}}</td>
+        <td>{{erro_de_distancia}}</td>
+        <td>{{teff_gspphot}}</td>
+        <td>{{erro_de_teff}}</td>
+        <td>{{logg_gspphot}}</td>
+        <td>{{erro_de_logg}}</td>
+        <td>{{mh_gspphot}}</td>
+        <td>{{erro_de_mh}}</td>
+        </tr>
+    {%endfor%}
+    </table>
+</html>
