@@ -7,11 +7,15 @@
 <body>
     <h1>Catálogo GAIA de estrelas até 20 parsecs do Sol</h1>
         <button type="button" onclick="window.location.href='{{url_for('tabela_de_dados')}}';">
-        tabela de dados
+        tabela de dados GAIA
         </button>
 
-        <button type="button" onclick="window.location.href='{{url_for('diagramas')}}';">
-        diagramas
+        <button type="button" onclick="window.location.href='{{url_for('diagramas_gaia')}}';">
+        diagramas GAIA
+        </button>
+
+        <button type="button" onclick="window.location.href='{{url_for('diagramas_hipparcos')}}';">
+        diagramas hipparcos
         </button>
 </body>
 </html>
