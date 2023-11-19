@@ -1,9 +1,9 @@
 from flask import Flask, render_template
 import mysql.connector
 import math
-import itertools
+#import itertools
 import matplotlib.pyplot
-import numpy as np
+#import numpy as np
 import csv
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='catalogo_gaia', user='helena', password='ic2023')
@@ -142,7 +142,7 @@ def diagramas_gaia():
     matplotlib.pyplot.scatter(indice_de_cor, mg, s=size, marker=".", edgecolors='black', alpha=transparency)
     matplotlib.pyplot.xlim(0, 4.2)
     matplotlib.pyplot.ylim(15, 0.3)
-    matplotlib.pyplot.title("M(G) x índice de cor")
+    matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
     matplotlib.pyplot.ylabel("M(G)")
     matplotlib.pyplot.xlabel("índice de cor")
     matplotlib.pyplot.savefig('static/images/mg_indice_de_cor.png')
@@ -151,7 +151,7 @@ def diagramas_gaia():
     matplotlib.pyplot.scatter(indice_de_cor, mrp, s=size, marker=".", edgecolors='black', alpha=transparency)
     matplotlib.pyplot.xlim(0, 4.2)
     matplotlib.pyplot.ylim(15, 0.3)
-    matplotlib.pyplot.title("M(Rp) x índice de cor")
+    matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
     matplotlib.pyplot.ylabel("M(Rp)")
     matplotlib.pyplot.xlabel("índice de cor")
     matplotlib.pyplot.savefig('static/images/mrp_indice_de_cor.png')
@@ -180,6 +180,7 @@ def diagramas_hipparcos():
     numero_ordinal_do_registro_diagrama = []
 
     cont = 0
+    qtde_de_registros_usados = 0
     for star in value:
         Vmag.append(star[0])
         Plx.append(star[1])
@@ -189,6 +190,7 @@ def diagramas_hipparcos():
         numero_ordinal_do_registro.append(star[5])
 
         if(Plx[cont] > 0):
+            qtde_de_registros_usados += 1
             MVt.append(VTmag[cont] + 5 + 5*math.log(Plx[cont]/1000, 10))
             MV.append(Vmag[cont] + 5 + 5 * math.log(Plx[cont]/1000, 10))
             BT_VT.append(BTmag[cont] - VTmag[cont])
@@ -213,7 +215,7 @@ def diagramas_hipparcos():
     matplotlib.pyplot.scatter(B_V_diagrama, MV, s=size, marker=".", edgecolors='black', alpha=transparency)
     matplotlib.pyplot.xlim(-1, 6)
     matplotlib.pyplot.ylim(18, -16)
-    matplotlib.pyplot.title("M(V) x B-V")
+    matplotlib.pyplot.title("Hipparcos: {} estrelas".format(qtde_de_registros_usados))
     matplotlib.pyplot.ylabel("M(V)")
     matplotlib.pyplot.xlabel("B-V")
     matplotlib.pyplot.savefig('static/images/MV_B_V.png')
@@ -222,7 +224,7 @@ def diagramas_hipparcos():
     matplotlib.pyplot.scatter(BT_VT, MVt, s=size, marker=".", edgecolors='black', alpha=transparency)
     matplotlib.pyplot.xlim(-1, 7)
     matplotlib.pyplot.ylim(18, -20)
-    matplotlib.pyplot.title("M(Vt) x BT-VT")
+    matplotlib.pyplot.title("Hipparcos: {} estrelas".format(qtde_de_registros_usados))
     matplotlib.pyplot.ylabel("M(Vt)")
     matplotlib.pyplot.xlabel("BT-VT")
     matplotlib.pyplot.savefig('static/images/MVt_BT_VT.png')
