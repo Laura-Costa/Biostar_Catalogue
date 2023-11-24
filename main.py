@@ -144,7 +144,7 @@ def diagramas_gaia():
     matplotlib.pyplot.ylim(15, 0.3)
     matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
     matplotlib.pyplot.ylabel("M(G)")
-    matplotlib.pyplot.xlabel("índice de cor")
+    matplotlib.pyplot.xlabel("BP-RP")
     matplotlib.pyplot.savefig('static/images/mg_indice_de_cor.png')
     matplotlib.pyplot.clf()
 
@@ -153,7 +153,7 @@ def diagramas_gaia():
     matplotlib.pyplot.ylim(15, 0.3)
     matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
     matplotlib.pyplot.ylabel("M(Rp)")
-    matplotlib.pyplot.xlabel("índice de cor")
+    matplotlib.pyplot.xlabel("BP-RP")
     matplotlib.pyplot.savefig('static/images/mrp_indice_de_cor.png')
     matplotlib.pyplot.clf()
 
@@ -189,7 +189,8 @@ def diagramas_hipparcos():
         B_V.append(star[4])
         numero_ordinal_do_registro.append(star[5])
 
-        if(Plx[cont] > 0):
+        paralaxe_minima = 0.0500 #dá a distância máxima
+        if((Plx[cont]/1000 > paralaxe_minima or Plx[cont]/1000 == paralaxe_minima) and (BTmag[cont] - VTmag[cont]) != 0.000 and B_V[cont] != 0.000):
             qtde_de_registros_usados += 1
             MVt.append(VTmag[cont] + 5 + 5*math.log(Plx[cont]/1000, 10))
             MV.append(Vmag[cont] + 5 + 5 * math.log(Plx[cont]/1000, 10))
@@ -213,18 +214,18 @@ def diagramas_hipparcos():
     size = 1.5
 
     matplotlib.pyplot.scatter(B_V_diagrama, MV, s=size, marker=".", edgecolors='black', alpha=transparency)
-    matplotlib.pyplot.xlim(-1, 6)
-    matplotlib.pyplot.ylim(18, -16)
-    matplotlib.pyplot.title("Hipparcos: {} estrelas".format(qtde_de_registros_usados))
+    matplotlib.pyplot.xlim(-1, 3)
+    matplotlib.pyplot.ylim(18, -5)
+    matplotlib.pyplot.title("Hipparcos: {} estrelas (π ≥ {}′′)".format(qtde_de_registros_usados, paralaxe_minima))
     matplotlib.pyplot.ylabel("M(V)")
     matplotlib.pyplot.xlabel("B-V")
     matplotlib.pyplot.savefig('static/images/MV_B_V.png')
     matplotlib.pyplot.clf()
 
     matplotlib.pyplot.scatter(BT_VT, MVt, s=size, marker=".", edgecolors='black', alpha=transparency)
-    matplotlib.pyplot.xlim(-1, 7)
-    matplotlib.pyplot.ylim(18, -20)
-    matplotlib.pyplot.title("Hipparcos: {} estrelas".format(qtde_de_registros_usados))
+    matplotlib.pyplot.xlim(-1, 3)
+    matplotlib.pyplot.ylim(18, -5)
+    matplotlib.pyplot.title("Hipparcos: {} estrelas (π ≥ {}′′)".format(qtde_de_registros_usados, paralaxe_minima))
     matplotlib.pyplot.ylabel("M(Vt)")
     matplotlib.pyplot.xlabel("BT-VT")
     matplotlib.pyplot.savefig('static/images/MVt_BT_VT.png')
