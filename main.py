@@ -100,11 +100,11 @@ def tabela_de_dados():
 
     # exportar listas para csv
 
-    rows = zip(numero_ordinal_do_registro, phot_g_mean_mag, parallax, phot_bp_mean_mag, phot_rp_mean_mag, mg, indice_de_cor)
-    with open("/home/h/Área de trabalho/Catalogo_GAIA/dados_gaia.csv", "w") as f:
-        writer = csv.writer(f)
-        for row in rows:
-            writer.writerow(row)
+    #rows = zip(numero_ordinal_do_registro, phot_g_mean_mag, parallax, phot_bp_mean_mag, phot_rp_mean_mag, mg, indice_de_cor)
+    #with open("/home/h/Área de trabalho/Catalogo_GAIA/dados_gaia.csv", "w") as f:
+    #    writer = csv.writer(f)
+    #    for row in rows:
+    #        writer.writerow(row)
 
     return render_template("tabela_de_dados.html", data=(numero_ordinal_do_registro, designation, ruwe, phot_g_mean_mag, phot_rp_mean_mag, indice_de_cor, mg, erro_de_mg, mrp, erro_de_mrp, distance_gspphot, erro_de_distancia, teff_gspphot, erro_de_teff, logg_gspphot, erro_de_logg, mh_gspphot, erro_de_mh), name='Tabela de Dados',zip=zip)
 
@@ -203,11 +203,11 @@ def diagramas_hipparcos():
 
     # exportar listas para csv
 
-    rows = zip(numero_ordinal_do_registro_diagrama, MV, B_V_diagrama, MVt, BT_VT)
-    with open("/home/h/Área de trabalho/Catalogo_GAIA/dados_hipparcos.csv", "w") as f:
-        writer = csv.writer(f)
-        for row in rows:
-            writer.writerow(row)
+    #rows = zip(numero_ordinal_do_registro_diagrama, MV, B_V_diagrama, MVt, BT_VT)
+    #with open("/home/h/Área de trabalho/Catalogo_GAIA/dados_hipparcos.csv", "w") as f:
+    #    writer = csv.writer(f)
+    #    for row in rows:
+    #        writer.writerow(row)
 
 
     transparency = 1
