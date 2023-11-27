@@ -14,18 +14,21 @@
 
     {% endblock %}
 
-    <table border = 1>
+    <table border="1">
         <tr>
+        <td><b>numero_ordinal_do_registro</b></td>
         <td><b>M(G)</b></td>
         <td><b>M(Rp)</b></td>
-        <td><b>índice de cor</b></td>
+        <td><b>Bp-Rp</b></td>
+        <td><b>erro de M(G)</b></td>
+        <td><b>erro de M(Rp)</b></td>
         </tr>
 
-        {%for (mg, mrp, indice_de_cor) in zip(data[0], data[1], data[2])%}
+    {%for registro in data%}
         <tr>
-        <td>{{mg}}</td>
-        <td>{{mrp}}</td>
-        <td>{{indice_de_cor}}</td>
+        {%for col in range(6)%}
+            <td>{{registro[col]}}</td>
+        {%endfor%}
         </tr>
     {%endfor%}
     </table>

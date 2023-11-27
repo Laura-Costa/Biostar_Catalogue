@@ -261,7 +261,14 @@ create table Produto_Hipparcos(
 );
 
 
-====================================================================================
+create table Produto_Gaia_é_plotado_em(
+      parallax double not null,
+      numero_ordinal_do_registro int not null,
+      codigo char(10) not null,
+      primary key (parallax, numero_ordinal_do_registro, codigo),
+      foreign key (numero_ordinal_do_registro) references Produto_Gaia(numero_ordinal_do_registro),
+      foreign key (codigo) references Diagrama_Gaia(codigo)
+);
 
 create table Diagrama_Gaia(
       codigo char(10) not null,
@@ -272,24 +279,14 @@ create table Diagrama_Gaia(
 
 
 
+==============================================================================================================================
+
 create table Diagrama_Hipparcos(
        codigo char(10) not null,
        diagrama blob not null,
        descricao char(100),
        primary key (codigo)
 );
-
-
-create table Produto_Gaia_é_plotado_em(
-      parallax double not null,
-      ra double not null,
-      declination double not null,
-      codigo char(10) not null,
-      primary key (ra, declination, parallax, codigo),
-      foreign key (ra, declination) references Produto_Gaia(ra, declination),
-      foreign key (codigo) references Diagrama_Gaia(codigo)
-);
-
 
 create table Produto_Hipparcos_é_plotado_em(
       parallax double not null,

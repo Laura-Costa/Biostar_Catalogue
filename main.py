@@ -31,49 +31,15 @@ def tabela_de_dados_hipparcos():
 
 @app.route("/diagramas_gaia/")
 def diagramas_gaia():
-    cursor.execute("drop table Produto_Gaia")
-    cursor.execute("create table Produto_Gaia (ra double not null, declination double not null, Mg double not null, MRp double not null, Bp_menos_Rp double not null, primary key (ra, declination), foreign key (ra, declination) references Source_Gaia(ra, declination))")
-    cursor.execute("select numero_ordinal_do_registro, ra, declination, phot_g_mean_mag + 5 + 5*log(10, parallax/1000) as Mg, phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) as MRp, phot_bp_mean_mag - phot_rp_mean_mag as Bp_menos_Rp, (abs(phot_g_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_g_mean_mag + 5 + 5*log(10, (parallax+parallax_error)/1000))) + abs(phot_g_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_g_mean_mag + 5 + 5*log(10, (parallax-parallax_error)/1000))))/2 as erro_de_Mg, (abs(phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_rp_mean_mag + 5 + 5*log(10, (parallax+parallax_error)/1000))) + abs(phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_rp_mean_mag + 5 + 5*log(10, (parallax-parallax_error)/1000))))/2 as erro_de_MRp from Source_Gaia order by numero_ordinal_do_registro")
+    cursor.execute("select * from Produto_Gaia")
     value = cursor.fetchall()
 
-    for registro in value:
-        ra = registro[1]
-        declination = registro[2]
-        Mg = registro[3]
-        MRp = registro[4]
-        Bp_menos_Rp = registro[5]
-        erro_de_Mg = registro[6]
-        erro_de_MRp = registro[7]
-        cursor.execute("insert into Produto_Gaia values ({}, {}, {}, {}, {})".format(ra, declination, Mg, MRp, Bp_menos_Rp))
-
-    '''
-    transparency = 1
-    size = 1.5
-
-    matplotlib.pyplot.scatter(indice_de_cor, mg, s=size, marker=".", edgecolors='black', alpha=transparency)
-    matplotlib.pyplot.xlim(0, 4.2)
-    matplotlib.pyplot.ylim(15, 0.3)
-    matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
-    matplotlib.pyplot.ylabel("M(G)")
-    matplotlib.pyplot.xlabel("BP-RP")
-    matplotlib.pyplot.savefig('static/images/mg_indice_de_cor.png')
-    matplotlib.pyplot.clf()
-
-    matplotlib.pyplot.scatter(indice_de_cor, mrp, s=size, marker=".", edgecolors='black', alpha=transparency)
-    matplotlib.pyplot.xlim(0, 4.2)
-    matplotlib.pyplot.ylim(15, 0.3)
-    matplotlib.pyplot.title("GAIA: {} estrelas dentro de 20pc".format(cont))
-    matplotlib.pyplot.ylabel("M(Rp)")
-    matplotlib.pyplot.xlabel("BP-RP")
-    matplotlib.pyplot.savefig('static/images/mrp_indice_de_cor.png')
-    matplotlib.pyplot.clf()
-    '''
-    return render_template("diagramas_gaia.html", data=([3], [3], [3]), name='Diagramas GAIA', zip=zip)
+    return render_template("diagramas_gaia.html", data=value, name='Diagramas GAIA')
 
 
 @app.route("/diagramas_hipparcos/")
 def diagramas_hipparcos():
-    cursor.execute("select Vmag, Plx, BTmag, VTmag, B_V, numero_ordinal_do_registro from Source_Hipparcos order by numero_ordinal_do_registro")
+    cursor.execute("select * from Produto_Hipparcos")
     value = cursor.fetchall()
     '''
     transparency = 1
@@ -97,7 +63,7 @@ def diagramas_hipparcos():
     matplotlib.pyplot.savefig('static/images/MVt_BT_VT.png')
     matplotlib.pyplot.clf()
     '''
-    return render_template("diagramas_hipparcos.html", data=([2], [2], [2], [2], [2]), name='Diagramas Hipparcos', zip=zip)
+    return render_template("diagramas_hipparcos.html", data=value, name='Diagramas Hipparcos')
 
 if __name__ == "__main__":
     app.run(debug=True)

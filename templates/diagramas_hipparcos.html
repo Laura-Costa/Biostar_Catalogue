@@ -13,27 +13,25 @@
     <img src="/static/images/MVt_BT_VT.png">
 
     {% endblock %}
-    <!--
-    <table border = 1>
+    <table border="1">
         <tr>
         <td><b>numero_ordinal_do_registro</b></td>
         <td><b>M(V)</b></td>
-        <td><b>B-V</b></td>
         <td><b>M(Vt)</b></td>
+        <td><b>B-V</b></td>
         <td><b>BT-VT</b></td>
+        <td><b>erro de M(V)</b></td>
+        <td><b>erro de M(Vt)</b></td>
         </tr>
 
-        {%for (MV, B_V_diagrama, MVt, BT_VT, numero_ordinal_do_registro_diagrama) in zip(data[0], data[1], data[2], data[3], data[4])%}
+    {%for registro in data%}
         <tr>
-        <td>{{numero_ordinal_do_registro_diagrama}}</td>
-        <td>{{MV}}</td>
-        <td>{{B_V_diagrama}}</td>
-        <td>{{MVt}}</td>
-        <td>{{BT_VT}}</td>
+        {%for col in range(7)%}
+            <td>{{registro[col]}}</td>
+        {%endfor%}
         </tr>
     {%endfor%}
     </table>
-    -->
     </body>
 
 </html>
