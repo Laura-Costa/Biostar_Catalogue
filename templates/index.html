@@ -5,9 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Catálogo GAIA de estrelas até 20 parsecs do Sol</h1>
-        <button type="button" onclick="window.location.href='{{url_for('tabela_de_dados')}}';">
+    <h1>Catálogo GAIA de estrelas até 23 parsecs do Sol</h1>
+
+        <button type="button" onclick="window.location.href='{{url_for('tabela_de_dados_gaia')}}';">
         tabela de dados GAIA
+        </button>
+
+        <button type="button" onclick="window.location.href='{{url_for('tabela_de_dados_hipparcos')}}';">
+        tabela de dados Hipparcos
         </button>
 
         <button type="button" onclick="window.location.href='{{url_for('diagramas_gaia')}}';">
@@ -17,5 +22,6 @@
         <button type="button" onclick="window.location.href='{{url_for('diagramas_hipparcos')}}';">
         diagramas hipparcos
         </button>
+
 </body>
 </html>

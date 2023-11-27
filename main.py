@@ -15,17 +15,37 @@ app = Flask(__name__, static_folder='/home/h/Área de trabalho/Catalogo_GAIA/sta
 def index():
     return render_template("index.html")
 
-@app.route("/tabela_de_dados/")
-def tabela_de_dados():
+@app.route("/tabela_de_dados_gaia/")
+def tabela_de_dados_gaia():
     cursor.execute("select * from Source_Gaia order by numero_ordinal_do_registro")
     value = cursor.fetchall()
 
-    return render_template("tabela_de_dados.html", data=value, name='Tabela de Dados')
+    return render_template("tabela_de_dados_gaia.html", data=value, name='Tabela de Dados Gaia')
+
+@app.route("/tabela_de_dados_hipparcos/")
+def tabela_de_dados_hipparcos():
+    cursor.execute("select * from Source_Hipparcos order by numero_ordinal_do_registro")
+    value = cursor.fetchall()
+
+    return render_template("tabela_de_dados_hipparcos.html", data=value, name='Tabela de Dados Hipparcos')
 
 @app.route("/diagramas_gaia/")
 def diagramas_gaia():
-    cursor.execute("select parallax, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag from Source_Gaia order by numero_ordinal_do_registro")
+    cursor.execute("drop table Produto_Gaia")
+    cursor.execute("create table Produto_Gaia (ra double not null, declination double not null, Mg double not null, MRp double not null, Bp_menos_Rp double not null, primary key (ra, declination), foreign key (ra, declination) references Source_Gaia(ra, declination))")
+    cursor.execute("select numero_ordinal_do_registro, ra, declination, phot_g_mean_mag + 5 + 5*log(10, parallax/1000) as Mg, phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) as MRp, phot_bp_mean_mag - phot_rp_mean_mag as Bp_menos_Rp, (abs(phot_g_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_g_mean_mag + 5 + 5*log(10, (parallax+parallax_error)/1000))) + abs(phot_g_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_g_mean_mag + 5 + 5*log(10, (parallax-parallax_error)/1000))))/2 as erro_de_Mg, (abs(phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_rp_mean_mag + 5 + 5*log(10, (parallax+parallax_error)/1000))) + abs(phot_rp_mean_mag + 5 + 5*log(10, parallax/1000) - (phot_rp_mean_mag + 5 + 5*log(10, (parallax-parallax_error)/1000))))/2 as erro_de_MRp from Source_Gaia order by numero_ordinal_do_registro")
     value = cursor.fetchall()
+
+    for registro in value:
+        ra = registro[1]
+        declination = registro[2]
+        Mg = registro[3]
+        MRp = registro[4]
+        Bp_menos_Rp = registro[5]
+        erro_de_Mg = registro[6]
+        erro_de_MRp = registro[7]
+        cursor.execute("insert into Produto_Gaia values ({}, {}, {}, {}, {})".format(ra, declination, Mg, MRp, Bp_menos_Rp))
+
     '''
     transparency = 1
     size = 1.5
