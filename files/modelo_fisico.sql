@@ -60,8 +60,7 @@ create table Source_Gaia (
 	scan_direction_strength_k2 float not null,
 	scan_direction_strength_k3 float not null,
 	scan_direction_strength_k4 float not null,
-	scan_direction_me integer value: '' for column 'vbroad_nb_transits' at row 2            |
-| Warning | 1265 | Data an_k1 float not null,
+	scan_direction_mean_k1 float not null,
 	scan_direction_mean_k2 float not null,
 	scan_direction_mean_k3 float not null,
 	scan_direction_mean_k4 float not null,
