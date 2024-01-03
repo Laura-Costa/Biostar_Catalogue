@@ -11,14 +11,16 @@
 
     <!--<img src="/img/MV_B_V.png">
     <img src="/img/MVt_BT_VT.png">-->
-    <img src= "{{url_for('static', filename='img/mv_b_v_0.png')}}" >
-    <img src= "{{url_for('static', filename='img/mvt_bt_vt_0.png')}}" >
+    <img src= "{{url_for('static', filename='img/mv_versus_B_minus_V_0.003.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_BT_minus_VT_0.003.png')}}" >
 
-    <img src= "{{url_for('static', filename='img/mv_b_v_005.png')}}" >
-    <img src= "{{url_for('static', filename='img/mvt_bt_vt_005.png')}}" >
+    <img src= "{{url_for('static', filename='img/mv_versus_B_minus_V_0.05.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_BT_minus_VT_0.05.png')}}" >
 
-    <img src= "{{url_for('static', filename='img/mv_b_v_01.png')}}" >
-    <img src= "{{url_for('static', filename='img/mvt_bt_vt_01.png')}}" >
+    <img src= "{{url_for('static', filename='img/mv_versus_B_minus_V_0.1.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_BT_minus_VT_0.1.png')}}" >
+
+
 
 
     <!--{% endblock %}-->
@@ -30,8 +32,8 @@
         <td><b>B-V</b></td>
         <td><b>M(Vt)</b></td>
         <td><b>BT-VT</b></td>
-        <td><b>erro de MV</b></td>
-        <td><b>erro de MVt</b></td>
+        <!--<td><b>erro de MV</b></td>-->
+        <!--<td><b>erro de MVt</b></td>-->
         </tr>
 
         {%for registro in data%}
@@ -41,8 +43,8 @@
         <td>{{registro[2]}}</td>
         <td>{{registro[3]}}</td>
         <td>{{registro[4]}}</td>
-        <td>{{registro[5]}}</td>
-        <td>{{registro[6]}}</td>
+        <!--<td>{{registro[5]}}</td>-->
+        <!--<td>{{registro[6]}}</td>-->
         </tr>
     {%endfor%}
     </table>
