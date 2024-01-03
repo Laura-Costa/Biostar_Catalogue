@@ -9,7 +9,7 @@ import csv
 connection = mysql.connector.connect(host='localhost', port='3306', database='catalogo_gaia', user='helena', password='ic2023')
 
 cursor = connection.cursor()
-# app = Flask(__name__, static_folder='/home/h/"Área de trabalho"/Catalogo_GAIA/static')
+# app = Flask(__name__, static_folder='/home/h/"Área de trabalho"/Catalogo_GAIA/static/static')
 app = Flask(__name__)
 @app.route("/")
 def index():
