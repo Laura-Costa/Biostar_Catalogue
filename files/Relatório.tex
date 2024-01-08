@@ -1,0 +1,152 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[12pt, a4paper]{article}
+\usepackage{tkz-base}
+\usepackage{tkz-euclide}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{multirow} 
+\usepackage{flafter} 
+\usetikzlibrary{arrows.meta}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{color}
+\usepackage{indentfirst}
+\usetikzlibrary{angles, quotes}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{pst-eucl}
+\usepackage{tabularx,ragged2e,booktabs}
+\usepackage{ragged2e,microtype}
+\usepackage{array} % for '\newcolumntype' macro
+% Define two new column types:
+% (a) for full-width columns:
+\newcolumntype{L}{@{} >{\RaggedRight}p{\dimexpr12cm+2\tabcolsep+1\arrayrulewidth\relax} @{}}
+% (b) for half-width columns:
+\newlength\mylen
+\settowidth\mylen{$4.$\space} % amount of hanging indentation
+\newcolumntype{P}[1]{>{\RaggedRight\hangafter1\hangindent\mylen}p{#1}}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[paper=portrait,pagesize]{typearea}
+\usepackage{calrsfs}
+\usepackage{mathtools}
+\newcommand\myeq{\stackrel{\mathclap{\tiny\mbox{Bayes}}}{=}}
+\usepackage{hyperref}
+\usepackage{xurl}
+\newcommand{\stackwords}[2]{\begin{tabular}[t]{@{}l@{}}#1\\#2\end{tabular}}
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{center}
+			{\large \textbf{Universidade Federal do Rio de Janeiro}}
+			
+			\vspace{0.2cm}
+			
+			{\large \textbf{Curso de Ciência da Computação}}
+			
+			\vspace{6.08cm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			
+			
+			{\large \textbf{Integração Numérica}}\\
+			{\normalsize \textbf{Trabalho para a disciplina de Introdução à Computação Numérica}}
+			
+			\vspace{6.08cm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			\begin{tabbing}
+				\hspace{7cm}\textbf{Alunas: \stackwords{Helena Serrano Cardoso da Costa}{Laura Serrano Cardoso da Costa}}
+			\end{tabbing}
+			
+			\vspace{6.08cm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			
+			\textbf{Rio de Janeiro, janeiro de 2024}
+		\end{center}	
+	\end{titlepage}
+	
+	\newpage
+	
+	%\tableofcontents
+	
+	\newpage
+	
+	\section*{Comentários sobre o código}
+	
+	\subsubsection*{Tarefa 1 - item b(i) - Regra dos Trapézios sem lista de valores}
+	
+	\includegraphics[scale=0.35]{fig1.png}
+	
+    Desigualdades entre números do tipo {\ttfamily float} que carregam algum tipo
+	de erro de arredondamento podem gerar inconsistências em relação
+	ao que é esperado. Logo, devido ao acúmulo de erros de arredondamento
+	pelo computador, o último ponto considerado pode ficar levemente
+	maior do que b. Por isso, no laço de repetição {\ttfamily while} da figura acima, utilizamos a
+	condição $i <= n$ em vez da condição $x <= b$ para evitar a perda
+	de pontos. Como $i$ e $n$ são números inteiros, os erros de
+	arredondamento não interferem nessa desigualdade.
+	
+	\vspace{1cm}
+	
+	\includegraphics[scale=0.35]{fig2.png}
+	
+	Se fizéssemos, no trecho de código destacado acima, $x = x + h$, em vez de $x = a + i \cdot h$, o programa realizaria muitas somas, o que
+	 implicaria em muitos erros de arredondamento. Quando calculamos com vários pontos e acrescentamos $h$ muitas vezes, estes erros se acumulam e começam a influenciar nos últimos dígitos de $x$. 
+	 
+	 Uma forma de evitar os erros de arredondamento é, em vez de somar $h$ a cada iteração, declarar: $x = a + i \cdot h$. Desta forma, o erro de arredondamento é dado pelo produto $i\cdot h$ e pela soma. Como o erro acontece apenas na iteração atual, ele se mantém pequeno.
+	
+	Abaixo, uma análise do erro da aproximação para o caso de se usar $x = x + h$ ou $x = a + i\cdot h$:
+	
+	\includegraphics[scale=0.73]{fig3.png}
+	
+	\subsubsection*{Tarefa 3 - item a}
+	
+	\includegraphics[scale=0.35]{fig4.png}
+	
+	Esta parte do código (mostrada na figura acima) encontra a quantidade mínima $n$ necessária de partições do intervalo de integração para se obter um erro $\varepsilon$ menor ou igual a $10^{-8}$ na aproximação da integral pela Regra dos Trapézios. A figura a seguir mostra a fórmula implementada nesta parte do código:
+	
+	\includegraphics[scale=0.22]{fig5.jpg}
+	
+	\includegraphics[scale=0.35]{fig6.png}
+	
+	Analogamente, esta outra parte do código (mostrada na figura acima) encontra a quantidade mínima $n$ necessária de partições do intervalo de integração para se obter um erro $\varepsilon$ menor ou igual a $10^{-8}$ na aproximação da integral pela Regra de Simpson. Depois de obter a quantidade $n$ de partições necessárias, verificamos se a quantidade mímina de pontos correspondente é par. Caso seja, somamos $1$ à quantidade mínima de pontos. A figura a seguir mostra a fórmula implementada nesta parte do código:
+	
+	\includegraphics[scale=0.18]{fig7.jpg}
+	
+	\section*{Cálculo da expressão para o erro da \\Regra dos Trapézios}
+	
+	\includegraphics[scale=0.7]{fig8.jpg}
+	
+	\section*{Cálculo da expressão para o erro da \\Regra de Simpson}
+	
+	\includegraphics[scale=0.7]{fig9.jpg}
+	
+	\includegraphics[scale=0.7]{fig10.jpg}
+	
+	\section*{Comparar os resultados obtidos pela \\Regra dos Trapézios e pela Regra de Simpson}
+	
+	Os resultados obtidos pela Regra de Simpson são melhores pois esta regra utiliza um polinômio interpolador de grau $2$. Como o polinômio de grau dois tem inflexão, ele consegue se adequar melhor à curva que se quer integrar. Por isso, quando comparamos os resultados, a aproximação obtida pela Regra de Simpson tem qualidade maior em relação à aproximação encontrada com a Regra dos Trapézios, que faz interpolação linear. 
+	
+	Se usarmos a mesma quantidade de pontos, a aproximação obtida pela Regra de Simpson será, em geral, melhor. Podemos perceber isso pelo resultado do item $a$ da Tarefa $3$. Nesta tarefa, para satisfazer à uma mesma tolerância $\varepsilon = 10^{-8}$, a Regra dos Trapézios exige uma quantidade bem maior de pontos, quando comparada à quantidade de pontos exigida pela Regra de Simpson.
+	Na figura a seguir, os valores destacados com a mesma cor são a quantidade de pontos usada nas aproximações de uma mesma integral através de regras diferentes.
+	\begin{center}
+		\includegraphics[scale=0.5]{fig11.png}
+	\end{center}
+
+
+	\newpage
+	\section*{Referências}
+	
+	\vspace{20pt}
+	
+	[1] \url{https://drive.google.com/file/d/1CGOJw9yA6J3UfgQL7xnTlUddk0_nTpkf/view}
+	
+	\vspace{5pt}
+	
+	[2] \url{https://www.w3schools.com/python/ref_math_ceil.asp}
+	
+	\vspace{5pt}
+	
+	[3] \url{https://www.derivative-calculator.net/}
+	
+	
+	
+	
+\end{document}
