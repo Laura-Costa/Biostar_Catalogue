@@ -35,6 +35,8 @@
 \usepackage{hyperref}
 \usepackage{xurl}
 \newcommand{\stackwords}[2]{\begin{tabular}[t]{@{}l@{}}#1\\#2\end{tabular}}
+\usepackage{graphicx} 
+\usepackage{subcaption} %  for subfigures environments 
 \begin{document}
 	
 	\begin{titlepage}
@@ -48,8 +50,8 @@
 			\vspace{6.08cm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			
 			
-			{\large \textbf{Integração Numérica}}\\
-			{\normalsize \textbf{Trabalho para a disciplina de Introdução à Computação Numérica}}
+			{\large \textbf{Catálogo de Estrelas até 23 parsecs do Sol}}\\
+			{\normalsize \textbf{Trabalho de Iniciação Científica}}
 			
 			\vspace{6.08cm}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 			\begin{tabbing}
@@ -64,88 +66,182 @@
 	
 	\newpage
 	
-	%\tableofcontents
+	\tableofcontents
 	
 	\newpage
 	
-	\section*{Comentários sobre o código}
+	\section{Introdução}
 	
-	\subsubsection*{Tarefa 1 - item b(i) - Regra dos Trapézios sem lista de valores}
+	Nosso trabalho tem como objetivo construir um banco de dados com informações, majoritariamente provenientes do Catálogo Gaia, de estrelas próximas do Sol, ou seja, distantes no máximo 23 parsecs do Sol (23 parsecs equivalem a 7.016 anos-luz ou 7.097x1014 quilômetros). Além disso, também foram utilizadas informações do catálogo Hipparcos.
 	
-	\includegraphics[scale=0.35]{fig1.png}
+	Hipparcos é um satélite que foi lançado pela Agência Espacial Europeia (ESA) em 18 de agosto de 1989. A missão se deu como concluída em 1993.
 	
-    Desigualdades entre números do tipo {\ttfamily float} que carregam algum tipo
-	de erro de arredondamento podem gerar inconsistências em relação
-	ao que é esperado. Logo, devido ao acúmulo de erros de arredondamento
-	pelo computador, o último ponto considerado pode ficar levemente
-	maior do que b. Por isso, no laço de repetição {\ttfamily while} da figura acima, utilizamos a
-	condição $i <= n$ em vez da condição $x <= b$ para evitar a perda
-	de pontos. Como $i$ e $n$ são números inteiros, os erros de
-	arredondamento não interferem nessa desigualdade.
-	
-	\vspace{1cm}
-	
-	\includegraphics[scale=0.35]{fig2.png}
-	
-	Se fizéssemos, no trecho de código destacado acima, $x = x + h$, em vez de $x = a + i \cdot h$, o programa realizaria muitas somas, o que
-	 implicaria em muitos erros de arredondamento. Quando calculamos com vários pontos e acrescentamos $h$ muitas vezes, estes erros se acumulam e começam a influenciar nos últimos dígitos de $x$. 
-	 
-	 Uma forma de evitar os erros de arredondamento é, em vez de somar $h$ a cada iteração, declarar: $x = a + i \cdot h$. Desta forma, o erro de arredondamento é dado pelo produto $i\cdot h$ e pela soma. Como o erro acontece apenas na iteração atual, ele se mantém pequeno.
-	
-	Abaixo, uma análise do erro da aproximação para o caso de se usar $x = x + h$ ou $x = a + i\cdot h$:
-	
-	\includegraphics[scale=0.73]{fig3.png}
-	
-	\subsubsection*{Tarefa 3 - item a}
-	
-	\includegraphics[scale=0.35]{fig4.png}
-	
-	Esta parte do código (mostrada na figura acima) encontra a quantidade mínima $n$ necessária de partições do intervalo de integração para se obter um erro $\varepsilon$ menor ou igual a $10^{-8}$ na aproximação da integral pela Regra dos Trapézios. A figura a seguir mostra a fórmula implementada nesta parte do código:
-	
-	\includegraphics[scale=0.22]{fig5.jpg}
-	
-	\includegraphics[scale=0.35]{fig6.png}
-	
-	Analogamente, esta outra parte do código (mostrada na figura acima) encontra a quantidade mínima $n$ necessária de partições do intervalo de integração para se obter um erro $\varepsilon$ menor ou igual a $10^{-8}$ na aproximação da integral pela Regra de Simpson. Depois de obter a quantidade $n$ de partições necessárias, verificamos se a quantidade mímina de pontos correspondente é par. Caso seja, somamos $1$ à quantidade mínima de pontos. A figura a seguir mostra a fórmula implementada nesta parte do código:
-	
-	\includegraphics[scale=0.18]{fig7.jpg}
-	
-	\section*{Cálculo da expressão para o erro da \\Regra dos Trapézios}
-	
-	\includegraphics[scale=0.7]{fig8.jpg}
-	
-	\section*{Cálculo da expressão para o erro da \\Regra de Simpson}
-	
-	\includegraphics[scale=0.7]{fig9.jpg}
-	
-	\includegraphics[scale=0.7]{fig10.jpg}
-	
-	\section*{Comparar os resultados obtidos pela \\Regra dos Trapézios e pela Regra de Simpson}
-	
-	Os resultados obtidos pela Regra de Simpson são melhores pois esta regra utiliza um polinômio interpolador de grau $2$. Como o polinômio de grau dois tem inflexão, ele consegue se adequar melhor à curva que se quer integrar. Por isso, quando comparamos os resultados, a aproximação obtida pela Regra de Simpson tem qualidade maior em relação à aproximação encontrada com a Regra dos Trapézios, que faz interpolação linear. 
-	
-	Se usarmos a mesma quantidade de pontos, a aproximação obtida pela Regra de Simpson será, em geral, melhor. Podemos perceber isso pelo resultado do item $a$ da Tarefa $3$. Nesta tarefa, para satisfazer à uma mesma tolerância $\varepsilon = 10^{-8}$, a Regra dos Trapézios exige uma quantidade bem maior de pontos, quando comparada à quantidade de pontos exigida pela Regra de Simpson.
-	Na figura a seguir, os valores destacados com a mesma cor são a quantidade de pontos usada nas aproximações de uma mesma integral através de regras diferentes.
-	\begin{center}
-		\includegraphics[scale=0.5]{fig11.png}
-	\end{center}
+	O gigantesco survey Gaia, utilizado neste trabalho, é um dos mais impactantes na Astronomia nos últimos anos. O telescópio Gaia foi lançado, também pela ESA, em 19 de dezembro de 2013. O primeiro catálogo proveniente da Missão Gaia com mais de um bilhão de estrelas foi publicado em 14 de setembro de 2016. Esta foi a maior pesquisa de objetos celestes até a data.
 
+	\begin{figure}[H]
+		%\centering
+		\hfill%
+		\includegraphics[width=4cm]{Hipparcos.png}%
+		\hfill%
+		\includegraphics[width=5cm]{Gaia.png}%
+		\hfill%
+		\hfill%
+	\end{figure}
 
+	No banco de dados criado neste trabalho, foram incluídos todos os registros que puderam ser obtidos do Gaia Archive (https://gea.esac.esa.int/archive/), somente limitado pela capacidade de seleção da ferramenta (de 2000 registros). Trabalhamos com três arquivos de dados: um proveniente do catálogo Gaia, do tipo csv, com 1774 estrelas; um proveniente do catálogo Hipparcos, do tipo dat, com 118218 estrelas; e outro proveniente do The Extrasolar Planet Encyclopedia (http://www.exoplanet.eu/), do tipo csv, contendo 5553 exoplanetas (planetas fora do Sistema Solar).
+	A partir das informações contidas nestes arquivos, foi possível calcular algumas propriedades de cada estrela, como magnitude e índice de cor, e plotar essas propriedades em diagramas HR, que também foram armazenados no banco de dados.
+	Também relacionamos os dados do Gaia com os do catálogo de exoplanetas. Ou seja, para cada estrela, proveniente do Gaia, obtivemos as informações, como massa e semieixo maior, dos planetas que orbitam ao seu redor. 
+	Os dados do Gaia superam, em precisão, os dados do catálogo Hipparcos, e somente algumas das 1774 estrelas contidas no Gaia também estão no Hipparcos. Dessa forma, nosso trabalho se propõe a fazer um cruzamento de dados: algumas informações mais tradicionais, que são encontradas somente no Hipparcos, foram acrescentadas às estrelas Gaia que estão, simultaneamente, nos dois catálogos. Logo, não é de interesse, neste trabalho, manter na base de dados as estrelas que estão somente no catálogo Hipparcos, mas acrescentar às estrelas provenientes do Gaia informações valiosas presentes apenas no Hipparcos.
+	O interesse na obtenção destas propriedades e diagramas HR de estrelas próximas do Sol é astrobiológico: dentre as estrelas selecionadas, aquelas que tiverem potencial de ter uma zona habitável (isto é, uma região em que um planeta orbitando ao seu redor possa abrigar vida) serão estudadas em mais detalhes em uma pesquisa que utilizará esta base de dados. 
+	
+	\section{Conceitos de Astronomia usados no Tratamento do Dataset
+	}
+	\subsection{Esfera celeste}
+	É uma esfera imaginária em volta da Terra, sem raio definido, que representa a projeção das estrelas como são vistas do nosso planeta. Os astrônomos mais antigos acreditavam que as estrelas estavam a uma mesma distância da Terra, como se estivessem “incrustadas” nesta esfera.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.37\textwidth]{celestial_sphere.png}
+		\caption{ \href{https://orionbearastronomy.com/2019/02/05/using-the-celestial-coordinates/}{Esfera Celeste}}
+		\label{fig:Esfera_Celeste}
+	\end{figure}
+
+	\subsection{Ascensão reta}
+	
+	É o ângulo medido, sobre o equador celeste, do ponto vernal ao meridiano do astro. É um conceito análogo ao de latitude geográfica.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.37\textwidth]{right_ascension_and_declination.png}
+		\caption{ \href{https://skyandtelescope.org/astronomy-resources/right-ascension-declination-celestial-coordinates/}{Ascensão Reta e Declinação}}
+		\label{fig:Ascensão_Reta_e_Declinação}
+	\end{figure}
+
+	\subsection{Declinação}
+	É a medida do ângulo, sobre o meridiano do astro, que vai do equador celeste ao astro. É um conceito análogo ao de longitude geográfica (ver figura acima).
+	Semi-eixo maior
+	
+	\subsection{Semi-eixo maior}
+	Semi-eixo maior da elipse descrita pela órbita do planeta ao redor da estrela. A estrela orbitada é um dos focos desta elipse.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\textwidth]{semi_major_axis.png}
+		\caption{ \href{https://astronomy.stackexchange.com/questions/23773/can-one-approximate-the-semi-major-axis-of-an-orbit-as-the-average-orbital-dista}{Semi eixo maior}}
+		\label{fig:Semi_eixo_maior}
+	\end{figure}
+
+	\section{Datasets}
+	
+	Os arquivos de dados com os quais o banco de dados foi populado foram obtidos do Gaia Archive, de um arquivo pessoal (\verb|HIP_MAIN.DAT|) e do The Extrasolar Planet Encyclopedia.
+	
+	Colunas contidas no csv extraído do Gaia Archive:
+	
+	ra (tipo numeric(65, 30)):
+	Ascenção reta. É a primeira coordenada da localização da estrela.
+	
+	dec (tipo numeric(65, 30)):
+	Declinação. É a segunda coordenada da localização da estrela.
+	
+	designation (tipo string): 
+	Designação única para cada estrela no Gaia.
+	
+	ruwe (tipo numeric(65, 30))
+	Basicamente é a medida da variação do brilho da estrela. Permite determinar se a estrela possui uma companheira binária.
+	
+	\verb|distance_gspphot| (tipo numeric(65, 30)):
+	Distância medida em parsecs do Sol.
+	
+	parallax (tipo numeric(65, 30)):
+	O deslocamento aparente de uma estrela por conta da mudança da posição da Terra em relação ao Sol.
+	
+	\verb|phot_g_mean_mag| (tipo numeric(65, 30)):
+	Tipo de magnitude (brilho intrínseco) da banda g.
+	
+	\verb|phot_rp_mean_mag| (tipo numeric(65, 30)):
+	Tipo de magnitude (brilho intrínseco) da banda rp.
+	
+	\verb|phot_bp_mean_mag| (tipo numeric(65, 30)):
+	Tipo de magnitude (brilho intrínseco) da banda bp.
+	
+	Colunas contidas no csv \verb|HIPPARCOS_MAIN.DAT|
+	
+	HIP (tipo int):
+	Identificação única da estrela no Hipparcos.
+	
+	Vmag (tipo numeric(65, 30)):
+	Magnitude V (brilho intrínseco) 
+	
+	RAdeg (tipo numeric(65, 30)):
+	Ascenção reta, que é a primeira coordenada da posição da Estrela.
+	
+	DEdeg (tipo numeric(65, 30)):
+	Declinação, que é a segunda coordenada da posição da Estrela.
+	
+	Plx (tipo numeric(65, 30)):
+	O deslocamento aparente de uma estrela por conta da mudança da posição da Terra em relação ao Sol.
+	
+	pmRA (tipo numeric(65, 30)):
+	Medida do movimento físico próprio de cada estrela, em relação ao equador celeste.
+	
+	pmDE (tipo numeric(65, 30)):
+	Medida do movimento físico próprio de cada estrela, em relação ao meridiano da Estrela.
+	
+	BTmag (tipo numeric(65, 30)):
+	Magnitude B específica do Hipparcos, chamada de magnitude de Tycho Brahe.
+	
+	VTmag (tipo numeric(65, 30)):
+	Magnitude V específica do Hipparcos, chamada de magnitude de Tycho Brahe.
+	
+	\verb|B_V| (tipo numeric(65, 30)):
+	Índice de cor (medida de temperatura da estrela) específica do Hipparcos.
+	
+	Colunas contidas no arquivo extraído do The Extrasolar Planet Encyclopedia:
+	
+	name (tipo string):
+	Nome do planeta.
+	
+	mass (tipo numeric(65, 30)):
+	Massa do planeta.
+	
+	\verb|semi_major_axis| (tipo numeric(65, 30)):
+	Semi-eixo maior da elipse descrita pela órbita do planeta ao redor da Estrela.
+	
+	\verb|orbital_period| (tipo numeric(65, 30)): 
+	Tempo que o planeta leva para dar uma volta completa em torno da Estrela.
+	
+	\section{Tratamento dos Datasets}
+	
+	\subsection{Gaia e Hipparcos}
+	
+	Primeiramente, fizemos o download dos arquivos nos endereços especificados anteriormente. Após isso, criamos um banco de dados auxiliar e, dentro deste banco, criamos duas tabelas, Gaia e Hipparcos. Cada arquivo baixado foi carregado em uma destas tabelas. Foi usada uma consulta SQL left outer join para poder adicionar às estrelas Gaia, presentes nos dois catálogos, informações extras que estão presentes apenas no Hipparcos. O resultado desta consulta foi gravado em um arquivo no formato csv e utilizado para popular a tabela Star do banco de dados \verb|Catalogo_Gaia|. Porém, em vez de a consulta retornar algumas centenas de Estrelas, como era esperado, retornou apenas algumas dezenas delas. Assim, decidimos carregar os dados do Hipparcos e do Gaia diretamente no BD, sem tratamento, nas tabelas \verb|Source_Gaia| e \verb|Source_Hipparcos|, respectivamente. Fizemos essa escolha porque precisávamos de um número grande de registros de estrelas para que os diagramas HR pudessem fazer sentido. A tentativa de relacionar os registros dos dois catálogos foi feita através de uma consulta, sem que o esquema do banco de dados fosse alterado.
+	Uma possível solução para conseguir relacionar corretamente os dois catálogos seria a implementação de uma fórmula mais precisa para a conversão da ascensão reta e declinação das Estrelas. A fórmula que implementamos é uma simplificação de uma fórmula mais complexa e completa. Esta fórmula mais simples deveria funcionar para intervalos de tempos curtos (dezesseis anos). A suspeita que temos é de que a precisão dos dados do Gaia e Hipparcos é alta, o que não permite utilizar a fórmula simplificada para a transformação das coordenadas da época 2000.0 para a época 2016.0. Este trabalho continuará em andamento no próximo ano, e pretendemos fazer a correlação entre os registros dos dois catálogos de forma precisa.
+	
+	\subsection{Planetas Extrasolares}
+	
+	Baixamos um arquivo csv do The Extrasolar Planet Encyclopedia e carregamos estes dados em uma tabela auxiliar. Depois, fizemos uma left outer join com a tabela Hipparcos, para adicionar características das estrelas aos registros de planetas. Após isto, tentamos fazer outra left outer join, desta vez entre o resultado da consulta anterior e a tabela Gaia. O resultado destas duas consultas (feita na verdade através de uma única consulta com subconsulta aninhada) foi o de relacionar os registros dos planetas aos registros das estrelas no Gaia. Mas, novamente devido ao problema de transformação de coordenadas, não conseguimos obter o resultado esperado com essa consulta. Então, o resultado apenas da primeira consulta foi gravado em um arquivo no formato csv e utilizado para popular a tabela Planet (que se relaciona com a tabela \verb|Source_Hipparcos|) do banco de dados \verb|Catalogo_Gaia|.
+	
+	\section{Projeto do Banco de Dados}
+	
+	\subsection{Modelo Conceitual}
+	\subsection{Modelo Lógico}
+	\subsection{Modelo Físico}
+	
+	\section{Aplicação}
+	
+	O link a seguir direciona para o repositório do código do projeto no GitHub:
+	
+	\href{https://github.com/Laura-Costa/Catalogo_GAIA}{Catálogo GAIA} 
+	\section{Considerações Finais}
+	
 	\newpage
 	\section*{Referências}
 	
 	\vspace{20pt}
 	
-	[1] \url{https://drive.google.com/file/d/1CGOJw9yA6J3UfgQL7xnTlUddk0_nTpkf/view}
+	[1] \url{https://tex.stackexchange.com/questions/282869/putting-two-figures-side-by-side}
 	
-	\vspace{5pt}
-	
-	[2] \url{https://www.w3schools.com/python/ref_math_ceil.asp}
-	
-	\vspace{5pt}
-	
-	[3] \url{https://www.derivative-calculator.net/}
-	
+
 	
 	
 	
