@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.1.8)  8 JAN 2024 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.1.8)  6 FEB 2024 08:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1379,27 +1379,40 @@ Package caption Info: New subtype `subfigure' on input line 239.
 Package caption Info: New subtype `subtable' on input line 239.
 \c@subtable=\count405
 )
-(./Relatório.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+)) (./Relatório.aux)
 \openout1 = `Relatório.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1464,20 +1477,20 @@ File: translations-basic-dictionary-brazil.trsl (brazil translation file `trans
 lations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `brazil'. on input line 40.
-LaTeX Info: Redefining \microtypecontext on input line 40.
-Package microtype Info: Applying patch `item' on input line 40.
-Package microtype Info: Applying patch `toc' on input line 40.
-Package microtype Info: Applying patch `eqnum' on input line 40.
-Package microtype Info: Applying patch `footnote' on input line 40.
-Package microtype Info: Applying patch `verbatim' on input line 40.
+or `brazil'. on input line 41.
+LaTeX Info: Redefining \microtypecontext on input line 41.
+Package microtype Info: Applying patch `item' on input line 41.
+Package microtype Info: Applying patch `toc' on input line 41.
+Package microtype Info: Applying patch `eqnum' on input line 41.
+Package microtype Info: Applying patch `footnote' on input line 41.
+Package microtype Info: Applying patch `verbatim' on input line 41.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 40.
+LaTeX Info: Redefining \showhyphens on input line 41.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1485,7 +1498,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 40.
+Package hyperref Info: Link coloring OFF on input line 41.
  (./Relatório.out) (./Relatório.out)
 \@outlinefile=\write4
 \openout4 = `Relatório.out'.
@@ -1500,7 +1513,7 @@ File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for OMS+rsfs on input line 
-58.
+59.
 
 (/usr/share/texlive/texmf-dist/tex/latex/calrsfs/OMSrsfs.fd) [1
 Non-PDF special ignored!
@@ -1530,77 +1543,111 @@ Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@refangle 0.  def grestore  e...
 Non-PDF special ignored!
 <special> ps:tx@Dict begin  gsave STV CP T /ps@rot 0 def grestore  end
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Relatório.toc)
-\tf@toc=\write5
-\openout5 = `Relatório.toc'.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Relatório.lof)
+\tf@lof=\write5
+\openout5 = `Relatório.lof'.
+
+
+(./Relatório.lot)
+\tf@lot=\write6
+\openout6 = `Relatório.lot'.
+
+ (./Relatório.toc)
+\tf@toc=\write7
+\openout7 = `Relatório.toc'.
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.71 	\newpage
+l.73 	\newpage
                [1]
-<Hipparcos.png, id=122, 331.2375pt x 391.4625pt>
+<Hipparcos.png, id=138, 331.2375pt x 391.4625pt>
 File: Hipparcos.png Graphic file (type png)
 <use Hipparcos.png>
-Package pdftex.def Info: Hipparcos.png  used on input line 84.
-(pdftex.def)             Requested size: 113.81102pt x 134.49919pt.
-<Gaia.png, id=123, 301.125pt x 168.63pt>
+Package pdftex.def Info: Hipparcos.png  used on input line 86.
+(pdftex.def)             Requested size: 156.84514pt x 185.36124pt.
+<Gaia.png, id=139, 301.125pt x 168.63pt>
 File: Gaia.png Graphic file (type png)
 <use Gaia.png>
-Package pdftex.def Info: Gaia.png  used on input line 86.
-(pdftex.def)             Requested size: 142.26378pt x 79.67036pt.
+Package pdftex.def Info: Gaia.png  used on input line 91.
+(pdftex.def)             Requested size: 224.06548pt x 125.48154pt.
  [2 <./Hipparcos.png> <./Gaia.png>]
-<celestial_sphere.png, id=129, 225.84375pt x 225.84375pt>
+<celestial_sphere.png, id=149, 225.84375pt x 225.84375pt>
 File: celestial_sphere.png Graphic file (type png)
 <use celestial_sphere.png>
-Package pdftex.def Info: celestial_sphere.png  used on input line 104.
+Package pdftex.def Info: celestial_sphere.png  used on input line 113.
 (pdftex.def)             Requested size: 165.80626pt x 165.81567pt.
-<right_ascension_and_declination.png, id=132, 223.83624pt x 226.8475pt>
+ [3 <./celestial_sphere.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 123.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\alpha' on input line 123.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 123.
+
+<right_ascension_and_declination.png, id=154, 581.17125pt x 573.14125pt>
 File: right_ascension_and_declination.png Graphic file (type png)
 <use right_ascension_and_declination.png>
 Package pdftex.def Info: right_ascension_and_declination.png  used on input lin
-e 115.
-(pdftex.def)             Requested size: 165.80626pt x 168.04105pt.
+e 129.
+(pdftex.def)             Requested size: 224.06548pt x 220.97052pt.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 133.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\delta' on input line 133.
 
-<semi_major_axis.png, id=135, 350.30875pt x 144.54pt>
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 133.
+
+<semi_major_axis.png, id=156, 350.30875pt x 144.54pt>
 File: semi_major_axis.png Graphic file (type png)
 <use semi_major_axis.png>
-Package pdftex.def Info: semi_major_axis.png  used on input line 129.
+Package pdftex.def Info: semi_major_axis.png  used on input line 141.
 (pdftex.def)             Requested size: 313.69029pt x 129.44077pt.
-[3 <./celestial_sphere.png>]
+[4 <./right_ascension_and_declination.png>]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [4 <./right_ascension_and_declination.png> <./semi_major_axis.png>] [5] [6] [7
-] [8] (./Relatório.aux)
+ [5 <./semi_major_axis.png>]
+[6] [7] [8] (./Relatório.aux)
  ***********
 LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-05>
  ***********
 Package rerunfilecheck Info: File `Relatório.out' has not changed.
-(rerunfilecheck)             Checksum: CC9F6F056029F2505AAA1E168DC99256;2341.
+(rerunfilecheck)             Checksum: E36164949EE85787FF53B575FFD9DB2E;2508.
  ) 
 Here is how much of TeX's memory you used:
- 42082 strings out of 475735
- 858576 string characters out of 5784787
- 1864759 words of memory out of 5000000
- 61895 multiletter control sequences out of 15000+600000
- 522296 words of font info for 102 fonts, out of 8000000 for 9000
+ 42214 strings out of 475735
+ 860866 string characters out of 5784787
+ 1863759 words of memory out of 5000000
+ 61994 multiletter control sequences out of 15000+600000
+ 526393 words of font info for 124 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 117i,7n,131p,1206b,968s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 117i,8n,131p,1206b,937s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Relatório.pdf (9 pages, 150412 bytes).
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmtt12.pfb>
+Output written on Relatório.pdf (9 pages, 218262 bytes).
 PDF statistics:
- 196 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 17158 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 232 PDF objects out of 1000 (max. 8388607)
+ 183 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 23310 words of extra memory for PDF output out of 24883 (max. 10000000)
 
