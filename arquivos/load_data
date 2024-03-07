@@ -9,7 +9,7 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/files/HIP_MAIN.D
 
 
 
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/files/1700922039277O-result.csv'
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/1700922039277O-result.csv'
     into table Source_Gaia
     fields terminated by ','
     enclosed by '"'

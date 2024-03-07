@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diagramas HIPPARCOS</title>
+</head>
+    <body>
+    <h1>{{name}}</h1>
+
+    <!--{% block content %}-->
+
+    <!--<img src="/img/MV_B_V.png">
+    <img src="/img/MVt_BT_VT.png">-->
+    <img src= "{{url_for('static', filename='img/mv_versus_b_minus_v_plx_greater_0.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_bt_minus_vt_plx_greater_0.png')}}" >
+
+    <img src= "{{url_for('static', filename='img/mv_versus_b_minus_v_plx_greater_0.05.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_bt_minus_vt_plx_greater_0.05.png')}}" >
+
+    <img src= "{{url_for('static', filename='img/mv_versus_b_minus_v_plx_greater_0.1.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_bt_minus_vt_plx_greater_0.1.png')}}" >
+
+
+    <!--{% endblock %}-->
+
+    <table border = 3>
+        <tr>
+        <td><b>numero_ordinal_do_registro</b></td>
+        <td><b>M(V)</b></td>
+        <td><b>M(Vt)</b></td>
+        <td><b>B-V</b></td>
+        <td><b>BT-VT</b></td>
+        <td><b>erro de M(V)</b></td>
+        <td><b>erro de M(Vt)</b></td>
+        </tr>
+
+        {%for registro in data%}
+        <tr>
+        <td>{{registro[0]}}</td>
+        <td>{{registro[1]}}</td>
+        <td>{{registro[2]}}</td>
+        <td>{{registro[3]}}</td>
+        <td>{{registro[4]}}</td>
+        <td>{{registro[5]}}</td>
+        <td>{{registro[6]}}</td>
+        </tr>
+    {%endfor%}
+    </table>
+
+    </body>
+
+</html>

@@ -1,16 +1,16 @@
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/files/HIP_MAIN.DAT'
-    into table Source_Hipparcos
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/HIP_MAIN.DAT'
+    into table Hipparcos
     fields terminated by '|'
     enclosed by '"'
     lines terminated by '\r\r'
-    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79) set HIP=@col2, Vmag=@col6, RAdeg=@col9, DEdeg=@col10, Plx=@col12, pmRA=@col13, pmDE=@col14, BTmag=@col33, VTmag=@col35, B_V=@col38;
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79) set HIP=@col2, Vmag=@col6, RAdeg=@col9, DEdeg=@col10, Plx=@col12, e_Plx=@col17, pmRA=@col13, pmDE=@col14, BTmag=@col33, VTmag=@col35, B_V=@col38;
 
 
 
 
 
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/files/1700922039277O-result.csv'
-    into table Source_Gaia
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/1700922039277O-result.csv'
+    into table Gaia
     fields terminated by ','
     enclosed by '"'
     lines terminated by '\n'
@@ -39,10 +39,330 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/files/1700922039
 	distance_gspphot_lower=@col141,
 	distance_gspphot_upper=@col142
 ;
-	
---consultas frequentes--
+
+
+load data local infile '/var/lib/mysql/matched.csv'
+    into table matched
+    fields terminated by ','
+    enclosed by '"'
+    lines terminated by '\n'
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34) 
+	set 
+	record_ordinal_number_gaia=@col1,
+	designation=@col2,
+	ra=@col3,
+	declination=@col4,
+	parallax=@col5,
+	parallax_error=@col6,
+	ruwe=@col7, 
+	phot_g_mean_mag=@col8,  
+	phot_bp_mean_mag=@col9,  
+	phot_rp_mean_mag=@col10, 
+	teff_gspphot=@col11,
+	teff_gspphot_lower=@col12,
+	teff_gspphot_upper=@col13,
+	logg_gspphot=@col14,
+	logg_gspphot_lower=@col15, 
+	logg_gspphot_upper=@col16,
+	mh_gspphot=@col17,
+	mh_gspphot_lower=@col18,
+	mh_gspphot_upper=@col19,
+	distance_gspphot=@col20,
+	distance_gspphot_lower=@col21,
+	distance_gspphot_upper=@col22,
+	record_ordinal_number_hipparcos=@col23,
+	HIP=@col24, 	
+	Vmag=@col25, 
+	RAdeg=@col26, 
+	DEdeg=@col27, 
+	Plx=@col28, 
+	e_Plx=@col29,
+	pmRA=@col30, 
+	pmDE=@col31, 
+	BTmag=@col32, 
+	VTmag=@col33, 
+	B_V=@col34
+;
+
+
+
+load data local infile '/var/lib/mysql/matched_python.csv'
+    into table matched_python
+    fields terminated by ','
+    enclosed by '"'
+    lines terminated by '\n'
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34) 
+	set 
+	record_ordinal_number_gaia=@col1,
+	designation=@col2,
+	ra=@col3,
+	declination=@col4,
+	parallax=@col5,
+	parallax_error=@col6,
+	ruwe=@col7, 
+	phot_g_mean_mag=@col8,  
+	phot_bp_mean_mag=@col9,  
+	phot_rp_mean_mag=@col10, 
+	teff_gspphot=@col11,
+	teff_gspphot_lower=@col12,
+	teff_gspphot_upper=@col13,
+	logg_gspphot=@col14,
+	logg_gspphot_lower=@col15, 
+	logg_gspphot_upper=@col16,
+	mh_gspphot=@col17,
+	mh_gspphot_lower=@col18,
+	mh_gspphot_upper=@col19,
+	distance_gspphot=@col20,
+	distance_gspphot_lower=@col21,
+	distance_gspphot_upper=@col22,
+	record_ordinal_number_hipparcos=@col23,
+	HIP=@col24, 	
+	Vmag=@col25, 
+	RAdeg=@col26, 
+	DEdeg=@col27, 
+	Plx=@col28, 
+	e_Plx=@col29,
+	pmRA=@col30, 
+	pmDE=@col31, 
+	BTmag=@col32, 
+	VTmag=@col33, 
+	B_V=@col34
+;
+
+===================================================================================
+===================================================================================
+===================================================================================
+===================================================================================
+
+
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/astropy/HIP_designation.csv'
+    into table HIP_designation
+    fields terminated by ','
+    enclosed by '"'
+    lines terminated by '\n'
+    (@col1, @col2) 
+	set 
+	HIP=@col1,
+	designation=@col2
+;
+
+SELECT *
+FROM Gaia, Hipparcos 
+WHERE ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) < (1.0)/3600 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) < (1.0)/3600
+INTO OUTFILE '/var/lib/mysql/matched.csv'
+FIELDS ENCLOSED BY '"'
+TERMINATED BY ','
+LINES TERMINATED BY '\n';
+
+
+
+
+SELECT Gaia.record_ordinal_number, Gaia.designation, ra, declination, parallax, parallax_error, ruwe, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag, teff_gspphot, teff_gspphot_lower, teff_gspphot_upper, logg_gspphot, logg_gspphot_lower, logg_gspphot_upper, mh_gspphot, mh_gspphot_lower, mh_gspphot_upper, distance_gspphot, distance_gspphot_lower, distance_gspphot_upper,	Hipparcos.record_ordinal_number, Hipparcos.HIP, Vmag, RAdeg, DEdeg, Plx, e_Plx, pmRA, pmDE, BTmag, VTmag, B_V 
+FROM Gaia, Hipparcos, HIP_designation
+WHERE Gaia.designation = HIP_designation.designation AND Hipparcos.HIP = HIP_designation.HIP
+INTO OUTFILE '/var/lib/mysql/matched_python.csv'
+FIELDS ENCLOSED BY '"'
+TERMINATED BY ','
+LINES TERMINATED BY '\n';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------consultas frequentes---------------------
 
 select designation, COUNT(HIP)
-from Source_Gaia, Source_Hipparcos
-where ABS(ra - (RAdeg + 24.75*(Source_Hipparcos.pmRA/(1000*3600)))) < 0.001 and ABS(declination - (DEdeg + 24.75*(Source_Hipparcos.pmDE/(1000*3600)))) < 0.01
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157
 group by designation;
+
+select *
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157;
+
+select * from Hipparcos where Hipparcos.record_ordinal_number not in (select record_ordinal_number_hipparcos from matched) limit 2000;
+
+
+select * from Gaia where Gaia.record_ordinal_number not in (select record_ordinal_number_gaia from matched) limit 2000;
+
+select designation, count(HIP)
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157 and designation = "Gaia DR3 4345775217221821312"
+group by designation
+having count(HIP) > 1;
+
+select designation, count(HIP)
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157 
+group by designation
+having count(HIP) > 1;
+
+
+select HIP, count(designation)
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157 
+group by HIP
+having count(HIP) > 1;
+
+
+
+select designation
+from Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) <= 0.063144215847999197416 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) <= 0.015294424312057384157;
+
+
+
+
+
+
+----------------------------diferenca da gemea---------------------------------------------------------------
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (0.063144215847999197416)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (0.015294424312057384157)/3600
+group by designation
+having count(HIP) > 1;
+Empty set (5 min 45,74 sec)
+
+
+
+select HIP, count(designation)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (0.063144215847999197416)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (0.015294424312057384157)/3600
+group by HIP
+having count(designation) > 1;
+Empty set (5 min 46,10 sec)
+
+
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (0.063144215847999197416)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (0.015294424312057384157)/3600
+group by designation;
+109 rows in set (5 min 45,88 sec)
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+----------------------------diferenca menor ou igual a 1 arcond---------------------------------------------------------------
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (1.0)/3600
+group by designation
+having count(HIP) > 1;
+Empty set (5 min 45,80 sec)
+
+
+
+
+
+select HIP, count(designation)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (1.0)/3600
+group by HIP
+having count(designation) > 1;
++-------+--------------------+
+| HIP   | count(designation) |
++-------+--------------------+
+| 21765 |                  2 |
++-------+--------------------+
+1 row in set (5 min 46,09 sec)
+
+
+
+
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) <= (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) <= (1.0)/3600
+group by designation;
+403 rows in set (5 min 46,26 sec)
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+----------------------------diferenca menor do que 1 arcond---------------------------------------------------------------
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) < (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) < (1.0)/3600
+group by designation
+having count(HIP) > 1;
+Empty set (5 min 51,67 sec)
+
+
+
+
+
+
+select HIP, count(designation)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) < (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) < (1.0)/3600
+group by HIP
+having count(designation) > 1;
++-------+--------------------+
+| HIP   | count(designation) |
++-------+--------------------+
+| 21765 |                  2 |
++-------+--------------------+
+1 row in set (5 min 51,63 sec)
+
+
+
+
+
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(RAdeg - (ra - 24.75*(Source_Gaia.pmra/(1000*3600)))) < (1.0)/3600 and ABS(DEdeg - (declination - 24.75*(Source_Gaia.pmdec/(1000*3600)))) < (1.0)/3600
+group by designation;
+403 rows in set (5 min 50,10 sec)
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+================================diferenca menor do que 1 arcond================================
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) < (1.0)/3600 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) < (1.0)/3600
+group by designation
+having count(HIP) > 1;
+Empty set (5 min 32,12 sec)
+
+
+select HIP, count(designation)
+from Source_Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) < (1.0)/3600 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) < (1.0)/3600
+group by HIP
+having count(designation) > 1;
+Empty set (5 min 30,52 sec)
+
+
+
+select designation, count(HIP)
+from Source_Gaia, Hipparcos
+where ABS(ra - (RAdeg + 24.75*(Hipparcos.pmRA/(1000*3600)))) < (1.0)/3600 and ABS(declination - (DEdeg + 24.75*(Hipparcos.pmDE/(1000*3600)))) < (1.0)/3600
+group by designation;
+400 rows in set (5 min 29,42 sec)
+
+================================================================================================
+
+
+
+

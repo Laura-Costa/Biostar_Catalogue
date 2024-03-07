@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Catálogo GAIA de estrelas até 23 parsecs do Sol</h1>
+
+        <button onclick="window.location.href='{{url_for('tabela_de_dados_gaia')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        tabela de dados GAIA
+        </button>
+
+        <button onclick="window.location.href='{{url_for('tabela_de_dados_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        tabela de dados Hipparcos
+        </button>
+
+        <button onclick="window.location.href='{{url_for('diagramas_gaia')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        diagramas GAIA
+        </button>
+
+        <button onclick="window.location.href='{{url_for('diagramas_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        diagramas hipparcos
+        </button>
+
+        <button onclick="window.location.href='{{url_for('gaia_intersection_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Gaia ∩ Hipparcos
+        </button>
+
+        <button onclick="window.location.href='{{url_for('gaia_minus_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Gaia - Hipparcos
+        </button>
+
+        <button onclick="window.location.href='{{url_for('hipparcos_minus_gaia')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Hipparcos - Gaia
+        </button>
+
+        <button onclick="window.location.href='{{url_for('gaia_intersection_hipparcos_astropy')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Gaia ∩ Hipparcos (Astropy)
+        </button>
+
+        <button onclick="window.location.href='{{url_for('gaia_minus_hipparcos_astropy')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Gaia - Hipparcos (Astropy)
+        </button>
+
+        <button onclick="window.location.href='{{url_for('hipparcos_minus_gaia_astropy')}}';" style="font-family: Arial; font-size: 30px;"
+                type="button">
+        Hipparcos - Gaia (Astropy)
+        </button>
+</body>
+</html>

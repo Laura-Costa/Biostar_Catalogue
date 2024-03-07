@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Dados GAIA</title>
+</head>
+    <h1>{{name}}</h1>
+    <table border="1">
+        <tr>
+        <td><b>record_ordinal_number</b></td>
+        <td><b>designation</b></td>
+        <td><b>ra</b></td>
+        <td><b>declination</b></td>
+        <td><b>parallax</b></td>
+        <td><b>parallax_error</b></td>
+        <td><b>ruwe</b></td>
+        <td><b>phot_g_mean_mag</b></td>
+        <td><b>phot_bp_mean_mag</b></td>
+        <td><b>phot_rp_mean_mag</b></td>
+        <td><b>teff_gspphot</b></td>
+        <td><b>teff_gspphot_lower</b></td>
+        <td><b>teff_gspphot_upper</b></td>
+        <td><b>logg_gspphot</b></td>
+        <td><b>logg_gspphot_lower</b></td>
+        <td><b>logg_gspphot_upper</b></td>
+        <td><b>mh_gspphot</b></td>
+        <td><b>mh_gspphot_lower</b></td>
+        <td><b>mh_gspphot_upper</b></td>
+        <td><b>distance_gspphot</b></td>
+        <td><b>distance_gspphot_lower</b></td>
+        <td><b>distance_gspphot_upper</b></td>
+        </tr>
+
+    {%for registro in data%}
+        <tr>
+        {%for col in range(23)%}
+            <td>{{registro[col]}}</td>
+        {%endfor%}
+        </tr>
+    {%endfor%}
+    </table>
+</html>

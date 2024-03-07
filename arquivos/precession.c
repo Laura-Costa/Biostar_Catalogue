@@ -3,7 +3,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include <quadmath.h>
-typedef __float128 real;
+//typedef __float128 real;
 
 // #define PI 3.14159265358979323846264338327950288419716939937510
 
@@ -38,24 +38,26 @@ int main(){
 
     // Corrigir precessao dos equinocios
     //prece(ep0, ep1, &ra, &dec);
-    printf("ra = %.20Lf\ndec = %.20Lf\n", ra, dec);
-
-
-
-
+    printf("\nCoordenadas Hipparcos apos correcao do movimento proprio\n");
+    printf("ra(rad) = %.50Lf\ndec(rad) = %.50Lf\n", ra, dec);
 
     // Coordenadas Gaia
     long double ar_gaia = 243.90633606005997 * PI / 180;
     long double dr_gaia = -8.371641161548801 * PI / 180;
 
-    printf("ar em radianos (Gaia): %.20Lf\n", ar_gaia);
-    printf("dr em radianos (Gaia): %.20Lf\n", dr_gaia);
+    printf("\nCoordenadas Gaia\n");
+    printf("ar(rad): %.50Lf\n", ar_gaia);
+    printf("dr(rad): %.50Lf\n", dr_gaia);
+    
+    long double difer_ra;
+    long double difer_dec;
 
-    long double difer_ra = abs(ar_gaia - ra)*3600*(180/PI);
-    long double difer_dec = abs(dec - dr_gaia)*3600*(180/PI);
+    difer_ra = fabs(ar_gaia - ra)*3600*(180/PI);
+    difer_dec = fabs(dec - dr_gaia)*3600*(180/PI);
 
-    printf("diferença ar em segundos de arco: %.50Lf\n", difer_ra);
-    printf("diferença dr em segundos de arco: %.50Lf\n", difer_dec);
+
+    printf("\ndiferenca ar em segundos de arco: %.50Lf\n", difer_ra);
+    printf("diferenca dr em segundos de arco: %.50Lf\n", difer_dec);
 
  
     return 0;
