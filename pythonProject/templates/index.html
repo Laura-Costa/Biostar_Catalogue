@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href='../static/style.css' type="text/css"/>
 </head>
 <body>
     <h1>Catálogo GAIA de estrelas até 23 parsecs do Sol</h1>
-
+    <div class="button-group">
         <button onclick="window.location.href='{{url_for('tabela_de_dados_gaia')}}';" style="font-family: Arial; font-size: 30px;"
                 type="button">
         tabela de dados GAIA
@@ -56,5 +57,7 @@
                 type="button">
         Hipparcos - Gaia (Astropy)
         </button>
+    </div>
+
 </body>
 </html>
