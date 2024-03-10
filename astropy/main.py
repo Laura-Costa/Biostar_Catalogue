@@ -4,6 +4,8 @@ from astropy.table import Table
 from astroquery.simbad import Simbad
 import csv
 
+# procurar estrelas Gaia no Hipparcos
+
 csv_file_path = 'designation.csv'
 
 with open(csv_file_path, 'r') as file:

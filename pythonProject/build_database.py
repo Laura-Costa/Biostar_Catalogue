@@ -419,6 +419,55 @@ connection.close()
 #
 
 
+##
+connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalog', user='helena', password='ic2023')
+cursor = connection.cursor()
+
+cursor.execute("select record_ordinal_number, Vmag + 5 + 5*log(10, Plx/1000) as MV, VTmag + 5 + 5*log(10, Plx/1000) as MVt, B_V as B_minus_V, BTmag - VTmag as BT_minus_VT from Hipparcos where (Plx/1000) > 0.0275 and B_V != 0 and BTmag - VTmag != 0 and record_ordinal_number not in (select record_ordinal_number_hipparcos from matched) order by record_ordinal_number")
+value = cursor.fetchall()
+
+eixox1 = []
+for registro in value:
+    eixox1.append(registro[3])
+
+eixoy1 = []
+for registro in value:
+    eixoy1.append(registro[1])
+
+plt.scatter(eixox1, eixoy1, s=size, marker=".", edgecolors='black', alpha=transparency)
+plt.xlim(-1, 2.5)
+plt.ylim(15, -2)
+plt.title("HIPPARCOS - GAIA: {} estrelas em um raio de 36.36pc (π > 0.0275'')".format(len(value)))
+plt.ylabel("M(V)")
+plt.xlabel("B-V")
+plt.savefig('static/img/hipparcos_minus_gaia_mv_versus_b_minus_v_plx_greater_0.0275.png')
+plt.clf()
+
+eixox2 = []
+for registro in value:
+    eixox2.append(registro[4])
+
+eixoy2 = []
+for registro in value:
+    eixoy2.append(registro[2])
+
+plt.scatter(eixox2, eixoy2, s=size, marker=".", edgecolors='black', alpha=transparency)
+plt.xlim(-1, 2.5)
+plt.ylim(15, -2)
+plt.title("HIPPARCOS - GAIA: {} estrelas em um raio de 36.36pc (π > 0.0275'')".format(len(value)))
+plt.ylabel("M(Vt)")
+plt.xlabel("BT-RT")
+plt.savefig('static/img/hipparcos_minus_gaia_mvt_versus_bt_minus_vt_plx_greater_0.0275.png')
+plt.clf()
+
+# Make sure data is committed to the database
+connection.commit()
+cursor.close()
+connection.close()
+
+##
+
+
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalog', user='helena', password='ic2023')
 cursor = connection.cursor()
@@ -751,7 +800,7 @@ size = 1.5
 plt.scatter(eixox1, eixoy1, s=size, marker=".", edgecolors='black', alpha=transparency)
 plt.xlim(-1, 7)
 plt.ylim(15, -20)
-plt.title("HIPPARCOS - GAIA: {} estrelas(π > 0'')".format(len(value)))
+plt.title("HIPPARCOS - GAIA: {} estrelas (π > 0'')".format(len(value)))
 plt.ylabel("M(V)")
 plt.xlabel("B-V")
 plt.savefig('static/img/hipparcos_minus_gaia_astropy_mv_versus_b_minus_v_plx_greater_0.png')
@@ -828,6 +877,53 @@ connection.close()
 #
 
 
+##
+connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalog', user='helena', password='ic2023')
+cursor = connection.cursor()
+
+cursor.execute("select record_ordinal_number, Vmag + 5 + 5*log(10, Plx/1000) as MV, VTmag + 5 + 5*log(10, Plx/1000) as MVt, B_V as B_minus_V, BTmag - VTmag as BT_minus_VT from Hipparcos where (Plx/1000) > 0.0275 and B_V != 0 and BTmag - VTmag != 0 and record_ordinal_number not in (select record_ordinal_number_hipparcos from matched_python) order by record_ordinal_number")
+value = cursor.fetchall()
+
+eixox1 = []
+for registro in value:
+    eixox1.append(registro[3])
+
+eixoy1 = []
+for registro in value:
+    eixoy1.append(registro[1])
+
+plt.scatter(eixox1, eixoy1, s=size, marker=".", edgecolors='black', alpha=transparency)
+plt.xlim(-1, 2.5)
+plt.ylim(15, -2)
+plt.title("HIPPARCOS - GAIA: {} estrelas em um raio de 36.36pc (π > 0.0275'')".format(len(value)))
+plt.ylabel("M(V)")
+plt.xlabel("B-V")
+plt.savefig('static/img/hipparcos_minus_gaia_astropy_mv_versus_b_minus_v_plx_greater_0.0275.png')
+plt.clf()
+
+eixox2 = []
+for registro in value:
+    eixox2.append(registro[4])
+
+eixoy2 = []
+for registro in value:
+    eixoy2.append(registro[2])
+
+plt.scatter(eixox2, eixoy2, s=size, marker=".", edgecolors='black', alpha=transparency)
+plt.xlim(-1, 2.5)
+plt.ylim(15, -2)
+plt.title("HIPPARCOS - GAIA: {} estrelas em um raio de 36.36pc (π > 0.0275'')".format(len(value)))
+plt.ylabel("M(Vt)")
+plt.xlabel("BT-RT")
+plt.savefig('static/img/hipparcos_minus_gaia_astropy_mvt_versus_bt_minus_vt_plx_greater_0.0275.png')
+plt.clf()
+
+# Make sure data is committed to the database
+connection.commit()
+cursor.close()
+connection.close()
+
+##
 
 
 
