@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaia ∩ Hipparcos</title>
+</head>
+<body>
+    <h1>{{name}}</h1>
+
+    <img src= "{{url_for('static', filename='img/gaia_intersection_hipparcos_mg_versus_Bp_minus_Rp.png')}}" >
+    <img src= "{{url_for('static', filename='img/gaia_intersection_hipparcos_mrp_versus_Bp_minus_Rp.png')}}" >
+
+
+    <img src= "{{url_for('static', filename='img/gaia_intersection_hipparcos_mv_versus_b_minus_v_plx_greater_0.png')}}" >
+    <img src= "{{url_for('static', filename='img/gaia_intersection_hipparcos_mvt_versus_bt_minus_vt_plx_greater_0.png')}}" >
+
+    <table border="1">
+        <tr>
+        <td><b>record_ordinal_number (Gaia)</b></td>
+        <td><b>designation</b></td>
+        <td><b>ra</b></td>
+        <td><b>RAdeg</b></td>
+        <td><b>declination</b></td>
+        <td><b>DEdeg</b></td>
+        <td><b>parallax</b></td>
+        <td><b>parallax_error</b></td>
+        <td><b>ruwe</b></td>
+        <td><b>phot_g_mean_mag</b></td>
+        <td><b>phot_bp_mean_mag</b></td>
+        <td><b>phot_rp_mean_mag</b></td>
+        <td><b>teff_gspphot</b></td>
+        <td><b>teff_gspphot_lower</b></td>
+        <td><b>teff_gspphot_upper</b></td>
+        <td><b>logg_gspphot</b></td>
+        <td><b>logg_gspphot_lower</b></td>
+        <td><b>logg_gspphot_upper</b></td>
+        <td><b>mh_gspphot</b></td>
+        <td><b>mh_gspphot_lower</b></td>
+        <td><b>mh_gspphot_upper</b></td>
+        <td><b>distance_gspphot</b></td>
+        <td><b>distance_gspphot_lower</b></td>
+        <td><b>distance_gspphot_upper</b></td>
+        <td><b>record_ordinal_number (Hipparcos)</b></td>
+        <td><b>HIP</b></td>
+        <td><b>Vmag</b></td>
+        <td><b>Plx</b></td>
+        <td><b>e_Plx</b></td>
+        <td><b>pmRA</b></td>
+        <td><b>pmDE</b></td>
+        <td><b>BTmag</b></td>
+        <td><b>VTmag</b></td>
+        <td><b>B_V</b></td>
+        </tr>
+
+    {%for registro in data%}
+        <tr>
+        {%for col in range(34)%}
+            <td>{{registro[col]}}</td>
+        {%endfor%}
+        </tr>
+    {%endfor%}
+    </table>
+</body>
+</html>

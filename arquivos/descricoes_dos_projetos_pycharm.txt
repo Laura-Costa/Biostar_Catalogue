@@ -1,0 +1,18 @@
+====pythonProject====
+Projeto feito com o Hipparcos completo
+Seleção no Gaia de 23 pc
+Correspondência feita com as coordenadas após a correção do movimento próprio das estrelas no Hipparcos
+Buscar estrelas do Hipparcos no Gaia
+Janela de comparação de 1 segundo de arco para ra e dec
+
+AstroPy: procurando estrelas Gaia no Hipparcos
+banco de dados: gaia_catalog
+
+
+====pythonProject1====
+Seleção no Hipparcos de 25.64 pc, paralaxe >= 0.039
+Seleção no Gaia de 23 pc
+Correspondência feita com os identificadores usando o astropy
+(1) Buscar estrelas do Gaia no Hipparcos
+
+banco de dados: gaia_catalogue_1 (buscar Gaia no Hipparcos)

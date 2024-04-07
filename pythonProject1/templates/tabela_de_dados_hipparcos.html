@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Dados HIPPARCOS</title>
+</head>
+    <h1>{{name}}</h1>
+    <table border="1">
+        <tr>
+        <td><b>numero_ordinal_do_registro</b></td>
+        <td><b>HIP</b></td>
+        <td><b>Vmag</b></td>
+        <td><b>RAdeg</b></td>
+        <td><b>DEdeg</b></td>
+        <td><b>Plx</b></td>
+        <td><b>e_Plx</b></td>
+        <td><b>pmRA</b></td>
+        <td><b>pmDE</b></td>
+        <td><b>BTmag</b></td>
+        <td><b>VTmag</b></td>
+        <td><b>B_V</b></td>
+        </tr>
+
+    {%for registro in data%}
+        <tr>
+        <td>{{registro[0]}}</td>
+        <td>{{registro[1]}}</td>
+        <td>{{registro[2]}}</td>
+        <td>{{registro[3]}}</td>
+        <td>{{registro[4]}}</td>
+        <td>{{registro[5]}}</td>
+        <td>{{registro[6]}}</td>
+        <td>{{registro[7]}}</td>
+        <td>{{registro[8]}}</td>
+        <td>{{registro[9]}}</td>
+        <td>{{registro[10]}}</td>
+        <td>{{registro[11]}}</td>
+        </tr>
+    {%endfor%}
+    </table>
+</html>
