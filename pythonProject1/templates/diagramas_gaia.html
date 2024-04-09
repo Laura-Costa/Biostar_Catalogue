@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Diagramas GAIA</title>
+    <link rel="stylesheet" href='../static/style.css' type="text/css"/>
+    <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 </head>
 <body>
     <h1>{{name}}</h1>
@@ -11,26 +13,72 @@
     <img src= "{{url_for('static', filename='img/mrp_versus_Bp_minus_Rp.png')}}" >
 
 
-    <table border="3">
-        <tr>
-        <td><b>número ordinal do registro</b></td>
-        <td><b>M(G)</b></td>
-        <td><b>M(Rp)</b></td>
-        <td><b>Bp - Rp</b></td>
-        <td><b>erro de M(G)</b></td>
-        <td><b>erro de M(Rp)</b></td>
-        </tr>
+    <div class="button-group">
+        <button onclick="window.location.href='{{url_for('hipparcos_minus_gaia')}}';" style="font-family: Arial; font-size: 20px;"
+                type="button">
+        Estrelas no catálogo
+        </button>
+    </div>
 
-        {%for registro in data%}
-        <tr>
-        <td>{{registro[0]}}</td>
-        <td>{{registro[1]}}</td>
-        <td>{{registro[2]}}</td>
-        <td>{{registro[3]}}</td>
-        <td>{{registro[4]}}</td>
-        <td>{{registro[5]}}</td>
-        </tr>
-        {%endfor%}
+
+
+
+    <h1><label for="pet-select">Search by identifier</label></h1>
+
+    <select name="id" id="id-select">
+      <option value="">--choose an option--</option>
+      <option value="HD">HD</option>
+      <option value="designation">Gaia designation</option>
+      <option value="HIP">HIP</option>
+    </select>
+
+
+    <table border="1" id="demo">
+        <thead>
+            <tr>
+            <td><b>número ordinal do registro</b></td>
+            <td><b>M(G)</b></td>
+            <td><b>M(Rp)</b></td>
+            <td><b>Bp - Rp</b></td>
+            <td><b>erro de M(G)</b></td>
+            <td><b>erro de M(Rp)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            {%for registro in data%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
     </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

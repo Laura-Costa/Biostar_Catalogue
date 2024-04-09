@@ -1,0 +1,8 @@
+/* STICK HEADER */
+#demo thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+#demo thead { background: #ffebec; }
+#demo tbody { background: #e4ebff; }
