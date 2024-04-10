@@ -14,3 +14,7 @@
 .button-group button:hover {
     backgroundcolor: gray;
 }
+
+body {
+    margin-bottom: 100px
+}

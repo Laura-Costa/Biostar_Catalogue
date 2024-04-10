@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hipparcos</title>
+    <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
+</head>
+    <body>
+    <h1>{{name[0]}}</h1>
+
+    <img src= "{{url_for('static', filename='img/mv_versus_b_minus_v_plx_greater_or_iqual_0.039.png')}}" >
+    <img src= "{{url_for('static', filename='img/mvt_versus_bt_minus_vt_plx_greater_or_iqual_0.039.png')}}" >
+
+    <h2>{{name[1]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
+            <td style="position: sticky; top: 0;"><b>HIP</b></td>
+            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+            <td style="position: sticky; top: 0;"><b>B-V</b></td>
+            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for registro in data[0]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            <td>{{registro[7]}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+    <h2>{{name[2]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
+            <td style="position: sticky; top: 0;"><b>HIP</b></td>
+            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+            <td style="position: sticky; top: 0;"><b>B-V</b></td>
+            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for registro in data[1]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            <td>{{registro[7]}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+
+    <h2>{{name[3]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
+            <td style="position: sticky; top: 0;"><b>HIP</b></td>
+            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+            <td style="position: sticky; top: 0;"><b>B-V</b></td>
+            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for registro in data[2]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            <td>{{registro[7]}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+    <h2>{{name[4]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
+            <td style="position: sticky; top: 0;"><b>HIP</b></td>
+            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+            <td style="position: sticky; top: 0;"><b>B-V</b></td>
+            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for registro in data[3]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            <td>{{registro[7]}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+    <h2>{{name[5]}}</h2>
+
+
+
+
+    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
+            <td style="position: sticky; top: 0;"><b>HIP</b></td>
+            <td style="position: sticky; top: 0;"><b>Vmag</b></td>
+            <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
+            <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
+            <td style="position: sticky; top: 0;"><b>Plx</b></td>
+            <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
+            <td style="position: sticky; top: 0;"><b>pmRA</b></td>
+            <td style="position: sticky; top: 0;"><b>pmDE</b></td>
+            <td style="position: sticky; top: 0;"><b>BTmag</b></td>
+            <td style="position: sticky; top: 0;"><b>VTmag</b></td>
+            <td style="position: sticky; top: 0;"><b>B_V</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {%for registro in data[4]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            <td>{{registro[7]}}</td>
+            <td>{{registro[8]}}</td>
+            <td>{{registro[9]}}</td>
+            <td>{{registro[10]}}</td>
+            <td>{{registro[11]}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+
+
+    </body>
+
+</html>

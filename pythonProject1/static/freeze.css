@@ -6,3 +6,7 @@
 }
 #demo thead { background: #ffebec; }
 #demo tbody { background: #e4ebff; }
+
+body {
+    margin-bottom: 100px
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Gaia</title>
+    <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
+</head>
+<body>
+
+    <h1>{{name[0]}}</h1>
+
+    <img src= "{{url_for('static', filename='img/mg_versus_Bp_minus_Rp.png')}}" >
+    <img src= "{{url_for('static', filename='img/mrp_versus_Bp_minus_Rp.png')}}" >
+
+    <h2>{{name[1]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Gaia)</b></td>
+            <td style="position: sticky; top: 0;"><b>designation</b></td>
+            <td style="position: sticky; top: 0;"><b>M(G)</b></td>
+            <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
+            <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(G)</b></td>
+            <td style="position: sticky; top: 0;"><b>erro de M(Rp)</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            {%for registro in data[0]%}
+            <tr>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>{{registro[5]}}</td>
+            <td>{{registro[6]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    <h2>{{name[2]}}</h2>
+
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+        <thead>
+            <tr>
+            <td style="position: sticky; top: 0;"><b>registro (Gaia)</b></td>
+            <td style="position: sticky; top: 0;"><b>designation</b></td>
+            <td style="position: sticky; top: 0;"><b>ra</b></td>
+            <td style="position: sticky; top: 0;"><b>declination</b></td>
+            <td style="position: sticky; top: 0;"><b>parallax</b></td>
+            <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
+            <td style="position: sticky; top: 0;"><b>ruwe</b></td>
+            <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
+            <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
+            <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
+            <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
+            <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
+            <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
+            <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
+            <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
+            <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
+            <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
+            <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
+            <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
+            <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
+            <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
+            <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
+            </tr>
+        </thead>
+        <tbody>
+            {%for registro in data[1]%}
+                <tr>
+                {%for col in range(22)%}
+                    <td>{{registro[col]}}</td>
+                {%endfor%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,43 +1,46 @@
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/HIP_MAIN.DAT'
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/pythonProject1/HIP_MAIN.DAT'
     into table Hipparcos_temp
     fields terminated by '|'
     enclosed by '"'
     lines terminated by '\r\r'
-    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79) set HIP=@col2, Vmag=@col6, RAdeg=@col9, DEdeg=@col10, Plx=@col12, e_Plx=@col17, pmRA=@col13, pmDE=@col14, BTmag=@col33, VTmag=@col35, B_V=@col38;
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79) set HIP=@col2, HD=@col72, Vmag=@col6, RAdeg=@col9, DEdeg=@col10, RAhms=@col4, DEdms=@col5, Plx=@col12, e_Plx=@col17, pmRA=@col13, pmDE=@col14, BTmag=@col33, VTmag=@col35, B_V=@col38;
 
 
 
 
 
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/1700922039277O-result.csv'
-    into table Gaia
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/pythonProject1/1712690092801O-result.csv'
+    into table Gaia_temp
     fields terminated by ','
     enclosed by '"'
     lines terminated by '\n'
     ignore 1 rows
-    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79, @col80, @col81, @col82, @col83, @col84, @col85, @col86, @col87, @col88, @col89, @col90, @col91, @col92, @col93, @col94, @col95, @col96, @col97, @col98, @col99, @col100, @col101, @col102, @col103, @col104, @col105, @col106, @col107, @col108, @col109, @col110, @col111, @col112, @col113, @col114, @col115, @col116, @col117, @col118, @col119, @col120, @col121, @col122, @col123, @col124, @col125, @col126, @col127, @col128, @col129, @col130, @col131, @col132, @col133, @col134, @col135, @col136, @col137, @col138, @col139, @col140, @col141, @col142, @col143, @col144, @col145, @col146, @col147, @col148, @col149, @col150, @col151, @col152) 
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24) 
 	set 
-	designation=@col2,
-	ra=@col6,
-	declination=@col8,
-	parallax=@col10,
-	parallax_error=@col11,
-	ruwe=@col56,
-	phot_g_mean_mag=@col70,
-	phot_bp_mean_mag=@col75,
-	phot_rp_mean_mag=@col80,
-	teff_gspphot=@col131,
-	teff_gspphot_lower=@col132,
-	teff_gspphot_upper=@col133,
-	logg_gspphot=@col134,
-	logg_gspphot_lower=@col135, 
-	logg_gspphot_upper=@col136,
-	mh_gspphot=@col137,
-	mh_gspphot_lower=@col138,
-	mh_gspphot_upper=@col139,
-	distance_gspphot=@col140,
-	distance_gspphot_lower=@col141,
-	distance_gspphot_upper=@col142
+	designation=@col1,
+	ra=@col2,
+	declination=@col3,
+	parallax=@col4,
+	parallax_error=@col5,
+	pm=@col6,
+	pmra=@col7,
+	pmdec=@col8,
+	ruwe=@col9,
+	phot_g_mean_mag=@col10,
+	phot_bp_mean_mag=@col11,
+	phot_rp_mean_mag=@col12,
+	teff_gspphot=@col13,
+	teff_gspphot_lower=@col14,
+	teff_gspphot_upper=@col15,
+	logg_gspphot=@col16,
+	logg_gspphot_lower=@col17, 
+	logg_gspphot_upper=@col18,
+	mh_gspphot=@col19,
+	mh_gspphot_lower=@col20,
+	mh_gspphot_upper=@col21,
+	distance_gspphot=@col22,
+	distance_gspphot_lower=@col23,
+	distance_gspphot_upper=@col24
 ;
 
 
@@ -56,23 +59,7 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/1700922
 
 
 
-
-
-
-
-
-load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/astropy/HIP_designation.csv'
-    into table HIP_designation
-    fields terminated by ','
-    enclosed by '"'
-    lines terminated by '\n'
-    (@col1, @col2) 
-	set 
-	HIP=@col1,
-	designation=@col2
-;
-
-SELECT HIP, Vmag, RAdeg, DEdeg, Plx, e_Plx, pmRA, pmDE, BTmag, VTmag, B_V
+SELECT HIP, HD, Vmag, RAdeg, DEdeg, RAhms, DEdms, Plx, e_Plx, pmRA, pmDE, BTmag, VTmag, B_V
 FROM Hipparcos_temp
 WHERE Hipparcos_temp.Plx >= 0.039000000000000000000000000000 * 1000.0
 INTO OUTFILE '/var/lib/mysql/Hipparcos_gc01.csv'
@@ -80,75 +67,93 @@ FIELDS ENCLOSED BY '"'
 TERMINATED BY ','
 LINES TERMINATED BY '\n';
 
+
+
 load data local infile '/var/lib/mysql/Hipparcos_gc01.csv'
     into table Hipparcos
     fields terminated by ','
     enclosed by '"'
     lines terminated by '\n'
-    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11) 
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14) 
 	set 
 	HIP=@col1, 	
-	Vmag=@col2, 
-	RAdeg=@col3, 
-	DEdeg=@col4, 
-	Plx=@col5, 
-	e_Plx=@col6,
-	pmRA=@col7, 
-	pmDE=@col8, 
-	BTmag=@col9, 
-	VTmag=@col10, 
-	B_V=@col11
+	HD=@col2,
+	Vmag=@col3, 
+	RAdeg=@col4, 
+	DEdeg=@col5,
+	RAhms=@col6,
+	DEdms=@col7,
+	Plx=@col8, 
+	e_Plx=@col9,
+	pmRA=@col10, 
+	pmDE=@col11, 
+	BTmag=@col12, 
+	VTmag=@col13, 
+	B_V=@col14
 ;
 
 
-SELECT Gaia.record_ordinal_number, Gaia.designation, ra, declination, parallax, parallax_error, ruwe, phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag, teff_gspphot, teff_gspphot_lower, teff_gspphot_upper, logg_gspphot, logg_gspphot_lower, logg_gspphot_upper, mh_gspphot, mh_gspphot_lower, mh_gspphot_upper, distance_gspphot, distance_gspphot_lower, distance_gspphot_upper,	Hipparcos.record_ordinal_number, Hipparcos.HIP, Vmag, RAdeg, DEdeg, Plx, e_Plx, pmRA, pmDE, BTmag, VTmag, B_V 
-FROM Gaia, Hipparcos, HIP_designation
-WHERE Gaia.designation = HIP_designation.designation AND Hipparcos.HIP = HIP_designation.HIP
-INTO OUTFILE '/var/lib/mysql/matched_gc01.csv'
+load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/astropy/corresponder_designation_HD_HIP_pythonProject1/designation_HD_HIP.csv'
+    into table designation_HD_HIP
+    fields terminated by ','
+    enclosed by '"'
+    lines terminated by '\n'
+    (@col1, @col2) 
+	set 
+	designation=@col1,
+	HD=@col2,
+	HIP=@col3
+;
+
+
+
+
+
+SELECT Gaia_temp.designation, designation_HD_HIP.HIP, designation_HD_HIP.HD, Gaia_temp.ra, Gaia_temp.declination, Gaia_temp.parallax, Gaia_temp.parallax_error, Gaia_temp.pm, Gaia_temp.pmra, Gaia_temp.pmdec, Gaia_temp.ruwe, Gaia_temp.phot_g_mean_mag, Gaia_temp.phot_bp_mean_mag, Gaia_temp.phot_rp_mean_mag, Gaia_temp.teff_gspphot, Gaia_temp.teff_gspphot_lower, Gaia_temp.teff_gspphot_upper, Gaia_temp.logg_gspphot, Gaia_temp.logg_gspphot_lower, Gaia_temp.logg_gspphot_upper, Gaia_temp.mh_gspphot, Gaia_temp.mh_gspphot_lower, Gaia_temp.mh_gspphot_upper, Gaia_temp.distance_gspphot, Gaia_temp.distance_gspphot_lower, Gaia_temp.distance_gspphot_upper
+FROM Gaia_temp, designation_HD_HIP
+WHERE Gaia_temp.designation = designation_HD_HIP.designation 
+INTO OUTFILE '/var/lib/mysql/Gaia_gc01.csv'
 FIELDS ENCLOSED BY '"'
 TERMINATED BY ','
 LINES TERMINATED BY '\n';
 
 
-load data local infile '/var/lib/mysql/matched_gc01.csv'
-    into table matched
+
+
+
+
+
+load data local infile '/var/lib/mysql/Gaia_gc01.csv'
+    into table Gaia
     fields terminated by ','
     enclosed by '"'
     lines terminated by '\n'
-    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34) 
+    (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26) 
 	set 
-	record_ordinal_number_gaia=@col1,
-	designation=@col2,
-	ra=@col3,
-	declination=@col4,
-	parallax=@col5,
-	parallax_error=@col6,
-	ruwe=@col7, 
-	phot_g_mean_mag=@col8,  
-	phot_bp_mean_mag=@col9,  
-	phot_rp_mean_mag=@col10, 
-	teff_gspphot=@col11,
-	teff_gspphot_lower=@col12,
-	teff_gspphot_upper=@col13,
-	logg_gspphot=@col14,
-	logg_gspphot_lower=@col15, 
-	logg_gspphot_upper=@col16,
-	mh_gspphot=@col17,
-	mh_gspphot_lower=@col18,
-	mh_gspphot_upper=@col19,
-	distance_gspphot=@col20,
-	distance_gspphot_lower=@col21,
-	distance_gspphot_upper=@col22,
-	record_ordinal_number_hipparcos=@col23,
-	HIP=@col24, 	
-	Vmag=@col25, 
-	RAdeg=@col26, 
-	DEdeg=@col27, 
-	Plx=@col28, 
-	e_Plx=@col29,
-	pmRA=@col30, 
-	pmDE=@col31, 
-	BTmag=@col32, 
-	VTmag=@col33, 
-	B_V=@col34
+	designation=@col1,
+	HIP=@col2,
+	HD=@col3,
+	ra=@col4,
+	declination=@col5,
+	parallax=@col6,
+	parallax_error=@col7,
+	pm=@col8,
+	pmra=@col9,
+	pmdec=@col10,
+	ruwe=@col11,
+	phot_g_mean_mag=@col12,
+	phot_bp_mean_mag=@col13,
+	phot_rp_mean_mag=@col14,
+	teff_gspphot=@col15,
+	teff_gspphot_lower=@col16,
+	teff_gspphot_upper=@col17,
+	logg_gspphot=@col18,
+	logg_gspphot_lower=@col19, 
+	logg_gspphot_upper=@col20,
+	mh_gspphot=@col21,
+	mh_gspphot_lower=@col22,
+	mh_gspphot_upper=@col23,
+	distance_gspphot=@col24,
+	distance_gspphot_lower=@col25,
+	distance_gspphot_upper=@col26
 ;

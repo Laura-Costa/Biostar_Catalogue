@@ -6,26 +6,17 @@
     <link rel="stylesheet" href='../static/style.css' type="text/css"/>
 </head>
 <body>
-    <h1>Catálogo GAIA de estrelas até 23 parsecs do Sol</h1>
+    <h1>Catálogo de Bioestrelas</h1>
     <div class="button-group">
-        <button onclick="window.location.href='{{url_for('tabela_de_dados_gaia')}}';" style="font-family: Arial; font-size: 30px;"
+
+        <button onclick="window.location.href='{{url_for('gaia')}}';" style="font-family: Arial; font-size: 30px;"
                 type="button">
-        tabela de dados GAIA
+        Gaia
         </button>
 
-        <button onclick="window.location.href='{{url_for('tabela_de_dados_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
+        <button onclick="window.location.href='{{url_for('hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
                 type="button">
-        tabela de dados Hipparcos
-        </button>
-
-        <button onclick="window.location.href='{{url_for('diagramas_gaia')}}';" style="font-family: Arial; font-size: 30px;"
-                type="button">
-        diagramas GAIA
-        </button>
-
-        <button onclick="window.location.href='{{url_for('diagramas_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
-                type="button">
-        diagramas hipparcos
+        Hipparcos
         </button>
 
         <button onclick="window.location.href='{{url_for('gaia_intersection_hipparcos')}}';" style="font-family: Arial; font-size: 30px;"
