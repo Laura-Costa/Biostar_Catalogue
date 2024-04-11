@@ -15,8 +15,26 @@ create database gaia_catalogue_1;
 use gaia_catalogue_1;
 
 
+
+
+create table Hipparcos (
+	HIP INT primary key, 	
+	HD CHAR(100) null,
+	Vmag NUMERIC(65,30) null, 
+	RAdeg NUMERIC(65,30) null, 
+	DEdeg NUMERIC(65,30) null,
+	RAhms CHAR(100) null,
+	DEdms CHAR(100) null,
+	Plx NUMERIC(65,30) null, 
+	e_Plx NUMERIC(65,30) null,
+	pmRA NUMERIC(65,30) null, 
+	pmDE NUMERIC(65,30) null, 
+	BTmag NUMERIC(65,30) null, 
+	VTmag NUMERIC(65,30) null, 
+	B_V NUMERIC(65,30) null
+);	
+
 create table Gaia (
-	record_ordinal_number INT not null auto_increment,
 	designation CHAR(100) primary key,
 	HIP INT,
 	HD CHAR(100) null,
@@ -45,24 +63,6 @@ create table Gaia (
 	distance_gspphot_upper NUMERIC(65,30) not null,
 	foreign key (HIP) references Hipparcos(HIP) on delete restrict 
 );
-
-create table Hipparcos (
-	record_ordinal_number INT not null auto_increment,
-	HIP INT primary key, 	
-	HD CHAR(100) null,
-	Vmag NUMERIC(65,30) not null, 
-	RAdeg NUMERIC(65,30) not null, 
-	DEdeg NUMERIC(65,30) not null,
-	RAhms CHAR(100) not null,
-	DEdms CHAR(100) not null,
-	Plx NUMERIC(65,30) not null, 
-	e_Plx NUMERIC(65,30) not null,
-	pmRA NUMERIC(65,30) not null, 
-	pmDE NUMERIC(65,30) not null, 
-	BTmag NUMERIC(65,30) not null, 
-	VTmag NUMERIC(65,30) not null, 
-	B_V NUMERIC(65,30) not null
-);	
 
 create table Gaia_Diagram(
       name char(100) not null,
@@ -100,7 +100,7 @@ create table Hipparcos_product(
 );
 
 create table Gaia_product_is_ploted_on(
-      designation CHAR(100) primary key,
+      designation CHAR(100),
       name char(100) not null,
       primary key (designation, name),
       foreign key (designation) references Gaia_product(designation),
@@ -108,7 +108,7 @@ create table Gaia_product_is_ploted_on(
 );
 
 create table Hipparcos_product_is_ploted_on(
-      HIP INT primary key,
+      HIP INT,
       name char(100) not null,
       primary key (HIP, name),
       foreign key (HIP) references Hipparcos_product(HIP),
@@ -133,7 +133,10 @@ create table Hipparcos_product_is_ploted_on(
 
 
 
-================================================================================================================
+
+
+
+
 create table designation_HD_HIP (
 	designation CHAR(100) primary key,
 	HD CHAR(100) null,
@@ -142,26 +145,24 @@ create table designation_HD_HIP (
 
 
 create table Hipparcos_temp (
-	record_ordinal_number INT not null auto_increment,
 	HIP INT primary key, 	
-	HD CHAR(100)not null,
-	Vmag NUMERIC(65,30) not null, 
-	RAdeg NUMERIC(65,30) not null, 
-	DEdeg NUMERIC(65,30) not null, 
-	RAhms CHAR(100) not null,
-	DEdms CHAR(100) not null,
-	Plx NUMERIC(65,30) not null, 
-	e_Plx NUMERIC(65,30) not null,
-	pmRA NUMERIC(65,30) not null, 
-	pmDE NUMERIC(65,30) not null, 
-	BTmag NUMERIC(65,30) not null, 
-	VTmag NUMERIC(65,30) not null, 
-	B_V NUMERIC(65,30) not null
+	HD CHAR(100) null,
+	Vmag NUMERIC(65,30) null, 
+	RAdeg NUMERIC(65,30) null, 
+	DEdeg NUMERIC(65,30) null, 
+	RAhms CHAR(100) null,
+	DEdms CHAR(100) null,
+	Plx NUMERIC(65,30) null, 
+	e_Plx NUMERIC(65,30) null,
+	pmRA NUMERIC(65,30) null, 
+	pmDE NUMERIC(65,30) null, 
+	BTmag NUMERIC(65,30) null, 
+	VTmag NUMERIC(65,30) null, 
+	B_V NUMERIC(65,30) null
 );
 
 
 create table Gaia_temp (
-	record_ordinal_number INT not null auto_increment,
 	designation CHAR(100) primary key,
 	ra NUMERIC(65,30) not null,
 	declination NUMERIC(65,30) not null,

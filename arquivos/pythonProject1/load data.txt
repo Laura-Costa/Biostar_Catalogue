@@ -6,6 +6,36 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/arquivos/pythonP
     (@col1, @col2, @col3, @col4, @col5, @col6, @col7, @col8, @col9, @col10, @col11, @col12, @col13, @col14, @col15, @col16, @col17, @col18, @col19, @col20, @col21, @col22, @col23, @col24, @col25, @col26, @col27, @col28, @col29, @col30, @col31, @col32, @col33, @col34, @col35, @col36, @col37, @col38, @col39, @col40, @col41, @col42, @col43, @col44, @col45, @col46, @col47, @col48, @col49, @col50, @col51, @col52, @col53, @col54, @col55, @col56, @col57, @col58, @col59, @col60, @col61, @col62, @col63, @col64, @col65, @col66, @col67, @col68, @col69, @col70, @col71, @col72, @col73, @col74, @col75, @col76, @col77, @col78, @col79) set HIP=@col2, HD=@col72, Vmag=@col6, RAdeg=@col9, DEdeg=@col10, RAhms=@col4, DEdms=@col5, Plx=@col12, e_Plx=@col17, pmRA=@col13, pmDE=@col14, BTmag=@col33, VTmag=@col35, B_V=@col38;
 
 
+UPDATE
+  Hipparcos_temp t1
+SET 
+  t1.HD = IF( t1.HD = "", NULL, t1.HD);
+
+UPDATE
+  Hipparcos_temp t1
+SET 
+  t1.RAhms = IF( t1.RAhms = "", NULL, t1.RAhms);
+  
+UPDATE
+  Hipparcos_temp t1
+SET 
+  t1.DEdms = IF( t1.DEdms = "", NULL, t1.DEdms);
+
+UPDATE
+  Hipparcos_temp t1
+SET 
+  t1.Vmag = IF( t1.HIP = 120412, NULL, t1.Vmag);
+  
+  
+  
+UPDATE
+  Hipparcos_temp t1
+SET 
+  t1.RAdeg = IF( t1.HIP = 421 OR t1.HIP = 1338 OR t1.HIP = 1902 OR t1.HIP = 2189 OR t1.HIP = 3158 OR t1.HIP = 3482 OR t1.HIP = 3856 OR t1.HIP = 5502 OR t1.HIP = 6132 OR t1.HIP = 7635 OR t1.HIP = 8538 OR t1.HIP = 8713 OR t1.HIP = 8781 OR t1.HIP = 9429 OR t1.HIP = 9867 OR t1.HIP = 10270 OR t1.HIP = 10659 OR t1.HIP = 10689 OR t1.HIP = 11692 OR t1.HIP = 11829 OR t1.HIP = 12103 OR t1.HIP = 13235 OR t1.HIP = 14275 OR t1.HIP = 14277 OR t1.HIP = 14951 OR t1.HIP = 16216 OR t1.HIP = 16218 OR t1.HIP = 17201 OR t1.HIP = 18045 OR t1.HIP = 18377 OR t1.HIP = 18404 OR t1.HIP = 19424 OR t1.HIP = 19708 OR t1.HIP = 20488 OR t1.HIP = 21185 OR t1.HIP = 120411 OR t1.HIP = 22992 OR t1.HIP = 23299 OR t1.HIP = 24042 OR t1.HIP = 24078 OR t1.HIP = 24360 OR t1.HIP = 24539 OR t1.HIP = 24648 OR t1.HIP = 25050 OR t1.HIP = 25105 OR t1.HIP = 120412 OR t1.HIP = 25836 OR t1.HIP = 27262 OR t1.HIP = 27464 OR t1.HIP = 27981 OR t1.HIP = 28121 OR t1.HIP = 29119 OR t1.HIP = 31067 OR t1.HIP = 31132 OR t1.HIP = 31153 OR t1.HIP = 31157 OR t1.HIP = 31437 OR t1.HIP = 31500 OR t1.HIP = 31825 OR t1.HIP = 31999 OR t1.HIP = 32000 OR t1.HIP = 32340 OR t1.HIP = 32914 OR t1.HIP = 34226 OR t1.HIP = 34467 OR t1.HIP = 34716 OR t1.HIP = 34836 OR t1.HIP = 35195 OR t1.HIP = 35311 OR t1.HIP = 35571 OR t1.HIP = 35964 OR t1.HIP = 36007 OR t1.HIP = 36109 OR t1.HIP = 36609 OR t1.HIP = 36642 OR t1.HIP = 36649 OR t1.HIP = 37417 OR t1.HIP = 38256 OR t1.HIP = 38398 OR t1.HIP = 38562 OR t1.HIP = 38821 OR t1.HIP = 39753 OR t1.HIP = 40272 OR t1.HIP = 41110 OR t1.HIP = 41397 OR t1.HIP = 41405 OR t1.HIP = 41884 OR t1.HIP = 43283 OR t1.HIP = 43329 OR t1.HIP = 43344 OR t1.HIP = 43708 OR t1.HIP = 43820 OR t1.HIP = 43946 OR t1.HIP = 44039 OR t1.HIP = 44197 OR t1.HIP = 45108 OR t1.HIP = 45109 OR t1.HIP = 45205 OR t1.HIP = 45792 OR t1.HIP = 46500 OR t1.HIP = 47386 OR t1.HIP = 48307 OR t1.HIP = 48645 OR t1.HIP = 48665 OR t1.HIP = 50572 OR t1.HIP = 50640 OR t1.HIP = 50751 OR t1.HIP = 51426 OR t1.HIP = 51496 OR t1.HIP = 51588 OR t1.HIP = 52021 OR t1.HIP = 52585 OR t1.HIP = 52800 OR t1.HIP = 53310 OR t1.HIP = 53573 OR t1.HIP = 54144 OR t1.HIP = 54171 OR t1.HIP = 54353 OR t1.HIP = 54812 OR t1.HIP = 54948 OR t1.HIP = 55203 OR t1.HIP = 55622 OR t1.HIP = 55826 OR t1.HIP = 56934 OR t1.HIP = 57037 OR t1.HIP = 120413 OR t1.HIP = 120414 OR t1.HIP = 58999 OR t1.HIP = 59018 OR t1.HIP = 59154 OR t1.HIP = 59189 OR t1.HIP = 59273 OR t1.HIP = 59963 OR t1.HIP = 60178 OR t1.HIP = 60450 OR t1.HIP = 120212 OR t1.HIP = 61062 OR t1.HIP = 61200 OR t1.HIP = 61231 OR t1.HIP = 62292 OR t1.HIP = 62295 OR t1.HIP = 62622 OR t1.HIP = 62719 OR t1.HIP = 62937 OR t1.HIP = 62947 OR t1.HIP = 62967 OR t1.HIP = 63447 OR t1.HIP = 64354 OR t1.HIP = 65863 OR t1.HIP = 65908 OR t1.HIP = 66187 OR t1.HIP = 66677 OR t1.HIP = 66747 OR t1.HIP = 67616 OR t1.HIP = 68059 OR t1.HIP = 68588 OR t1.HIP = 68820 OR t1.HIP = 69192 OR t1.HIP = 69782 OR t1.HIP = 70878 OR t1.HIP = 70958 OR t1.HIP = 71228 OR t1.HIP = 72588 OR t1.HIP = 72860 OR t1.HIP = 73533 OR t1.HIP = 75865 OR t1.HIP = 75901 OR t1.HIP = 76059 OR t1.HIP = 76316 OR t1.HIP = 76462 OR t1.HIP = 76640 OR t1.HIP = 78411 OR t1.HIP = 78528 OR t1.HIP = 78727 OR t1.HIP = 79592 OR t1.HIP = 79729 OR t1.HIP = 80579 OR t1.HIP = 80630 OR t1.HIP = 80796 OR t1.HIP = 80880 OR t1.HIP = 81402 OR t1.HIP = 81538 OR t1.HIP = 81694 OR t1.HIP = 82021 OR t1.HIP = 82899 OR t1.HIP = 82904 OR t1.HIP = 84915 OR t1.HIP = 85778 OR t1.HIP = 86257 OR t1.HIP = 86261 OR t1.HIP = 86405 OR t1.HIP = 87122 OR t1.HIP = 87343 OR t1.HIP = 87816 OR t1.HIP = 88444 OR t1.HIP = 88639 OR t1.HIP = 88734 OR t1.HIP = 88759 OR t1.HIP = 90518 OR t1.HIP = 91256 OR t1.HIP = 91724 OR t1.HIP = 91924 OR t1.HIP = 92536 OR t1.HIP = 92584 OR t1.HIP = 92836 OR t1.HIP = 92897 OR t1.HIP = 93018 OR t1.HIP = 93538 OR t1.HIP = 93563 OR t1.HIP = 95493 OR t1.HIP = 95672 OR t1.HIP = 95723 OR t1.HIP = 95811 OR t1.HIP = 96005 OR t1.HIP = 96073 OR t1.HIP = 96108 OR t1.HIP = 96410 OR t1.HIP = 96569 OR t1.HIP = 97202 OR t1.HIP = 97237 OR t1.HIP = 97570 OR t1.HIP = 98625 OR t1.HIP = 98713 OR t1.HIP = 98790 OR t1.HIP = 98811 OR t1.HIP = 98909 OR t1.HIP = 99261 OR t1.HIP = 120416 OR t1.HIP = 99861 OR t1.HIP = 100006 OR t1.HIP = 100086 OR t1.HIP = 100109 OR t1.HIP = 100245 OR t1.HIP = 120415 OR t1.HIP = 100304 OR t1.HIP = 100364 OR t1.HIP = 103180 OR t1.HIP = 103992 OR t1.HIP = 103995 OR t1.HIP = 103996 OR t1.HIP = 104240 OR t1.HIP = 104243 OR t1.HIP = 104645 OR t1.HIP = 105230 OR t1.HIP = 105296 OR t1.HIP = 120159 OR t1.HIP = 106124 OR t1.HIP = 108291 OR t1.HIP = 120229 OR t1.HIP = 108802 OR t1.HIP = 111277 OR t1.HIP = 111293 OR t1.HIP = 111432 OR t1.HIP = 111606 OR t1.HIP = 111858 OR t1.HIP = 112316 OR t1.HIP = 112465 OR t1.HIP = 112469 OR t1.HIP = 112856 OR t1.HIP = 114349 OR t1.HIP = 115125 OR t1.HIP = 115269 OR t1.HIP = 117643, NULL, t1.RAdeg);
+  
+
+  
+  
 
 
 
@@ -98,7 +128,7 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/astropy/correspo
     fields terminated by ','
     enclosed by '"'
     lines terminated by '\n'
-    (@col1, @col2) 
+    (@col1, @col2, @col3) 
 	set 
 	designation=@col1,
 	HD=@col2,
@@ -107,8 +137,19 @@ load data local infile '/home/h/Área de trabalho/Catalogo_GAIA/astropy/correspo
 
 
 
-
-
+UPDATE
+  designation_HD_HIP t1
+SET 
+  t1.HIP = IF( t1.HIP = 0, NULL, t1.HIP);
+  
+  
+UPDATE
+  designation_HD_HIP t1
+SET 
+  t1.HD = IF( t1.HD = "", NULL, t1.HD);
+  
+  
+  
 SELECT Gaia_temp.designation, designation_HD_HIP.HIP, designation_HD_HIP.HD, Gaia_temp.ra, Gaia_temp.declination, Gaia_temp.parallax, Gaia_temp.parallax_error, Gaia_temp.pm, Gaia_temp.pmra, Gaia_temp.pmdec, Gaia_temp.ruwe, Gaia_temp.phot_g_mean_mag, Gaia_temp.phot_bp_mean_mag, Gaia_temp.phot_rp_mean_mag, Gaia_temp.teff_gspphot, Gaia_temp.teff_gspphot_lower, Gaia_temp.teff_gspphot_upper, Gaia_temp.logg_gspphot, Gaia_temp.logg_gspphot_lower, Gaia_temp.logg_gspphot_upper, Gaia_temp.mh_gspphot, Gaia_temp.mh_gspphot_lower, Gaia_temp.mh_gspphot_upper, Gaia_temp.distance_gspphot, Gaia_temp.distance_gspphot_lower, Gaia_temp.distance_gspphot_upper
 FROM Gaia_temp, designation_HD_HIP
 WHERE Gaia_temp.designation = designation_HD_HIP.designation 

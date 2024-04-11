@@ -10,7 +10,7 @@ Todo registro tem designation. Pode ou nao ter HD. Pode ou nao ter HIP.
 '''
 
 
-# ler o arquivo designation
+# ler o arquivo designation (transforma a coluna numa lista de string)
 
 csv_file_path = 'designation.csv'
 
@@ -47,20 +47,34 @@ for id in designation:
         HIP.append(None)
     else:
         quantidade_de_estrelas_com_HIP += 1
-        HIP.append([id for id in tab['ID'] if id.startswith('HIP')][0][4:])
+        myHIP = int([id for id in tab['ID'] if id.startswith('HIP')][0][4:])
+        HIP.append(myHIP)
 
 print("\n Quantidade de estrelas Gaia com HIP: {}".format(quantidade_de_estrelas_com_HIP))
 
 
+'''
+ATENCAO!
+Existe uma particularidade no trecho de codigo abaixo.
+Ele substitui valores None por string vazia ou zero, dependendo do tipo de dado.
+
+Quando carrego este CSV para o MySQL, se o tipo de
+dado do campo eh inteiro, a string vazia eh substituida por 0.
+Se o tipo de dado do campo eh string, eh carregada a string vazia.
+Mas nesses dois casos, o que eu desejava
+era que fosse carregado o valor NULL quando
+carrego o CSV para o MySQL.
+'''
+
 csv_file_path = 'designation_HD_HIP.csv'
 with open(csv_file_path, 'w', newline='') as file:
-    csv_writer = csv.writer(file, dialect='unix')
+    csv_writer = csv.writer(file, dialect='unix', quoting=csv.QUOTE_NONNUMERIC)
     for row1, row2, row3 in zip(designation, HD, HIP):
-        if row2 is None and row3 is None:
-            csv_writer.writerow([row1, "", ""])
-        elif row2 is not None and row3 is not None:
-            csv_writer.writerow([row1, row2, row3])
-        elif row2 is None and row3 is not None:
-            csv_writer.writerow([row1, "", row3])
-        elif row2 is not None and row3 is None:
-            csv_writer.writerow([row1, row2, ""])
+        csv_writer.writerow([row1, row2, row3])
+       
+
+
+# imprimir as colunas designation e HD para ver qual eh o tipo dos dados
+# print(designation)
+# print(HD)
+
