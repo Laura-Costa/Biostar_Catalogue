@@ -126,6 +126,7 @@ with open("HIP_MAIN.DAT") as tsv:
                     cursor.execute("update Hipparcos set B_V = NULL where HIP = {}".format(int(HIP_value)))
                 else:
                     cursor.execute("update Hipparcos set B_V = {} where HIP = {}".format(float(B_V_value), int(HIP_value)))
+tsv.close()
 
 # Criar a tabela Gaia no BD
 
@@ -164,231 +165,358 @@ cursor.execute("select HIP from Hipparcos")
 HIPs_in_Hipparcos = cursor.fetchall()
 
 with open("1712690092801O-result.csv", 'r') as csv_file:
-    HIPs_novos = []
     next(csv_file)
-    for line in csv_file:
-        line = line.split(",")
-        line[0] = line[0].split('"')[1]
 
-        # load designation
+    with open('HIPs_novos.csv', 'w', newline='') as file:
+        csv_writer = csv.writer(file, dialect='unix', quoting=csv.QUOTE_NONNUMERIC)
+        csv_writer.writerow(["HIP", "designation", "HD"])
 
-        designation_value = line[0].strip()
-        if len(designation_value) == 0:
-            cursor.execute("insert into Gaia(designation) values(NULL)")
-        else:
-            cursor.execute("insert into Gaia(designation) values('{}')".format(designation_value))
+        for line in csv_file:
+            line = line.split(",")
+            line[0] = line[0].split('"')[1]
+
+            # load designation
+
+            designation_value = line[0].strip()
+            if len(designation_value) == 0:
+                cursor.execute("insert into Gaia(designation) values(NULL)")
+            else:
+                cursor.execute("insert into Gaia(designation) values('{}')".format(designation_value))
 
 
-        # Verificar se no Simbad existe um HD correspondente a designation
-        # Se houver, carregar no BD. Senao, colocar NULL.
+            # Verificar se no Simbad existe um HD correspondente a designation
+            # Se houver, carregar no BD. Senao, colocar NULL.
 
 
-        tab = Simbad.query_objectids(designation_value)
+            tab = Simbad.query_objectids(designation_value)
 
-        if (len([id for id in tab['ID'] if id.startswith('HD')]) == 0):
-            cursor.execute("update Gaia set HD = NULL where designation = '{}'".format(designation_value))
-        else:
-            HD_value = [id for id in tab['ID'] if id.startswith('HD')][0][2:].strip()
-            cursor.execute("update Gaia set HD = '{}' where designation = '{}'".format(HD_value, designation_value))
+            if (len([id for id in tab['ID'] if id.startswith('HD')]) == 0):
+                cursor.execute("update Gaia set HD = NULL where designation = '{}'".format(designation_value))
+            else:
+                HD_value = [id for id in tab['ID'] if id.startswith('HD')][0][2:].strip()
+                cursor.execute("update Gaia set HD = '{}' where designation = '{}'".format(HD_value, designation_value))
 
-        # Verificar se no Simbad existe um HIP correspondente a designation
-        # Se houver, carregar no BD. Senao, colocar NULL.
-        # OBS: o HIP correspondente só é carregado se ele já estiver na tabela Hipparcos (25,64 pc)
+            # Verificar se no Simbad existe um HIP correspondente a designation
+            # Se houver, carregar no BD. Senao, colocar NULL.
+            # OBS: o HIP correspondente só é carregado se ele já estiver na tabela Hipparcos (25,64 pc)
 
-        if (len([id for id in tab['ID'] if id.startswith('HIP')]) == 0):
-            cursor.execute("update Gaia set HIP = NULL where designation = '{}'".format(designation_value))
-        else:
-            HIP_value = [id for id in tab['ID'] if id.startswith('HIP')][0][3:].strip()
-            cursor.execute("update Gaia set HIP = {} where designation = '{}' and HIP in"
-                           "(select HIP from Hipparcos)".format(int(HIP_value), designation_value))
-            if (int(HIP_value),) not in HIPs_in_Hipparcos:
-                HIPs_novos.append(int(HIP_value))
+            if (len([id for id in tab['ID'] if id.startswith('HIP')]) == 0):
+                cursor.execute("update Gaia set HIP = NULL where designation = '{}'".format(designation_value))
+            else:
+                HIP_value = [id for id in tab['ID'] if id.startswith('HIP')][0][3:].strip()
+                cursor.execute("update Gaia set HIP = {} where designation = '{}' and HIP in"
+                               "(select HIP from Hipparcos)".format(int(HIP_value), designation_value))
 
-        # load ra
+                # Gerar um arquivo com os HIPs novos na intersecao entre Gaia e Hipparcos
+                # Ou seja, o Gaia 'correspondeu' com HIPs que não estao na selecao atual do Hipparcos
 
-        ra_value = line[1].strip()
-        if len(ra_value) == 0:
-            cursor.execute("update Gaia set ra = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set ra = {} where designation = '{}'".format(float(ra_value), designation_value))
+                if (int(HIP_value),) not in HIPs_in_Hipparcos:
+                    csv_writer.writerow([int(HIP_value), designation_value, HD_value])
 
-        # load declination
+            # load ra
 
-        declination_value = line[2].strip()
-        if len(declination_value) == 0:
-            cursor.execute("update Gaia set declination = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set declination = {} where designation = '{}'".format(float(declination_value), designation_value))
+            ra_value = line[1].strip()
+            if len(ra_value) == 0:
+                cursor.execute("update Gaia set ra = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set ra = {} where designation = '{}'".format(float(ra_value), designation_value))
 
-        # load parallax
+            # load declination
 
-        parallax_value = line[3].strip()
-        if len(parallax_value) == 0:
-            cursor.execute("update Gaia set parallax = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set parallax = {} where designation = '{}'".format(float(parallax_value), designation_value))
+            declination_value = line[2].strip()
+            if len(declination_value) == 0:
+                cursor.execute("update Gaia set declination = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set declination = {} where designation = '{}'".format(float(declination_value), designation_value))
 
-        # load parallax_error
+            # load parallax
 
-        parallax_error_value = line[4].strip()
-        if len(parallax_error_value) == 0:
-            cursor.execute("update Gaia set parallax_error = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set parallax_error = {} where designation = '{}'".format(float(parallax_error_value), designation_value))
+            parallax_value = line[3].strip()
+            if len(parallax_value) == 0:
+                cursor.execute("update Gaia set parallax = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set parallax = {} where designation = '{}'".format(float(parallax_value), designation_value))
 
-        # load pm
+            # load parallax_error
 
-        pm_value = line[5].strip()
-        if len(pm_value) == 0:
-            cursor.execute("update Gaia set pm = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set pm = {} where designation = '{}'".format(float(pm_value), designation_value))
+            parallax_error_value = line[4].strip()
+            if len(parallax_error_value) == 0:
+                cursor.execute("update Gaia set parallax_error = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set parallax_error = {} where designation = '{}'".format(float(parallax_error_value), designation_value))
 
-        # load pmra
+            # load pm
 
-        pmra_value = line[6].strip()
-        if len(pmra_value) == 0:
-            cursor.execute("update Gaia set pmra = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set pmra = {} where designation = '{}'".format(float(pmra_value), designation_value))
+            pm_value = line[5].strip()
+            if len(pm_value) == 0:
+                cursor.execute("update Gaia set pm = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set pm = {} where designation = '{}'".format(float(pm_value), designation_value))
 
-        # load pmdec
+            # load pmra
 
-        pmdec_value = line[7].strip()
-        if len(pmdec_value) == 0:
-            cursor.execute("update Gaia set pmdec = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set pmdec = {} where designation = '{}'".format(float(pmdec_value), designation_value))
+            pmra_value = line[6].strip()
+            if len(pmra_value) == 0:
+                cursor.execute("update Gaia set pmra = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set pmra = {} where designation = '{}'".format(float(pmra_value), designation_value))
 
-        # load ruwe
+            # load pmdec
 
-        ruwe_value = line[8].strip()
-        if len(ruwe_value) == 0:
-            cursor.execute("update Gaia set ruwe = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set ruwe = {} where designation = '{}'".format(float(ruwe_value), designation_value))
+            pmdec_value = line[7].strip()
+            if len(pmdec_value) == 0:
+                cursor.execute("update Gaia set pmdec = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set pmdec = {} where designation = '{}'".format(float(pmdec_value), designation_value))
 
-        # load phot_g_mean_mag
+            # load ruwe
 
-        phot_g_mean_mag_value = line[9].strip()
-        if len(phot_g_mean_mag_value) == 0:
-            cursor.execute("update Gaia set phot_g_mean_mag = NULL where designation = '{}'".format(float(phot_g_mean_mag_value), designation_value))
-        else:
-            cursor.execute("update Gaia set phot_g_mean_mag = {} where designation = '{}'".format(float(phot_g_mean_mag_value), designation_value))
+            ruwe_value = line[8].strip()
+            if len(ruwe_value) == 0:
+                cursor.execute("update Gaia set ruwe = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set ruwe = {} where designation = '{}'".format(float(ruwe_value), designation_value))
 
-        # load phot_bp_mean_mag
+            # load phot_g_mean_mag
 
-        phot_bp_mean_mag_value = line[10].strip()
-        if len(phot_bp_mean_mag_value) == 0:
-            cursor.execute("update Gaia set phot_bp_mean_mag = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set phot_bp_mean_mag = {} where designation = '{}'".format(float(phot_bp_mean_mag_value), designation_value))
+            phot_g_mean_mag_value = line[9].strip()
+            if len(phot_g_mean_mag_value) == 0:
+                cursor.execute("update Gaia set phot_g_mean_mag = NULL where designation = '{}'".format(float(phot_g_mean_mag_value), designation_value))
+            else:
+                cursor.execute("update Gaia set phot_g_mean_mag = {} where designation = '{}'".format(float(phot_g_mean_mag_value), designation_value))
 
-        # load phot_rp_mean_mag
+            # load phot_bp_mean_mag
 
-        phot_rp_mean_mag_value = line[11].strip()
-        if len(phot_rp_mean_mag_value) == 0:
-            cursor.execute("update Gaia set phot_rp_mean_mag = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set phot_rp_mean_mag = {} where designation = '{}'".format(float(phot_rp_mean_mag_value), designation_value))
+            phot_bp_mean_mag_value = line[10].strip()
+            if len(phot_bp_mean_mag_value) == 0:
+                cursor.execute("update Gaia set phot_bp_mean_mag = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set phot_bp_mean_mag = {} where designation = '{}'".format(float(phot_bp_mean_mag_value), designation_value))
 
-        # load teff_gspphot
+            # load phot_rp_mean_mag
 
-        teff_gspphot_value = line[12].strip()
-        if len(teff_gspphot_value) == 0:
-            cursor.execute("update Gaia set teff_gspphot = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set teff_gspphot = {} where designation = '{}'".format(float(teff_gspphot_value), designation_value))
+            phot_rp_mean_mag_value = line[11].strip()
+            if len(phot_rp_mean_mag_value) == 0:
+                cursor.execute("update Gaia set phot_rp_mean_mag = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set phot_rp_mean_mag = {} where designation = '{}'".format(float(phot_rp_mean_mag_value), designation_value))
 
-        # load teff_gspphot_lower
+            # load teff_gspphot
 
-        teff_gspphot_lower_value = line[13].strip()
-        if len(teff_gspphot_lower_value) == 0:
-            cursor.execute("update Gaia set teff_gspphot_lower = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set teff_gspphot_lower = {} where designation = '{}'".format(float(teff_gspphot_lower_value), designation_value))
+            teff_gspphot_value = line[12].strip()
+            if len(teff_gspphot_value) == 0:
+                cursor.execute("update Gaia set teff_gspphot = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set teff_gspphot = {} where designation = '{}'".format(float(teff_gspphot_value), designation_value))
 
-        # load teff_gspphot_upper
+            # load teff_gspphot_lower
 
-        teff_gspphot_upper_value = line[14].strip()
-        if len(teff_gspphot_upper_value) == 0:
-            cursor.execute("update Gaia set teff_gspphot_upper = NULL where designation = '{}'".format(float(teff_gspphot_upper_value), designation_value))
-        else:
-            cursor.execute("update Gaia set teff_gspphot_upper = {} where designation = '{}'".format(float(teff_gspphot_upper_value), designation_value))
+            teff_gspphot_lower_value = line[13].strip()
+            if len(teff_gspphot_lower_value) == 0:
+                cursor.execute("update Gaia set teff_gspphot_lower = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set teff_gspphot_lower = {} where designation = '{}'".format(float(teff_gspphot_lower_value), designation_value))
 
-        # load logg_gspphot
+            # load teff_gspphot_upper
 
-        logg_gspphot_value = line[15].strip()
-        if len(logg_gspphot_value) == 0:
-            cursor.execute("update Gaia set logg_gspphot = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set logg_gspphot = {} where designation = '{}'".format(float(logg_gspphot_value), designation_value))
+            teff_gspphot_upper_value = line[14].strip()
+            if len(teff_gspphot_upper_value) == 0:
+                cursor.execute("update Gaia set teff_gspphot_upper = NULL where designation = '{}'".format(float(teff_gspphot_upper_value), designation_value))
+            else:
+                cursor.execute("update Gaia set teff_gspphot_upper = {} where designation = '{}'".format(float(teff_gspphot_upper_value), designation_value))
 
-        # load logg_gspphot_lower
+            # load logg_gspphot
 
-        logg_gspphot_lower_value = line[16].strip()
-        if len(logg_gspphot_lower_value) == 0:
-            cursor.execute("update Gaia set logg_gspphot_lower = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set logg_gspphot_lower = {} where designation = '{}'".format(float(logg_gspphot_lower_value), designation_value))
+            logg_gspphot_value = line[15].strip()
+            if len(logg_gspphot_value) == 0:
+                cursor.execute("update Gaia set logg_gspphot = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set logg_gspphot = {} where designation = '{}'".format(float(logg_gspphot_value), designation_value))
 
-        # load logg_gspphot_upper
+            # load logg_gspphot_lower
 
-        logg_gspphot_upper_value = line[17].strip()
-        if len(logg_gspphot_upper_value) == 0:
-            cursor.execute("update Gaia set logg_gspphot_upper = NULL where deignation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set logg_gspphot_upper = {} where designation = '{}'".format(float(logg_gspphot_upper_value), designation_value))
+            logg_gspphot_lower_value = line[16].strip()
+            if len(logg_gspphot_lower_value) == 0:
+                cursor.execute("update Gaia set logg_gspphot_lower = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set logg_gspphot_lower = {} where designation = '{}'".format(float(logg_gspphot_lower_value), designation_value))
 
-        # load mh_gspphot
+            # load logg_gspphot_upper
 
-        mh_gspphot_value = line[18].strip()
-        if len(mh_gspphot_value) == 0:
-            cursor.execute("update Gaia set mh_gspphot = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set mh_gspphot = {} where designation = '{}'".format(float(mh_gspphot_value), designation_value))
+            logg_gspphot_upper_value = line[17].strip()
+            if len(logg_gspphot_upper_value) == 0:
+                cursor.execute("update Gaia set logg_gspphot_upper = NULL where deignation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set logg_gspphot_upper = {} where designation = '{}'".format(float(logg_gspphot_upper_value), designation_value))
 
-        # load mh_gspphot_upper
+            # load mh_gspphot
 
-        mh_gspphot_lower_value = line[19].strip()
-        if len(mh_gspphot_lower_value) == 0:
-            cursor.execute("update Gaia set mh_gspphot_lower = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set mh_gspphot_lower = {} where designation = '{}'".format(float(mh_gspphot_lower_value), designation_value))
+            mh_gspphot_value = line[18].strip()
+            if len(mh_gspphot_value) == 0:
+                cursor.execute("update Gaia set mh_gspphot = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set mh_gspphot = {} where designation = '{}'".format(float(mh_gspphot_value), designation_value))
 
-        # load mh_gspphot_lower
+            # load mh_gspphot_upper
 
-        mh_gspphot_upper_value = line[20].strip()
-        if len(mh_gspphot_upper_value) == 0:
-            cursor.execute("update Gaia set mh_gspphot_upper = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set mh_gspphot_upper = {} where designation = '{}'".format(float(mh_gspphot_upper_value), designation_value))
+            mh_gspphot_lower_value = line[19].strip()
+            if len(mh_gspphot_lower_value) == 0:
+                cursor.execute("update Gaia set mh_gspphot_lower = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set mh_gspphot_lower = {} where designation = '{}'".format(float(mh_gspphot_lower_value), designation_value))
 
-        # load distance_gspphot
+            # load mh_gspphot_lower
 
-        distance_gspphot_value = line[21].strip()
-        if len(distance_gspphot_value) == 0:
-            cursor.execute("update Gaia set distance_gspphot = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set distance_gspphot = {} where designation = '{}'".format(float(distance_gspphot_value), designation_value))
+            mh_gspphot_upper_value = line[20].strip()
+            if len(mh_gspphot_upper_value) == 0:
+                cursor.execute("update Gaia set mh_gspphot_upper = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set mh_gspphot_upper = {} where designation = '{}'".format(float(mh_gspphot_upper_value), designation_value))
 
-        # load distance_gspphot_lower
+            # load distance_gspphot
 
-        distance_gspphot_lower_value = line[22].strip()
-        if len(distance_gspphot_lower_value) == 0:
-            cursor.execute("update Gaia set distance_gspphot_lower = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set distance_gspphot_lower = {} where designation = '{}'".format(float(distance_gspphot_lower_value), designation_value))
+            distance_gspphot_value = line[21].strip()
+            if len(distance_gspphot_value) == 0:
+                cursor.execute("update Gaia set distance_gspphot = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set distance_gspphot = {} where designation = '{}'".format(float(distance_gspphot_value), designation_value))
 
-        # load distance_upper
+            # load distance_gspphot_lower
 
-        distance_gspphot_upper_value = line[23].strip()
-        if len(distance_gspphot_upper_value) == 0:
-            cursor.execute("update Gaia set distance_gspphot_upper = NULL where designation = '{}'".format(designation_value))
-        else:
-            cursor.execute("update Gaia set distance_gspphot_upper = {} where designation = '{}'".format(float(distance_gspphot_upper_value), designation_value))
+            distance_gspphot_lower_value = line[22].strip()
+            if len(distance_gspphot_lower_value) == 0:
+                cursor.execute("update Gaia set distance_gspphot_lower = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set distance_gspphot_lower = {} where designation = '{}'".format(float(distance_gspphot_lower_value), designation_value))
 
-    print("\n Lista de HIPs novos na interseção entre Gaia e Hipparcos: {}".format(HIPs_novos))
+            # load distance_upper
+
+            distance_gspphot_upper_value = line[23].strip()
+            if len(distance_gspphot_upper_value) == 0:
+                cursor.execute("update Gaia set distance_gspphot_upper = NULL where designation = '{}'".format(designation_value))
+            else:
+                cursor.execute("update Gaia set distance_gspphot_upper = {} where designation = '{}'".format(float(distance_gspphot_upper_value), designation_value))
+
+        file.close()
+    csv_file.close()
+
+
+# Criar a tabela Gaia_product no BD
+
+cursor.execute("create table Gaia_product("
+               "designation CHAR(100) primary key,"
+               "Mg NUMERIC(65,30) null,"
+               "Mg_error NUMERIC(65,30) null,"
+               "MRp NUMERIC(65,30) null,"
+               "MRp_error NUMERIC(65,30) null,"
+               "Bp_minus_Rp NUMERIC(65,30) null,"
+               "foreign key (designation) references Gaia(designation) on delete restrict)")
+
+# Carregar dados da tabela Gaia_product
+
+# load designation
+
+cursor.execute("select designation from Gaia")
+value = cursor.fetchall()
+
+add_row = ("insert into Gaia_product (designation) values (%(designation)s)")
+
+for registro in value:
+    data_row = {
+        'designation': registro[0]
+    }
+    cursor.execute(add_row, data_row)
+
+# load Mg
+
+cursor.execute("select designation, phot_g_mean_mag + 5 + 5*log(10, parallax/1000.0) as Mg from Gaia where phot_g_mean_mag is not NULL")
+value = cursor.fetchall()
+for (designation_value, Mg_value) in value:
+    cursor.execute("update Gaia_product set Mg = {} where designation = '{}'".format(Mg_value, designation_value))
+
+cursor.execute("select designation from Gaia where phot_g_mean_mag is NULL")
+value = cursor.fetchall()
+for (designation_value) in value:
+    cursor.execute("update Gaia_product set Mg = NULL where designation = '{}'".format(designation_value))
+
+# load Mg_error
+
+cursor.execute("select designation, "
+               "( "
+               "abs((phot_g_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_g_mean_mag + 5 + 5 * log(10, (parallax + parallax_error) / 1000.0))) "
+               "+ "
+               "abs((phot_g_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_g_mean_mag + 5 + 5 * log(10, (parallax - parallax_error) / 1000.0))) "
+               ") / 2 as Mg_error "
+               "from Gaia "
+               "where phot_g_mean_mag is not NULL and "
+               "parallax is not NULL and "
+               "parallax_error is not NULL")
+value = cursor.fetchall()
+for (designation_value, Mg_error_value) in value:
+    cursor.execute("update Gaia_product set Mg_error = {} where designation = '{}'".format(Mg_error_value, designation_value))
+
+cursor.execute("select designation "
+               "from Gaia "
+               "where phot_g_mean_mag is NULL or "
+               "parallax is NULL or "
+               "parallax_error is NULL")
+value = cursor.fetchall()
+for (designation_value) in value:
+    cursor.execute("update Gaia_product set Mg_error = NULL where designation = '{}'".format(designation_value))
+
+# load MRp
+
+cursor.execute("select designation, phot_rp_mean_mag + 5 + 5*log(10, parallax/1000.0) as MRp from Gaia where phot_rp_mean_mag is not NULL")
+value = cursor.fetchall()
+for (designation_value, MRp_value) in value:
+    cursor.execute("update Gaia_product set MRp = {} where designation = '{}'".format(MRp_value, designation_value))
+
+cursor.execute("select designation from Gaia where phot_rp_mean_mag is NULL")
+value = cursor.fetchall()
+for (designation_value) in value:
+    cursor.execute("update Gaia_product set MRp = NULL where designation = '{}'".format(designation_value))
+
+# load MRp_error
+
+cursor.execute("select designation, "
+               "( "
+               "abs((phot_rp_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_rp_mean_mag + 5 + 5 * log(10, (parallax + parallax_error) / 1000.0))) "
+               "+ "
+               "abs((phot_rp_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_rp_mean_mag + 5 + 5 * log(10, (parallax - parallax_error) / 1000.0))) "
+               ") / 2 as MRp_error "
+               "from Gaia "
+               "where phot_rp_mean_mag is not NULL and "
+               "parallax is not NULL and "
+               "parallax_error is not NULL")
+value = cursor.fetchall()
+for (designation_value, MRp_error_value) in value:
+    cursor.execute("update Gaia_product set MRp_error = {} where designation = '{}'".format(MRp_error_value, designation_value))
+
+cursor.execute("select designation from Gaia "
+               "where phot_rp_mean_mag is NULL or "
+               "parallax is NULL or "
+               "parallax_error is NULL")
+value = cursor.fetchall()
+for (designation_value) in value:
+    cursor.execute("update Gaia_product set MRp_error = NULL where designation = '{}'".format(designation_value))
+
+# load Bp_minus_Rp
+
+cursor.execute("select designation, phot_bp_mean_mag - phot_rp_mean_mag as Bp_minus_Rp from Gaia "
+               "where phot_bp_mean_mag is not NULL and phot_rp_mean_mag is not NULL")
+value = cursor.fetchall()
+for (designation_value, Bp_minus_Rp_value) in value:
+    cursor.execute("update Gaia_product set Bp_minus_Rp = {} where designation = '{}'".format(Bp_minus_Rp_value, designation_value))
+
+cursor.execute("select designation from Gaia "
+               "where phot_bp_mean_mag is NULL or phot_rp_mean_mag is NULL")
+value = cursor.fetchall()
+for (designation_value) in value:
+    cursor.execute("update Gaia set Bp_minus_Rp = NULL where designation = '{}'".format(designation_value))
+
+# Criar a tabela Hipparcos_product no BD
+
+
 
 # Make sure data is committed to the database
 
