@@ -144,24 +144,6 @@ create table designation_HD_HIP (
 );
 
 
-create table Hipparcos_temp (
-	HIP INT primary key, 	
-	HD CHAR(100) null,
-	Vmag NUMERIC(65,30) null, 
-	RAdeg NUMERIC(65,30) null, 
-	DEdeg NUMERIC(65,30) null, 
-	RAhms CHAR(100) null,
-	DEdms CHAR(100) null,
-	Plx NUMERIC(65,30) null, 
-	e_Plx NUMERIC(65,30) null,
-	pmRA NUMERIC(65,30) null, 
-	pmDE NUMERIC(65,30) null, 
-	BTmag NUMERIC(65,30) null, 
-	VTmag NUMERIC(65,30) null, 
-	B_V NUMERIC(65,30) null
-);
-
-
 create table Gaia_temp (
 	designation CHAR(100) primary key,
 	ra NUMERIC(65,30) not null,
