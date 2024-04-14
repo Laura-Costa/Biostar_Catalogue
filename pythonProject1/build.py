@@ -12,7 +12,6 @@ cursor = connection.cursor()
 
 cursor.execute("drop database if exists gaia_catalogue_1")
 cursor.execute("create database gaia_catalogue_1")
-#cursor.execute("grant all privileges on gaia_catalogue_1.* to 'helena'@'localhost'")
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalogue_1', user='root', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
@@ -198,6 +197,7 @@ with open("1712690092801O-result.csv", 'r') as csv_file:
                 HD_value = [id for id in tab['ID'] if id.startswith('HD')][0][2:].strip()
                 cursor.execute("update Gaia set HD = '{}' where designation = '{}'".format(HD_value, designation_value))
 
+
             # Verificar se no Simbad existe um HIP correspondente a designation
             # Se houver, carregar no BD. Senao, colocar NULL.
             # OBS: o HIP correspondente só é carregado se ele já estiver na tabela Hipparcos (25,64 pc)
@@ -206,8 +206,8 @@ with open("1712690092801O-result.csv", 'r') as csv_file:
                 cursor.execute("update Gaia set HIP = NULL where designation = '{}'".format(designation_value))
             else:
                 HIP_value = [id for id in tab['ID'] if id.startswith('HIP')][0][3:].strip()
-                cursor.execute("update Gaia set HIP = {} where designation = '{}' and HIP in"
-                               "(select HIP from Hipparcos)".format(int(HIP_value), designation_value))
+                cursor.execute("update Gaia set HIP = {} where designation = '{}' and {} in"
+                               "(select HIP from Hipparcos)".format(int(HIP_value), designation_value, int(HIP_value)))
 
                 # Gerar um arquivo com os HIPs novos na intersecao entre Gaia e Hipparcos
                 # Ou seja, o Gaia 'correspondeu' com HIPs que não estao na selecao atual do Hipparcos
@@ -719,7 +719,7 @@ cursor.execute("create table Gaia_product_is_plotted_on( "
                "foreign key (designation) references Gaia_product(designation), "
                "foreign key (name) references Gaia_diagram(name))")
 
-# Criar o diagrama Gaia_Mg_versus_Bp_minus_Rp.png
+# Criar o diagrama Gaia_Mg_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
 
 cursor.execute("select Gaia_product.designation, "
                "Gaia.parallax, "
@@ -753,16 +753,77 @@ plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(le
 plt.ylabel("M(G)")
 plt.xlabel("Bp-Rp")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
-plt.savefig('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp.png')
-
-# Salvar o diagrama Gaia_Mg_versus_Bp_minus_Rp.png na tabela Gaia_diagram
-
-cursor.execute("insert into Gaia_diagram(name, image, description) values ('Gaia_Mg_versus_Bp_minus_Rp.png', "
-           "load_file('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp.png'), "
-           "'Diagrama HR (M(G) vs Bp-Rp) das estrelas Gaia (seleção de 23 pc)')")
 
 # close matplotlib.pyplot object
 plt.clf()
+
+######################################################################################################
+# DIAGRAMA DQUE O GUSTAVO 14/04/2024 PEDIU POR EMAIL
+
+cursor.execute("select Gaia_product.Mg, Gaia.parallax, Hipparcos_product.MV "
+               "from Hipparcos_product, Gaia, Gaia_product "
+               "where Hipparcos_product.HIP = Gaia.HIP and "
+               "Gaia.designation = Gaia_product.designation and "
+               "Gaia_product.Mg is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (Mg_value, parallax_value, MV_value) in value:
+    parallax_list.append(parallax_value)
+    y_axis.append(MV_value)
+    x_axis.append(Mg_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
+plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.ylabel("M(G)")
+plt.xlabel("M(V)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/intersection_Mg_versus_MV.png')
+
+# close matplotlib.pyplot object
+plt.clf()
+######################################################################################################
+# DIAGRAMA DQUE O GUSTAVO 14/04/2024 PEDIU POR EMAIL
+
+cursor.execute("select Gaia.phot_g_mean_mag, Gaia.parallax, Hipparcos.Vmag "
+               "from Hipparcos, Gaia "
+               "where Hipparcos.HIP = Gaia.HIP and "
+               "Hipparcos.Vmag is not NULL")
+value = cursor.fetchall()
+
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (phot_g_mean_mag_value, parallax_value, Vmag_value) in value:
+    parallax_list.append(parallax_value)
+    y_axis.append(Vmag_value)
+    x_axis.append(phot_g_mean_mag_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
+plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("phot_g_mean_mag")
+plt.ylabel("Vmag")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/gaia_intersection_hipparcos_phot_g_mean_mag_versus_Vmag.png')
+
+# close matplotlib.pyplot object
+plt.clf()
+######################################################################################################
 
 # Make sure data is committed to the database
 
