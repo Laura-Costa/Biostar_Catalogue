@@ -198,3 +198,6 @@ load data local infile '/var/lib/mysql/Gaia_gc01.csv'
 	distance_gspphot_lower=@col25,
 	distance_gspphot_upper=@col26
 ;
+
+
+insert into Gaia_diagram(name, image, description) values ('Gaia_Mg_versus_Bp_minus_Rp.png', load_file('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp.png'), 'Diagrama HR (M(G) vs Bp-Rp) das estrelas Gaia (seleção de 23 pc)');

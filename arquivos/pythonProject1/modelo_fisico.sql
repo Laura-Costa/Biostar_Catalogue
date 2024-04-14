@@ -64,16 +64,16 @@ create table Gaia (
 	foreign key (HIP) references Hipparcos(HIP) on delete restrict 
 );
 
-create table Gaia_Diagram(
+create table Gaia_diagram(
       name char(100) not null,
-      diagram blob not null,
+      image blob not null,
       description char(100),
       primary key (name)
 );
 
-create table Hipparcos_Diagram(
+create table Hipparcos_diagram(
        name char(100) not null,
-       diagram blob not null,
+       image blob not null,
        description char(100),
        primary key (name)
 );
@@ -99,12 +99,12 @@ create table Hipparcos_product(
       foreign key (HIP) references Hipparcos(HIP) on delete restrict 
 );
 
-create table Gaia_product_is_ploted_on(
+create table Gaia_product_is_plotted_on(
       designation CHAR(100),
       name char(100) not null,
       primary key (designation, name),
       foreign key (designation) references Gaia_product(designation),
-      foreign key (name) references Gaia_Diagram(name)
+      foreign key (name) references Gaia_diagram(name)
 );
 
 create table Hipparcos_product_is_ploted_on(

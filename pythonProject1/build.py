@@ -5,14 +5,16 @@ from astroquery.simbad import Simbad
 import csv
 import mysql.connector
 import matplotlib.pyplot as plt
+import decimal
 
-connection = mysql.connector.connect(host='localhost', port='3306', user='helena', password='ic2023')
+connection = mysql.connector.connect(host='localhost', port='3306', user='root', password='ic2023')
 cursor = connection.cursor()
 
 cursor.execute("drop database if exists gaia_catalogue_1")
 cursor.execute("create database gaia_catalogue_1")
+#cursor.execute("grant all privileges on gaia_catalogue_1.* to 'helena'@'localhost'")
 
-connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalogue_1', user='helena', password='ic2023', allow_local_infile=True)
+connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalogue_1', user='root', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
 
 cursor.execute("set global local_infile='ON'")
@@ -429,12 +431,17 @@ for registro in value:
 
 # load Mg
 
-cursor.execute("select designation, phot_g_mean_mag + 5 + 5*log(10, parallax/1000.0) as Mg from Gaia where phot_g_mean_mag is not NULL")
+cursor.execute("select designation, phot_g_mean_mag + 5 + 5*log(10, parallax/1000.0) as Mg "
+               "from Gaia "
+               "where phot_g_mean_mag is not NULL and "
+               "parallax > 0")
 value = cursor.fetchall()
 for (designation_value, Mg_value) in value:
     cursor.execute("update Gaia_product set Mg = {} where designation = '{}'".format(Mg_value, designation_value))
 
-cursor.execute("select designation from Gaia where phot_g_mean_mag is NULL")
+cursor.execute("select designation from Gaia "
+               "where phot_g_mean_mag is NULL or "
+               "parallax <= 0")
 value = cursor.fetchall()
 for (designation_value) in value:
     cursor.execute("update Gaia_product set Mg = NULL where designation = '{}'".format(designation_value))
@@ -446,11 +453,14 @@ cursor.execute("select designation, "
                "abs((phot_g_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_g_mean_mag + 5 + 5 * log(10, (parallax + parallax_error) / 1000.0))) "
                "+ "
                "abs((phot_g_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_g_mean_mag + 5 + 5 * log(10, (parallax - parallax_error) / 1000.0))) "
-               ") / 2 as Mg_error "
+               ") / 2.0 as Mg_error "
                "from Gaia "
                "where phot_g_mean_mag is not NULL and "
                "parallax is not NULL and "
-               "parallax_error is not NULL")
+               "parallax_error is not NULL and "
+               "parallax > 0 and "
+               "parallax + parallax_error > 0 and "
+               "parallax - parallax_error > 0")
 value = cursor.fetchall()
 for (designation_value, Mg_error_value) in value:
     cursor.execute("update Gaia_product set Mg_error = {} where designation = '{}'".format(Mg_error_value, designation_value))
@@ -459,19 +469,28 @@ cursor.execute("select designation "
                "from Gaia "
                "where phot_g_mean_mag is NULL or "
                "parallax is NULL or "
-               "parallax_error is NULL")
+               "parallax_error is NULL or "
+               "parallax <= 0 or "
+               "parallax + parallax_error <= 0 or "
+               "parallax - parallax_error <= 0")
 value = cursor.fetchall()
 for (designation_value) in value:
     cursor.execute("update Gaia_product set Mg_error = NULL where designation = '{}'".format(designation_value))
 
 # load MRp
 
-cursor.execute("select designation, phot_rp_mean_mag + 5 + 5*log(10, parallax/1000.0) as MRp from Gaia where phot_rp_mean_mag is not NULL")
+cursor.execute("select designation, phot_rp_mean_mag + 5 + 5*log(10, parallax/1000.0) as MRp "
+               "from Gaia "
+               "where phot_rp_mean_mag is not NULL and "
+               "parallax > 0")
 value = cursor.fetchall()
 for (designation_value, MRp_value) in value:
     cursor.execute("update Gaia_product set MRp = {} where designation = '{}'".format(MRp_value, designation_value))
 
-cursor.execute("select designation from Gaia where phot_rp_mean_mag is NULL")
+cursor.execute("select designation "
+               "from Gaia "
+               "where phot_rp_mean_mag is NULL or "
+               "parallax <= 0")
 value = cursor.fetchall()
 for (designation_value) in value:
     cursor.execute("update Gaia_product set MRp = NULL where designation = '{}'".format(designation_value))
@@ -483,11 +502,14 @@ cursor.execute("select designation, "
                "abs((phot_rp_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_rp_mean_mag + 5 + 5 * log(10, (parallax + parallax_error) / 1000.0))) "
                "+ "
                "abs((phot_rp_mean_mag + 5 + 5 * log(10, parallax / 1000.0)) - (phot_rp_mean_mag + 5 + 5 * log(10, (parallax - parallax_error) / 1000.0))) "
-               ") / 2 as MRp_error "
+               ") / 2.0 as MRp_error "
                "from Gaia "
                "where phot_rp_mean_mag is not NULL and "
                "parallax is not NULL and "
-               "parallax_error is not NULL")
+               "parallax_error is not NULL and "
+               "parallax > 0 and "
+               "parallax + parallax_error > 0 and "
+               "parallax - parallax_error > 0")
 value = cursor.fetchall()
 for (designation_value, MRp_error_value) in value:
     cursor.execute("update Gaia_product set MRp_error = {} where designation = '{}'".format(MRp_error_value, designation_value))
@@ -495,7 +517,10 @@ for (designation_value, MRp_error_value) in value:
 cursor.execute("select designation from Gaia "
                "where phot_rp_mean_mag is NULL or "
                "parallax is NULL or "
-               "parallax_error is NULL")
+               "parallax_error is NULL or "
+               "parallax <= 0 or "
+               "parallax + parallax_error <= 0 or "
+               "parallax - parallax_error <= 0")
 value = cursor.fetchall()
 for (designation_value) in value:
     cursor.execute("update Gaia_product set MRp_error = NULL where designation = '{}'".format(designation_value))
@@ -508,15 +533,236 @@ value = cursor.fetchall()
 for (designation_value, Bp_minus_Rp_value) in value:
     cursor.execute("update Gaia_product set Bp_minus_Rp = {} where designation = '{}'".format(Bp_minus_Rp_value, designation_value))
 
-cursor.execute("select designation from Gaia "
-               "where phot_bp_mean_mag is NULL or phot_rp_mean_mag is NULL")
+cursor.execute("select designation "
+               "from Gaia "
+               "where phot_bp_mean_mag is NULL or "
+               "phot_rp_mean_mag is NULL")
 value = cursor.fetchall()
 for (designation_value) in value:
     cursor.execute("update Gaia set Bp_minus_Rp = NULL where designation = '{}'".format(designation_value))
 
 # Criar a tabela Hipparcos_product no BD
 
+cursor.execute("create table Hipparcos_product( "
+               "HIP INT primary key, "
+               "MV NUMERIC(65,30) null, "
+               "MV_error NUMERIC(65,30) null, "
+               "MVt NUMERIC(65,30) null, "
+               "MVt_error NUMERIC(65,30) null, "
+               "B_minus_V NUMERIC(65,30) null, "
+               "BT_minus_VT NUMERIC(65,30) null, "
+               "foreign key (HIP) references Hipparcos(HIP) on delete restrict)")
 
+# Carregar dados da tabela Hipparcos_product
+
+# load HIP
+
+cursor.execute("select HIP from Hipparcos")
+value = cursor.fetchall()
+
+add_row = ("insert into Hipparcos_product (HIP) values (%(HIP)s)")
+
+for registro in value:
+    data_row = {
+        'HIP': registro[0]
+    }
+    cursor.execute(add_row, data_row)
+
+# load MV
+
+cursor.execute("select HIP, Vmag + 5 + 5 * log(10, Plx/1000.0) as MV "
+               "from Hipparcos "
+               "where Vmag is not NULL and "
+               "Plx is not NULL and "
+               "Plx > 0")
+value = cursor.fetchall()
+for (HIP_value, MV_value) in value:
+    cursor.execute("update Hipparcos_product set MV = {} where HIP = {}".format(MV_value, HIP_value))
+
+cursor.execute("select HIP "
+               "from Hipparcos "
+               "where Vmag is NULL or "
+               "Plx is NULL or "
+               "Plx <= 0")
+value = cursor.fetchall()
+for (HIP_value) in value:
+    cursor.execute("update Hipparcos_product set MV = NULL where HIP = {}".format(HIP_value))
+
+# load MV_error
+
+cursor.execute("select HIP, "
+               "("
+               "abs((Vmag + 5 + 5 * log(10, Plx/1000.0)) - (Vmag + 5 + 5 * log(10, (Plx + e_Plx) / 1000.0))) "
+               "+ "
+               "abs((Vmag  + 5 + 5 * log(10, Plx/1000.0)) - (Vmag + 5 + 5 * log(10, (Plx - e_Plx) / 1000.0))) "
+               ") / 2.0 as MV_error "
+               "from Hipparcos "
+               "where Vmag is not NULL and "
+               "Plx is not NULL and "
+               "e_Plx is not NULL and "
+               "Plx > 0 and "
+               "Plx + e_Plx > 0 and "
+               "Plx - e_Plx > 0")
+value = cursor.fetchall()
+for (HIP_value, MV_error_value) in value:
+    cursor.execute("update Hipparcos_product set MV_error = {} where HIP = {}".format(MV_error_value, HIP_value))
+
+cursor.execute("select HIP from Hipparcos "
+               "where Vmag is NULL or "
+               "Plx is NULL or "
+               "e_Plx is NULL or "
+               "Plx <= 0 or "
+               "Plx + e_Plx <= 0 or "
+               "Plx - e_Plx <= 0")
+value = cursor.fetchall()
+for (HIP_value,) in value:
+    cursor.execute("update Hipparcos_product set MV_error = NULL where HIP = {}".format(HIP_value))
+
+# load MVt
+
+cursor.execute("select HIP, "
+               "VTmag + 5 + 5 * log(10, Plx / 1000.0) as MVt "
+               "from Hipparcos "
+               "where VTmag is not NULL and "
+               "Plx > 0")
+value = cursor.fetchall()
+for (HIP_value, MVt_value) in value:
+    cursor.execute("update Hipparcos_product set MVt = {} where HIP = {}".format(MVt_value, HIP_value))
+
+cursor.execute("select HIP "
+               "from Hipparcos "
+               "where VTmag is NULL or "
+               "Plx <= 0")
+value = cursor.fetchall()
+for (HIP_value,) in value:
+    cursor.execute("update Hipparcos_product set MVt = NULL where HIP = {}".format(HIP_value))
+
+# load MVt_error
+
+cursor.execute("select HIP, "
+               "( "
+               "abs(( VTmag + 5 + 5 * log(10, Plx / 1000.0)) - (VTmag + 5 + 5 * log(10, (Plx + e_Plx) / 1000.0))) "
+               "+ "
+               "abs(( VTmag + 5 + 5 * log(10, Plx / 1000.0)) - (VTmag + 5 + 5 * log(10, (Plx - e_Plx) / 1000.0))) "
+               ") / 2.0 as MVt_error "
+               "from Hipparcos "
+               "where VTmag is not NULL and "
+               "Plx is not NULL and "
+               "e_Plx is not NULL and "
+               "Plx > 0 and "
+               "Plx + e_Plx > 0 and "
+               "Plx - e_Plx > 0")
+value = cursor.fetchall()
+for (HIP_value, MVt_error_value) in value:
+    cursor.execute("update Hipparcos_product set MVt_error = {} where HIP = {}".format(MVt_error_value, HIP_value))
+
+cursor.execute("select HIP from Hipparcos "
+               "where VTmag is NULL or "
+               "Plx is NULL or "
+               "e_Plx is NULL or "
+               "Plx <= 0 or "
+               "Plx + e_Plx <= 0 or "
+               "Plx - e_Plx <= 0")
+value = cursor.fetchall()
+for (HIP_value,) in value:
+    cursor.execute("update Hipparcos_product set MVt_error = NULL where HIP = {}".format(HIP_value))
+
+# load B_minus_V
+
+cursor.execute("select HIP, "
+               "B_V as B_minus_V "
+               "from Hipparcos "
+               "where B_V is not NULL")
+value = cursor.fetchall()
+for (HIP_value, B_minus_V_value) in value:
+    cursor.execute("update Hipparcos_product set B_minus_V = {} where HIP = {}".format(B_minus_V_value, HIP_value))
+
+cursor.execute("select HIP "
+               "from Hipparcos "
+               "where B_V is NULL")
+value = cursor.fetchall()
+for (HIP_value,) in value:
+    cursor.execute("update Hipparcos_product set B_minus_V = NULL where HIP = {}".format(HIP_value))
+
+# load BT_minus_VT
+
+cursor.execute("select HIP, "
+               "BTmag - VTmag  as BT_minus_VT "
+               "from Hipparcos "
+               "where BTmag is not NULL and "
+               "VTmag is not NULL")
+value = cursor.fetchall()
+for (HIP_value, BT_minus_VT_value) in value:
+    cursor.execute("update Hipparcos_product set BT_minus_VT = {} where HIP = {}".format(BT_minus_VT_value, HIP_value))
+
+cursor.execute("select HIP "
+               "from Hipparcos "
+               "where BTmag is NULL or "
+               "VTmag is NULL")
+value = cursor.fetchall()
+for (HIP_value,) in value:
+    cursor.execute("update Hipparcos_product set BT_minus_VT = NULL where HIP = {}".format(HIP_value))
+
+# Criar a tabela Gaia_diagram no BD
+
+cursor.execute("create table Gaia_diagram( "
+               "name char(100) primary key, "
+               "image blob null, "
+               "description char(100))")
+
+# Criar a tabela Gaia_product_is_plotted_on no BD
+
+cursor.execute("create table Gaia_product_is_plotted_on( "
+               "designation CHAR(100) not null, "
+               "name char(100) not null, "
+               "primary key (designation, name), "
+               "foreign key (designation) references Gaia_product(designation), "
+               "foreign key (name) references Gaia_diagram(name))")
+
+# Criar o diagrama Gaia_Mg_versus_Bp_minus_Rp.png
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Mg, "
+               "Gaia_product.Bp_minus_Rp "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Mg is not NULL and "
+               "Bp_minus_Rp is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+y_axis = []
+x_axis = []
+
+for (designation_value, parallax_value, Mg_value, Bp_minus_Rp_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    y_axis.append(Mg_value)
+    x_axis.append(Bp_minus_Rp_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.ylabel("M(G)")
+plt.xlabel("Bp-Rp")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp.png')
+
+# Salvar o diagrama Gaia_Mg_versus_Bp_minus_Rp.png na tabela Gaia_diagram
+
+cursor.execute("insert into Gaia_diagram(name, image, description) values ('Gaia_Mg_versus_Bp_minus_Rp.png', "
+           "load_file('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp.png'), "
+           "'Diagrama HR (M(G) vs Bp-Rp) das estrelas Gaia (seleção de 23 pc)')")
+
+# close matplotlib.pyplot object
+plt.clf()
 
 # Make sure data is committed to the database
 
