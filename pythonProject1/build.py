@@ -723,24 +723,24 @@ cursor.execute("create table Gaia_product_is_plotted_on( "
 
 cursor.execute("select Gaia_product.designation, "
                "Gaia.parallax, "
-               "Gaia_product.Mg, "
-               "Gaia_product.Bp_minus_Rp "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
                "from Gaia_product, Gaia "
                "where Gaia_product.designation = Gaia.designation and "
-               "Mg is not NULL and "
-               "Bp_minus_Rp is not NULL")
+               "Gaia_product.Mg is not NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL")
 value = cursor.fetchall()
 
 designation_list = []
 parallax_list = []
-y_axis = []
 x_axis = []
+y_axis = []
 
-for (designation_value, parallax_value, Mg_value, Bp_minus_Rp_value) in value:
+for (designation_value, parallax_value, Bp_minus_Rp_value, Mg_value) in value:
     designation_list.append(designation_value)
     parallax_list.append(parallax_value)
-    y_axis.append(Mg_value)
     x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
 
 min_parallax = min(parallax_list)
 
@@ -758,7 +758,7 @@ plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/G
 plt.clf()
 
 ######################################################################################################
-# DIAGRAMA DQUE O GUSTAVO 14/04/2024 PEDIU POR EMAIL
+# DIAGRAMA M(G) vs M(V)
 
 cursor.execute("select Gaia_product.Mg, Gaia.parallax, Hipparcos_product.MV "
                "from Hipparcos_product, Gaia, Gaia_product "
@@ -787,12 +787,12 @@ plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
 plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.ylabel("M(G)")
 plt.xlabel("M(V)")
-plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/intersection_Mg_versus_MV.png')
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_Mg_versus_MV.png')
 
 # close matplotlib.pyplot object
 plt.clf()
 ######################################################################################################
-# DIAGRAMA DQUE O GUSTAVO 14/04/2024 PEDIU POR EMAIL
+# DIAGRAMA phot_g_mean_mag vs Vmag
 
 cursor.execute("select Gaia.phot_g_mean_mag, Gaia.parallax, Hipparcos.Vmag "
                "from Hipparcos, Gaia "
@@ -819,11 +819,437 @@ plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("phot_g_mean_mag")
 plt.ylabel("Vmag")
-plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/gaia_intersection_hipparcos_phot_g_mean_mag_versus_Vmag.png')
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')
 
 # close matplotlib.pyplot object
 plt.clf()
 ######################################################################################################
+# Criar o diagrama Gaia_MRp_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia, Gaia_product "
+               "where Gaia.designation = Gaia_product.designation and "
+               "Gaia_product.MRp is not NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (designation_value, parallax_value, Bp_minus_Rp_value, MRp_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.ylabel("M(Rp)")
+plt.xlabel("Bp-Rp")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_MRp_versus_Bp_minus_Rp.png')
+
+# close matplotlib.pyplot object
+plt.clf()
+
+# Criar o diagrama Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (designation_value, parallax_value, Bp_minus_Rp_value, Mg_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("Bp - Rp")
+plt.ylabel("M(G)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+
+# close matplotlib.pyplot object
+plt.close()
+
+# Criar o diagrama Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (designation_value, parallax_value, Bp_minus_Rp_value, MRp_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("Bp - Rp")
+plt.ylabel("M(Rp)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+
+# close matplotlib.pyplot object
+plt.close()
+
+# Criar o diagrama Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP is NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (designation_value, parallax_value, Bp_minus_Rp_value, Mg_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia - Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("Bp - Rp")
+plt.ylabel("M(G)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia_product.designation, "
+               "Gaia.parallax, "
+               "Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP is NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.MRp is not NULL")
+value = cursor.fetchall()
+
+designation_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (designation_value, parallax_value, Bp_minus_Rp_value, MRp_value) in value:
+    designation_list.append(designation_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia - Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("Bp - Rp")
+plt.ylabel("M(Rp)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Hipparcos_MV_versus_B_minus_V.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MV_versus_B_minus_V.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Hipparcos_MVt_versus_BT_minus_VT.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.BT_minus_VT, "
+               "Hipparcos_product.MVt "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.BT_minus_VT is not NULL and "
+               "Hipparcos_product.MVt is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, BT_minus_VT_value, MVt_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha =  transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("BT - VT")
+plt.ylabel("M(Vt)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MVt_versus_BT_minus_VT.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Gaia.parallax, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Gaia "
+               "where Hipparcos_product.HIP = Gaia.HIP and "
+               "Hipparcos_product.MV is not NULL and "
+               "Hipparcos_product.B_minus_V is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, parallax_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Gaia.parallax, "
+               "Hipparcos_product.BT_minus_VT, "
+               "Hipparcos_product.MVt "
+               "from Hipparcos_product, Gaia "
+               "where Hipparcos_product.HIP = Gaia.HIP and "
+               "Hipparcos_product.BT_minus_VT is not NULL and "
+               "Hipparcos_product.MVt is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+parallax_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, parallax_value, BT_minus_VT_value, MVt_value) in value:
+    HIP_list.append(HIP_value)
+    parallax_list.append(parallax_value)
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+min_parallax = min(parallax_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
+plt.xlabel("BT - VT")
+plt.ylabel("M(Vt)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Hipparcos_minus_Gaia_MV_versus_B_minus_V.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.HIP not in ( "
+               "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.BT_minus_VT, "
+               "Hipparcos_product.MVt "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.HIP not in ( "
+               "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) and "
+               "Hipparcos_product.BT_minus_VT is not NULL and "
+               "Hipparcos_product.MVt is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, BT_minus_VT_value, MVt_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("BT - VT")
+plt.ylabel("M(Vt)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
 
 # Make sure data is committed to the database
 
