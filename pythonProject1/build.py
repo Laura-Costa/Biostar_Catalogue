@@ -753,6 +753,7 @@ plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(le
 plt.ylabel("M(G)")
 plt.xlabel("Bp-Rp")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
+# plt.savefig('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp')
 
 # close matplotlib.pyplot object
 plt.clf()
