@@ -1,185 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Hipparcos</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
+
 </head>
-    <body>
-    <h1>{{name[0]}}</h1>
-
-    <img src= "{{url_for('static', filename='img/mv_versus_b_minus_v_plx_greater_or_iqual_0.039.png')}}" >
-    <img src= "{{url_for('static', filename='img/mvt_versus_bt_minus_vt_plx_greater_or_iqual_0.039.png')}}" >
-
-    <h2>{{name[1]}}</h2>
-
-    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+<body>
+    <h1>{{name}}</h1>
+    <img src= "{{url_for('static', filename='img/Hipparcos_MV_versus_B_minus_V.png')}}" >
+    <img src= "{{url_for('static', filename='img/Hipparcos_MVt_versus_BT_minus_VT.png')}}" >
+    <h2>Estrelas Plotadas no Diagrama M(V) vs B-V</h2>
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr>
-            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
-            <td style="position: sticky; top: 0;"><b>HIP</b></td>
-            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-            <td style="position: sticky; top: 0;"><b>B-V</b></td>
-            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
+                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
+                <td style="position: sticky; top: 0;"><b>Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
+                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
+                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
+                <td style="position: sticky; top: 0;"><b>B-V</b></td>
+                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
             </tr>
         </thead>
         <tbody>
-        {%for registro in data[0]%}
+            {%for registro in data[0]%}
             <tr>
-            <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
-            <td>{{registro[5]}}</td>
-            <td>{{registro[6]}}</td>
-            <td>{{registro[7]}}</td>
+                <td>{{registro[0]}}</td>
+                <td>{{registro[1]}}</td>
+                <td>{{registro[2]}}</td>
+                <td>{{registro[3]}}</td>
+                <td>{{registro[4]}}</td>
+                <td>{{registro[5]}}</td>
+                <td>{{registro[6]}}</td>
+                <td>{{registro[7]}}</td>
+                <td>{{registro[8]}}</td>
+                <td>{{registro[9]}}</td>
+                <td>{{registro[10]}}</td>
+                <td>{{registro[11]}}</td>
+                <td>{{registro[12]}}</td>
+                <td>{{registro[13]}}</td>
+                <td>{{registro[14]}}</td>
+                <td>{{registro[15]}}</td>
+                <td>{{registro[16]}}</td>
+                <td>{{registro[17]}}</td>
+                <td>{{registro[18]}}</td>
+                <td>{{registro[19]}}</td>
+                <td>{{registro[20]}}</td>
             </tr>
-        {%endfor%}
+            {%endfor%}
         </tbody>
     </table>
+    <footer>Quantidade de registros: {{data[1]}}</footer>
 
-    <h2>{{name[2]}}</h2>
-
-    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+    <h2>Estrelas sem M(V) ou sem B-V</h2>
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr>
-            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
-            <td style="position: sticky; top: 0;"><b>HIP</b></td>
-            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-            <td style="position: sticky; top: 0;"><b>B-V</b></td>
-            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
+                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
+                <td style="position: sticky; top: 0;"><b>Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
+                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
+                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
+                <td style="position: sticky; top: 0;"><b>B-V</b></td>
+                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
             </tr>
         </thead>
         <tbody>
-        {%for registro in data[1]%}
+            {%for registro in data[2]%}
             <tr>
-            <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
-            <td>{{registro[5]}}</td>
-            <td>{{registro[6]}}</td>
-            <td>{{registro[7]}}</td>
+                <td>{{registro[0]}}</td>
+                <td>{{registro[1]}}</td>
+                <td>{{registro[2]}}</td>
+                <td>{{registro[3]}}</td>
+                <td>{{registro[4]}}</td>
+                <td>{{registro[5]}}</td>
+                <td>{{registro[6]}}</td>
+                <td>{{registro[7]}}</td>
+                <td>{{registro[8]}}</td>
+                <td>{{registro[9]}}</td>
+                <td>{{registro[10]}}</td>
+                <td>{{registro[11]}}</td>
+                <td>{{registro[12]}}</td>
+                <td>{{registro[13]}}</td>
+                <td>{{registro[14]}}</td>
+                <td>{{registro[15]}}</td>
+                <td>{{registro[16]}}</td>
+                <td>{{registro[17]}}</td>
+                <td>{{registro[18]}}</td>
+                <td>{{registro[19]}}</td>
+                <td>{{registro[20]}}</td>
             </tr>
-        {%endfor%}
+            {%endfor%}
         </tbody>
     </table>
+    <footer>Quantidade de registros: {{data[3]}}</footer>
 
-
-    <h2>{{name[3]}}</h2>
-
-    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+    <h2>Estrelas Plotadas no Diagrama M(Vt) vs BT-VT</h2>
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr>
-            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
-            <td style="position: sticky; top: 0;"><b>HIP</b></td>
-            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-            <td style="position: sticky; top: 0;"><b>B-V</b></td>
-            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
+                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
+                <td style="position: sticky; top: 0;"><b>Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
+                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
+                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
+                <td style="position: sticky; top: 0;"><b>B-V</b></td>
+                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
             </tr>
         </thead>
         <tbody>
-        {%for registro in data[2]%}
+            {%for registro in data[4]%}
             <tr>
-            <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
-            <td>{{registro[5]}}</td>
-            <td>{{registro[6]}}</td>
-            <td>{{registro[7]}}</td>
+                <td>{{registro[0]}}</td>
+                <td>{{registro[1]}}</td>
+                <td>{{registro[2]}}</td>
+                <td>{{registro[3]}}</td>
+                <td>{{registro[4]}}</td>
+                <td>{{registro[5]}}</td>
+                <td>{{registro[6]}}</td>
+                <td>{{registro[7]}}</td>
+                <td>{{registro[8]}}</td>
+                <td>{{registro[9]}}</td>
+                <td>{{registro[10]}}</td>
+                <td>{{registro[11]}}</td>
+                <td>{{registro[12]}}</td>
+                <td>{{registro[13]}}</td>
+                <td>{{registro[14]}}</td>
+                <td>{{registro[15]}}</td>
+                <td>{{registro[16]}}</td>
+                <td>{{registro[17]}}</td>
+                <td>{{registro[18]}}</td>
+                <td>{{registro[19]}}</td>
+                <td>{{registro[20]}}</td>
             </tr>
-        {%endfor%}
+            {%endfor%}
         </tbody>
     </table>
+    <footer>Quantidade de registros: {{data[5]}}</footer>
 
-    <h2>{{name[4]}}</h2>
-
-    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
+    <h2>Estrelas sem M(Vt) ou sem BT-VT</h2>
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr>
-            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
-            <td style="position: sticky; top: 0;"><b>HIP</b></td>
-            <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-            <td style="position: sticky; top: 0;"><b>B-V</b></td>
-            <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(V)</b></td>
-            <td style="position: sticky; top: 0;"><b>erro de M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
+                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
+                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
+                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
+                <td style="position: sticky; top: 0;"><b>Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
+                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
+                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
+                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
+                <td style="position: sticky; top: 0;"><b>B-V</b></td>
+                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
             </tr>
         </thead>
         <tbody>
-        {%for registro in data[3]%}
+            {%for registro in data[6]%}
             <tr>
-            <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
-            <td>{{registro[5]}}</td>
-            <td>{{registro[6]}}</td>
-            <td>{{registro[7]}}</td>
+                <td>{{registro[0]}}</td>
+                <td>{{registro[1]}}</td>
+                <td>{{registro[2]}}</td>
+                <td>{{registro[3]}}</td>
+                <td>{{registro[4]}}</td>
+                <td>{{registro[5]}}</td>
+                <td>{{registro[6]}}</td>
+                <td>{{registro[7]}}</td>
+                <td>{{registro[8]}}</td>
+                <td>{{registro[9]}}</td>
+                <td>{{registro[10]}}</td>
+                <td>{{registro[11]}}</td>
+                <td>{{registro[12]}}</td>
+                <td>{{registro[13]}}</td>
+                <td>{{registro[14]}}</td>
+                <td>{{registro[15]}}</td>
+                <td>{{registro[16]}}</td>
+                <td>{{registro[17]}}</td>
+                <td>{{registro[18]}}</td>
+                <td>{{registro[19]}}</td>
+                <td>{{registro[20]}}</td>
             </tr>
-        {%endfor%}
+            {%endfor%}
         </tbody>
     </table>
+    <footer>Quantidade de registros: {{data[7]}}</footer>
 
-    <h2>{{name[5]}}</h2>
-
-
-
-
-    <table id="demo" style="display: block; height: 300px; width: 700px; overflow: auto;">
-        <thead>
-            <tr>
-            <td style="position: sticky; top: 0;"><b>registro (Hipparcos)</b></td>
-            <td style="position: sticky; top: 0;"><b>HIP</b></td>
-            <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-            <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-            <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-            <td style="position: sticky; top: 0;"><b>Plx</b></td>
-            <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-            <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-            <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-            <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-            <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-            <td style="position: sticky; top: 0;"><b>B_V</b></td>
-            </tr>
-        </thead>
-        <tbody>
-        {%for registro in data[4]%}
-            <tr>
-            <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
-            <td>{{registro[5]}}</td>
-            <td>{{registro[6]}}</td>
-            <td>{{registro[7]}}</td>
-            <td>{{registro[8]}}</td>
-            <td>{{registro[9]}}</td>
-            <td>{{registro[10]}}</td>
-            <td>{{registro[11]}}</td>
-            </tr>
-        {%endfor%}
-        </tbody>
-    </table>
-
-
-
-    </body>
-
+</body>
 </html>
