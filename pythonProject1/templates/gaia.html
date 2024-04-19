@@ -5,15 +5,22 @@
     <title>Gaia</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 </head>
+<style>
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 <body>
     <h1>{{name}}</h1>
     <img src= "{{url_for('static', filename='img/Gaia_Mg_versus_Bp_minus_Rp.png')}}" >
     <img src= "{{url_for('static', filename='img/Gaia_MRp_versus_Bp_minus_Rp.png')}}" >
     <h2>Estrelas Plotadas</h2>
+
     <input type="text" id="designation-search" onkeyup="search()" placeholder="buscar por designação.." class="table-search-filters">
     <input type="number" id="HIP-search" onkeyup="search()" placeholder="buscar por HIP.." class="table-search-filters">
     <input type="text" id="HD-search" onkeyup="search()" placeholder="buscar por HD.." class="table-search-filters">
-    <div id="count"></div>
+
+    <div id="statistic"></div>
     <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr class="header">
@@ -90,41 +97,48 @@
     </table>
 
     <script>
+
     var input_designation = document.getElementById("designation-search");
     var input_HIP = document.getElementById("HIP-search");
     var input_HD = document.getElementById("HD-search");
     var table = document.getElementById("demo");
-
     function search() {
-        let filter_designation = input_designation.value.toUpperCase();
-        let filter_HIP = input_HIP.value;
-        let filter_HD = input_HD.value.toUpperCase();
-        let tr = table.getElementsByTagName("tr");
-        for (let i = 0; i < tr.length; i++) {
 
-            td_designation = tr[i].getElementsByTagName("td")[0];
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_designation = input_designation.value.toUpperCase();
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[0]; // change number to any other number to target column for table search
             td_HIP = tr[i].getElementsByTagName("td")[1];
             td_HD = tr[i].getElementsByTagName("td")[2];
 
+            if (td_designation) {
 
-            if (td_designation && td_HIP && td_HD) {
                 designationValue = td_designation.textContent || td_designation.innerText;
                 HIPValue = td_HIP.textContent || td_HIP.innerText;
                 HDValue = td_HD.textContent || td_HD.innerText;
-                if (designationValue.toUpperCase().indexOf(filter_designation) > -1
-                    && HIPValue.indexOf(filter_HIP) > -1
-                    && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
             }
         }
+        document.getElementById("statistic").innerHTML =  "Mostrando " + rowsFound.length + " registro(s).";
     }
-
+    search()
     </script>
-
-    <footer>Quantidade de registros: {{data[1]}}</footer>
-
 </body>
 </html>
