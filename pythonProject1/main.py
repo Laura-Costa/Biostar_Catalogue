@@ -26,6 +26,7 @@ def gaia():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -200,6 +201,7 @@ def gaia_intersection_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -256,6 +258,7 @@ def gaia_intersection_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -314,6 +317,7 @@ def gaia_intersection_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -372,6 +376,7 @@ def gaia_intersection_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -430,6 +435,7 @@ def gaia_intersection_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -482,8 +488,8 @@ def gaia_intersection_hipparcos():
 def gaia_minus_hipparcos():
     data = []
     cursor.execute("select Gaia.designation, "
-                   "Gaia.HIP, "
                    "Gaia.HD, "
+                   "Gaia.HIP, "
                    "round(Gaia.ra, 4), "
                    "round(Gaia.declination, 4), "
                    "round(Gaia.parallax, 4), "
@@ -493,6 +499,7 @@ def gaia_minus_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -520,8 +527,8 @@ def gaia_minus_hipparcos():
     data.append(len(value))
 
     cursor.execute("select Gaia.designation, "
-                   "Gaia.HIP, "
                    "Gaia.HD, "
+                   "Gaia.HIP, "
                    "round(Gaia.ra, 4), "
                    "round(Gaia.declination, 4), "
                    "round(Gaia.parallax, 4), "
@@ -531,6 +538,7 @@ def gaia_minus_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -553,14 +561,14 @@ def gaia_minus_hipparcos():
                    "where Gaia.designation = Gaia_product.designation and "
                    "Gaia.HIP is NULL and "
                    "Gaia_product.Bp_minus_Rp <= 1.6 "
-                   "order by Gaia_product.Bp_minus_Rp")
+                   "order by Gaia_product.Bp_minus_Rp desc")
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))
 
     cursor.execute("select Gaia.designation, "
-                   "Gaia.HIP, "
                    "Gaia.HD, "
+                   "Gaia.HIP, "
                    "round(Gaia.ra, 4), "
                    "round(Gaia.declination, 4), "
                    "round(Gaia.parallax, 4), "
@@ -570,6 +578,7 @@ def gaia_minus_hipparcos():
                    "round(Gaia.pmdec, 4), "
                    "round(Gaia.ruwe, 4), "
                    "round(Gaia.phot_g_mean_mag, 4), "
+                   "round(Gaia.phot_bp_mean_mag, 4), "
                    "round(Gaia.phot_rp_mean_mag, 4), "
                    "round(Gaia.teff_gspphot, 4), "
                    "round(Gaia.teff_gspphot_lower, 4), "
@@ -632,7 +641,7 @@ def hipparcos_minus_gaia():
                    "Hipparcos_product.B_minus_V is not NULL and "
                    "Hipparcos.HIP not in( "
                    "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) "
-                   "order by Hipparcos.HIP")
+                   "order by distance_Plx DESC")
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))
@@ -666,7 +675,7 @@ def hipparcos_minus_gaia():
                    "Hipparcos_product.B_minus_V is NULL) and "
                    "Hipparcos.HIP not in ( "
                    "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) "
-                   "order by Hipparcos.HIP")
+                   "order by distance_Plx DESC")
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))
@@ -700,7 +709,7 @@ def hipparcos_minus_gaia():
                    "Hipparcos_product.BT_minus_VT is not NULL and "
                    "Hipparcos.HIP not in( "
                    "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) "
-                   "order by Hipparcos.HIP")
+                   "order by distance_Plx DESC")
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))
@@ -734,7 +743,7 @@ def hipparcos_minus_gaia():
                    "Hipparcos_product.BT_minus_VT is NULL) and "
                    "Hipparcos.HIP not in( "
                    "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) "
-                   "order by Hipparcos.HIP")
+                   "order by distance_Plx DESC")
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))

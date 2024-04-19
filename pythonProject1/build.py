@@ -1,4 +1,4 @@
-from astroquery.gaia import Gaia
+# from astroquery.gaia import Gaia
 from astropy.coordinates import SkyCoord
 from astropy.table import Table
 from astroquery.simbad import Simbad
@@ -755,6 +755,41 @@ plt.xlabel("Bp-Rp")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
 # plt.savefig('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp')
 
+
+# cursor.execute("insert into Gaia_diagram(name, image, description) values ('Gaia_Mg_versus_Bp_minus_Rp', "
+#                "load_file('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png'), "
+#                "'Diagrama HR (M(G) vs Bp-Rp) das estrelas Gaia (seleção de 23 parsecs)')")
+
+
+# Plotar, em deepskyblue, a estrela HD146233
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, Mg_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='lower left',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
+
 # close matplotlib.pyplot object
 plt.clf()
 
@@ -792,6 +827,7 @@ plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/G
 
 # close matplotlib.pyplot object
 plt.clf()
+
 ######################################################################################################
 # DIAGRAMA phot_g_mean_mag vs Vmag
 
@@ -822,9 +858,37 @@ plt.xlabel("phot_g_mean_mag")
 plt.ylabel("Vmag")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')
 
+# Plotar, em deepskyblue, a estrela HD146233
+
+cursor.execute("select Gaia.phot_g_mean_mag, Hipparcos.Vmag "
+               "from Hipparcos, Gaia "
+               "where Hipparcos.HIP = Gaia.HIP and "
+               "Hipparcos.Vmag is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (phot_g_mean_mag_value, Vmag_value) in value:
+    x_axis.append(phot_g_mean_mag_value)
+    y_axis.append(Vmag_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='lower right',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')
+
 # close matplotlib.pyplot object
 plt.clf()
 ######################################################################################################
+
 # Criar o diagrama Gaia_MRp_versus_Bp_minus_Rp.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
 
 cursor.execute("select Gaia_product.designation, "
@@ -858,6 +922,35 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.ylabel("M(Rp)")
 plt.xlabel("Bp-Rp")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_MRp_versus_Bp_minus_Rp.png')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia, Gaia_product "
+               "where Gaia.designation = Gaia_product.designation and "
+               "Gaia_product.MRp is not NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, MRp_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='lower left',
+           ncol=1,
+           fontsize=8)
+
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_MRp_versus_Bp_minus_Rp.png')
 
 # close matplotlib.pyplot object
@@ -899,6 +992,57 @@ plt.xlabel("Bp - Rp")
 plt.ylabel("M(G)")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png')
 
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, Mg_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+# Plotar, em tomato, a estrela Gaia DR3 5853498713190525696 (Estrela isolada no fim da cauda do Diagrama)
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia.designation = 'Gaia DR3 5853498713190525696'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, Mg_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
+
+plt.legend((tomato, deepskyblue),
+           ('Gaia DR3 5853498713190525696', 'HD 146233'),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+
 # close matplotlib.pyplot object
 plt.close()
 
@@ -936,6 +1080,57 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp - Rp")
 plt.ylabel("M(Rp)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, MRp_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+# Plotar, em tomato, a estrela Gaia DR3 5853498713190525696 (Estrela isolada no fim da cauda do Diagrama)
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia_product, Gaia, Hipparcos "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP = Hipparcos.HIP and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia.designation = 'Gaia DR3 5853498713190525696'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, MRp_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
+
+plt.legend((tomato, deepskyblue,),
+           ('Gaia DR3 5853498713190525696', 'HD 146233',),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png')
 
 # close matplotlib.pyplot object
@@ -978,6 +1173,36 @@ plt.xlabel("Bp - Rp")
 plt.ylabel("M(G)")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')
 
+# Plotar, em tomato, a estrela 131156B
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.Mg "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP is NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.Mg is not NULL and "
+               "Gaia.HD = '131156B'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, Mg_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(Mg_value)
+
+tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
+
+plt.legend((tomato,),
+           ('HD 131156B',),
+           scatterpoints=1,
+           loc='lower left',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+
 # close matplotlib.pyplot as plt object
 plt.close()
 
@@ -1015,6 +1240,36 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia - Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp - Rp")
 plt.ylabel("M(Rp)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+
+# Plotar, em tomato, a estrela 131156B
+
+cursor.execute("select Gaia_product.Bp_minus_Rp, "
+               "Gaia_product.MRp "
+               "from Gaia_product, Gaia "
+               "where Gaia_product.designation = Gaia.designation and "
+               "Gaia.HIP is NULL and "
+               "Gaia_product.Bp_minus_Rp is not NULL and "
+               "Gaia_product.MRp is not NULL and "
+               "Gaia.HD = '131156B'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (Bp_minus_Rp_value, MRp_value) in value:
+    x_axis.append(Bp_minus_Rp_value)
+    y_axis.append(MRp_value)
+
+tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
+
+plt.legend((tomato,),
+           ('HD 131156B',),
+           scatterpoints=1,
+           loc='lower left',
+           ncol=1,
+           fontsize=8)
+
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')
 
 # close matplotlib.pyplot as plt object
@@ -1055,6 +1310,35 @@ plt.xlabel("B - V")
 plt.ylabel("M(V)")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MV_versus_B_minus_V.png')
 
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL and "
+               "Hipparcos.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (B_minus_V_value, MV_value) in value:
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MV_versus_B_minus_V.png')
+
 # close matplotlib.pyplot as plt object
 plt.close()
 
@@ -1091,6 +1375,35 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
 plt.xlabel("BT - VT")
 plt.ylabel("M(Vt)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MVt_versus_BT_minus_VT.png')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Hipparcos_product.BT_minus_VT, "
+               "Hipparcos_product.MVt "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.BT_minus_VT is not NULL and "
+               "Hipparcos_product.MVt is not NULL and "
+               "Hipparcos.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (BT_minus_VT_value, MVt_value) in value:
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha =  transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Hipparcos_MVt_versus_BT_minus_VT.png')
 
 # close matplotlib.pyplot as plt object
@@ -1131,6 +1444,35 @@ plt.xlabel("B - V")
 plt.ylabel("M(V)")
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png')
 
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Gaia "
+               "where Hipparcos_product.HIP = Gaia.HIP and "
+               "Hipparcos_product.MV is not NULL and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (B_minus_V_value, MV_value) in value:
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png')
+
 # close matplotlib.pyplot as plt object
 plt.close()
 
@@ -1167,6 +1509,35 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("BT - VT")
 plt.ylabel("M(Vt)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select Hipparcos_product.BT_minus_VT, "
+               "Hipparcos_product.MVt "
+               "from Hipparcos_product, Gaia "
+               "where Hipparcos_product.HIP = Gaia.HIP and "
+               "Hipparcos_product.BT_minus_VT is not NULL and "
+               "Hipparcos_product.MVt is not NULL and "
+               "Gaia.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (BT_minus_VT_value, MVt_value) in value:
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
+
+plt.legend((deepskyblue,),
+           ('HD 146233',),
+           scatterpoints=1,
+           loc='upper right',
+           ncol=1,
+           fontsize=8)
+
 plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')
 
 # close matplotlib.pyplot as plt object
