@@ -1013,29 +1013,8 @@ for (Bp_minus_Rp_value, Mg_value) in value:
 
 deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
 
-# Plotar, em tomato, a estrela Gaia DR3 5853498713190525696 (Estrela isolada no fim da cauda do Diagrama)
-
-cursor.execute("select Gaia_product.Bp_minus_Rp, "
-               "Gaia_product.Mg "
-               "from Gaia_product, Gaia, Hipparcos "
-               "where Gaia_product.designation = Gaia.designation and "
-               "Gaia.HIP = Hipparcos.HIP and "
-               "Gaia_product.Bp_minus_Rp is not NULL and "
-               "Gaia_product.Mg is not NULL and "
-               "Gaia.designation = 'Gaia DR3 5853498713190525696'")
-value = cursor.fetchall()
-
-x_axis = []
-y_axis = []
-
-for (Bp_minus_Rp_value, Mg_value) in value:
-    x_axis.append(Bp_minus_Rp_value)
-    y_axis.append(Mg_value)
-
-tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
-
-plt.legend((tomato, deepskyblue),
-           ('Gaia DR3 5853498713190525696', 'HD 146233'),
+plt.legend((deepskyblue,),
+           ('HD 146233',),
            scatterpoints=1,
            loc='upper right',
            ncol=1,
@@ -1103,29 +1082,8 @@ for (Bp_minus_Rp_value, MRp_value) in value:
 
 deepskyblue = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'deepskyblue', alpha = transparency)
 
-# Plotar, em tomato, a estrela Gaia DR3 5853498713190525696 (Estrela isolada no fim da cauda do Diagrama)
-
-cursor.execute("select Gaia_product.Bp_minus_Rp, "
-               "Gaia_product.MRp "
-               "from Gaia_product, Gaia, Hipparcos "
-               "where Gaia_product.designation = Gaia.designation and "
-               "Gaia.HIP = Hipparcos.HIP and "
-               "Gaia_product.Bp_minus_Rp is not NULL and "
-               "Gaia_product.Mg is not NULL and "
-               "Gaia.designation = 'Gaia DR3 5853498713190525696'")
-value = cursor.fetchall()
-
-x_axis = []
-y_axis = []
-
-for (Bp_minus_Rp_value, MRp_value) in value:
-    x_axis.append(Bp_minus_Rp_value)
-    y_axis.append(MRp_value)
-
-tomato = plt.scatter(x_axis, y_axis, s = size, marker = "s", edgecolors = 'tomato', alpha = transparency)
-
-plt.legend((tomato, deepskyblue,),
-           ('Gaia DR3 5853498713190525696', 'HD 146233',),
+plt.legend((deepskyblue,),
+           ('HD 146233',),
            scatterpoints=1,
            loc='upper right',
            ncol=1,

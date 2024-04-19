@@ -2,6 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <style>
+        #myInput4 {
+          background-image: url('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/templates/css/searchicon.png');
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 300px;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+        }
+        #myInput5 {
+          background-image: url('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/templates/css/searchicon.png');
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 300px;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+        }
+        #myInput6 {
+          background-image: url('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/templates/css/searchicon.png');
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 300px;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+        }
+    </style>
     <title>Gaia ∩ Hipparcos</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 
@@ -14,58 +46,59 @@
     <img src= "{{url_for('static', filename='img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')}}" >
     <img src= "{{url_for('static', filename='img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')}}" >
     <h2>Estrelas Plotadas em M(G) vs Bp-Rp e M(Rp) vs Bp-Rp</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="Buscar por designação Gaia.." title="Digite a designação">
+    <table id="demo4" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>ra</b></td>
-                <td style="position: sticky; top: 0;"><b>declination</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
-                <td style="position: sticky; top: 0;"><b>pm</b></td>
-                <td style="position: sticky; top: 0;"><b>pmra</b></td>
-                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
-                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
-                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT - VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>ra</b></th>
+                <th style="position: sticky; top: 0;"><b>declination</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
+                <th style="position: sticky; top: 0;"><b>pm</b></th>
+                <th style="position: sticky; top: 0;"><b>pmra</b></th>
+                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
+                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
+                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT - VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -124,61 +157,82 @@
             {%endfor%}
         </tbody>
     </table>
+    <script>
+    function myFunction4() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput4");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("demo4");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
     <footer>Quantidade de registros: {{data[1]}}</footer>
 
     <h2>Estrelas Plotadas em M(V) vs B-V</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <input type="text" id="myInput5" onkeyup="myFunction5()" placeholder="Buscar por designação Gaia.." title="Digite a designação">
+    <table id="demo5" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>ra</b></td>
-                <td style="position: sticky; top: 0;"><b>declination</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
-                <td style="position: sticky; top: 0;"><b>pm</b></td>
-                <td style="position: sticky; top: 0;"><b>pmra</b></td>
-                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
-                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
-                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT - VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>ra</b></th>
+                <th style="position: sticky; top: 0;"><b>declination</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
+                <th style="position: sticky; top: 0;"><b>pm</b></th>
+                <th style="position: sticky; top: 0;"><b>pmra</b></th>
+                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
+                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
+                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT - VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -237,61 +291,82 @@
             {%endfor%}
         </tbody>
     </table>
+    <script>
+    function myFunction5() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput5");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("demo5");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
     <footer>Quantidade de registros: {{data[3]}}</footer>
 
     <h2>Estrelas sem M(V) ou sem B-V</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <input type="text" id="myInput6" onkeyup="myFunction6()" placeholder="Buscar por designação Gaia.." title="Digite a designação">
+    <table id="demo6" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>ra</b></td>
-                <td style="position: sticky; top: 0;"><b>declination</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax</b></td>
-                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
-                <td style="position: sticky; top: 0;"><b>pm</b></td>
-                <td style="position: sticky; top: 0;"><b>pmra</b></td>
-                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
-                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
-                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT - VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>ra</b></th>
+                <th style="position: sticky; top: 0;"><b>declination</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
+                <th style="position: sticky; top: 0;"><b>pm</b></th>
+                <th style="position: sticky; top: 0;"><b>pmra</b></th>
+                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
+                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
+                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT - VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -350,6 +425,26 @@
             {%endfor%}
         </tbody>
     </table>
+    <script>
+    function myFunction6() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput6");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("demo6");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
     <footer>Quantidade de registros: {{data[5]}}</footer>
 
     <h2>Estrelas Plotadas em M(Vt) vs BT-VT</h2>
