@@ -2,28 +2,18 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        #myInput {
-          background-image: url('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/templates/css/searchicon.png');
-          background-position: 10px 10px;
-          background-repeat: no-repeat;
-          width: 300px;
-          font-size: 16px;
-          padding: 12px 20px 12px 40px;
-          border: 1px solid #ddd;
-          margin-bottom: 12px;
-        }
-    </style>
     <title>Gaia</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
-
 </head>
 <body>
     <h1>{{name}}</h1>
     <img src= "{{url_for('static', filename='img/Gaia_Mg_versus_Bp_minus_Rp.png')}}" >
     <img src= "{{url_for('static', filename='img/Gaia_MRp_versus_Bp_minus_Rp.png')}}" >
     <h2>Estrelas Plotadas</h2>
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por designação Gaia.." title="Type in a name">
+    <input type="text" id="designation-search" onkeyup="search()" placeholder="buscar por designação.." class="table-search-filters">
+    <input type="number" id="HIP-search" onkeyup="search()" placeholder="buscar por HIP.." class="table-search-filters">
+    <input type="text" id="HD-search" onkeyup="search()" placeholder="buscar por HD.." class="table-search-filters">
+    <div id="count"></div>
     <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
             <tr class="header">
@@ -98,26 +88,43 @@
             {%endfor%}
         </tbody>
     </table>
+
     <script>
-    function myFunction() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("myInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("demo");
-      tr = table.getElementsByTagName("tr");
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-          txtValue = td.textContent || td.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
+    var input_designation = document.getElementById("designation-search");
+    var input_HIP = document.getElementById("HIP-search");
+    var input_HD = document.getElementById("HD-search");
+    var table = document.getElementById("demo");
+
+    function search() {
+        let filter_designation = input_designation.value.toUpperCase();
+        let filter_HIP = input_HIP.value;
+        let filter_HD = input_HD.value.toUpperCase();
+        let tr = table.getElementsByTagName("tr");
+        for (let i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[0];
+            td_HIP = tr[i].getElementsByTagName("td")[1];
+            td_HD = tr[i].getElementsByTagName("td")[2];
+
+
+            if (td_designation && td_HIP && td_HD) {
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+                if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                    && HIPValue.indexOf(filter_HIP) > -1
+                    && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
         }
-      }
     }
+
     </script>
+
     <footer>Quantidade de registros: {{data[1]}}</footer>
+
 </body>
 </html>
