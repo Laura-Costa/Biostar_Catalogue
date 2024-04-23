@@ -2,6 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <style>
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
     <title>Hipparcos - Gaia</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 
@@ -11,30 +16,37 @@
     <img src= "{{url_for('static', filename='img/Hipparcos_minus_Gaia_MV_versus_B_minus_V.png')}}" >
     <img src= "{{url_for('static', filename='img/Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png')}}" >
     <h2>Estrelas Plotadas no Diagrama M(V) vs B-V</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
-        <thead>
+
+    <input type="number" id="HIP-search13" onkeyup="search13()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search13" onkeyup="search13()" placeholder="search by HD.." class="table-search-filters">
+    <input type="text" id="designation-search13" onkeyup="search13()" placeholder="search by designation.." class="table-search-filters">
+
+    <div id="statistic13"></div>
+
+    <table id="demo13" style="display: block; height: 300px; width: 600px; overflow: auto;">
+        <thead class="header">
             <tr>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT-VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -65,33 +77,84 @@
             {%endfor%}
         </tbody>
     </table>
-    <footer>Quantidade de registros: {{data[1]}}</footer>
+
+    <script>
+
+    var input_HIP = document.getElementById("HIP-search13");
+    var input_HD = document.getElementById("HD-search13");
+    var input_designation = document.getElementById("designation-search13");
+    var table = document.getElementById("demo13");
+    function search13() {
+
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        filter_designation = input_designation.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[2]; // change number to any other number to target column for table search
+            td_HIP = tr[i].getElementsByTagName("td")[0];
+            td_HD = tr[i].getElementsByTagName("td")[1];
+
+            if (td_designation) {
+
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
+            }
+        }
+        document.getElementById("statistic13").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
+    }
+    search13()
+    </script>
 
     <h2>Estrelas sem M(V) ou sem B-V</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+
+    <input type="number" id="HIP-search14" onkeyup="search14()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search14" onkeyup="search14()" placeholder="search by HD.." class="table-search-filters">
+    <input type="text" id="designation-search14" onkeyup="search14()" placeholder="search by designation.." class="table-search-filters">
+
+    <div id="statistic1"></div>
+
+    <table id="demo14" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT-VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -122,33 +185,84 @@
             {%endfor%}
         </tbody>
     </table>
-    <footer>Quantidade de registros: {{data[3]}}</footer>
+
+    <script>
+
+    var input_HIP = document.getElementById("HIP-search14");
+    var input_HD = document.getElementById("HD-search14");
+    var input_designation = document.getElementById("designation-search14");
+    var table = document.getElementById("demo14");
+    function search14() {
+
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        filter_designation = input_designation.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[2]; // change number to any other number to target column for table search
+            td_HIP = tr[i].getElementsByTagName("td")[0];
+            td_HD = tr[i].getElementsByTagName("td")[1];
+
+            if (td_designation) {
+
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
+            }
+        }
+        document.getElementById("statistic14").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
+    }
+    search14()
+    </script>
 
     <h2>Estrelas Plotadas no Diagrama M(Vt) vs BT-VT</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+
+    <input type="number" id="HIP-search15" onkeyup="search15()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search15" onkeyup="search15()" placeholder="search by HD.." class="table-search-filters">
+    <input type="text" id="designation-search15" onkeyup="search15()" placeholder="search by designation.." class="table-search-filters">
+
+    <div id="statistic15"></div>
+
+    <table id="demo15" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT-VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -179,33 +293,84 @@
             {%endfor%}
         </tbody>
     </table>
-    <footer>Quantidade de registros: {{data[5]}}</footer>
+
+    <script>
+
+    var input_HIP = document.getElementById("HIP-search15");
+    var input_HD = document.getElementById("HD-search15");
+    var input_designation = document.getElementById("designation-search15");
+    var table = document.getElementById("demo15");
+    function search15() {
+
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        filter_designation = input_designation.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[2]; // change number to any other number to target column for table search
+            td_HIP = tr[i].getElementsByTagName("td")[0];
+            td_HD = tr[i].getElementsByTagName("td")[1];
+
+            if (td_designation) {
+
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
+            }
+        }
+        document.getElementById("statistic15").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
+    }
+    search15()
+    </script>
 
     <h2>Estrelas sem M(Vt) ou sem BT-VT</h2>
-    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
+
+    <input type="number" id="HIP-search16" onkeyup="search16()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search16" onkeyup="search16()" placeholder="search by HD.." class="table-search-filters">
+    <input type="text" id="designation-search16" onkeyup="search16()" placeholder="search by designation.." class="table-search-filters">
+
+    <div id="statistic16"></div>
+
+    <table id="demo16" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr>
-                <td style="position: sticky; top: 0;"><b>HIP</b></td>
-                <td style="position: sticky; top: 0;"><b>HD</b></td>
-                <td style="position: sticky; top: 0;"><b>designation</b></td>
-                <td style="position: sticky; top: 0;"><b>Vmag</b></td>
-                <td style="position: sticky; top: 0;"><b>RAdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdeg</b></td>
-                <td style="position: sticky; top: 0;"><b>RAhms</b></td>
-                <td style="position: sticky; top: 0;"><b>DEdms</b></td>
-                <td style="position: sticky; top: 0;"><b>Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>e_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>distance_Plx</b></td>
-                <td style="position: sticky; top: 0;"><b>pmRA</b></td>
-                <td style="position: sticky; top: 0;"><b>pmDE</b></td>
-                <td style="position: sticky; top: 0;"><b>BTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>VTmag</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(V) error</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt)</b></td>
-                <td style="position: sticky; top: 0;"><b>M(Vt) error</b></td>
-                <td style="position: sticky; top: 0;"><b>B-V</b></td>
-                <td style="position: sticky; top: 0;"><b>BT-VT</b></td>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>Vmag</b></th>
+                <th style="position: sticky; top: 0;"><b>RAdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdeg</b></th>
+                <th style="position: sticky; top: 0;"><b>RAhms</b></th>
+                <th style="position: sticky; top: 0;"><b>DEdms</b></th>
+                <th style="position: sticky; top: 0;"><b>Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>e_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_Plx</b></th>
+                <th style="position: sticky; top: 0;"><b>pmRA</b></th>
+                <th style="position: sticky; top: 0;"><b>pmDE</b></th>
+                <th style="position: sticky; top: 0;"><b>BTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>VTmag</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(V) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Vt) error</b></th>
+                <th style="position: sticky; top: 0;"><b>B-V</b></th>
+                <th style="position: sticky; top: 0;"><b>BT-VT</b></th>
             </tr>
         </thead>
         <tbody>
@@ -236,7 +401,51 @@
             {%endfor%}
         </tbody>
     </table>
-    <footer>Quantidade de registros: {{data[7]}}</footer>
+
+    <script>
+
+    var input_HIP = document.getElementById("HIP-search16");
+    var input_HD = document.getElementById("HD-search16");
+    var input_designation = document.getElementById("designation-search16");
+    var table = document.getElementById("demo16");
+    function search16() {
+
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        filter_designation = input_designation.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[2]; // change number to any other number to target column for table search
+            td_HIP = tr[i].getElementsByTagName("td")[0];
+            td_HD = tr[i].getElementsByTagName("td")[1];
+
+            if (td_designation) {
+
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
+            }
+        }
+        document.getElementById("statistic16").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
+    }
+    search16()
+    </script>
 
 </body>
 </html>

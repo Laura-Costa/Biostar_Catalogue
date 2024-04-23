@@ -4,7 +4,7 @@ import math
 import matplotlib.pyplot
 import csv
 
-connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalogue_1', user='root', password='ic2023')
+connection = mysql.connector.connect(host='localhost', port='3306', database='gaia_catalogue_1', user='helena', password='ic2023IC*')
 cursor = connection.cursor()
 
 app = Flask(__name__)

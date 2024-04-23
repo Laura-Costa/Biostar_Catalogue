@@ -63,7 +63,7 @@ dado do campo eh inteiro, a string vazia eh substituida por 0.
 Se o tipo de dado do campo eh string, eh carregada a string vazia.
 Mas nesses dois casos, o que eu desejava
 era que fosse carregado o valor NULL quando
-carrego o CSV para o MySQL.
+carrego o valor NONE do CSV para o MySQL.
 '''
 
 csv_file_path = 'designation_HD_HIP.csv'

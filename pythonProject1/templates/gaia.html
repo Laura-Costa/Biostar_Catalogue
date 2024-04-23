@@ -2,23 +2,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
     <title>Gaia</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 </head>
-<style>
-    input[type=number] {
-        -moz-appearance: textfield;
-    }
-</style>
 <body>
     <h1>{{name}}</h1>
     <img src= "{{url_for('static', filename='img/Gaia_Mg_versus_Bp_minus_Rp.png')}}" >
     <img src= "{{url_for('static', filename='img/Gaia_MRp_versus_Bp_minus_Rp.png')}}" >
-    <h2>Estrelas Plotadas</h2>
+    <h2>Stars Plotted</h2>
 
-    <input type="text" id="designation-search" onkeyup="search()" placeholder="buscar por designação.." class="table-search-filters">
-    <input type="number" id="HIP-search" onkeyup="search()" placeholder="buscar por HIP.." class="table-search-filters">
-    <input type="text" id="HD-search" onkeyup="search()" placeholder="buscar por HD.." class="table-search-filters">
+    <input type="text" id="designation-search" onkeyup="search()" placeholder="search by designation.." class="table-search-filters">
+    <input type="number" id="HIP-search" onkeyup="search()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search" onkeyup="search()" placeholder="search by HD.." class="table-search-filters">
 
     <div id="statistic"></div>
     <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
@@ -136,7 +136,7 @@
                  }
             }
         }
-        document.getElementById("statistic").innerHTML =  "Mostrando " + rowsFound.length + " registro(s).";
+        document.getElementById("statistic").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
     }
     search()
     </script>
