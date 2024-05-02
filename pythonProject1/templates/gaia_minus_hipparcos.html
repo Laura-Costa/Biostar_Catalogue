@@ -2,11 +2,6 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <style>
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-    </style>
     <title>Gaia - Hipparcos</title>
     <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
 
@@ -16,47 +11,40 @@
     <img src= "{{url_for('static', filename='img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')}}" >
     <img src= "{{url_for('static', filename='img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')}}" >
     <h2>Estrelas Plotadas</h2>
-
-    <input type="text" id="designation-search10" onkeyup="search10()" placeholder="search by designation.." class="table-search-filters">
-    <input type="text" id="HD-search10" onkeyup="search10()" placeholder="search by HD.." class="table-search-filters">
-    <input type="number" id="HIP-search10" onkeyup="search10()" placeholder="search by HIP.." class="table-search-filters">
-
-    <div id="statistic10"></div>
-
-    <table id="demo10" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr class="header">
-                <th style="position: sticky; top: 0;"><b>designation</b></th>
-                <th style="position: sticky; top: 0;"><b>HD</b></th>
-                <th style="position: sticky; top: 0;"><b>HIP</b></th>
-                <th style="position: sticky; top: 0;"><b>ra</b></th>
-                <th style="position: sticky; top: 0;"><b>declination</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
-                <th style="position: sticky; top: 0;"><b>pm</b></th>
-                <th style="position: sticky; top: 0;"><b>pmra</b></th>
-                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
-                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
-                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+            <tr>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>ra</b></td>
+                <td style="position: sticky; top: 0;"><b>declination</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
+                <td style="position: sticky; top: 0;"><b>pm</b></td>
+                <td style="position: sticky; top: 0;"><b>pmra</b></td>
+                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
+                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
+                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
             </tr>
         </thead>
         <tbody>
@@ -97,94 +85,43 @@
             {%endfor%}
         </tbody>
     </table>
-
-    <script>
-
-    var input_designation = document.getElementById("designation-search10");
-    var input_HIP = document.getElementById("HIP-search10");
-    var input_HD = document.getElementById("HD-search10");
-    var table = document.getElementById("demo10");
-    function search10() {
-
-        // Declare variables
-        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
-
-        filter_designation = input_designation.value.toUpperCase();
-        filter_HIP = input_HIP.value;
-        filter_HD = input_HD.value.toUpperCase();
-        tr = table.getElementsByTagName("tr");
-
-        // Loop through all table rows, and hide those who don't match the search query
-        rowsFound = [];
-        for (i = 0; i < tr.length; i++) {
-
-            td_designation = tr[i].getElementsByTagName("td")[0]; // change number to any other number to target column for table search
-            td_HIP = tr[i].getElementsByTagName("td")[2];
-            td_HD = tr[i].getElementsByTagName("td")[1];
-
-            if (td_designation) {
-
-                designationValue = td_designation.textContent || td_designation.innerText;
-                HIPValue = td_HIP.textContent || td_HIP.innerText;
-                HDValue = td_HD.textContent || td_HD.innerText;
-
-                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
-                  && HIPValue.indexOf(filter_HIP) > -1
-                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
-                     tr[i].style.display = "";
-                     rowsFound.push(1)
-                 } else {
-                     tr[i].style.display = "none";
-                 }
-            }
-        }
-        document.getElementById("statistic10").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
-    }
-    search10()
-    </script>
+    <footer>Quantidade de registros: {{data[1]}}</footer>
 
     <h2>Estrelas com Bp - Rp ≤ 1.6</h2>
-
-    <input type="text" id="designation-search11" onkeyup="search11()" placeholder="search by designation.." class="table-search-filters">
-    <input type="text" id="HD-search11" onkeyup="search11()" placeholder="search by HD.." class="table-search-filters">
-    <input type="number" id="HIP-search11" onkeyup="search11()" placeholder="search by HIP.." class="table-search-filters">
-
-    <div id="statistic11"></div>
-
-    <table id="demo11" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr class="header">
-                <th style="position: sticky; top: 0;"><b>designation</b></th>
-                <th style="position: sticky; top: 0;"><b>HD</b></th>
-                <th style="position: sticky; top: 0;"><b>HIP</b></th>
-                <th style="position: sticky; top: 0;"><b>ra</b></th>
-                <th style="position: sticky; top: 0;"><b>declination</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
-                <th style="position: sticky; top: 0;"><b>pm</b></th>
-                <th style="position: sticky; top: 0;"><b>pmra</b></th>
-                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
-                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
-                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+            <tr>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>ra</b></td>
+                <td style="position: sticky; top: 0;"><b>declination</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
+                <td style="position: sticky; top: 0;"><b>pm</b></td>
+                <td style="position: sticky; top: 0;"><b>pmra</b></td>
+                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
+                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
+                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
             </tr>
         </thead>
         <tbody>
@@ -225,94 +162,43 @@
             {%endfor%}
         </tbody>
     </table>
-
-    <script>
-
-    var input_designation = document.getElementById("designation-search11");
-    var input_HIP = document.getElementById("HIP-search11");
-    var input_HD = document.getElementById("HD-search11");
-    var table = document.getElementById("demo11");
-    function search11() {
-
-        // Declare variables
-        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
-
-        filter_designation = input_designation.value.toUpperCase();
-        filter_HIP = input_HIP.value;
-        filter_HD = input_HD.value.toUpperCase();
-        tr = table.getElementsByTagName("tr");
-
-        // Loop through all table rows, and hide those who don't match the search query
-        rowsFound = [];
-        for (i = 0; i < tr.length; i++) {
-
-            td_designation = tr[i].getElementsByTagName("td")[0]; // change number to any other number to target column for table search
-            td_HIP = tr[i].getElementsByTagName("td")[2];
-            td_HD = tr[i].getElementsByTagName("td")[1];
-
-            if (td_designation) {
-
-                designationValue = td_designation.textContent || td_designation.innerText;
-                HIPValue = td_HIP.textContent || td_HIP.innerText;
-                HDValue = td_HD.textContent || td_HD.innerText;
-
-                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
-                  && HIPValue.indexOf(filter_HIP) > -1
-                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
-                     tr[i].style.display = "";
-                     rowsFound.push(1)
-                 } else {
-                     tr[i].style.display = "none";
-                 }
-            }
-        }
-        document.getElementById("statistic11").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
-    }
-    search11()
-    </script>
+    <footer>Quantidade de registros: {{data[3]}}</footer>
 
     <h2>Estrelas com Bp - Rp > 1.6</h2>
-
-    <input type="text" id="designation-search12" onkeyup="search12()" placeholder="search by designation.." class="table-search-filters">
-    <input type="text" id="HD-search12" onkeyup="search12()" placeholder="search by HD.." class="table-search-filters">
-    <input type="number" id="HIP-search12" onkeyup="search12()" placeholder="search by HIP.." class="table-search-filters">
-
-    <div id="statistic12"></div>
-
-    <table id="demo12" style="display: block; height: 300px; width: 600px; overflow: auto;">
+    <table id="demo" style="display: block; height: 300px; width: 600px; overflow: auto;">
         <thead>
-            <tr class="header">
-                <th style="position: sticky; top: 0;"><b>designation</b></th>
-                <th style="position: sticky; top: 0;"><b>HD</b></th>
-                <th style="position: sticky; top: 0;"><b>HIP</b></th>
-                <th style="position: sticky; top: 0;"><b>ra</b></th>
-                <th style="position: sticky; top: 0;"><b>declination</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax</b></th>
-                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
-                <th style="position: sticky; top: 0;"><b>pm</b></th>
-                <th style="position: sticky; top: 0;"><b>pmra</b></th>
-                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
-                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
-                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
-                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
-                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+            <tr>
+                <td style="position: sticky; top: 0;"><b>designation</b></td>
+                <td style="position: sticky; top: 0;"><b>HD</b></td>
+                <td style="position: sticky; top: 0;"><b>HIP</b></td>
+                <td style="position: sticky; top: 0;"><b>ra</b></td>
+                <td style="position: sticky; top: 0;"><b>declination</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax</b></td>
+                <td style="position: sticky; top: 0;"><b>parallax_error</b></td>
+                <td style="position: sticky; top: 0;"><b>pm</b></td>
+                <td style="position: sticky; top: 0;"><b>pmra</b></td>
+                <td style="position: sticky; top: 0;"><b>pmdec</b></td>
+                <td style="position: sticky; top: 0;"><b>ruwe</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></td>
+                <td style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(G) error</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp)</b></td>
+                <td style="position: sticky; top: 0;"><b>M(Rp) error</b></td>
+                <td style="position: sticky; top: 0;"><b>Bp - Rp</b></td>
             </tr>
         </thead>
         <tbody>
@@ -353,51 +239,6 @@
             {%endfor%}
         </tbody>
     </table>
-
-    <script>
-
-    var input_designation = document.getElementById("designation-search12");
-    var input_HIP = document.getElementById("HIP-search12");
-    var input_HD = document.getElementById("HD-search12");
-    var table = document.getElementById("demo12");
-    function search12() {
-
-        // Declare variables
-        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
-
-        filter_designation = input_designation.value.toUpperCase();
-        filter_HIP = input_HIP.value;
-        filter_HD = input_HD.value.toUpperCase();
-        tr = table.getElementsByTagName("tr");
-
-        // Loop through all table rows, and hide those who don't match the search query
-        rowsFound = [];
-        for (i = 0; i < tr.length; i++) {
-
-            td_designation = tr[i].getElementsByTagName("td")[0]; // change number to any other number to target column for table search
-            td_HIP = tr[i].getElementsByTagName("td")[2];
-            td_HD = tr[i].getElementsByTagName("td")[1];
-
-            if (td_designation) {
-
-                designationValue = td_designation.textContent || td_designation.innerText;
-                HIPValue = td_HIP.textContent || td_HIP.innerText;
-                HDValue = td_HD.textContent || td_HD.innerText;
-
-                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
-                  && HIPValue.indexOf(filter_HIP) > -1
-                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
-                     tr[i].style.display = "";
-                     rowsFound.push(1)
-                 } else {
-                     tr[i].style.display = "none";
-                 }
-            }
-        }
-        document.getElementById("statistic12").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
-    }
-    search12()
-    </script>
-
+    <footer>Quantidade de registros: {{data[5]}}</footer>
 </body>
 </html>

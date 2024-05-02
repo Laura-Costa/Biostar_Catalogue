@@ -183,6 +183,36 @@ def hipparcos():
     value = cursor.fetchall()
     data.append(value)
     data.append(len(value))
+
+    cursor.execute("select Hipparcos.HIP, "
+                   "Hipparcos.HD, "
+                   "IF (Hipparcos.HIP in ( "
+                   "select Gaia.HIP from Gaia where Gaia.HIP is not NULL), "
+                   "(select Gaia.designation from Gaia where Gaia.HIP = Hipparcos.HIP), NULL) AS designation, "
+                   "round(Hipparcos.Vmag, 4), "
+                   "round(Hipparcos.RAdeg, 4), "
+                   "round(Hipparcos.DEdeg, 4), "
+                   "Hipparcos.RAhms, "
+                   "Hipparcos.DEdms, "
+                   "round(Hipparcos.Plx, 4), "
+                   "round(Hipparcos.e_Plx, 4), "
+                   "round(1/(Hipparcos.Plx/1000.0), 4) AS distance_Plx, "
+                   "round(Hipparcos.pmRA, 4), "
+                   "round(Hipparcos.pmDE, 4), "
+                   "round(Hipparcos.BTmag, 4), "
+                   "round(Hipparcos.VTmag, 4), "
+                   "round(Hipparcos_product.MV, 4), "
+                   "round(Hipparcos_product.MV_error, 4), "
+                   "round(Hipparcos_product.MVt, 4), "
+                   "round(Hipparcos_product.MVt_error, 4), "
+                   "round(Hipparcos_product.B_minus_V, 4), "
+                   "round(Hipparcos_product.BT_minus_VT, 4) "
+                   "from Hipparcos, Hipparcos_product "
+                   "where Hipparcos.HIP = Hipparcos_product.HIP "
+                   "order by Hipparcos.HIP")
+    value = cursor.fetchall()
+    data.append(value)
+
     name = "Hipparcos"
     return render_template("hipparcos.html", data=data, name=name)
 
