@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <title>Gaia</title>
+    <link rel="stylesheet" href='../static/freeze.css' type="text/css"/>
+</head>
+<body>
+    <h1>{{name}}</h1>
+    <img src= "{{url_for('static', filename='img/Gaia_Mg_versus_Bp_minus_Rp.png')}}" >
+    <img src= "{{url_for('static', filename='img/Gaia_MRp_versus_Bp_minus_Rp.png')}}" >
+    <h2>Estrelas no Catálogo</h2>
+
+    <input type="text" id="designation-search" onkeyup="search()" placeholder="search by designation.." class="table-search-filters">
+    <input type="number" id="HIP-search" onkeyup="search()" placeholder="search by HIP.." class="table-search-filters">
+    <input type="text" id="HD-search" onkeyup="search()" placeholder="search by HD.." class="table-search-filters">
+
+    <div id="statistic"></div>
+    <table id="demo" style="display: block; height: 300px; width: 100%; overflow: auto;">
+        <thead>
+            <tr class="header">
+                <th style="position: sticky; top: 0;"><b>designation</b></th>
+                <th style="position: sticky; top: 0;"><b>HIP</b></th>
+                <th style="position: sticky; top: 0;"><b>HD</b></th>
+                <th style="position: sticky; top: 0;"><b>ra</b></th>
+                <th style="position: sticky; top: 0;"><b>declination</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax</b></th>
+                <th style="position: sticky; top: 0;"><b>parallax_error</b></th>
+                <th style="position: sticky; top: 0;"><b>pm</b></th>
+                <th style="position: sticky; top: 0;"><b>pmra</b></th>
+                <th style="position: sticky; top: 0;"><b>pmdec</b></th>
+                <th style="position: sticky; top: 0;"><b>ruwe</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_g_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_bp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>phot_rp_mean_mag</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>teff_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>logg_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>mh_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_lower</b></th>
+                <th style="position: sticky; top: 0;"><b>distance_gspphot_upper</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(G) error</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp)</b></th>
+                <th style="position: sticky; top: 0;"><b>M(Rp) error</b></th>
+                <th style="position: sticky; top: 0;"><b>Bp - Rp</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for registro in data[0]%}
+            <tr>
+                <td>{{registro[0]}}</td>
+                <td>{{registro[1]}}</td>
+                <td>{{registro[2]}}</td>
+                <td>{{registro[3]}}</td>
+                <td>{{registro[4]}}</td>
+                <td>{{registro[5]}}</td>
+                <td>{{registro[6]}}</td>
+                <td>{{registro[7]}}</td>
+                <td>{{registro[8]}}</td>
+                <td>{{registro[9]}}</td>
+                <td>{{registro[10]}}</td>
+                <td>{{registro[11]}}</td>
+                <td>{{registro[12]}}</td>
+                <td>{{registro[13]}}</td>
+                <td>{{registro[14]}}</td>
+                <td>{{registro[15]}}</td>
+                <td>{{registro[16]}}</td>
+                <td>{{registro[17]}}</td>
+                <td>{{registro[18]}}</td>
+                <td>{{registro[19]}}</td>
+                <td>{{registro[20]}}</td>
+                <td>{{registro[21]}}</td>
+                <td>{{registro[22]}}</td>
+                <td>{{registro[23]}}</td>
+                <td>{{registro[24]}}</td>
+                <td>{{registro[25]}}</td>
+                <td>{{registro[26]}}</td>
+                <td>{{registro[27]}}</td>
+                <td>{{registro[28]}}</td>
+                <td>{{registro[29]}}</td>
+                <td>{{registro[30]}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    <script>
+
+    var input_designation = document.getElementById("designation-search");
+    var input_HIP = document.getElementById("HIP-search");
+    var input_HD = document.getElementById("HD-search");
+    var table = document.getElementById("demo");
+    function search() {
+
+        // Declare variables
+        var filter_designation, filter_HIP, filter_HD, tr, td_designation, td_HIP, td_HD, i, designationValue, HIPValue, HDValue;
+
+        filter_designation = input_designation.value.toUpperCase();
+        filter_HIP = input_HIP.value;
+        filter_HD = input_HD.value.toUpperCase();
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        rowsFound = [];
+        for (i = 0; i < tr.length; i++) {
+
+            td_designation = tr[i].getElementsByTagName("td")[0]; // change number to any other number to target column for table search
+            td_HIP = tr[i].getElementsByTagName("td")[1];
+            td_HD = tr[i].getElementsByTagName("td")[2];
+
+            if (td_designation) {
+
+                designationValue = td_designation.textContent || td_designation.innerText;
+                HIPValue = td_HIP.textContent || td_HIP.innerText;
+                HDValue = td_HD.textContent || td_HD.innerText;
+
+                 if (designationValue.toUpperCase().indexOf(filter_designation) > -1
+                  && HIPValue.indexOf(filter_HIP) > -1
+                  && HDValue.toUpperCase().indexOf(filter_HD) > -1) {
+                     tr[i].style.display = "";
+                     rowsFound.push(1)
+                 } else {
+                     tr[i].style.display = "none";
+                 }
+            }
+        }
+        document.getElementById("statistic").innerHTML =  "Showing " + rowsFound.length + " recorder(s).";
+    }
+    search()
+    </script>
+</body>
+</html>
