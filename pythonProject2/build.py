@@ -1798,6 +1798,46 @@ plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject1/static/img/H
 # close matplotlib.pyplot as plt object
 plt.close()
 
+# Criar o diagrama Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.HIP not in ( "
+               "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+plt.savefig('/home/h/Área de trabalho/Catalogo_GAIA/pythonProject2/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.png')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
 # Criar o diagrama Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
 
 cursor.execute("select Hipparcos_product.HIP, "
@@ -2390,7 +2430,7 @@ cursor.execute('''select Gaia.designation, '''
                '''Gaia.HIP is NULL and '''
                '''Gaia_product.Bp_minus_Rp <= 1.6 '''
                '''order by Gaia_product.Bp_minus_Rp desc '''
-               '''into outfile '/var/lib/mysql-files/Gaia_minus_Hipparcos_Bp_minus_Rp_less_than_or_iqual_to_1.6_temp.csv' '''
+               '''into outfile '/var/lib/mysql-files/Gaia_minus_Hipparcos_Bp_minus_Rp_less_than_or_equal_to_1.6_temp.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 
 # Criar o arquivo Gaia_minus_Hipparcos_Bp_minus_Rp_less_than_or_iqual_to_1.6_redux.csv
@@ -2417,7 +2457,7 @@ cursor.execute('''select Gaia.designation, '''
                '''Gaia.HIP is NULL and '''
                '''Gaia_product.Bp_minus_Rp <= 1.6 '''
                '''order by Gaia_product.Bp_minus_Rp desc '''
-               '''into outfile '/var/lib/mysql-files/Gaia_minus_Hipparcos_Bp_minus_Rp_less_than_or_iqual_to_1.6_redux_temp.csv' '''
+               '''into outfile '/var/lib/mysql-files/Gaia_minus_Hipparcos_Bp_minus_Rp_less_than_or_equal_to_1.6_redux_temp.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 
 # Criando o arquivo Gaia_minus_Hipparcos_Bp_minus_Rp_greater_than_1.6.csv
