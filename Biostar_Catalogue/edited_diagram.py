@@ -1,7 +1,12 @@
+from xxsubtype import bench
+
 from astroquery.simbad import Simbad
 import mysql.connector
 import matplotlib.pyplot as plt
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 import decimal
+import numpy as np
+from matplotlib.ticker import FormatStrFormatter
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
@@ -116,7 +121,7 @@ plt.legend((yellow, blue, coral, red, dodgerblue, black),
            ncol=1,
            fontsize=6)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -185,11 +190,71 @@ plt.legend((lightcoral, black),
            ncol=1,
            fontsize=6)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
+###########################
+# Criar o diagrama Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
 
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.HIP not in ( "
+               "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+fig, ax = plt.subplots()
+
+transparency = 1
+size = 1.5
+ax.scatter(x_axis, y_axis, s=1, color='black')
+#plt.scatter(x_axis, y_axis, s = size, marker = ".", edgecolors = 'black', alpha = transparency)
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+#plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+ax.set_title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+
+ax.xaxis.set_major_locator(MultipleLocator(0.5))
+ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+ax.yaxis.set_major_locator(MultipleLocator(2))
+ax.yaxis.set_minor_locator(MultipleLocator(0.5))
+
+ax.xaxis.set_minor_formatter(FormatStrFormatter("%.1f"))
+ax.yaxis.set_minor_formatter(FormatStrFormatter("%.1f"))
+
+#ax.tick_params(wich='both', width=2)
+ax.tick_params(axis='both', which='major', labelsize=5)
+ax.tick_params(axis='both', which='minor', labelsize=2.5, labelcolor='dimgray')
+
+ax.set_axisbelow(True)
+plt.grid(color='darkgrey', linestyle='dashed', which='major', linewidth=0.5)
+plt.grid(color='lightgray', linestyle='dashed', which='minor', linewidth=0.5)
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+###########################
 # Make sure data is committed to the database
 connection.commit()
 

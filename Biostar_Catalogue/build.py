@@ -896,7 +896,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.ylabel("M(G)")
 plt.xlabel("Bp-Rp")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_Mg_versus_Bp_minus_Rp.pdf')
 # plt.savefig('/var/lib/mysql/Gaia_Mg_versus_Bp_minus_Rp')
 
 
@@ -932,7 +932,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_Mg_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot object
 plt.clf()
@@ -967,7 +967,7 @@ plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
 plt.title("Gaia: {} estrelas em um raio de {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.ylabel("M(G)")
 plt.xlabel("M(V)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_MV.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_MV.pdf')
 
 # close matplotlib.pyplot object
 plt.clf()
@@ -1000,7 +1000,7 @@ plt.ylim(min(y_axis) - decimal.Decimal(0.5), max(y_axis) + decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("phot_g_mean_mag")
 plt.ylabel("Vmag")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.pdf')
 
 # Plotar, em deepskyblue, a estrela HD146233
 
@@ -1027,7 +1027,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.pdf')
 
 # close matplotlib.pyplot object
 plt.clf()
@@ -1066,7 +1066,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia: {} stars within {:.5f}pc (π ≥ {:.5f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.ylabel("M(Rp)")
 plt.xlabel("Bp-Rp")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_MRp_versus_Bp_minus_Rp.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1095,7 +1095,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_MRp_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot object
 plt.clf()
@@ -1134,7 +1134,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp - Rp")
 plt.ylabel("M(G)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1164,7 +1164,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot object
 plt.close()
@@ -1203,7 +1203,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp - Rp")
 plt.ylabel("M(Rp)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1233,7 +1233,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot object
 plt.close()
@@ -1272,7 +1272,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("M(Rp)")
 plt.ylabel("M(Vt)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_MVt.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_MVt.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1302,7 +1302,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_MVt.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MRp_versus_MVt.pdf')
 
 # close matplotlib.pyplot object
 plt.close()
@@ -1341,7 +1341,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp-Rp")
 plt.ylabel("Bt-Vt")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Bp_minus_Rp_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Bp_minus_Rp_versus_BT_minus_VT.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1371,7 +1371,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Bp_minus_Rp_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_Bp_minus_Rp_versus_BT_minus_VT.pdf')
 
 # close matplotlib.pyplot object
 plt.close()
@@ -1411,7 +1411,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia - Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("M(G)")
 plt.ylabel("Bp - Rp")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.pdf')
 
 # Plotar, em tomato, a estrela 131156B
 
@@ -1441,7 +1441,7 @@ plt.legend((tomato,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1480,7 +1480,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia - Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("Bp - Rp")
 plt.ylabel("M(Rp)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.pdf')
 
 # Plotar, em tomato, a estrela 131156B
 
@@ -1510,7 +1510,7 @@ plt.legend((tomato,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1548,7 +1548,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
 plt.xlabel("B - V")
 plt.ylabel("M(V)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_MV_versus_B_minus_V.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_MV_versus_B_minus_V.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1577,7 +1577,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_MV_versus_B_minus_V.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_MV_versus_B_minus_V.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1615,7 +1615,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
 plt.xlabel("BT - VT")
 plt.ylabel("M(Vt)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_MVt_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_MVt_versus_BT_minus_VT.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1644,7 +1644,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_MVt_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_MVt_versus_BT_minus_VT.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1682,7 +1682,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("B - V")
 plt.ylabel("M(V)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1711,7 +1711,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1749,7 +1749,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Gaia ∩ Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_parallax / decimal.Decimal(1000.0)), min_parallax / decimal.Decimal(1000.0)))
 plt.xlabel("BT - VT")
 plt.ylabel("M(Vt)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.pdf')
 
 # Plotar, em deepskyblue, a estrela HD 146233
 
@@ -1778,7 +1778,7 @@ plt.legend((deepskyblue,),
            ncol=1,
            fontsize=8)
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1819,7 +1819,7 @@ plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}''
 plt.xlabel("B - V")
 plt.ylabel("M(V)")
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -1859,7 +1859,7 @@ plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
 plt.title("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
 plt.xlabel("BT - VT")
 plt.ylabel("M(Vt)")
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
