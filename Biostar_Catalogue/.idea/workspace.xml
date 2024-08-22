@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd1aeb3c-1047-41e7-bd30-8d5a38887779" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.py" beforeDir="false" afterPath="$PROJECT_DIR$/build.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/edited_diagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/edited_diagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_MRp_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_Mg_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_Bp_minus_Rp_versus_BT_minus_VT.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_MRp_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_MRp_versus_MVt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_MV_versus_B_minus_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_MVt_versus_BT_minus_VT.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_Mg_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_Mg_versus_MV.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_intersection_Hipparcos_phot_g_mean_mag_versus_Vmag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_minus_Hipparcos_MRp_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Gaia_minus_Hipparcos_Mg_versus_Bp_minus_Rp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_MV_versus_B_minus_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_MVt_versus_BT_minus_VT.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MVt_versus_BT_minus_VT.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +34,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.build.executor": "Run",
-    "Python.edited_diagram.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.build.executor&quot;: &quot;Run&quot;,
+    &quot;Python.edited_diagram.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
