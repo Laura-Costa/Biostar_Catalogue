@@ -1,7 +1,7 @@
 from xxsubtype import bench
-
 from astroquery.simbad import Simbad
 import mysql.connector
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 import decimal
@@ -268,6 +268,101 @@ plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparc
 # close matplotlib.pyplot as plt object
 plt.close()
 ###########################
+
+###########################
+# Criar o diagrama Hipparcos_minus_Gaia_MV_versus_B_minus_V_colors.png numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos_product.HIP, "
+               "Hipparcos.Plx, "
+               "Hipparcos_product.B_minus_V, "
+               "Hipparcos_product.MV "
+               "from Hipparcos_product, Hipparcos "
+               "where Hipparcos_product.HIP = Hipparcos.HIP and "
+               "Hipparcos_product.HIP not in ( "
+               "select Gaia.HIP from Gaia where Gaia.HIP is not NULL) and "
+               "Hipparcos_product.B_minus_V is not NULL and "
+               "Hipparcos_product.MV is not NULL")
+value = cursor.fetchall()
+
+HIP_list = []
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (HIP_value, Plx_value, B_minus_V_value, MV_value) in value:
+    HIP_list.append(HIP_value)
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+min_Plx = min(Plx_list)
+
+fig, ax = plt.subplots()
+transparency = 1
+size = 1.5
+
+# definindo as cores
+colors = x_axis
+
+# mudar a cor atras do plot
+ax.set_facecolor('black')
+
+# criando um cmap customizado
+cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["blue", "lightblue", "white", "yellow" , "orange", "red", "red", "red", "red", "red", "red", "red"])
+
+ax.scatter(x_axis, y_axis, s=0.3, c=colors, cmap=cmap)
+
+# tentar consertar o gradiente de cores no diagrama
+# plt.clim(-0.375, 1.750)
+
+# definindo a barra de cor
+# cbar = ax.colorbar(orientation="horizontal", shrink=0.5, extend="both", format="%.3f", aspect=40)
+# cbar.ax.tick_params(labelsize=3)
+# cbar.set_label(label="índice de cor", size=5)
+
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+# ax.set_title("M(V) x B-V", fontsize=7)
+fig.suptitle("Hipparcos - Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
+plt.xlabel("B - V", fontsize=7)
+plt.ylabel("M(V)", fontsize=7)
+
+# tentar colocar nos dois eixos o mesmo tamanho entre os majorticks
+print("tentar colocar nos dois eixos o mesmo tamanho entre os majorticks", (decimal.Decimal(0.5)*(abs(min(x_axis)) + abs(max(x_axis))))/(abs(min(y_axis)) + abs(max(y_axis))))
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(0.125))
+ax.xaxis.set_minor_locator(MultipleLocator(0.03125))
+ax.yaxis.set_major_locator(MultipleLocator(0.5))
+ax.yaxis.set_minor_locator(MultipleLocator(0.1))
+
+# para colocar label no minor axis também
+# ax.xaxis.set_minor_formatter(FormatStrFormatter("%.1f"))
+# ax.yaxis.set_minor_formatter(FormatStrFormatter("%.1f"))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="dimgray", labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+# ax.tick_params(axis='both', which='minor', labelsize=2.5, labelcolor='dimgray')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=45)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='dimgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+# plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
+
+# salvar diagrama
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_colors.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+###########################
+
 # Make sure data is committed to the database
 connection.commit()
 
@@ -293,9 +388,6 @@ cursor.execute('''select Hipparcos.HIP, '''
                '''order by B_minus_V ASC '''
                '''into outfile '/var/lib/mysql-files/Hipparcos_minus_Gaia_MV_versus_B_minus_V_white_dwarfs_temp.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''' % anas_brancas)
-# sql = "insert into cust_table(name)values(names)where cust_id IN('{ids}')"
-#sql = "SELECT * FROM table WHERE column = ANY(%(parameter_array)s)"
-#cur.execute(sql,{"parameter_array": [1, 2, 3]})
 
 # Criar o arquivo Hipparcos_minus_Gaia_MV_versus_B_minus_V_unknown.csv
 sem_classificacao = ",".join(sem_classificacao)
