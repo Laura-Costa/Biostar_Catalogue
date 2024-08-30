@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Biostar_Catalogue.iml" filepath="$PROJECT_DIR$/.idea/Biostar_Catalogue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/biostar_catalogue.iml" filepath="$PROJECT_DIR$/.idea/biostar_catalogue.iml" />
     </modules>
   </component>
 </project>

@@ -121,7 +121,7 @@ plt.legend((yellow, blue, coral, red, dodgerblue, black),
            ncol=1,
            fontsize=6)
 
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.pdf')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_edited.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -190,7 +190,7 @@ plt.legend((lightcoral, black),
            ncol=1,
            fontsize=6)
 
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.pdf')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_showing_gaia.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -263,7 +263,7 @@ plt.grid(color='darkgrey', linestyle='dashed', dashes=(5,5), which='major', line
 # plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
 
 # salvar diagrama
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.pdf')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_ticks.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
@@ -357,7 +357,7 @@ plt.grid(color='dimgray', linestyle='dashed', dashes=(5,5), which='major', linew
 # plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
 
 # salvar diagrama
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/Biostar_Catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_colors.pdf')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_minus_Gaia_MV_versus_B_minus_V_colors.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()
