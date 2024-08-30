@@ -162,12 +162,14 @@ plt.ylim(max(y_axis_temp) + decimal.Decimal(0.5), min(y_axis_temp) - decimal.Dec
 x_axis_gaia = []
 y_axis_gaia = []
 pop_axis = []
-
+hips_com_designacao = ()
 for i in range(len(HIP_list)):
     tab = Simbad.query_objectids("HIP " + str(HIP_list[i]))
-    if (len([id for id in tab['ID'] if id.startswith('Gaia')]) != 0):
+    ids = [id for id in tab['ID'] if id.startswith('Gaia')]
+    if len(ids) != 0:
+        hips_com_designacao += (str(HIP_list[i]),)
+        print(ids)
         # se esse if é True, entao a estrela com identificador HIP_list[i] tem designation, ela está no Gaia com distancia maior do que 23pc
-        print(HIP_list[i])
         x_axis_gaia.append(x_axis_temp[i])
         y_axis_gaia.append(y_axis_temp[i])
         pop_axis.append(i)
