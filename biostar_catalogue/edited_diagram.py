@@ -168,7 +168,7 @@ for i in range(len(HIP_list)):
     ids = [id for id in tab['ID'] if id.startswith('Gaia')]
     if len(ids) != 0:
         hips_com_designacao += (str(HIP_list[i]),)
-        print(ids)
+        # print(ids)
         # se esse if é True, entao a estrela com identificador HIP_list[i] tem designation, ela está no Gaia com distancia maior do que 23pc
         x_axis_gaia.append(x_axis_temp[i])
         y_axis_gaia.append(y_axis_temp[i])
@@ -329,7 +329,7 @@ plt.xlabel("B - V", fontsize=7)
 plt.ylabel("M(V)", fontsize=7)
 
 # tentar colocar nos dois eixos o mesmo tamanho entre os majorticks
-print("tentar colocar nos dois eixos o mesmo tamanho entre os majorticks", (decimal.Decimal(0.5)*(abs(min(x_axis)) + abs(max(x_axis))))/(abs(min(y_axis)) + abs(max(y_axis))))
+# print("tentar colocar nos dois eixos o mesmo tamanho entre os majorticks", (decimal.Decimal(0.5)*(abs(min(x_axis)) + abs(max(x_axis))))/(abs(min(y_axis)) + abs(max(y_axis))))
 
 # definir os intervalos dos minor e major ticks, dos eixos x e eixos y
 ax.xaxis.set_major_locator(MultipleLocator(0.125))
@@ -364,6 +364,120 @@ plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparc
 # close matplotlib.pyplot as plt object
 plt.close()
 ###########################
+
+########################################################################################################
+# Criar o diagrama Hipparcos_errors.pdf numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos.e_Plx, "
+               "Hipparcos.Plx "
+               "from Hipparcos ")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (e_Plx_value, Plx_value) in value:
+    x_axis.append(e_Plx_value)
+    y_axis.append(Plx_value)
+min_Plx = min(y_axis)
+
+fig, ax = plt.subplots()
+transparency = 1
+size = 1.5
+
+ax.scatter(x_axis, y_axis, s=0.3, color='black')
+
+plt.xlim(min(x_axis) - decimal.Decimal(1.5), max(x_axis) + decimal.Decimal(1.5))
+plt.ylim(min(y_axis) - decimal.Decimal(6), max(y_axis) + decimal.Decimal(6))
+fig.suptitle("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
+plt.xlabel("e_Plx (mas)", fontsize=7)
+plt.ylabel("Plx (mas)", fontsize=7)
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(10))
+ax.xaxis.set_minor_locator(MultipleLocator(2))
+ax.yaxis.set_major_locator(MultipleLocator(50))
+ax.yaxis.set_minor_locator(MultipleLocator(12.5))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=0)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='darkgrey', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
+
+# salvar diagrama
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_errors.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+########################################################################################################
+
+########################################################################################################
+# Criar o diagrama Gaia_errors.pdf numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia.parallax_error, "
+               "Gaia.parallax "
+               "from Gaia ")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (e_Plx_value, Plx_value) in value:
+    x_axis.append(e_Plx_value)
+    y_axis.append(Plx_value)
+min_Plx = min(y_axis)
+
+fig, ax = plt.subplots()
+transparency = 1
+size = 1.5
+
+ax.scatter(x_axis, y_axis, s=0.3, color='black')
+
+plt.xlim(min(x_axis) - decimal.Decimal(0.02), max(x_axis) + decimal.Decimal(0.02))
+plt.ylim(min(y_axis) - decimal.Decimal(5.0), max(y_axis) + decimal.Decimal(5.0))
+fig.suptitle("Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
+plt.xlabel("parallax_error (mas)", fontsize=7)
+plt.ylabel("parallax (mas)", fontsize=7)
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(0.1))
+ax.xaxis.set_minor_locator(MultipleLocator(0.1/5))
+ax.yaxis.set_major_locator(MultipleLocator(50))
+ax.yaxis.set_minor_locator(MultipleLocator(10))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=0)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='darkgrey', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
+
+# salvar diagrama
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Gaia_errors.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+########################################################################################################
 
 # Make sure data is committed to the database
 connection.commit()
