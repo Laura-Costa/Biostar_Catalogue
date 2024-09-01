@@ -2,6 +2,7 @@ import decimal
 import matplotlib.pyplot as plt
 import mysql.connector
 import numpy as np
+from matplotlib import style
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
@@ -39,18 +40,37 @@ plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5,
 plt.legend(loc='upper right')
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_e_Plx_CAT2.pdf')
 plt.close()
+
 ###############################################################################################
 
-# cria os subplots
-fig, axes = plt.subplots(figsize=(50, 25))
+###############################################################################################
+cursor.execute("select Hipparcos.e_Plx, "
+               "Hipparcos.Plx "
+               "from Hipparcos ")
+value = cursor.fetchall()
 
-# plot
-axes.hist(data, edgecolor="white", color="blue")
-axes.set_xlim((min(data)-decimal.Decimal(0.001), max(data)+decimal.Decimal(0.001)))
+e_Plx_list = []
+Plx_list = []
 
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma2_e_Plx_CAT2.pdf')
+for (e_Plx_value, Plx_value) in value:
+    e_Plx_list.append(e_Plx_value)
+    Plx_list.append(Plx_value)
+
+min_Plx = min(Plx_list)
+
+data = e_Plx_list
+style.use('ggplot')
+plt.hist(data, bins=10, edgecolor="black", color='blue', rwidth=1.0, log=True)
+
+plt.ylabel ('quantidade de estrelas')
+plt.xlabel ('e_Plx (mas)')
+plt.title('π ≥ {:.1f} mas (CAT2, {} estrelas)'.format(min_Plx, len(data)))
+# plt.axvline(np.mean(data))
+plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5, label=str('{:.5}'.format(sum(data)/len(data))))
+plt.legend(loc='upper right')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_ggplot_e_Plx_CAT2.pdf')
 plt.close()
-###############################################################################################
+style.use('default')
 
 ###############################################################################################
 cursor.execute("select Gaia.parallax_error, "
@@ -70,7 +90,7 @@ print('data: ', data)
 print(max(data))
 print(min(data))
 binwidth = decimal.Decimal(0.005)
-plt.hist(data, bins=len(data), edgecolor="white")
+plt.hist(data, bins=len(data), edgecolor="white", log=True)
 
 plt.ylabel ('quantidade de estrelas')
 plt.xlabel ('parallax_error (mas)')
@@ -100,7 +120,7 @@ print('data: ', data)
 print(max(data))
 print(min(data))
 binwidth = decimal.Decimal(0.048)
-plt.hist(data, bins=np.arange(min(data), max(data), binwidth), edgecolor="white")
+plt.hist(data, bins=np.arange(min(data), max(data), binwidth), edgecolor="white", log=True)
 
 plt.ylabel ('quantidade de estrelas')
 plt.xlabel ('parallax_error (mas)')

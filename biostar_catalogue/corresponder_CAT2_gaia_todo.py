@@ -7,53 +7,20 @@ cursor = connection.cursor()
 
 cursor.execute("set global local_infile='ON'")
 
-
-
-
-
-
-
-#######################################################################################
-# consulta para saber quantos HIP têm Gaia DR3
-
-cursor.execute("select Hipparcos.HIP "
-               "from Hipparcos ")
-value = cursor.fetchall()
-
-HIP_list = []
-
-for (HIP_value,) in value:
-    HIP_list.append(HIP_value)
-
-hips_com_designacao_DR3 = ()
-
-for i in range(len(HIP_list)):
-    tab = Simbad.query_objectids("HIP " + str(HIP_list[i]))
-
-    ids = [id for id in tab['ID'] if id.startswith('Gaia DR3')]
-    if len(ids) != 0:
-        # se esse if é True, entao a estrela com identificador HIP_list[i] tem designation no Gaia DR3
-        hips_com_designacao_DR3 += (str(HIP_list[i]),)
-
-print(len(hips_com_designacao_DR3))
-#######################################################################################
-
-
-
 cursor.execute("drop table if exists Gaia_DR3")
 
 # Criar a tabela Gaia_DR3 no BD:
 
 cursor.execute("create table Gaia_DR3("
                "designation CHAR(100) primary key,"
-               "Plx NUMERIC(65,30) null,"
-               "e_Plx NUMERIC(65,30) null,"
+               "parallax NUMERIC(65,30) null,"
+               "parallax_error NUMERIC(65,30) null,"
                "distance_gspphot NUMERIC(65,30) null, "
                "HIP INT null)")
 
 # Carregar os dados da tabela Gaia_DR3:
 
-with open("asu.tsv") as tsv:
+with open("asu_parallax_maior_15.tsv") as tsv:
     for line in csv.reader(tsv, dialect="excel-tab"):
 
         if len(line) != 0:
@@ -67,15 +34,15 @@ with open("asu.tsv") as tsv:
 
             Plx_value = line[1].strip()
             if len(Plx_value) == 0:
-                cursor.execute("update Gaia_DR3 set Plx = NULL where designation = '{}'".format(designation_value))
+                cursor.execute("update Gaia_DR3 set parallax = NULL where designation = '{}'".format(designation_value))
             else:
-                cursor.execute("update Gaia_DR3 set Plx = {} where designation = '{}'".format(float(Plx_value), designation_value))
+                cursor.execute("update Gaia_DR3 set parallax = {} where designation = '{}'".format(float(Plx_value), designation_value))
 
             e_Plx_value = line[2].strip()
             if len(e_Plx_value) == 0:
-                cursor.execute("update Gaia_DR3 set e_Plx = NULL where designation = '{}'".format(designation_value))
+                cursor.execute("update Gaia_DR3 set parallax_error = NULL where designation = '{}'".format(designation_value))
             else:
-                cursor.execute("update Gaia_DR3 set e_Plx = {} where designation = '{}'".format(float(e_Plx_value), designation_value))
+                cursor.execute("update Gaia_DR3 set parallax_error = {} where designation = '{}'".format(float(e_Plx_value), designation_value))
 
             distance_gspphot_value = line[3].strip()
             if len(distance_gspphot_value) == 0:
@@ -119,6 +86,7 @@ cursor.execute("create table Hipparcos_DR3("
 
 # Carregar os dados da tabela Hipparcos:
 
+qtde_hips_com_DR3 = 0
 with open("HIP_MAIN.DAT") as tsv:
     for line in csv.reader(tsv, dialect="excel-tab"):
         if len(line) != 0:
@@ -241,10 +209,13 @@ with open("HIP_MAIN.DAT") as tsv:
                 if len([id for id in tab['ID'] if id.startswith('Gaia DR3')]) == 0:
                     cursor.execute("update Hipparcos_DR3 set designation_DR3 = NULL where HIP = {}".format(int(HIP_value)))
                 else:
+                    qtde_hips_com_DR3 += 1
                     designation_DR3_value = [id for id in tab['ID'] if id.startswith('Gaia DR3')][0][0:].strip()
                     cursor.execute(
                         "update Hipparcos_DR3 set designation_DR3 = '{}' where HIP = {}".format(designation_DR3_value, int(HIP_value)))
 tsv.close()
+
+print(qtde_hips_com_DR3)
 
 #cursor.execute("drop table Hipparcos_DR3")
 
@@ -253,19 +224,17 @@ connection.commit()
 
 # Criar o arquivo CAT2_intersecao_Gaia.csv
 
-'''hips_com_designacao_DR3 = ",".join(hips_com_designacao_DR3)'''
-
 cursor.execute('''select Hipparcos_DR3.HIP, '''
                '''Gaia_DR3.designation, '''
                '''TRIM(Hipparcos_DR3.Plx)+0, '''
                '''TRIM(Hipparcos_DR3.e_Plx)+0, '''
-               '''TRIM(Gaia_DR3.Plx)+0 as Plx_Gaia, '''
-               '''TRIM(Gaia_DR3.e_Plx)+0, '''
+               '''TRIM(Gaia_DR3.parallax)+0 as parallax_Gaia, '''
+               '''TRIM(Gaia_DR3.parallax_error)+0, '''
                '''TRIM(Gaia_DR3.distance_gspphot)+0 '''
                '''from Hipparcos_DR3, Gaia_DR3 '''
                '''where Hipparcos_DR3.designation_DR3 = Gaia_DR3.designation and '''
                '''Hipparcos_DR3.designation_DR3 is not NULL '''
-               '''order by Plx_Gaia DESC '''
+               '''order by parallax_Gaia DESC '''
                '''into outfile '/var/lib/mysql-files/CAT2_intersecao_Gaia.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 

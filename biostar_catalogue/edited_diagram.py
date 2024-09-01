@@ -397,7 +397,7 @@ plt.ylabel("Plx (mas)", fontsize=7)
 ax.xaxis.set_major_locator(MultipleLocator(10))
 ax.xaxis.set_minor_locator(MultipleLocator(2))
 ax.yaxis.set_major_locator(MultipleLocator(50))
-ax.yaxis.set_minor_locator(MultipleLocator(12.5))
+ax.yaxis.set_minor_locator(MultipleLocator(10))
 
 # configurar labels dos major e minor ticks de ambos os eixos
 ax.tick_params(axis='both', which='both', labelsize=3, color="black", labeltop=True, top=True, labelright=True, right=True, tickdir='out')
