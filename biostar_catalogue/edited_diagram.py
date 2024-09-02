@@ -423,6 +423,90 @@ plt.close()
 ########################################################################################################
 
 ########################################################################################################
+# Criar o diagrama Hipparcos_errors_logarithmic_scale.pdf numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Hipparcos.e_Plx, "
+               "Hipparcos.Plx "
+               "from Hipparcos ")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (e_Plx_value, Plx_value) in value:
+    x_axis.append(e_Plx_value)
+    y_axis.append(Plx_value)
+min_Plx = min(y_axis)
+
+fig, ax = plt.subplots()
+transparency = 1
+size = 1.5
+
+ax.scatter(x_axis, y_axis, s=0.3, color='black')
+ax.set_yscale('log')
+ax.set_xscale('log')
+ax.tick_params(labelsize=3)
+ax.set_yticks([39, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 772.33])
+ax.get_yaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+ax.set_xticks([0.38, 10, 114.46])
+ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+#ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+
+#ax.xaxis.set_major_locator(matplotlib.ticker.MultipleLocator(100.0))
+
+
+plt.xlim(min(x_axis) - decimal.Decimal(0.1), max(x_axis) + decimal.Decimal(100))
+plt.ylim(min(y_axis) - decimal.Decimal(6), max(y_axis) + decimal.Decimal(100))
+fig.suptitle("Hipparcos: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
+plt.xlabel("e_Plx (mas)", fontsize=7)
+plt.ylabel("Plx (mas)", fontsize=7)
+
+# salvar diagrama
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Hipparcos_errors_logarithmic_scale.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+########################################################################################################
+########################################################################################################
+# Criar o diagrama Gaia_errors_logarithmic_scale.pdf numa pasta do computador (NÃO conseguiu ainda salvar no BD)
+
+cursor.execute("select Gaia.parallax_error, "
+               "Gaia.parallax "
+               "from Gaia ")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (e_Plx_value, Plx_value) in value:
+    x_axis.append(e_Plx_value)
+    y_axis.append(Plx_value)
+min_Plx = min(y_axis)
+
+fig, ax = plt.subplots()
+transparency = 1
+size = 1.5
+
+ax.scatter(x_axis, y_axis, s=0.3, color='black')
+ax.set_yscale('log')
+ax.set_xscale('log')
+ax.tick_params(labelsize=3)
+
+plt.xlim(min(x_axis) - decimal.Decimal(0.0), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(min(y_axis) - decimal.Decimal(0.0), max(y_axis) + decimal.Decimal(100.0))
+fig.suptitle("Gaia: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
+plt.xlabel("parallax_error (mas)", fontsize=7)
+plt.ylabel("parallax (mas)", fontsize=7)
+
+# salvar diagrama
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/Gaia_errors_logarithmic_scale.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+########################################################################################################
+
+########################################################################################################
 # Criar o diagrama Gaia_errors.pdf numa pasta do computador (NÃO conseguiu ainda salvar no BD)
 
 cursor.execute("select Gaia.parallax_error, "
