@@ -99,21 +99,18 @@ plt.hist(data, bins=100, edgecolor="white")
 plt.ylabel ('quantidade de estrelas')
 plt.xlabel ('parallax_error (mas)')
 plt.title('parallax_error (CAT1, {} estrela)'.format(len(data)))
-# plt.axvline(np.mean(data))
 plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5, label=str('{:.10f}'.format(np.mean(data))))
 plt.legend(loc='upper right')
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_parallax_error_CAT1_3_sigma.pdf')
 plt.close()
-
-
-labels, counts = np.unique([2, 3], return_counts=True)
-plt.bar(labels, counts, align='center', width=0.1)
-plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5, label=str('{:.4f}'.format(np.mean(data))))
-plt.legend(loc='upper right')
-plt.gca().set_xticks(labels)
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_parallax_error_CAT1_3_sigma_bar.pdf')
-plt.close()
-
+cursor.execute('''select Gaia.designation, '''
+               '''TRIM(Gaia.parallax)+0, '''
+               '''TRIM(Gaia.parallax_error)+0 '''
+               '''from Gaia '''
+               '''where Gaia.parallax < 50.000 and '''
+               '''Gaia.parallax + 3*Gaia.parallax_error >= 50.000 '''
+               '''into outfile '/var/lib/mysql-files/parallax_error_CAT1_3_sigma.csv' '''
+               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 ###############################################################################################
 cursor.execute("select Gaia.parallax_error, "
                "Gaia.parallax "
@@ -142,6 +139,14 @@ plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5,
 plt.legend(loc='upper right')
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_parallax_error_CAT1_5_sigma.pdf')
 plt.close()
+cursor.execute('''select Gaia.designation, '''
+               '''TRIM(Gaia.parallax)+0, '''
+               '''TRIM(Gaia.parallax_error)+0 '''
+               '''from Gaia '''
+               '''where Gaia.parallax < 50.000 and '''
+               '''Gaia.parallax + 5*Gaia.parallax_error >= 50.000 '''
+               '''into outfile '/var/lib/mysql-files/parallax_error_CAT1_5_sigma.csv' '''
+               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 ###############################################################################################
 
 ###############################################################################################
@@ -173,6 +178,14 @@ plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5,
 plt.legend(loc='upper right')
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/static/img/histograma_parallax_error_CAT1_10_sigma.pdf')
 plt.close()
+cursor.execute('''select Gaia.designation, '''
+               '''TRIM(Gaia.parallax)+0, '''
+               '''TRIM(Gaia.parallax_error)+0 '''
+               '''from Gaia '''
+               '''where Gaia.parallax < 50.000 and '''
+               '''Gaia.parallax + 10*Gaia.parallax_error >= 50.000 '''
+               '''into outfile '/var/lib/mysql-files/parallax_error_CAT1_10_sigma.csv' '''
+               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 ###############################################################################################
 
 cursor.close()
