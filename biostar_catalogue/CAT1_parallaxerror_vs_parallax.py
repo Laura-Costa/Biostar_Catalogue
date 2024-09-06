@@ -3,7 +3,7 @@ import mysql.connector
 import seaborn as sns
 import pandas as pd
 
-connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh', password='ic2023', allow_local_infile=True)
+connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh_mysql', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
 
 cursor.execute("set global local_infile='ON'")

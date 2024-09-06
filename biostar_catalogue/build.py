@@ -4,13 +4,13 @@ import mysql.connector
 import matplotlib.pyplot as plt
 import decimal
 
-connection = mysql.connector.connect(host='localhost', port='3306', user='lh', password='ic2023')
+connection = mysql.connector.connect(host='localhost', port='3306', user='lh_mysql', password='ic2023')
 cursor = connection.cursor()
 
 cursor.execute("drop database if exists biostar_catalogue")
 cursor.execute("create database biostar_catalogue")
 
-connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh', password='ic2023', allow_local_infile=True)
+connection = mysql.connector.connect(host='localhost', port='3306', database='biostar_catalogue', user='lh_mysql', password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
 
 cursor.execute("set global local_infile='ON'")
@@ -277,7 +277,7 @@ cursor.execute("create table Gaia("
                "designation CHAR(100) primary key,"
                "HIP INT null,"
                "HD CHAR(100) null,"
-               "ra NUMERIC(65,30) null,"
+               "ra float null,"
                "declination NUMERIC(65,30) null,"
                "parallax NUMERIC(65,30) null,"
                "parallax_error NUMERIC(65,30) null,"
@@ -2675,6 +2675,13 @@ cursor.execute('''select onze_estrelas.HIP, '''
                '''Gaia.designation = Gaia_product.designation and '''
                '''onze_estrelas.HIP = Hipparcos_completo.HIP '''
                '''into outfile '/var/lib/mysql-files/onze_estrelas.csv' '''
+               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
+
+cursor.execute('''select Hipparcos_completo.HIP, ''' 
+               '''TRIM(Hipparcos_completo.e_Plx)+0, '''
+               '''TRIM(Hipparcos_completo.Plx)+0 '''
+               '''from Hipparcos_completo '''
+               '''into outfile '/var/lib/mysql-files/Hipparcos_completo.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 
 cursor.execute("drop table onze_estrelas")
