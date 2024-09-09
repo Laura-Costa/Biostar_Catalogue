@@ -140,6 +140,79 @@ def anas_vermelhas():
     connection.close()
     return [HIP_anas_vermelhas, anas_vermelhas_x_axis, anas_vermelhas_y_axis]
 
+# Criar o diagrama CAT5_MV_versus_B_minus_V.pdf
+
+cursor.execute("select CAT2.Plx, "
+               "CAT2_product.B_minus_V, "
+               "CAT2_product.MV "
+               "from CAT2_product, CAT2 "
+               "where CAT2.HIP = CAT2_product.HIP and "
+               "CAT2_product.HIP not in ( "
+               "select CAT1.HIP from CAT1 where CAT1.HIP is not NULL) and "
+               "CAT2_product.B_minus_V is not NULL and "
+               "CAT2_product.MV is not NULL")
+value = cursor.fetchall()
+
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (Plx_value, B_minus_V_value, MV_value) in value:
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s=size, marker = "o", color='black', edgecolors = 'none')
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("CAT5: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT5/diagram/CAT5_MV_versus_B_minus_V.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama CAT5_MVt_versus_BT_minus_VT.pdf
+
+cursor.execute("select CAT2.Plx, "
+               "CAT2_product.BT_minus_VT, "
+               "CAT2_product.MVt "
+               "from CAT2, CAT2_product "
+               "where CAT2.HIP = CAT2_product.HIP and "
+               "CAT2_product.HIP not in ( "
+               "select CAT1.HIP from CAT1 where CAT1.HIP is not NULL) and "
+               "CAT2_product.BT_minus_VT is not NULL and "
+               "CAT2_product.MVt is not NULL")
+value = cursor.fetchall()
+
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (Plx_value, BT_minus_VT_value, MVt_value) in value:
+    Plx_list.append(Plx_value)
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+min_Plx = min(Plx_list)
+
+plt.scatter(x_axis, y_axis, s=size, marker = "o", color='black', edgecolors = 'none')
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("CAT5: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("Bt - Vt")
+plt.ylabel("M(Vt)")
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT5/diagram/CAT5_MVt_versus_BT_minus_VT.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
 # Criar o diagrama CAT5_MV_versus_B_minus_V_edited.pdf
 
 cursor.execute("select CAT2.Plx "
@@ -158,8 +231,6 @@ for (Plx_value,) in value:
 
 min_Plx = min(Plx_list)
 
-transparency = 1
-size = 1.5
 plt.xlim(-0.3990, 3.7000)
 plt.ylim(14.7491, -1.1312)
 
@@ -217,7 +288,7 @@ for handle in lgnd.legend_handles:
 frame = lgnd.get_frame()
 
 # Salvar figura
-plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT5/diagram/CAT5_MV_versus_B_minus_V.pdf')
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT5/diagram/CAT5_MV_versus_B_minus_V_edited.pdf')
 
 # close matplotlib.pyplot as plt object
 plt.close()

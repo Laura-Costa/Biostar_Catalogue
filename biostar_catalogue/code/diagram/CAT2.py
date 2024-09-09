@@ -14,6 +14,138 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='bi
                                      password='ic2023', allow_local_infile=True)
 cursor = connection.cursor()
 
+# Criar o diagrama CAT2_MV_versus_B_minus_V.pdf
+
+cursor.execute("select CAT2.Plx, "
+               "CAT2_product.B_minus_V, "
+               "CAT2_product.MV "
+               "from CAT2_product, CAT2 "
+               "where CAT2_product.HIP = CAT2.HIP and "
+               "CAT2_product.B_minus_V is not NULL and "
+               "CAT2_product.MV is not NULL")
+value = cursor.fetchall()
+
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (Plx_value, B_minus_V_value, MV_value) in value:
+    Plx_list.append(Plx_value)
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+min_Plx = min(Plx_list)
+
+transparency = 1
+size = 1.5
+plt.scatter(x_axis, y_axis, s = size, marker = "o", color='black', edgecolors = 'none')
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("CAT2: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("B - V")
+plt.ylabel("M(V)")
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/CAT2_MV_versus_B_minus_V.pdf')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select CAT2_product.B_minus_V, "
+               "CAT2_product.MV "
+               "from CAT2_product, CAT2 "
+               "where CAT2_product.HIP = CAT2.HIP and "
+               "CAT2_product.B_minus_V is not NULL and "
+               "CAT2_product.MV is not NULL and "
+               "CAT2.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (B_minus_V_value, MV_value) in value:
+    x_axis.append(B_minus_V_value)
+    y_axis.append(MV_value)
+
+plt.scatter(x_axis, y_axis, s = size+5, marker = "o", color='deepskyblue', edgecolors = 'none', label='HD 146233')
+
+# Legenda
+lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=7)
+
+# Fazer com que os marcadores da legenda tenham o mesmo tamanho
+for handle in lgnd.legend_handles:
+    handle.set_sizes([30])
+
+# Expor legenda na figura
+frame = lgnd.get_frame()
+
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/CAT2_MV_versus_B_minus_V.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
+# Criar o diagrama CAT2_MVt_versus_BT_minus_VT.pdf
+
+cursor.execute("select CAT2.Plx, "
+               "CAT2_product.BT_minus_VT, "
+               "CAT2_product.MVt "
+               "from CAT2_product, CAT2 "
+               "where CAT2_product.HIP = CAT2.HIP and "
+               "CAT2_product.BT_minus_VT is not NULL and "
+               "CAT2_product.MVt is not NULL")
+value = cursor.fetchall()
+
+Plx_list = []
+x_axis = []
+y_axis = []
+
+for (Plx_value, BT_minus_VT_value, MVt_value) in value:
+    Plx_list.append(Plx_value)
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+min_Plx = min(Plx_list)
+
+plt.scatter(x_axis, y_axis, s = size, marker = "o", color='black', edgecolors = 'none')
+plt.xlim(min(x_axis) - decimal.Decimal(0.2), max(x_axis) + decimal.Decimal(0.2))
+plt.ylim(max(y_axis) + decimal.Decimal(0.5), min(y_axis) - decimal.Decimal(0.5))
+plt.title("CAT2: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
+plt.xlabel("BT - VT")
+plt.ylabel("M(Vt)")
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/CAT2_MVt_versus_BT_minus_VT.pdf')
+
+# Plotar, em deepskyblue, a estrela HD 146233
+
+cursor.execute("select CAT2_product.BT_minus_VT, "
+               "CAT2_product.MVt "
+               "from CAT2_product, CAT2 "
+               "where CAT2_product.HIP = CAT2.HIP and "
+               "CAT2_product.BT_minus_VT is not NULL and "
+               "CAT2_product.MVt is not NULL and "
+               "CAT2.HD = '146233'")
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (BT_minus_VT_value, MVt_value) in value:
+    x_axis.append(BT_minus_VT_value)
+    y_axis.append(MVt_value)
+
+plt.scatter(x_axis, y_axis, s = size+5, marker = "o", color='deepskyblue', edgecolors = 'none', label='HD 146233')
+
+# Legenda
+lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=7)
+
+# Fazer com que os marcadores da legenda tenham o mesmo tamanho
+for handle in lgnd.legend_handles:
+    handle.set_sizes([30])
+
+# Expor legenda na figura
+frame = lgnd.get_frame()
+
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/CAT2_MVt_versus_BT_minus_VT.pdf')
+
+# close matplotlib.pyplot as plt object
+plt.close()
+
 # Criar o diagrama CAT2_errors.pdf
 
 cursor.execute("select CAT2.e_Plx, "

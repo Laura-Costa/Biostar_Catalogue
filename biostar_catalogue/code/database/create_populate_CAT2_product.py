@@ -22,13 +22,7 @@ cursor.execute("create table CAT2_product( "
 cursor.execute("select HIP from CAT2")
 value = cursor.fetchall()
 
-#add_row = ("insert into Hipparcos_product (HIP) values (%(HIP)s)")
-
 for (HIP_value,) in value:
-    #data_row = {
-    #    'HIP': registro[0]
-    #}
-    #cursor.execute(add_row, data_row)
     cursor.execute("insert into CAT2_product(HIP) values ('{}')".format(HIP_value))
 
 # load MV
