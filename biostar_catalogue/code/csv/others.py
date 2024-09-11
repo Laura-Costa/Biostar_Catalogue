@@ -70,16 +70,16 @@ cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''
                '''designation_DR2 is not null or '''
                '''designation_DR1 is not null) '''
                '''order by simbad_parallax ASC '''
-               '''into outfile '/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_via_Simbad.csv' '''
+               '''into outfile '/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 
 header_list = ["HIP", "designation_DR3", "designation_DR2", "designation_DR1", "Plx", "e_Plx", "simbad_parallax",
                "simbad_parallax_error", "simbad_distance_parallax"]
 
-file = pd.read_csv("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_via_Simbad.csv", header=None)
-file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2_intersec_GaiaCompleto_via_Simbad.csv",
+file = pd.read_csv("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv", header=None)
+file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv",
             header=header_list, index=False)
-os.remove("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_via_Simbad.csv")
+os.remove("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv")
 
 # Criar o arquivo das as estrelas que estão no CAT5, possuem dados Gaia DR1, DR2 ou DR3 e não estão no CAT1
 

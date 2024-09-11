@@ -1,5 +1,3 @@
-from xxsubtype import bench
-from astroquery.simbad import Simbad
 import mysql.connector
 import matplotlib
 import matplotlib.pyplot as plt
@@ -162,10 +160,10 @@ value = cursor.fetchall()
 x_axis = []
 y_axis = []
 
-for (e_Plx_value, Plx_value) in value:
-    x_axis.append(e_Plx_value)
-    y_axis.append(Plx_value)
-min_Plx = min(y_axis)
+for (parallax_error_value, parallax_value) in value:
+    x_axis.append(parallax_value)
+    y_axis.append(parallax_error_value)
+min_Plx = min(x_axis)
 
 fig, ax = plt.subplots()
 
@@ -174,11 +172,11 @@ ax.set_yscale('log')
 ax.set_xscale('log')
 ax.tick_params(labelsize=3)
 
-plt.xlim(min(x_axis) - decimal.Decimal(0.0), max(x_axis) + decimal.Decimal(0.0))
-plt.ylim(min(y_axis) - decimal.Decimal(1.0), max(y_axis) + decimal.Decimal(10.0))
+plt.xlim(min(x_axis) - decimal.Decimal(1.0), max(x_axis) + decimal.Decimal(10.0))
+plt.ylim(min(y_axis) - decimal.Decimal(0.001), max(y_axis) + decimal.Decimal(0.5))
 fig.suptitle("CAT1: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
-plt.xlabel("parallax_error (mas)", fontsize=7)
-plt.ylabel("parallax (mas)", fontsize=7)
+plt.xlabel("parallax (mas)", fontsize=7)
+plt.ylabel("parallax_error (mas)", fontsize=7)
 
 # salvar diagrama
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT1/diagram/CAT1_errors_logarithmic_scale.pdf')
@@ -196,26 +194,26 @@ value = cursor.fetchall()
 x_axis = []
 y_axis = []
 
-for (e_Plx_value, Plx_value) in value:
-    x_axis.append(e_Plx_value)
-    y_axis.append(Plx_value)
-min_Plx = min(y_axis)
+for (parallax_error_value, parallax_value) in value:
+    y_axis.append(parallax_error_value)
+    x_axis.append(parallax_value)
+min_Plx = min(x_axis)
 
 fig, ax = plt.subplots()
 
 ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o')
 
-plt.xlim(min(x_axis) - decimal.Decimal(0.02), max(x_axis) + decimal.Decimal(0.02))
-plt.ylim(min(y_axis) - decimal.Decimal(5.0), max(y_axis) + decimal.Decimal(5.0))
+plt.xlim(min(x_axis) - decimal.Decimal(3.0), max(x_axis) + decimal.Decimal(5.0))
+plt.ylim(min(y_axis) - decimal.Decimal(0.02), max(y_axis) + decimal.Decimal(0.02))
 fig.suptitle("CAT1: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)), fontsize=8)
-plt.xlabel("parallax_error (mas)", fontsize=7)
-plt.ylabel("parallax (mas)", fontsize=7)
+plt.xlabel("parallax (mas)", fontsize=7)
+plt.ylabel("parallax_error (mas)", fontsize=7)
 
 # definir os intervalos dos minor e major ticks, dos eixos x e eixos y
-ax.xaxis.set_major_locator(MultipleLocator(0.3))
-ax.xaxis.set_minor_locator(MultipleLocator(0.3/5))
-ax.yaxis.set_major_locator(MultipleLocator(50))
-ax.yaxis.set_minor_locator(MultipleLocator(10))
+ax.xaxis.set_major_locator(MultipleLocator(15))
+ax.xaxis.set_minor_locator(MultipleLocator(15/5))
+ax.yaxis.set_major_locator(MultipleLocator(0.1))
+ax.yaxis.set_minor_locator(MultipleLocator(0.1/5))
 
 # configurar labels dos major e minor ticks de ambos os eixos
 ax.tick_params(axis='both', which='both', labelsize=3, color="black", labeltop=True, top=True, labelright=True, right=True, tickdir='out')
@@ -227,11 +225,11 @@ plt.xticks(rotation=45)
 ax.set_axisbelow(True)
 
 # deixar o axes com aspecto quadrado
-ax.set_box_aspect(1)
+# ax.set_box_aspect(1)
 
 # configurar as caracteristicas da grid
-plt.grid(color='darkgrey', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
-plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+# plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='minor', linewidth=0.2)
 
 # salvar diagrama
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT1/diagram/CAT1_errors.pdf')
