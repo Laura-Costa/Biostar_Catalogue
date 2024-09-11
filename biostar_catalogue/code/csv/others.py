@@ -81,7 +81,7 @@ file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2_interse
             header=header_list, index=False)
 os.remove("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv")
 
-# Criar o arquivo das as estrelas que estão no CAT5, possuem dados Gaia DR1, DR2 ou DR3 e não estão no CAT1
+# Criar o arquivo estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv
 
 cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''
                '''CAT2_DR1_DR2_DR3.designation_DR3 as designation_DR3,'''
@@ -100,13 +100,43 @@ cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''
                '''(CAT2_DR1_DR2_DR3.HIP not in( '''
                '''select CAT1.HIP from CAT1 where CAT1.HIP is not NULL)) '''
                '''order by simbad_parallax ASC '''
-               '''into outfile '/var/lib/mysql-files/estrelas_que_estao_no_CAT5_possuem_dados_Gaia_e_nao_estao_no_CAT1.csv' '''
+               '''into outfile '/var/lib/mysql-files/estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv' '''
                '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
 
-file = pd.read_csv("/var/lib/mysql-files/estrelas_que_estao_no_CAT5_possuem_dados_Gaia_e_nao_estao_no_CAT1.csv", header=None)
-file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/estrelas_que_estao_no_CAT5_possuem_dados_Gaia_e_nao_estao_no_CAT1.csv",
+file = pd.read_csv("/var/lib/mysql-files/estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv", header=None)
+file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv",
             header=header_list, index=False)
-os.remove("/var/lib/mysql-files/estrelas_que_estao_no_CAT5_possuem_dados_Gaia_e_nao_estao_no_CAT1.csv")
+os.remove("/var/lib/mysql-files/estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv")
+
+# Criar o arquivo estrelas_que_estao_no_CAT2_e_nao_tem_DR3_no_Simbad.csv
+
+cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''
+               '''CAT2_DR1_DR2_DR3.designation_DR3 as designation_DR3, '''
+               '''CAT2_DR1_DR2_DR3.designation_DR2 as designation_DR2, '''
+               '''CAT2_DR1_DR2_DR3.designation_DR1 as designation_DR1, '''
+               '''CAT2.HD, '''
+               '''CAT2.Plx, '''
+               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax)+0 as simbad_parallax, '''
+               '''CAT2.e_Plx, '''
+               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax_error)+0, '''
+               '''CAT2.B_V, '''
+               '''CAT2.Vmag, '''
+               '''CAT2.SpType, '''
+               '''TRIM(1/(CAT2_DR1_DR2_DR3.simbad_parallax/1000.0))+0 as simbad_distance_parallax '''
+               '''from CAT2_DR1_DR2_DR3, CAT2 '''
+               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and '''
+               '''(designation_DR3 is null) '''
+               '''order by simbad_parallax ASC '''
+               '''into outfile '/var/lib/mysql-files/estrelas_que_estao_no_CAT2_e_nao_tem_DR3_no_Simbad.csv' '''
+               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
+
+header_list = ["HIP", "designation_DR3", "designation_DR2", "designation_DR1", "HD", "Plx", "simbad_parallax", "e_Plx",
+               "simbad_parallax_error", "B_minus_V", "Vmag", "SpType", "simbad_distance_parallax"]
+
+file = pd.read_csv("/var/lib/mysql-files/estrelas_que_estao_no_CAT2_e_nao_tem_DR3_no_Simbad.csv", header=None)
+file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/estrelas_que_estao_no_CAT2_e_nao_tem_DR3_no_Simbad.csv",
+            header=header_list, index=False)
+os.remove("/var/lib/mysql-files/estrelas_que_estao_no_CAT2_e_nao_tem_DR3_no_Simbad.csv")
 
 cursor.close()
 connection.close()

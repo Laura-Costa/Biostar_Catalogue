@@ -146,6 +146,277 @@ plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram
 # close matplotlib.pyplot as plt object
 plt.close()
 
+# Criar diagrama do CAT2 Plx_versus_parallax_simbad.pdf
+
+cursor.execute('''select TRIM(CAT2.Plx)+0, '''
+               '''TRIM(CAT2.e_Plx)+0, '''
+               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax)+0 as simbad_parallax, '''
+               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax_error)+0 '''
+               '''from CAT2_DR1_DR2_DR3, CAT2 '''
+               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and ''' 
+               '''(designation_DR3 is not null or '''
+               '''designation_DR2 is not null or '''
+               '''designation_DR1 is not null) and ''' 
+               '''CAT2.Plx is not null and ''' 
+               '''CAT2_DR1_DR2_DR3.simbad_parallax is not null ''')
+
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+e_Plx_list = []
+simbad_parallax_error_list = []
+
+for (Plx_value, e_Plx_value, simbad_parallax_value, simbad_parallax_error_value) in value:
+    x_axis.append(simbad_parallax_value)
+    y_axis.append(Plx_value)
+    e_Plx_list.append(e_Plx_value)
+    simbad_parallax_error_list.append(simbad_parallax_error_value)
+
+min_parallax = min(x_axis)
+
+fig, ax = plt.subplots()
+ax.errorbar(x_axis, y_axis, ms=size, color='black', mec='none', fmt='o', elinewidth=0.1, yerr=e_Plx_list, xerr=simbad_parallax_error_list, ecolor='blue')
+
+plt.xlim(min(x_axis) - 8.0, max(x_axis) + 8.0)
+plt.ylim(min(y_axis) - 100.0, max(y_axis) + 8.0)
+
+# colocar título e rótulo dos eixos x e y
+plt.suptitle("Estrelas do CAT2 que têm designação Gaia DR1, DR2 ou DR3 no Simbad", fontsize=8)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.8f}'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel("Simbad parallax (mas)", fontsize=7)
+plt.ylabel("Hipparcos parallax (mas)", fontsize=7)
+
+# reta y = x
+ax.axline((0, 0), slope=1, linewidth=0.001, label='f(x) = y', color='red')
+
+# escala logarítmica
+# ax.set_yscale('log')
+# ax.set_xscale('log')
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(20))
+ax.xaxis.set_minor_locator(MultipleLocator(20/5))
+ax.yaxis.set_major_locator(MultipleLocator(20))
+ax.yaxis.set_minor_locator(MultipleLocator(20/5))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labelleft=True, left=True, labelbottom=True, bottom=True, labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=45)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+# ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+
+#legenda
+plt.legend(shadow=True, fontsize=7)
+
+plt.savefig("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/Plx_versus_parallax_simbad.pdf")
+
+# Criar diagrama do CAT2 error_division_versus_simbad_parallax.pdf
+
+cursor.execute('''select TRIM(CAT2.e_Plx/CAT2_DR1_DR2_DR3.simbad_parallax_error)+0, '''
+               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax)+0 as simbad_parallax '''
+               '''from CAT2_DR1_DR2_DR3, CAT2 '''
+               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and ''' 
+               '''(designation_DR3 is not null or '''
+               '''designation_DR2 is not null or '''
+               '''designation_DR1 is not null) and ''' 
+               '''CAT2_DR1_DR2_DR3.simbad_parallax is not null and '''
+               '''CAT2_DR1_DR2_DR3.simbad_parallax_error is not null''')
+
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (error_division_value, simbad_parallax_value) in value:
+    x_axis.append(simbad_parallax_value)
+    y_axis.append(error_division_value)
+
+min_parallax = min(x_axis)
+
+fig, ax = plt.subplots()
+ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o')
+
+plt.xlim(min(x_axis) - 8.0, max(x_axis) + 8.0)
+plt.ylim(min(y_axis) - 100.0, max(y_axis) + 100.0)
+
+# colocar título e rótulo dos eixos x e y
+plt.suptitle("Estrelas do CAT2 que têm designação Gaia DR1, DR2 ou DR3 no Simbad", fontsize=8)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.8f}'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel("Simbad parallax (mas)", fontsize=7)
+plt.ylabel("σ(HIP)/σ(Simbad)", fontsize=7)
+
+# escala logarítmica
+# ax.set_yscale('log')
+# ax.set_xscale('log')
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(15))
+ax.xaxis.set_minor_locator(MultipleLocator(15/5))
+ax.yaxis.set_major_locator(MultipleLocator(150))
+ax.yaxis.set_minor_locator(MultipleLocator(150/5))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labelleft=True, left=True, labelbottom=True, bottom=True, labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=45)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+# ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+
+#legenda
+#plt.legend(shadow=True, fontsize=7)
+
+plt.savefig("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/error_division_versus_simbad_parallax.pdf")
+
+# Criar diagrama do CAT2 e_Plx_versus_Plx.pdf
+
+cursor.execute('''select TRIM(CAT2.e_Plx)+0, '''
+               '''TRIM(CAT2.Plx)+0 '''
+               '''from CAT2_DR1_DR2_DR3, CAT2 '''
+               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and ''' 
+               '''(designation_DR3 is null) and ''' 
+               '''CAT2.e_Plx is not null and ''' 
+               '''CAT2.Plx is not null ''')
+
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+
+for (e_Plx_value, Plx_value) in value:
+    x_axis.append(Plx_value)
+    y_axis.append(e_Plx_value)
+
+min_parallax = min(x_axis)
+
+fig, ax = plt.subplots()
+ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o')
+
+plt.xlim(min(x_axis) - 5.0, max(x_axis) + 5.0)
+plt.ylim(min(y_axis) - 1.0, max(y_axis) + 1.0)
+
+# colocar título e rótulo dos eixos x e y
+plt.suptitle("Estrelas do CAT2 que não têm designação Gaia DR3 no Simbad", fontsize=8)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}''".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel("Plx (mas)", fontsize=7)
+plt.ylabel("e_Plx (mas)", fontsize=7)
+
+# escala logarítmica
+# ax.set_yscale('log')
+# ax.set_xscale('log')
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(20))
+ax.xaxis.set_minor_locator(MultipleLocator(20/5))
+ax.yaxis.set_major_locator(MultipleLocator(5))
+ax.yaxis.set_minor_locator(MultipleLocator(5/5))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labelleft=True, left=True, labelbottom=True, bottom=True, labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=45)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+# ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+
+#legenda
+#plt.legend(shadow=True, fontsize=7)
+
+plt.savefig("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/e_Plx_versus_Plx.pdf")
+
+# Criar diagrama do CAT2 e_Plx_versus_Vmag.pdf
+
+matplotlib.style.use('default') # voltar para o estilo default
+
+cursor.execute('''select TRIM(CAT2.Vmag)+0, '''
+               '''TRIM(CAT2.Plx)+0, '''
+               '''TRIM(CAT2.e_Plx)+0 '''
+               '''from CAT2_DR1_DR2_DR3, CAT2 '''
+               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and ''' 
+               '''(designation_DR3 is null) and ''' 
+               '''CAT2.e_Plx is not null and ''' 
+               '''CAT2.Plx is not null and ''' 
+               '''CAT2.Vmag is not null ''')
+
+value = cursor.fetchall()
+
+x_axis = []
+y_axis = []
+Plx_list = []
+
+for (Vmag_value, Plx_value, e_Plx_value) in value:
+    x_axis.append(Vmag_value)
+    y_axis.append(e_Plx_value)
+    Plx_list.append(Plx_value)
+
+min_parallax = min(Plx_list)
+
+fig, ax = plt.subplots()
+ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o')
+
+plt.xlim(min(x_axis) - 0.3, max(x_axis) + 0.3)
+plt.ylim(min(y_axis) - 4.0, max(y_axis) + 4.5)
+
+# colocar título e rótulo dos eixos x e y
+plt.suptitle("Estrelas do CAT2 que não têm designação Gaia DR3 no Simbad", fontsize=8)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}''".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel("Vmag (mag)", fontsize=7)
+plt.ylabel("e_Plx (mas)", fontsize=7)
+
+# escala logarítmica
+# ax.set_yscale('log')
+# ax.set_xscale('log')
+
+# definir os intervalos dos minor e major ticks, dos eixos x e eixos y
+ax.xaxis.set_major_locator(MultipleLocator(0.5))
+ax.xaxis.set_minor_locator(MultipleLocator(0.5/5))
+ax.yaxis.set_major_locator(MultipleLocator(5))
+ax.yaxis.set_minor_locator(MultipleLocator(5/5))
+
+# configurar labels dos major e minor ticks de ambos os eixos
+ax.tick_params(axis='both', which='both', labelsize=3, color="black", labelleft=True, left=True, labelbottom=True, bottom=True, labeltop=True, top=True, labelright=True, right=True, tickdir='out')
+
+# rotacionar label do eixo x
+plt.xticks(rotation=45)
+
+# colocar a grid atras do plot
+ax.set_axisbelow(True)
+
+# deixar o axes com aspecto quadrado
+# ax.set_box_aspect(1)
+
+# configurar as caracteristicas da grid
+plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
+
+#legenda
+#plt.legend(shadow=True, fontsize=7)
+
+plt.savefig("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/e_Plx_versus_Vmag.pdf")
+
 # Criar o diagrama CAT2_errors.pdf
 
 cursor.execute("select CAT2.e_Plx, "
