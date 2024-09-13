@@ -251,7 +251,7 @@ plt.plot([0.17, 1.9], [5.68 * (0.17) + 3.9, 14.7], color='gray', linestyle=':', 
 plt.plot([1, 1.9], [-5.26 * (1) + 14.842, -5.26 * (1.9) + 14.842], color='gray', linestyle=':', linewidth=0.01, zorder=1)
 
 # Marcando o Sol
-plt.scatter([0.65], [4.82], s=30, marker="o", color='yellow', edgecolors='gold', label="Sol")
+plt.scatter([0.65], [4.82], s=30, marker="o", color='yellow', edgecolors='gold', label="Sol", zorder=2)
 
 plt.title("CAT5: {} estrelas em um raio de {:.4f}pc (π ≥ {:.4f}'')".format(len(value), decimal.Decimal(1.0) / (min_Plx / decimal.Decimal(1000.0)), min_Plx / decimal.Decimal(1000.0)))
 plt.xlabel("B - V")
