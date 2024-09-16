@@ -11,6 +11,7 @@ cursor.execute("drop table if exists BrightStarSupplement")
 cursor.execute("create table BrightStarSupplement( "
                "id INT not null auto_increment primary key, "
                "HD CHAR(100) null, "
+               "HD_Suffix CHAR(100) null, "
                "V NUMERIC(6,2) null, "
                "B_V NUMERIC(7,2) null, "
                "SpType CHAR(100) null, "
@@ -22,21 +23,21 @@ cursor.execute("create table BrightStarSupplement( "
 
 with open("BSC4S.DAT", 'r') as file:
     for line in file:
-
+        if len(line) == 0: continue
         # load HD
 
-        HD_value = 'HD ' + line[0:7].strip()
+        HD_value = line[0:6].strip()
+
+        # aqui é adicionado o prefixo 'HD' apenas se a estrela tiver um HD
+        #########
+        if len(HD_value) != 0:
+            HD_value = 'HD ' + HD_value
+        #########
 
         if len(HD_value) == 0:
             cursor.execute("insert into BrightStarSupplement(HD) values(NULL)")
         else:
-            # alguns HD's ficam com uma barra "/" no final
-            # aqui, removemos esta barra
-            #########
-            if HD_value[-1] == "/":
-                HD_value = HD_value[:-1]
             cursor.execute("insert into BrightStarSupplement(HD) values('{}')".format(HD_value))
-            #########
 
         # Pegar a chave do ultimo registro. O HD não pode ser chave porque existem HDs null (faltantes)
         #########
@@ -45,9 +46,23 @@ with open("BSC4S.DAT", 'r') as file:
         id = value[0][0]
         #########
 
+        # load HD_Suffix
+
+        HD_Suffix = line[6:9].strip()
+        if len(HD_Suffix) == 0:
+            cursor.execute("update BrightStarSupplement set HD_Suffix = NULL where id = {}".format(id))
+        else:
+            cursor.execute("update BrightStarSupplement set HD_Suffix = '{}' where id = {}".format(HD_Suffix, id))
+
         # load V
 
-        V_value = line[104:108].strip()
+        V_value = line[104:109].strip()
+        # o HD 84005 tem um caractere ':' depois do valor de V.
+        # Aqui este caractere ':' é removido
+        #########
+        if HD_value == 'HD 84005':
+            V_value = V_value[:-1]
+        #########
         if len(V_value) == 0:
             cursor.execute("update BrightStarSupplement set V = NULL where id = {}".format(id))
         else:
@@ -55,7 +70,7 @@ with open("BSC4S.DAT", 'r') as file:
 
         # load B-V
 
-        B_V_value = line[109:114].strip()
+        B_V_value = line[109:115].strip()
         if len(B_V_value) == 0:
             cursor.execute("update BrightStarSupplement set B_V = NULL where id = {}".format(id))
         else:
@@ -63,7 +78,7 @@ with open("BSC4S.DAT", 'r') as file:
 
         # load SpType
 
-        SpType_value = line[127:147].strip()
+        SpType_value = line[127:148].strip()
         if len(SpType_value) == 0:
             cursor.execute("update BrightStarSupplement set SpType = NULL where id = {}".format(id))
         else:
@@ -72,21 +87,21 @@ with open("BSC4S.DAT", 'r') as file:
         # Verificar se no Simbad existe uma designacao Gaia DR3 correspondente ao HD
         # Se houver, carregar no BD. Senao, colocar NULL.
 
-        # antes de pesquisar no Simbad, verificamos se o HD termina com 'A'
-        # se termina com 'A', esse 'A' é removido antes da busca
+        # antes de pesquisar no Simbad, verificamos se o HD é null
+        # se é null, o HD nao é buscado no simbad
         #########
-        if HD_value[-1] == 'A':
-            tab = Simbad.query_objectids(HD_value[:-1])
+        if len(HD_value) == 0:
+            cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = NULL where id = {}".format(id))
         else:
             tab = Simbad.query_objectids(HD_value[:])
+
+            if tab is None or len([id for id in tab['ID'] if id.startswith('Gaia DR3')]) == 0:
+                cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = NULL where id = {}".format(id))
+            else:
+                designation_DR3_value = [id for id in tab['ID'] if id.startswith('Gaia DR3')][0][:].strip()
+                cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = '{}' where id = {}".format(designation_DR3_value, id))
         #########
-
-        if tab is None or len([id for id in tab['ID'] if id.startswith('Gaia DR3')]) == 0:
-            cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = NULL where HD = '{}'".format(HD_value))
-        else:
-            designation_DR3_value = [id for id in tab['ID'] if id.startswith('Gaia DR3')][0][:].strip()
-            cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = '{}' where HD = '{}'".format(designation_DR3_value, HD_value))
-
+        '''
         # puxar do Simbad o atributo parallax correspondente ao HD
         # se houver, carregar no BD. Senao, colocar NULL
 
@@ -95,18 +110,22 @@ with open("BSC4S.DAT", 'r') as file:
         # antes de pesquisar no Simbad, verificamos se o HD termina com 'A'
         # se termina com 'A', esse 'A' é removido antes da busca
         #########
-        if HD_value[-1] == 'A':
-            sim = Simbad.query_object(HD_value[:-1])
-        else:
-            sim = Simbad.query_object(HD_value[:])
-        #########
-
-        if sim is None or len(sim['PLX_VALUE']) == 0 or str(sim['PLX_VALUE'][0]) == '--':
+        if len(HD_value) == 0:
             cursor.execute("update BrightStarSupplement set simbad_parallax = NULL where HD = '{}'".format(HD_value))
         else:
-            parallax_value = float(sim['PLX_VALUE'])
-            cursor.execute(
-                "update BrightStarSupplement set simbad_parallax = {:.10f} where HD = '{}'".format(parallax_value, HD_value))
+            if HD_value[-1] == 'A':
+                sim = Simbad.query_object(HD_value[:-1])
+            else:
+                sim = Simbad.query_object(HD_value[:])
+
+            if sim is None or len(sim['PLX_VALUE']) == 0 or str(sim['PLX_VALUE'][0]) == '--':
+                cursor.execute(
+                    "update BrightStarSupplement set simbad_parallax = NULL where HD = '{}'".format(HD_value))
+            else:
+                parallax_value = float(sim['PLX_VALUE'])
+                cursor.execute(
+                    "update BrightStarSupplement set simbad_parallax = {:.10f} where HD = '{}'".format(parallax_value, HD_value))
+        #########
 
         # Puxar do Simbad o atributo parallax_error correspondente ao HD
         # Se houver, carregar no BD. Senao, colocar NULL.
@@ -127,7 +146,7 @@ with open("BSC4S.DAT", 'r') as file:
         else:
             parallax_error_value = float(sim['PLX_ERROR'])
             cursor.execute("update BrightStarSupplement set simbad_parallax_error = {:.10f} where HD = '{}'".format(parallax_error_value, HD_value))
-
+        '''
 file.close()
 
 # Make sure data is committed to the database
