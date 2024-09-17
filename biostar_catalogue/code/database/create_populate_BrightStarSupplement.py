@@ -1,3 +1,4 @@
+import time
 import mysql.connector
 from astroquery.simbad import Simbad
 
@@ -23,12 +24,12 @@ cursor.execute("create table BrightStarSupplement( "
 
 with open("BSC4S.DAT", 'r') as file:
     for line in file:
-        if len(line) == 0: continue
+        if len(line) == 0: continue # pular as linhas vazias do arquivo
         # load HD
 
         HD_value = line[0:6].strip()
 
-        # aqui é adicionado o prefixo 'HD' apenas se a estrela tiver um HD
+        # aqui é adicionado o prefixo 'HD' apenas se a estrela tiver um número HD
         #########
         if len(HD_value) != 0:
             HD_value = 'HD ' + HD_value
@@ -101,52 +102,27 @@ with open("BSC4S.DAT", 'r') as file:
                 designation_DR3_value = [id for id in tab['ID'] if id.startswith('Gaia DR3')][0][:].strip()
                 cursor.execute("update BrightStarSupplement set simbad_designation_DR3 = '{}' where id = {}".format(designation_DR3_value, id))
         #########
-        '''
+
         # puxar do Simbad o atributo parallax correspondente ao HD
         # se houver, carregar no BD. Senao, colocar NULL
 
+        time.sleep(0.5)
+
         Simbad.add_votable_fields('plx')  # adicionar o campo plx aos campos default do Simbad
 
-        # antes de pesquisar no Simbad, verificamos se o HD termina com 'A'
-        # se termina com 'A', esse 'A' é removido antes da busca
         #########
         if len(HD_value) == 0:
             cursor.execute("update BrightStarSupplement set simbad_parallax = NULL where HD = '{}'".format(HD_value))
         else:
-            if HD_value[-1] == 'A':
-                sim = Simbad.query_object(HD_value[:-1])
-            else:
-                sim = Simbad.query_object(HD_value[:])
+            sim = Simbad.query_object(HD_value)
 
             if sim is None or len(sim['PLX_VALUE']) == 0 or str(sim['PLX_VALUE'][0]) == '--':
-                cursor.execute(
-                    "update BrightStarSupplement set simbad_parallax = NULL where HD = '{}'".format(HD_value))
+                cursor.execute("update BrightStarSupplement set simbad_parallax = NULL where HD = '{}'".format(HD_value))
             else:
                 parallax_value = float(sim['PLX_VALUE'])
-                cursor.execute(
-                    "update BrightStarSupplement set simbad_parallax = {:.10f} where HD = '{}'".format(parallax_value, HD_value))
+                cursor.execute("update BrightStarSupplement set simbad_parallax = {:.10f} where HD = '{}'".format(parallax_value, HD_value))
         #########
 
-        # Puxar do Simbad o atributo parallax_error correspondente ao HD
-        # Se houver, carregar no BD. Senao, colocar NULL.
-
-        Simbad.add_votable_fields('plx_error')  # adicionar o campo plx_error aos campos default do Simbad
-
-        # antes de pesquisar no Simbad, verificamos se o HD termina com 'A'
-        # se termina com 'A', esse 'A' é removido antes da busca
-        #########
-        if HD_value[-1] == 'A':
-            sim = Simbad.query_object(HD_value[:-1])
-        else:
-            sim = Simbad.query_object(HD_value[:])
-        #########
-
-        if sim is None or len(sim['PLX_ERROR']) == 0 or str(sim['PLX_ERROR'][0]) == '--':
-            cursor.execute("update BrightStarSupplement set simbad_parallax_error = NULL where HD = '{}'".format(HD_value))
-        else:
-            parallax_error_value = float(sim['PLX_ERROR'])
-            cursor.execute("update BrightStarSupplement set simbad_parallax_error = {:.10f} where HD = '{}'".format(parallax_error_value, HD_value))
-        '''
 file.close()
 
 # Make sure data is committed to the database

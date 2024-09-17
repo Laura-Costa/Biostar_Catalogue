@@ -87,7 +87,7 @@ with open("HIP_MAIN.DAT") as tsv:
                 else:
                     parallax_error_value = float(sim['PLX_ERROR'])
                     cursor.execute(
-                        "update CAT2_DR1_DR2_DR3 set simbad_parallax_error = {:.10f} where HIP = '{}'".format(parallax_error_value, HIP_value))
+                        "update CAT2_DR1_DR2_DR3 set simbad_parallax_error = {:.4f} where HIP = '{}'".format(parallax_error_value, HIP_value))
 tsv.close()
 
 # Make sure data is committed to the database

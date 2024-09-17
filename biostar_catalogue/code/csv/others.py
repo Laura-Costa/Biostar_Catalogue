@@ -53,34 +53,6 @@ file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/Hipparcos_co
             header=header_list, index=False)
 os.remove("/var/lib/mysql-files/Hipparcos_completo.csv")
 
-# Criar o arquivo CAT2_intersec_GaiaCompleto_via_Simbad.csv
-
-cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''
-               '''CAT2_DR1_DR2_DR3.designation_DR3 as designation_DR3, '''
-               '''CAT2_DR1_DR2_DR3.designation_DR2 as designation_DR2, '''
-               '''CAT2_DR1_DR2_DR3.designation_DR1 as designation_DR1, '''
-               '''CAT2.Plx, '''
-               '''CAT2.e_Plx, '''
-               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax)+0 as simbad_parallax, '''
-               '''TRIM(CAT2_DR1_DR2_DR3.simbad_parallax_error)+0, '''
-               '''TRIM(1/(CAT2_DR1_DR2_DR3.simbad_parallax/1000.0))+0 as simbad_distance_parallax '''
-               '''from CAT2_DR1_DR2_DR3, CAT2 '''
-               '''where CAT2_DR1_DR2_DR3.HIP = CAT2.HIP and '''
-               '''(designation_DR3 is not null or '''
-               '''designation_DR2 is not null or '''
-               '''designation_DR1 is not null) '''
-               '''order by simbad_parallax ASC '''
-               '''into outfile '/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv' '''
-               '''fields optionally enclosed by '"' terminated by ',' LINES TERMINATED BY '\n' ''')
-
-header_list = ["HIP", "designation_DR3", "designation_DR2", "designation_DR1", "Plx", "e_Plx", "simbad_parallax",
-               "simbad_parallax_error", "simbad_distance_parallax"]
-
-file = pd.read_csv("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv", header=None)
-file.to_csv("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv",
-            header=header_list, index=False)
-os.remove("/var/lib/mysql-files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv")
-
 # Criar o arquivo estrelas_que_estao_no_CAT5_e_possuem_DR1_DR2_ou_DR3_no_Simbad_e_nao_estao_no_CAT1.csv
 
 cursor.execute('''select CAT2_DR1_DR2_DR3.HIP, '''

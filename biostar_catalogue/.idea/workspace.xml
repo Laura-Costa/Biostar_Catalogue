@@ -6,7 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="527afad2-cbce-4860-85d8-c7c3634366ed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/csv/CAT2.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/csv/CAT2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/csv/others.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/csv/others.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/create_populate_BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/create_populate_BrightStar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/database/create_populate_BrightStarSupplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/create_populate_BrightStarSupplement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/create_populate_CAT2_DR1_DR2_DR3.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/create_populate_CAT2_DR1_DR2_DR3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/diagram/CAT2.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/diagram/CAT2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_MRp_versus_Bp_minus_Rp.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_MRp_versus_Bp_minus_Rp.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_Mg_versus_Bp_minus_Rp.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_Mg_versus_Bp_minus_Rp.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale_sns.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale_sns.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale_sns_apr.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_logarithmic_scale_sns_apr.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_sns.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_sns.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_sns_apr.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_errors_sns_apr.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_histogram_parallax_error_1_sigma.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT1/diagram/CAT1_histogram_parallax_error_1_sigma.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_MV_versus_B_minus_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_MV_versus_B_minus_V.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_MVt_versus_BT_minus_VT.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_MVt_versus_BT_minus_VT.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale_sns.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale_sns.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale_sns_apr.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_logarithmic_scale_sns_apr.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_sns.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_sns.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_sns_apr.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_errors_sns_apr.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_histogram_e_Plx.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/CAT2_histogram_e_Plx.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/Plx_versus_parallax_simbad.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/Plx_versus_parallax_simbad.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/e_Plx_versus_Plx.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/e_Plx_versus_Plx.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/e_Plx_versus_Vmag.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/e_Plx_versus_Vmag.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2/diagram/error_division_versus_simbad_parallax.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/files/CAT2/diagram/error_division_versus_simbad_parallax.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/CAT2_intersec_GaiaCompleto_DR1_DR2_DR3_via_Simbad.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +63,7 @@
   "keyToString": {
     "Python.BrightStar.executor": "Run",
     "Python.BrightStarSupplement.executor": "Run",
+    "Python.BrightStar_plus_Supplement.executor": "Run",
     "Python.CAT1.executor": "Run",
     "Python.CAT1a.executor": "Run",
     "Python.CAT2.executor": "Run",
@@ -60,6 +89,7 @@
     "Python.main.executor": "Run",
     "Python.others.executor": "Run",
     "Python.teste_obter_parallax_simbad.executor": "Run",
+    "Python.tres_estrelas_a_mais.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main"
   }

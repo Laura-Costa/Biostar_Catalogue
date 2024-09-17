@@ -184,11 +184,11 @@ plt.ylim(min(y_axis) - 100.0, max(y_axis) + 8.0)
 # colocar título e rótulo dos eixos x e y
 plt.suptitle("Estrelas do CAT2 que têm designação Gaia DR1, DR2 ou DR3 no Simbad", fontsize=8)
 plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.8f}'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
-plt.xlabel("Simbad parallax (mas)", fontsize=7)
-plt.ylabel("Hipparcos parallax (mas)", fontsize=7)
+plt.xlabel("paralaxe Simbad (mas)", fontsize=7)
+plt.ylabel("paralaxe Hipparcos (mas)", fontsize=7)
 
 # reta y = x
-ax.axline((0, 0), slope=1, linewidth=0.001, label='f(x) = y', color='red')
+# ax.axline((0, 0), slope=1, linewidth=0.001, label='f(x) = y', color='red')
 
 # escala logarítmica
 # ax.set_yscale('log')
@@ -216,7 +216,7 @@ ax.set_axisbelow(True)
 plt.grid(color='lightgray', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.2)
 
 #legenda
-plt.legend(shadow=True, fontsize=7)
+# plt.legend(shadow=True, fontsize=7)
 
 plt.savefig("/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT2/diagram/Plx_versus_parallax_simbad.pdf")
 
@@ -251,9 +251,9 @@ plt.ylim(min(y_axis) - 100.0, max(y_axis) + 100.0)
 
 # colocar título e rótulo dos eixos x e y
 plt.suptitle("Estrelas do CAT2 que têm designação Gaia DR1, DR2 ou DR3 no Simbad", fontsize=8)
-plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.8f}'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
-plt.xlabel("Simbad parallax (mas)", fontsize=7)
-plt.ylabel("σ(HIP)/σ(Simbad)", fontsize=7)
+plt.title("{} estrelas em um raio de ${:.4f}pc, π ≥ {:.8f}$'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel("paralaxe Simbad (mas)", fontsize=7)
+plt.ylabel("$σ_π({HIP})/σ_π({Simbad})$ (mas)", fontsize=7)
 
 # escala logarítmica
 # ax.set_yscale('log')
