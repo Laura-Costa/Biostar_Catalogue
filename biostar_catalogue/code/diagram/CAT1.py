@@ -323,5 +323,62 @@ plt.legend(loc='upper right')
 plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT1/diagram/CAT1_histogram_parallax_error_1_sigma.pdf')
 plt.close()
 
+# criar histograma CAT1_19_20_histogram_parallax_error_log_scale.pdf
+
+matplotlib.style.use('default') # voltar para o estilo default
+
+cursor.execute("select CAT1.parallax_error, "
+               "CAT1.parallax "
+               "from CAT1 "
+               "where CAT1.parallax >= (1.00/20.00)*1000.00 and "
+               "CAT1.parallax <= (1.00/19.00)*1000.00")
+value = cursor.fetchall()
+
+parallax_error_list = []
+parallax_list = []
+
+for (parallax_error_value, parallax_value) in value:
+    parallax_error_list.append(parallax_error_value)
+    parallax_list.append(parallax_value)
+
+min_Plx = min(parallax_list)
+max_Plx = max(parallax_list)
+
+data = parallax_error_list
+fig, ax = plt.subplots() # novo
+(bin_heights, bin_edges, _) = plt.hist(data, bins=4, edgecolor="black", rwidth=1.0, log=True, zorder=2)
+
+# remover minor ticks da escala logarítmica do eixo y
+ax.tick_params(axis='y', left=False, which='minor')
+
+# rotacionar label do eixo x
+plt.yticks(rotation=0)
+
+plt.ylabel ('frequência')
+plt.xlabel ('parallax_error (mas)')
+# plt.suptitle("Distribuição de erros do CAT1a em escala logarítmica")
+plt.title(' {:.4f} ≤ π ≤ {:.4f} mas ({} estrelas)'.format(min_Plx, max_Plx, len(data)))
+plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5, label=str('média: {:.6f}'.format(sum(data)/len(data))))
+
+# colocar os ticks no eixo x do histograma
+ax.set_xticks(bin_edges)
+ax.xaxis.set_major_formatter(FormatStrFormatter('%.6f'))
+
+# colocar major ticks no eixo y do histograma
+ax.set_yticks(bin_heights)
+ax.yaxis.set_major_formatter(FormatStrFormatter('%i'))
+
+# colocar a grid
+plt.grid(color='lightgrey', linestyle='solid', which='major', linewidth=1.0, axis='y', zorder=0)
+
+# framealpha: opacidade do frame da legenda (1 é opaco, 0 é transparente)
+legenda = plt.legend(loc='upper right', facecolor='white', framealpha=1, shadow=True)
+frame = legenda.get_frame()
+frame.set_facecolor('white')
+frame.set_edgecolor('lightgrey')
+
+plt.savefig('/home/lh/Desktop/Catalogo_GAIA/biostar_catalogue/files/CAT1/diagram/CAT1_19_20_histogram_parallax_error_log_scale.pdf')
+plt.close()
+
 cursor.close()
 connection.close()

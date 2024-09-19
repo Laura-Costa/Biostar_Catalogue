@@ -251,9 +251,9 @@ plt.ylim(min(y_axis) - 100.0, max(y_axis) + 100.0)
 
 # colocar título e rótulo dos eixos x e y
 plt.suptitle("Estrelas do CAT2 que têm designação Gaia DR1, DR2 ou DR3 no Simbad", fontsize=8)
-plt.title("{} estrelas em um raio de ${:.4f}pc, π ≥ {:.8f}$'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
-plt.xlabel("paralaxe Simbad (mas)", fontsize=7)
-plt.ylabel("$σ_π({HIP})/σ_π({Simbad})$ (mas)", fontsize=7)
+plt.title(r"{} estrelas em um raio de ${:.4f}pc, π ≥ {:.8f}$'' (paralaxe do Simbad)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.xlabel(r"$paralaxe \; Simbad$ $(mas)$", fontsize=7) # o prefixo 'r' permite usar comandos do LaTeX
+plt.ylabel(r"$\frac{σ_π({HIP})}{σ_π({Simbad})} \; (mas)$", fontsize=7)
 
 # escala logarítmica
 # ax.set_yscale('log')
@@ -314,7 +314,7 @@ plt.ylim(min(y_axis) - 1.0, max(y_axis) + 1.0)
 
 # colocar título e rótulo dos eixos x e y
 plt.suptitle("Estrelas do CAT2 que não têm designação Gaia DR3 no Simbad", fontsize=8)
-plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}''".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}'' (paralaxe Hipparcos)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
 plt.xlabel("Plx (mas)", fontsize=7)
 plt.ylabel("e_Plx (mas)", fontsize=7)
 
@@ -383,7 +383,7 @@ plt.ylim(min(y_axis) - 4.0, max(y_axis) + 4.5)
 
 # colocar título e rótulo dos eixos x e y
 plt.suptitle("Estrelas do CAT2 que não têm designação Gaia DR3 no Simbad", fontsize=8)
-plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}''".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
+plt.title("{} estrelas em um raio de {:.4f}pc, π ≥ {:.4f}'' (paralaxe do Hipparcos)".format(len(value), 1.0 / (min_parallax / 1000.0), min_parallax / 1000.0), fontsize=5)
 plt.xlabel("Vmag (mag)", fontsize=7)
 plt.ylabel("e_Plx (mas)", fontsize=7)
 

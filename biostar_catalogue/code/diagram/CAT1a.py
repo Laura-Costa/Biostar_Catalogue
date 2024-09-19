@@ -392,8 +392,8 @@ matplotlib.style.use('default') # voltar para o estilo default
 cursor.execute("select CAT1.parallax_error, "
                "CAT1.parallax "
                "from CAT1 "
-               "where CAT1.parallax >= 50.00 or "
-               "(CAT1.parallax < 50.00 and (CAT1.parallax + CAT1.parallax_error >= 50.00))")
+               "where CAT1.parallax >= (1.00/20.00)*1000.00 or "
+               "(CAT1.parallax < (1.00/20.00)*1000.00 and ((CAT1.parallax + CAT1.parallax_error) >= (1.00/20.00)*1000.00))")
 value = cursor.fetchall()
 
 parallax_error_list = []
@@ -415,10 +415,10 @@ ax.tick_params(axis='y', left=False, which='minor')
 # rotacionar label do eixo x
 plt.yticks(rotation=0)
 
-plt.ylabel ('quantidade')
+plt.ylabel ('frequência')
 plt.xlabel ('parallax_error (mas)')
-plt.suptitle("Distribuição de erros do CAT1a em escala logarítmica")
-plt.title('π ≥ {:.1f} mas ({} estrelas)'.format(min_Plx, len(data)))
+# plt.suptitle("Distribuição de erros do CAT1a em escala logarítmica")
+plt.title('π ≥ {:.4f} mas ({} estrelas)'.format(min_Plx, len(data)))
 plt.axvline(sum(data)/len(data), color='red', linestyle='dashed', linewidth=1.5, label=str('média: {:.6f}'.format(sum(data)/len(data))))
 
 # colocar os ticks no eixo x do histograma
