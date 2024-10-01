@@ -1,7 +1,5 @@
-from astroquery.simbad import Simbad
 import mysql.connector
-import code.database.functions as f
-import time
+import code.functions.database as f
 
 # abrir conexão com o BD
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
@@ -22,11 +20,11 @@ cursor.execute("create table {}( "
                "BD char(100) null, "
                "CoD char(100) null, "
                "CPD char(100) null, "
-               "in_simbad bool, "
+               "in_simbad bool null default 0, "
                "simbad_DR1 char(100) null, "
                "simbad_DR2 char(100) null, "
                "simbad_DR3 char(100) null, "
-               "Vmag numeric(65, 30) null, "
+               "Vmag numeric(65, 30) null, "    
                "RAdeg numeric(65, 30) null, "
                "DEdeg numeric(65, 30) null, "
                "RAhms char(100) null, "
@@ -52,21 +50,9 @@ with open("input_files/HIP_MAIN.DAT", "r") as dat_file:
 
         line = line.split("|")
 
-        if len(line[11].strip()) == 0: # or float(line[11].strip()) < 29.00:
-            continue # pular os registros que não têm paralaxe
-
         # load HIP
         f.insert_key(cursor, table_name, column_key_name, line, 1, True)
         lastrowid = "HIP " + line[1].strip()
-
-        # load in_simbad
-        tab = Simbad.query_objectids(lastrowid)
-        f.search_id_in_simbad(tab, cursor, table_name, 'in_simbad', column_key_name, lastrowid)
-
-        # load simbad_DRX
-        for data_release in ['1', '2', '3']:
-            time.sleep(0.000000001)
-            f.simbad_search_id_by_id(cursor, tab, 'Gaia DR'+data_release, table_name, 'simbad_DR'+data_release, column_key_name, lastrowid)
 
         # load HD
         f.update_table(cursor, table_name, 'HD', line, 71, column_key_name, lastrowid, True)

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/code/database/Gaia30pc_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Biostar_Catalogue.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Biostar_Catalogue.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/csv/CAT1/without_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Gaia50pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia30pc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Gaia50pc_product.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/input_files/Gaia30pc.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figures/23pc_selection/histogram.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figures/CAT1/diagrams.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figures/CAT1/histogram.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/figures/functions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/23pc_selection/figures/histograma1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/23pc_selection/figures/histograma2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagram 6.1 - MBp_Bp_G.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 1 - MRp_Bp_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 2 - MRp_G_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 3 - MRp_G_Bp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 4 - MBp_Bp_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 5 - MBp_G_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 6 - MBp_G_Bp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 7 - MG_Bp_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 8 - MG_G_Rp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/diagramas_HR/diagrama 9 - MG_G_Bp.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/histogramas/hist.pdf" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2mi0NMjPQKIrLm9puP23EAEGfGc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Gaia30pc.executor": "Run",
+    "Python.Gaia30pc_product.executor": "Run",
+    "Python.Gaia50pc.executor": "Run",
+    "Python.Gaia50pc_product.executor": "Run",
+    "Python.Hipparcos.executor": "Run",
+    "Python.astropy_histogram.executor": "Run",
+    "Python.create_database.executor": "Run",
+    "Python.pyplot_HRdiagram.executor": "Run",
+    "Python.pyplot_histogram.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/code/CAT1/HRdiagram" />
+      <recent name="$PROJECT_DIR$/code/functions" />
+      <recent name="$PROJECT_DIR$/code/database" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="" />
+      <created>1727544053256</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727544053256</updated>
+    </task>
+    <servers />
+  </component>
+</project>
