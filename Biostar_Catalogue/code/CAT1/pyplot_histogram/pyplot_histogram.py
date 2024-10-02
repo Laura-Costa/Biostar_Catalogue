@@ -24,7 +24,7 @@ query = ("select trim({father_table}.parallax)+0, "
          "({father_table}.parallax < 50.00 and ({father_table}.parallax + 3*{father_table}.parallax_error) >= 50.00) "
          ")".format(father_table=father_table))
 
-f.histogram(query, cursor, 'paralaxe', 4, '/CAT1/pyplot_histogram/CAT1_parallax.svg', yfontsize=5, xfontsize=0.5,  log=True)
+f.histogram(query, cursor, 'paralaxes', 'paralaxe', 4, '/CAT1/pyplot_histogram/CAT1_parallax.svg', yfontsize=5, xfontsize=0.5, ylog=True)
 
 """
 Histograma de sigma(pi)
@@ -42,8 +42,8 @@ query = ("select trim({father_table}.parallax)+0, "
          "({father_table}.parallax < 50.00 and ({father_table}.parallax + 3*{father_table}.parallax_error) >= 50.00) "
          ")".format(father_table=father_table))
 
-f.histogram(query, cursor, r"$σ_π$(CAT1)", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/CAT1_parallax_error_log.svg', yfontsize=5, xfontsize=5,  rot=30, log=True, yticks_equally_spaced=True)
-f.histogram(query, cursor, r"$σ_π$(CAT1)", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/CAT1_parallax_error_lin.svg', yfontsize=5, xfontsize=5, rot=30, yticks_equally_spaced=True, xticks_not_edges=False)
+f.histogram(query, cursor, r"$σ_π$(CAT1)", r"$σ$($π$)", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/CAT1_parallax_error_log.svg', yfontsize=5, xfontsize=5, xrot=30, ylog=True, yticks_not_heights=True)
+f.histogram(query, cursor, r"$σ_π$(CAT1)",  r"$σ$($π$)", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/CAT1_parallax_error_lin.svg', yfontsize=5, xfontsize=5, xrot=30, yticks_not_heights=True)
 
 
 """

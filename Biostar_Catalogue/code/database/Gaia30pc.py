@@ -17,6 +17,7 @@ cursor.execute("drop table if exists {}".format(table_name))
 # criar a tabela table_name
 cursor.execute("create table {table_name}( "
                "designation char(100) primary key, "
+               "HIP char(100) null, "
                "simbad_HIP char(100) null, "
                "simbad_HD char(100) null, "
                "in_simbad bool null, "
@@ -42,7 +43,8 @@ cursor.execute("create table {table_name}( "
                "mh_gspphot_upper numeric(65, 30) null, "
                "distance_gspphot numeric(65, 30) null, "
                "distance_gspphot_lower numeric(65, 30) null, "
-               "distance_gspphot_upper numeric(65, 30) null )".format(table_name=table_name))
+               "distance_gspphot_upper numeric(65, 30) null, "
+               "foreign key(HIP) references Hipparcos(HIP) on delete restrict)".format(table_name=table_name))
 
 # carregar os dados de table_name.csv na tabela table_name
 with open("input_files/Gaia30pc.csv", "r") as csv_file:
@@ -62,6 +64,10 @@ with open("input_files/Gaia30pc.csv", "r") as csv_file:
         # load designation
         f.insert_key(cursor, table_name, column_key_name, line, 0)
         lastrowid = line[0].strip()
+
+        # load HIP
+        cursor.execute("update {table_name} set {table_name}.HIP = {table_name}.simbad_HIP "
+                       "where {table_name}.simbad_HIP in (select Hipparcos.HIP from Hipparcos)".format(table_name=table_name))
 
         # load simbad_HIP
         tab = Simbad.query_objectids(lastrowid)

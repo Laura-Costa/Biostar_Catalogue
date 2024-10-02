@@ -11,10 +11,10 @@ father_table = 'Gaia30pc'
 son_table = 'Gaia30pc_product'
 son_key_column = 'designation'
 
-# apagar a tabela son_table_name caso ela já exista
+# apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
-# criar a tabela son_table_name
+# criar a tabela son_table
 
 cursor.execute("create table {son_table}( "
                "designation char(100) primary key, "
@@ -27,8 +27,8 @@ cursor.execute("create table {son_table}( "
                "Bp_Rp numeric(65, 30) null, "
                "G_Rp numeric(65, 30) null, "
                "Bp_G numeric(65, 30) null, "
-               "foreign key (designation) references {father_table}(designation) on delete restrict "
-               ")".format(son_table=son_table, father_table=father_table))
+               "foreign key ({son_key_column}) references {father_table}(designation) on delete restrict "
+               ")".format(son_table=son_table, father_table=father_table, son_key_column=son_key_column))
 
 # load designation
 cursor.execute("select designation from {father_table}".format(father_table=father_table))
@@ -37,7 +37,8 @@ for my_tuple in value: # my_tuple is like ('Gaia DR3 4345775217221821312',)
     f.insert_key(cursor, son_table, son_key_column, my_tuple, 0)
 
 # load MRp
-cursor.execute("select designation, phot_rp_mean_mag + 5 + 5 * log(10, parallax/1000.0) as MRp "
+cursor.execute("select designation, "
+               "phot_rp_mean_mag + 5 + 5 * log(10, parallax/1000.0) as MRp "
                "from {father_table} "
                "where parallax is not null and "
                "parallax > 0 and "

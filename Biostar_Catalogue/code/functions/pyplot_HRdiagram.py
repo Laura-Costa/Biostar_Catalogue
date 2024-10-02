@@ -43,7 +43,7 @@ def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel
     plt.xticks(rotation=0)
 
     # configurar uma grid atrás do plot
-    plt.grid(color='grey', linestyle='dashed', dashes=(5,5), which='major', linewidth=0.05)
+    plt.grid(color='grey', linestyle='dashed', dashes=(7,7), which='major', linewidth=0.1)
 
     # salvar a figura
     plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_HRdiagram/' + name, dpi=1200)

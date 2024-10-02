@@ -26,22 +26,22 @@ def update_table(cursor, table_name, column_name, line, index, column_key_name, 
                                                                                         column_key_name=column_key_name,
                                                                                         key_value=key_value))
 
-def update_product(cursor, son_table_name, son_column_name, son_column_key_name, my_tuple):
+def update_product(cursor, son_table, son_column, son_key_column, my_tuple):
     """
     @param cursor: variável que permite ao Python executar comandos SQL
-    @param son_table_name: nome da tabela a ser atualizada
-    @param son_column_name: nome da coluna a ser atualizada
-    @param son_column_key_name: nome da coluna que é chave primária na tabela a ser atualizada
+    @param son_table: nome da tabela a ser atualizada
+    @param son_column: nome da coluna a ser atualizada
+    @param son_key_column: nome da coluna que é chave primária na tabela a ser atualizada
     @param my_tuple: (chave, produto): tupla que contém, no índice 0, a chave do registro a ser atualizado e, no índice 1, o produto a ser inserido
     @return: none
     """
     key_value = my_tuple[0]
     product_value = my_tuple[1]
     cursor.execute("update {son_table_name} set {son_column_name} = {product_value} "
-                   "where {son_column_key_name} = '{key_value}'".format(son_table_name=son_table_name,
-                                                                        son_column_name=son_column_name,
+                   "where {son_column_key_name} = '{key_value}'".format(son_table_name=son_table,
+                                                                        son_column_name=son_column,
                                                                         product_value=product_value,
-                                                                        son_column_key_name=son_column_key_name,
+                                                                        son_column_key_name=son_key_column,
                                                                         key_value=key_value))
 
 def simbad_search_id_by_id(cursor, tab, catalogue, table_name, column_name, column_key_name, id):
@@ -68,15 +68,18 @@ def simbad_search_id_by_id(cursor, tab, catalogue, table_name, column_name, colu
             "update {} set {} = '{}' where {} = '{}'".format(table_name, column_name, simbad_id_value,
                                                                       column_key_name, id))
 
-def insert_key(cursor, table_name, column_key_name, line, index, preffix=False):
-    data_value = line[index].strip()
+def insert_key(cursor, table_name, column_key_name, my_tuple, index, preffix=False):
+    data_value = my_tuple[index].strip()
 
-    if len(data_value) == 0 or data_value == '\n':
-        cursor.execute("insert into {}({}) values(null)".format(table_name, column_key_name))
+    if len(data_value) == 0 or data_value == '\n' or data_value == '\r\n':
+        cursor.execute("insert into {table_name}({column_key_name}) values(null)".format(table_name=table_name,
+                                                                                         column_key_name=column_key_name))
         return
 
     if preffix: data_value = column_key_name + " " + data_value
-    cursor.execute("insert into {}({}) values('{}')".format(table_name, column_key_name, data_value))
+    cursor.execute("insert into {table_name}({column_key_name}) values('{data_value}')".format(table_name=table_name,
+                                                                                               column_key_name=column_key_name,
+                                                                                               data_value=data_value))
 
 def search_id_in_simbad(tab, cursor, table_name, column_name, column_key_name, key_value):
     if tab is None:
