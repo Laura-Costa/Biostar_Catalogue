@@ -1,36 +1,42 @@
 <?php
+    // criar um objeto client url para fazer transferências
     $ch = curl_init();
+
+    // definindo as variáveis para a conexão com o banco de dados
     $servername = "localhost";
     $username = "lh";
     $password = "ic2023";
     $dbname = "Biostar_Catalogue";
 
-    //criar conexao com o banco de dados
+    // criar conexao com o banco de dados
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-    //checar conexao
+    // checar conexao
     if ($conn->connect_error){
         die("connection failed: " . $conn->connect_error);
-    } else{
+    } else {
         echo "sucess";
     }
 
     $query = mysqli_query($conn, "select HIP from Hipparcos");
     while($row = mysqli_fetch_array($query)){
 
-        //pegar o HIP do BD
-        $id = substr($row[0], 4);
+        // pegar o HIP do BD
+        $id = substr($row[0], 4); // o índice 4 aqui é para pegar apenas a componente numérica do HIP
 
-        //configurar url
+        // configurar url
         curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=HIP+" . $id);
 
-        //retornar a tranferencia como uma string
+        // retornar a tranferencia como uma string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-        //executar a requisicao
+        // executar a requisição
         $output = curl_exec($ch);
 
+        // criar um array de strings com a string única retornada pela tranferência
         $string_array = explode(" ", $output);
+
+        // definindo variáveis para o processamento dos dados
         $started = False;
         $ended = False;
         $cont = 0;
@@ -39,7 +45,7 @@
         $simbad_DR3 = "";
         $simbad_HIP = "";
 
-        //inicio do processamento da pagina
+        // início do processamento da pagina
         foreach($string_array as $word){
             if(str_contains($word, "Identifiers")){
                 $started = True;
@@ -62,7 +68,7 @@
             $cont++;
         }
 
-        // colocar os dados no BD
+        // carregar os dados obtidos na web para o BD, caso existam
         if(strlen($simbad_DR1) != 0){
             mysqli_query($conn, "update Hipparcos set simbad_DR1 = '" . $simbad_DR1 . "' where HIP = 'HIP " . $id . "'");
         }
@@ -115,6 +121,9 @@
     shell_exec("sudo chmod a+r+w /var/lib/mysql-files/*");
     shell_exec("mv -v /var/lib/mysql-files/backup_Hipparcos.csv /home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/backup_files/backup_Hipparcos.csv");
 
+    // fechar a instância do client url
     curl_close($ch);
+
+    // fechar a conexão com o banco de dados
     mysqli_close($conn);
 ?>

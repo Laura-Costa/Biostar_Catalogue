@@ -10,11 +10,11 @@ cursor = connection.cursor()
 table_name = 'Hipparcos'
 column_key_name = 'HIP'
 
-# apagar a tabela Hipparcos caso ela já exista
+# apagar a tabela table_name caso ela já exista
 cursor.execute("drop table if exists {}".format(table_name))
 
-# criar tabela Hipparcos no BD
-cursor.execute("create table {}( "
+# criar tabela table_name no BD
+cursor.execute("create table {table_name}( "
                "HIP char(100) primary key, "
                "HD char(100) null, "
                "BD char(100) null, "
@@ -39,20 +39,20 @@ cursor.execute("create table {}( "
                "e_VTmag numeric(65, 30) null, "
                "B_V numeric(65, 30) null, "
                "e_B_V numeric(65, 30) null "
-               ")".format(table_name))
+               ")".format(table_name=table_name))
 
-# carregar os dados de HIP_MAIN.DAT na tabela Hipparcos
+# carregar os dados de HIP_MAIN.DAT na tabela table_name
 with open("input_files/HIP_MAIN.DAT", "r") as dat_file:
     for line in dat_file:
 
-        if len(line) == 0 or line == '\n' or line == '\r':
+        if len(line) == 0 or line == '\n' or line == '\r' or line == '\r\n':
             continue # pular as linhas vazias do arquivo
 
         line = line.split("|")
 
         # load HIP
         f.insert_key(cursor, table_name, column_key_name, line, 1, True)
-        lastrowid = "HIP " + line[1].strip()
+        lastrowid = "HIP " + line[1].strip() # .strip() para retirar os espaços vazios da segunda componente do HIP
 
         # load HD
         f.update_table(cursor, table_name, 'HD', line, 71, column_key_name, lastrowid, True)

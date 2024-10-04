@@ -1,4 +1,4 @@
-def update_table(cursor, table_name, column_name, line, index, column_key_name, key_value, preffix = False):
+def update_table(cursor, table_name, column_name, line, index, column_key_name, key_value, preffix = False, index2=-1):
     """
 
     @param cursor: variável que permite ao Python executar comandos SQL
@@ -11,14 +11,19 @@ def update_table(cursor, table_name, column_name, line, index, column_key_name, 
     @param preffix: True se o campo tem prefixo; False caso contrário
     @return: none
     """
-    data_value = line[index].strip()
+    if(index2 != -1):
+        data_value = line[index:index2].strip()
+    else:
+        data_value = line[index].strip()
 
     if len(data_value) == 0 or data_value == '\n':
-        cursor.execute("update {} set {} = null where {} = '{}'".format(table_name, column_name, column_key_name, key_value))
+        cursor.execute("update {table_name} set {column_name} = null where {column_key_name} = '{key_value}'".format(table_name=table_name,
+                                                                                                                     column_name=column_name,
+                                                                                                                     column_key_name=column_key_name,
+                                                                                                                     key_value=key_value))
         return
 
     if preffix: data_value = column_name + " " + data_value
-
     cursor.execute("update {table_name} set {column_name} = '{data_value}' where {column_key_name} = '{key_value}'".format(
                                                                                         table_name=table_name,
                                                                                         column_name=column_name,
@@ -68,10 +73,24 @@ def simbad_search_id_by_id(cursor, tab, catalogue, table_name, column_name, colu
             "update {} set {} = '{}' where {} = '{}'".format(table_name, column_name, simbad_id_value,
                                                                       column_key_name, id))
 
-def insert_key(cursor, table_name, column_key_name, my_tuple, index, preffix=False):
-    data_value = my_tuple[index].strip()
+def insert_key(cursor, table_name, column_key_name, data_structure, index, preffix=False, index2=-1):
+    """
+    :param cursor: permite executar comandos SQL no Python
+    :param table_name: nome da tabela na qual será inserida a chave primária
+    :param column_key_name: nome da coluna que é chave primária em table_name
+    :param data_structure: estrutura de dados (tuple, array, string) que contém a chave primária a ser inserida
+    :param index: índice do qual a data_structure será indexada para se obter a chave primária a ser inserida
+    :param preffix: booleano que indica se a chave tem prefixo. Caso tenha, o prefixo será a column_key_name. Caso index2 != -1, é o primeiro índice do slice.
+    :param index2: segundo número do slice
+    :return:
+    """
 
-    if len(data_value) == 0 or data_value == '\n' or data_value == '\r\n':
+    if(index2 != -1): # para os dados do BrightStar e Supplement é preciso fazer um slice
+        data_value = data_structure[index:index2].strip()
+    else:
+        data_value = data_structure[index].strip()
+
+    if len(data_value) == 0 or data_value == '\n' or data_value == '\r' or data_value == '\r\n':
         cursor.execute("insert into {table_name}({column_key_name}) values(null)".format(table_name=table_name,
                                                                                          column_key_name=column_key_name))
         return

@@ -24,9 +24,13 @@ def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel
 
     plt.xlim(min(x_axis) - xmargin, max(x_axis) + xmargin)
     plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
-    fig.suptitle("CAT1: {} estrelas ({:.4f} ≤ π ≤ {:.4f})".format(len(value), min_parallax, max_parallax))
+    plt.suptitle("CAT1: {} estrelas".format(len(value)), fontsize=10)
+    plt.title("{:.4f} ≤ π ≤ {:.4f} (mas)".format(min_parallax, max_parallax), fontsize=7)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
+
+    # definir o tamanho da figura
+    # plt.figure(figsize=(10, 10))
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))

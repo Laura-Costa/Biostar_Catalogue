@@ -34,9 +34,12 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
 
     fig, ax = plt.subplots()
     (bin_heights, bin_edges, _) = plt.hist(data_list, bins=bins, edgecolor=None, rwidth=7, log=ylog, zorder=2)
-    plt.ylabel('frequência')
+    if ylog:
+        plt.ylabel('frequência (escala logarítmica)')
+    else:
+        plt.ylabel('frequência')
     plt.xlabel('{xlabel}'.format(xlabel=xlabel))
-    plt.title('{:.4f} ≤ π ≤ {:.4f} mas ({} estrelas)'.format(min_parallax, max_parallax, len(value)))
+    plt.title('{:.4f} ≤ π ≤ {:.4f} (mas)'.format(min_parallax, max_parallax))
 
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)
@@ -47,13 +50,15 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
 
     # colocar o média e desvio padrão no pyplot_histogram
     (mu, sigma) = norm.fit(data_list)
-    plt.axvline(mu, color='red', linestyle='dashed', linewidth=1.0, label=str(r"$\sigma_{medio}$"))
+    plt.axvline(mu, color='red', linestyle='dashed', linewidth=1.0, label=str(r"$\langle\,\sigma(\pi)\,\rangle$"))
+    qtde_estrelas = len(value)
+
     if(stdv):
-        plt.suptitle(r'Histograma de %s: $\sigma_{medio}$=%.5f mas, desvio padrão=%.3f' %(suptitle, mu, sigma))
-        plt.axvline(mu + sigma, color='lightgreen', linestyle='dashed', linewidth=1.5, label=str(r"$\sigma_{medio} \pm$ desvio padrão"))
+        plt.suptitle(r'%s: %i estrelas, $\sigma(\pi)_{medio}$=%.5f (mas), desvio padrão=%.3f' %(suptitle, qtde_estrelas, mu, sigma))
+        plt.axvline(mu + sigma, color='lightgreen', linestyle='dashed', linewidth=1.5, label=str(r"$\langle\,\sigma\,\rangle \pm$ desvio padrão"))
         plt.axvline(mu - sigma, color='lightgreen', linestyle='dashed', linewidth=1.5)
     else:
-        plt.suptitle(r'Histograma de %s: $\sigma_{medio}$ = %.5f mas' % (suptitle, mu))
+        plt.suptitle(r'%s: %i estrelas, $\langle\,\sigma(\pi)\,\rangle$ = %.5f (mas)' % (suptitle, qtde_estrelas, mu))
 
     # configurar legenda
     lgnd = plt.legend(facecolor='white', framealpha=1, shadow=True)

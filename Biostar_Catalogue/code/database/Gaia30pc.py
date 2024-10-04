@@ -8,14 +8,15 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 # inicializar o cursor
 cursor = connection.cursor()
 
-table_name = 'Gaia30pc'
+son_table = 'Gaia30pc'
+father_table = 'Hipparcos'
 column_key_name = 'designation'
 
 # apagar a tabela table_name caso ela já exista
-cursor.execute("drop table if exists {}".format(table_name))
+cursor.execute("drop table if exists {}".format(son_table))
 
 # criar a tabela table_name
-cursor.execute("create table {table_name}( "
+cursor.execute("create table {son_table}( "
                "designation char(100) primary key, "
                "HIP char(100) null, "
                "simbad_HIP char(100) null, "
@@ -44,7 +45,8 @@ cursor.execute("create table {table_name}( "
                "distance_gspphot numeric(65, 30) null, "
                "distance_gspphot_lower numeric(65, 30) null, "
                "distance_gspphot_upper numeric(65, 30) null, "
-               "foreign key(HIP) references Hipparcos(HIP) on delete restrict)".format(table_name=table_name))
+               "foreign key(HIP) references {father_table}(HIP) on delete restrict)".format(son_table=son_table,
+                                                                                            father_table=father_table))
 
 # carregar os dados de table_name.csv na tabela table_name
 with open("input_files/Gaia30pc.csv", "r") as csv_file:
@@ -53,7 +55,7 @@ with open("input_files/Gaia30pc.csv", "r") as csv_file:
 
     for line in csv_file:
 
-        if len(line) == 0 or line == '\n' or line == '\r':
+        if len(line) == 0 or line == '\n' or line == '\r' or line == '\r\n':
             continue # pular as linhas vazias do arquivo
 
         line = line.split(",")
@@ -62,22 +64,23 @@ with open("input_files/Gaia30pc.csv", "r") as csv_file:
             continue # pular os registros que não têm paralaxe ou têm paralaxe menor do que (1/30)*1000
 
         # load designation
-        f.insert_key(cursor, table_name, column_key_name, line, 0)
-        lastrowid = line[0].strip()
+        f.insert_key(cursor, son_table, column_key_name, line, 0)
+        lastrowid = line[0].strip() # .strip() para retirar os espaços vazios da designation
 
         # load HIP
-        cursor.execute("update {table_name} set {table_name}.HIP = {table_name}.simbad_HIP "
-                       "where {table_name}.simbad_HIP in (select Hipparcos.HIP from Hipparcos)".format(table_name=table_name))
+        cursor.execute("update {son_table} set {son_table}.HIP = {son_table}.simbad_HIP "
+                       "where {son_table}.simbad_HIP in (select {father_table}.HIP from {father_table})".format(son_table=son_table,
+                                                                                                                father_table=father_table))
 
         # load simbad_HIP
         tab = Simbad.query_objectids(lastrowid)
-        f.simbad_search_id_by_id(cursor, tab, 'HIP', table_name, 'simbad_HIP', column_key_name, lastrowid)
+        f.simbad_search_id_by_id(cursor, tab, 'HIP', son_table, 'simbad_HIP', column_key_name, lastrowid)
 
         # load simbad_HD
-        f.simbad_search_id_by_id(cursor, tab, 'HD', table_name, 'simbad_HD', column_key_name, lastrowid)
+        f.simbad_search_id_by_id(cursor, tab, 'HD', son_table, 'simbad_HD', column_key_name, lastrowid)
 
         # load in_simbad
-        f.search_id_in_simbad(tab, cursor, table_name, 'in_simbad', column_key_name, lastrowid)
+        f.search_id_in_simbad(tab, cursor, son_table, 'in_simbad', column_key_name, lastrowid)
 
         columns_names_and_indexes = [('right_ascension', 1), ('declination', 2), ('parallax', 3), ('parallax_error', 4),
                                      ('pm', 5), ('pmra', 6), ('pmdec', 7), ('ruwe', 8), ('phot_g_mean_mag', 9),
@@ -87,7 +90,7 @@ with open("input_files/Gaia30pc.csv", "r") as csv_file:
                                      ('mh_gspphot_lower', 19), ('mh_gspphot_upper', 20), ('distance_gspphot', 21),
                                      ('distance_gspphot_lower', 22), ('distance_gspphot_upper', 23)]
         for(column_name, index) in columns_names_and_indexes:
-            f.update_table(cursor, table_name, column_name, line, index, column_key_name, lastrowid)
+            f.update_table(cursor, son_table, column_name, line, index, column_key_name, lastrowid)
 
 csv_file.close()
 
