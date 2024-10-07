@@ -4,7 +4,7 @@ import code.functions.database as f
 # abrir conexão com o BD
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 
-# iniciaizar o cursor
+# inicializar o cursor
 cursor = connection.cursor()
 
 son_table = 'BrightStar'
@@ -12,10 +12,10 @@ father_table_Hipparcos = 'Hipparcos'
 father_table_Gaia = 'Gaia30pc'
 column_key_name = 'HR'
 
-# apagar a tabela table_name caso ela já exista
+# apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
-# criar a tabela table_name no BD
+# criar a tabela son_name no BD
 cursor.execute("create table {son_table}( "
                "HR char(100) primary key, "
                "HIP char(100) null, "
@@ -42,8 +42,10 @@ cursor.execute("create table {son_table}( "
                "simbad_DR3 char(100) null, "
                "simbad_HIP char(100) null, "
                "simbad_parallax numeric(65, 30) null, "
-               "simbad_parallax_error numeric(65, 30) null,"
-               "foreign key(HIP) references {father_table_Hipparcos}(HIP) on delete restrict,"
+               "simbad_parallax_error numeric(65, 30) null, "
+               "simbad_B numeric(65, 30) null, "
+               "simbad_V numeric(65, 30) null, "
+               "foreign key(HIP) references {father_table_Hipparcos}(HIP) on delete restrict, "
                "foreign key(designation) references {father_table_Gaia}(designation) on delete restrict)".format(son_table=son_table,
                                                                                                                  father_table_Hipparcos=father_table_Hipparcos,
                                                                                                                  father_table_Gaia = father_table_Gaia))
@@ -105,7 +107,7 @@ with open("input_files/BSC5_edited.DAT", "r") as dat_file:
 
         # load Mult_ID
 
-        # O HR 2343 tem o valor de Mult_ID igual a AA'
+        # O HR 2343 tem o valor de Mult_ID igual a -> AA'
         # Aqui este caractere "'" é removido
         #########
         index2 = 194
@@ -116,8 +118,6 @@ with open("input_files/BSC5_edited.DAT", "r") as dat_file:
 
         # load Mult_Cnt
         f.update_table(cursor, son_table, 'Mult_Cnt', line, 194, column_key_name, lastrowid, False, 196)
-
-
 
 # certificar-se de que os dados estão gravados no BD
 connection.commit()

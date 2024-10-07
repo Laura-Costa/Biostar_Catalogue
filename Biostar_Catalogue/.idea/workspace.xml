@@ -6,40 +6,38 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/csv/CAT1_csv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_histogram/pyplot_histogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_histogram/pyplot_histogram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_pi.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_pi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia30pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia30pc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_hipparcos.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/curl_Hipparcos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Gaia30pc_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia30pc_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/curl_BrightStar.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/curl_BrightStar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/functions/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/functions/pyplot_histogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_histogram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/teste/string_format.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/teste/string_format.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_G.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_G.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_G_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_G_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_G_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_Bp_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_G_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_G_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_G_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_G_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MBp_G_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_G.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_G.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_G_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_G_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_G_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_G_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_G_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_G_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_G_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_G_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_G.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_G.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_G_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_G_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_G_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_Bp_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_G_Rp.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_G_Rp.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_G_Rp_zoom.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_G_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MRp_G_Rp_ampliado.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/CAT1_parallax.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/CAT1_parallax.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/CAT1_parallax_error_lin.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/CAT1_parallax_error_log.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_log.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_log.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/sigma_pi_borda.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/sigma_pi_borda.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/CAT1_parallax_error_versus_parallax.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/CAT1_parallax_error_versus_parallax_log_scale.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +65,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.BrightStar.executor": "Run",
+    "Python.BrightStarSupplement.executor": "Run",
+    "Python.BrightStarSupplement_product.executor": "Run",
+    "Python.BrightStar_product.executor": "Run",
     "Python.CAT1_csv.executor": "Run",
     "Python.Gaia30pc.executor": "Run",
     "Python.Gaia30pc_product.executor": "Run",
@@ -82,6 +83,7 @@
     "Python.pyplot_scatterplot.executor": "Run",
     "Python.sigmaPi_vs_pi.executor": "Run",
     "Python.sigma_pi_x_pi.executor": "Run",
+    "Python.testeBrightStar.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main"
   }

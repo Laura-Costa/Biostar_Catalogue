@@ -9,7 +9,7 @@ import numpy as np
 import math
 
 def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize, xrot=0, stdv=False, ylog=False, yticks_not_heights=False,
-              xticks_not_edges=False):
+              xticks_not_edges=False, yticks_step=None, xticks_step=None):
     """
     @param cursor: permite ao Python executar comandos SQL
     @param xlabel: rótulo do eixo x e grandeza da qual se quer ver a distribuição
@@ -50,7 +50,7 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
 
     # colocar o média e desvio padrão no pyplot_histogram
     (mu, sigma) = norm.fit(data_list)
-    plt.axvline(mu, color='red', linestyle='dashed', linewidth=1.0, label=str(r"$\langle\,\sigma(\pi)\,\rangle$"))
+    plt.axvline(mu, color='red', linestyle='dashed', linewidth=0.5, label=str(r"$\langle\,\sigma(\pi)\,\rangle$"))
     qtde_estrelas = len(value)
 
     if(stdv):
@@ -80,7 +80,7 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.0f"))
 
     elif(yticks_not_heights and not ylog):
-        ax.set_yticks(range(0, 2245, 204))
+        ax.set_yticks(range(0, math.ceil(bin_heights.max())+yticks_step, yticks_step))
         ax.tick_params(axis='y', which='minor', left=False)
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.0f"))
 
@@ -89,9 +89,11 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
         ax.yaxis.set_major_formatter(FormatStrFormatter('%i'))
 
     if(xticks_not_edges):
-        ax.xaxis.set_major_formatter( lambda x, pos: f'{x:g}')
+        # ax.xaxis.set_major_formatter( lambda x, pos: f'{x:g}')
+        ax.set_xticks(np.arange(0, max(data_list) + xticks_step, xticks_step))
         ax.tick_params(axis='x', which='minor', left=False)
-        ax.xaxis.set_major_formatter(FormatStrFormatter("%if"))
+        ax.tick_params(axis='both', which='both', width=0.1)
+        ax.xaxis.set_major_formatter(FormatStrFormatter("%.2f"))
     else:
         # cofigurar major ticks no eixo x do pyplot_histogram
         ax.set_xticks(bin_edges)

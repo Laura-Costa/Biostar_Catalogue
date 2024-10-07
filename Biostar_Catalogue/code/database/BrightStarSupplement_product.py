@@ -7,17 +7,17 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 # inicializar o cursor
 cursor = connection.cursor()
 
-father_table = 'BrightStar'
-father_key_column = 'HR'
-son_table = 'BrightStar_product'
-son_key_column = 'HR'
+father_table = "BrightStarSupplement"
+father_key_column = "id"
+son_table = "BrightStarSupplement_product"
+son_key_column = "id"
 
 # apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
 # criar tabela son_table
 cursor.execute("create table {son_table}( "
-               "HR char(100) primary key, "
+               "id int primary key, "
                "MV numeric(65, 30) null, "
                "MV_error numeric(65, 30) null, "
                "simbad_MV numeric(65, 30) null, "
@@ -25,15 +25,15 @@ cursor.execute("create table {son_table}( "
                "B_V numeric(65, 30) null, "
                "simbad_B_V numeric(65, 30) null, "
                "foreign key({son_key_column}) references {father_table}({father_key_column}) on delete restrict)".format(son_table=son_table,
-                                                                                                        son_key_column=son_key_column,
-                                                                                                        father_table=father_table,
-                                                                                                        father_key_column=father_key_column))
+                                                                                                                         son_key_column=son_key_column,
+                                                                                                                         father_table=father_table,
+                                                                                                                         father_key_column=father_key_column))
 
-# load HR
+# load id
 cursor.execute("select {father_key_column} from {father_table}".format(father_key_column=father_key_column,
                                                                        father_table=father_table))
 value = cursor.fetchall()
-for my_tuple in value: # my_tuple is like ('HR 625',)
+for my_tuple in value: # my_tuple is like ('1',)
     f.insert_key(cursor, son_table, son_key_column, my_tuple, 0)
 
 # load MV

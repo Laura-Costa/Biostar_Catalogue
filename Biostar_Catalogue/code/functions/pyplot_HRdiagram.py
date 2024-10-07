@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
 
-def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel, ylabel, size, xmargin, ymargin_upper, ymargin_bottom):
+def diagram(cursor, query, query_emphasis, colors, HDs, path, xgap, ygap, xlabel, ylabel, size, xmargin, ymargin_upper, ymargin_bottom, suptitle):
 
     fig, ax = plt.subplots()
     cursor.execute(query)
@@ -13,7 +13,11 @@ def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel
 
     for (simbad_HD_value, parallax_value, Bp_Rp_value, MRp_value) in value:
         parallax_list.append(parallax_value)
-        if simbad_HD_value not in ('HD 146233', 'HD 4628', 'HD 16160', 'HD 32147', 'HD 191408', 'HD 219134'):
+        if len(HDs) != 0:
+            if simbad_HD_value not in HDs:
+                x_axis.append(Bp_Rp_value)
+                y_axis.append(MRp_value)
+        else:
             x_axis.append(Bp_Rp_value)
             y_axis.append(MRp_value)
 
@@ -24,10 +28,11 @@ def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel
 
     plt.xlim(min(x_axis) - xmargin, max(x_axis) + xmargin)
     plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
-    plt.suptitle("CAT1: {} estrelas".format(len(value)), fontsize=10)
-    plt.title("{:.4f} ≤ π ≤ {:.4f} (mas)".format(min_parallax, max_parallax), fontsize=7)
-    plt.xlabel(xlabel)
-    plt.ylabel(ylabel)
+    #plt.title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)\n".format(suptitle, len(value), 1000.0/min_parallax, min_parallax, max_parallax), fontsize=10)
+    #plt.title("{:.4f} ≤ π ≤ {:.4f} (mas)".format(min_parallax, max_parallax), fontsize=7)
+    ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle, len(value), 1000.0/min_parallax, min_parallax, max_parallax), fontsize=7, y=1.04)
+    plt.xlabel(xlabel, fontsize=7)
+    plt.ylabel(ylabel, fontsize=7)
 
     # definir o tamanho da figura
     # plt.figure(figsize=(10, 10))
@@ -50,15 +55,15 @@ def diagram(cursor, query, query_emphasis, colors, HDs, name, xgap, ygap, xlabel
     plt.grid(color='grey', linestyle='dashed', dashes=(7,7), which='major', linewidth=0.1)
 
     # salvar a figura
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_HRdiagram/' + name, dpi=1200)
+    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path, dpi=1200)
 
     # marcar a HD 146233 e as 5 anãs K
-    emphasis_diagram(ax, cursor, query_emphasis, name, colors, HDs, size)
+    if len(HDs) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, HDs, size)
 
     # fechar plt
     plt.close()
 
-def emphasis_diagram(ax, cursor, query_emphasis, name, colors, HDs, size):
+def emphasis_diagram(ax, cursor, query_emphasis, path, colors, HDs, size):
 
     for (HD_value, color) in zip(HDs, colors):
         cursor.execute(query_emphasis + "'{}'".format(HD_value))
@@ -68,6 +73,9 @@ def emphasis_diagram(ax, cursor, query_emphasis, name, colors, HDs, size):
     # configurar legenda
     lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='best')
 
+    if path == '/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg':
+        lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower right')
+
     # configurar tamanho dos marcadores da legenda
     for handle in lgnd.legend_handles:
         handle.set_sizes([25])
@@ -76,4 +84,4 @@ def emphasis_diagram(ax, cursor, query_emphasis, name, colors, HDs, size):
     frame = lgnd.get_frame()
 
     # salvar a figura
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_HRdiagram/' + name, dpi=1200)
+    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path, dpi=1200)

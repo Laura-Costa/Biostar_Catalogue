@@ -8,6 +8,7 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 father_table = 'Gaia30pc'
+father_key_column = 'designation'
 son_table = 'Gaia30pc_product'
 son_key_column = 'designation'
 
@@ -27,8 +28,11 @@ cursor.execute("create table {son_table}( "
                "Bp_Rp numeric(65, 30) null, "
                "G_Rp numeric(65, 30) null, "
                "Bp_G numeric(65, 30) null, "
-               "foreign key ({son_key_column}) references {father_table}(designation) on delete restrict "
-               ")".format(son_table=son_table, father_table=father_table, son_key_column=son_key_column))
+               "foreign key({son_key_column}) references {father_table}({father_key_column}) on delete restrict "
+               ")".format(son_table=son_table,
+                          son_key_column=son_key_column,
+                          father_table=father_table,
+                          father_key_column=father_key_column))
 
 # load designation
 cursor.execute("select designation from {father_table}".format(father_table=father_table))
