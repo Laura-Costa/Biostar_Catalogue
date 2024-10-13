@@ -8,9 +8,11 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 son_table = 'BrightStar'
+son_column_key = 'HR'
 father_table_Hipparcos = 'Hipparcos'
+father_table_Hipparcos_column_key = 'HIP'
 father_table_Gaia = 'Gaia30pc'
-column_key_name = 'HR'
+father_table_Gaia_column_key = 'designation'
 
 # apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
@@ -45,10 +47,14 @@ cursor.execute("create table {son_table}( "
                "simbad_parallax_error numeric(65, 30) null, "
                "simbad_B numeric(65, 30) null, "
                "simbad_V numeric(65, 30) null, "
-               "foreign key(HIP) references {father_table_Hipparcos}(HIP) on delete restrict, "
-               "foreign key(designation) references {father_table_Gaia}(designation) on delete restrict)".format(son_table=son_table,
-                                                                                                                 father_table_Hipparcos=father_table_Hipparcos,
-                                                                                                                 father_table_Gaia = father_table_Gaia))
+               "foreign key(HIP) references {father_table_Hipparcos}({father_table_Hipparcos_column_key}) on delete restrict, "
+               "foreign key(designation) references {father_table_Gaia}({father_table_Gaia_column_key}) on delete restrict)".format(
+                                                   son_table=son_table,
+                                                   father_table_Hipparcos=father_table_Hipparcos,
+                                                   father_table_Hipparcos_column_key=father_table_Hipparcos_column_key,
+                                                   father_table_Gaia = father_table_Gaia,
+                                                   father_table_Gaia_column_key=father_table_Gaia_column_key))
+
 # carregar os dados de BSC5_edited.DAT na tabela son_table
 with open("input_files/BSC5_edited.DAT", "r") as dat_file:
     for line in dat_file:
@@ -57,53 +63,53 @@ with open("input_files/BSC5_edited.DAT", "r") as dat_file:
             continue # pular as linhas vazias do arquivo
 
         # load HR
-        f.insert_key(cursor, son_table, column_key_name, line, 0, True, 4)
+        f.insert_key(cursor, son_table, son_column_key, line, 0, True, 4)
         lastrowid = "HR " + line[0:4].strip() # .strip() para retirar os espaços vazios da segunda componente do HR
 
         # load Name
-        f.update_table(cursor, son_table, 'Name', line, 4, column_key_name, lastrowid, False, 14)
+        f.update_table(cursor, son_table, 'Name', line, 4, son_column_key, lastrowid, False, 14)
 
         # load DM_Cat
-        f.update_table(cursor, son_table, 'DM_Cat', line, 14, column_key_name, lastrowid, False, 16)
+        f.update_table(cursor, son_table, 'DM_Cat', line, 14, son_column_key, lastrowid, False, 16)
 
         # load DM
-        f.update_table(cursor, son_table, 'DM', line, 16, column_key_name, lastrowid, False, 25)
+        f.update_table(cursor, son_table, 'DM', line, 16, son_column_key, lastrowid, False, 25)
 
         # load HD
-        f.update_table(cursor, son_table, 'HD', line, 25, column_key_name, lastrowid, True, 31)
+        f.update_table(cursor, son_table, 'HD', line, 25, son_column_key, lastrowid, True, 31)
 
         # load SAO
-        f.update_table(cursor, son_table, 'SAO', line, 31, column_key_name, lastrowid, True, 37)
+        f.update_table(cursor, son_table, 'SAO', line, 31, son_column_key, lastrowid, True, 37)
 
         # load FK5
-        f.update_table(cursor, son_table, 'FK5', line, 37, column_key_name, lastrowid, True, 41)
+        f.update_table(cursor, son_table, 'FK5', line, 37, son_column_key, lastrowid, True, 41)
 
         # load Mutiple
-        f.update_table(cursor, son_table, 'Multiple', line, 43, column_key_name, lastrowid, False, 44)
+        f.update_table(cursor, son_table, 'Multiple', line, 43, son_column_key, lastrowid, False, 44)
 
         # load ADS
-        f.update_table(cursor, son_table, 'ADS', line, 44, column_key_name, lastrowid, True, 49)
+        f.update_table(cursor, son_table, 'ADS', line, 44, son_column_key, lastrowid, True, 49)
 
         # load ADS_Comp
-        f.update_table(cursor, son_table, 'ADS_Comp', line, 49, column_key_name, lastrowid, False, 51)
+        f.update_table(cursor, son_table, 'ADS_Comp', line, 49, son_column_key, lastrowid, False, 51)
 
         # load Var_ID
-        f.update_table(cursor, son_table, 'Var_ID', line, 51, column_key_name, lastrowid, False, 60)
+        f.update_table(cursor, son_table, 'Var_ID', line, 51, son_column_key, lastrowid, False, 60)
 
         # load V
-        f.update_table(cursor, son_table, 'V', line, 102, column_key_name, lastrowid, False, 107)
+        f.update_table(cursor, son_table, 'V', line, 102, son_column_key, lastrowid, False, 107)
 
         # load B_V
-        f.update_table(cursor, son_table, 'B_V', line, 109, column_key_name, lastrowid, False, 114)
+        f.update_table(cursor, son_table, 'B_V', line, 109, son_column_key, lastrowid, False, 114)
 
         # load SpType
-        f.update_table(cursor, son_table, 'SpType', line, 127, column_key_name, lastrowid, False, 147)
+        f.update_table(cursor, son_table, 'SpType', line, 127, son_column_key, lastrowid, False, 147)
 
         # load Mult_MDiff
-        f.update_table(cursor, son_table, 'Mult_MDiff', line, 180, column_key_name, lastrowid, False, 184)
+        f.update_table(cursor, son_table, 'Mult_MDiff', line, 180, son_column_key, lastrowid, False, 184)
 
         # load Mult_Sep
-        f.update_table(cursor, son_table, 'Mult_Sep', line, 184, column_key_name, lastrowid, False, 190)
+        f.update_table(cursor, son_table, 'Mult_Sep', line, 184, son_column_key, lastrowid, False, 190)
 
         # load Mult_ID
 
@@ -114,10 +120,10 @@ with open("input_files/BSC5_edited.DAT", "r") as dat_file:
         if lastrowid == 'HR 2343':
             index2 = index2 - 2
         #########
-        f.update_table(cursor, son_table, 'Mult_ID', line, 190, column_key_name, lastrowid, False, index2)
+        f.update_table(cursor, son_table, 'Mult_ID', line, 190, son_column_key, lastrowid, False, index2)
 
         # load Mult_Cnt
-        f.update_table(cursor, son_table, 'Mult_Cnt', line, 194, column_key_name, lastrowid, False, 196)
+        f.update_table(cursor, son_table, 'Mult_Cnt', line, 194, son_column_key, lastrowid, False, 196)
 
 # certificar-se de que os dados estão gravados no BD
 connection.commit()

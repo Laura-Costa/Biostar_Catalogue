@@ -8,16 +8,16 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 father_table = "BrightStarSupplement"
-father_key_column = "id"
+father_key_column = "ordinal_number"
 son_table = "BrightStarSupplement_product"
-son_key_column = "id"
+son_key_column = "ordinal_number"
 
 # apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
 # criar tabela son_table
 cursor.execute("create table {son_table}( "
-               "id int primary key, "
+               "{son_key_column} int primary key, "
                "MV numeric(65, 30) null, "
                "MV_error numeric(65, 30) null, "
                "simbad_MV numeric(65, 30) null, "

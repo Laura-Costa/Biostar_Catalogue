@@ -8,6 +8,7 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 son_table = 'BrightStarSupplement'
+son_key_column = 'ordinal_number'
 father_table_Hipparcos = 'Hipparcos'
 father_table_Gaia = 'Gaia30pc'
 
@@ -16,7 +17,7 @@ cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
 # criar a tabela son_table no BD
 cursor.execute("create table {son_table}( "
-               "id int not null auto_increment primary key, "
+               "{son_key_column} int not null auto_increment primary key, "
                "HIP char(100) null, "
                "designation char(100) null, "
                "DM_Cat char(100) null, " # not
@@ -45,8 +46,9 @@ cursor.execute("create table {son_table}( "
                #"primary key(DM_Cat, DM), "
                "foreign key(HIP) references {father_table_Hipparcos}(HIP) on delete restrict, "
                "foreign key(designation) references {father_table_Gaia}(designation) on delete restrict)".format(son_table=son_table,
-                                                                                                                father_table_Hipparcos=father_table_Hipparcos,
-                                                                                                                father_table_Gaia=father_table_Gaia))
+                                                                                                                 son_key_column=son_key_column,
+                                                                                                                 father_table_Hipparcos=father_table_Hipparcos,
+                                                                                                                 father_table_Gaia=father_table_Gaia))
 
 # carregar os dados de BSC4S.DAT na tabela son_table
 cont = 0
@@ -66,22 +68,22 @@ with open("input_files/BSC4S.DAT", "r") as dat_file:
         f.insert_key(cursor, son_table, 'DM_Cat', line, 8, False, 10)
 
         # load DM
-        f.update_table(cursor, son_table, 'DM', line, 10, 'id', cont, False, 19)
+        f.update_table(cursor, son_table, 'DM', line, 10, son_key_column, cont, False, 19)
 
         # load HD
-        f.update_table(cursor, son_table, 'HD', line, 0, 'id', cont, True, 6)
+        f.update_table(cursor, son_table, 'HD', line, 0, son_key_column, cont, True, 6)
 
         # load HD_Suffix
-        f.update_table(cursor, son_table, 'HD_Suffix', line, 6, 'id', cont, False, 8)
+        f.update_table(cursor, son_table, 'HD_Suffix', line, 6, son_key_column, cont, False, 8)
 
         # load SAO
-        f.update_table(cursor, son_table, 'SAO', line, 19, 'id', cont, True, 26)
+        f.update_table(cursor, son_table, 'SAO', line, 19, son_key_column, cont, True, 26)
 
         # load Comp
-        f.update_table(cursor, son_table, 'Comp', line, 204, 'id', cont, False, 209)
+        f.update_table(cursor, son_table, 'Comp', line, 204, son_key_column, cont, False, 209)
 
         # load Comp_Cnt
-        f.update_table(cursor, son_table, 'Comp_Cnt', line, 209, 'id', cont, False, 211)
+        f.update_table(cursor, son_table, 'Comp_Cnt', line, 209, son_key_column, cont, False, 211)
 
         # load V
 
@@ -93,28 +95,28 @@ with open("input_files/BSC4S.DAT", "r") as dat_file:
         if HD == 'HD 84005':
             index2 = index2 - 1
         #########
-        f.update_table(cursor, son_table, 'V', line, 104, 'id', cont, False, index2)
+        f.update_table(cursor, son_table, 'V', line, 104, son_key_column, cont, False, index2)
 
         # load B_V
-        f.update_table(cursor, son_table, 'B_V', line, 109, 'id', cont, False, 115)
+        f.update_table(cursor, son_table, 'B_V', line, 109, son_key_column, cont, False, 115)
 
         # load SpType
-        f.update_table(cursor, son_table, 'SpType', line, 127, 'id', cont, False, 148)
+        f.update_table(cursor, son_table, 'SpType', line, 127, son_key_column, cont, False, 148)
 
         # load Mult_MDiff
-        f.update_table(cursor, son_table, 'Mult_MDiff', line, 184, 'id', cont, False, 188)
+        f.update_table(cursor, son_table, 'Mult_MDiff', line, 184, son_key_column, cont, False, 188)
 
         # load Mult_Flag
-        f.update_table(cursor, son_table, 'Mult_Flag', line, 188, 'id', cont, False, 190)
+        f.update_table(cursor, son_table, 'Mult_Flag', line, 188, son_key_column, cont, False, 190)
 
         # load Mult_Sep
-        f.update_table(cursor, son_table, 'Mult_Sep', line, 190, 'id', cont, False, 195)
+        f.update_table(cursor, son_table, 'Mult_Sep', line, 190, son_key_column, cont, False, 195)
 
         # load Sep_Code
-        f.update_table(cursor, son_table, 'Sep_Code', line, 195, 'id', cont, False, 196)
+        f.update_table(cursor, son_table, 'Sep_Code', line, 195, son_key_column, cont, False, 196)
 
         # load Mult_ID
-        f.update_table(cursor, son_table, 'Mult_ID', line, 27, 'id', cont, False, 36)
+        f.update_table(cursor, son_table, 'Mult_ID', line, 27, son_key_column, cont, False, 36)
 
 # certificar-se de que os dados estão gravados no BD
 connection.commit()

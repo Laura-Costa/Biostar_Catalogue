@@ -54,19 +54,19 @@ def sql_query(x_axis, y_axis):
 Fazer o diagrama MV x B_V
 """
 colors = ['deepskyblue', 'red', 'magenta', 'lime', 'gold', 'chocolate']
-HDs = ['HD 146233', 'HD 4628', 'HD 16160', 'HD 32147', 'HD 191408', 'HD 219134']
+hds = ['HD 146233', 'HD 4628', 'HD 16160', 'HD 32147', 'HD 191408', 'HD 219134']
 
 (query, query_emphasis) = sql_query('B_V', 'MV')
-f.diagram(cursor, query, query_emphasis, colors, HDs, '/BrightStarSupplement/pyplot_HRdiagram/MV_B_V.svg', 0.0625, 1.0, r'B-V', r'M(V)', 6.0, 0.20, 2.0, 2.0, r'Objetos do Bright Star Supplement sem designação Gaia DR3 no Simbad')
+f.diagram(cursor, query, query_emphasis, colors, hds, '/BrightStarSupplement/pyplot_HRdiagram/MV_B_V.svg', 0.0625, 1.0, r'B-V', r'M(V)', 6.0, 0.20, 2.0, 2.0, r'Objetos do Bright Star Supplement sem designação Gaia DR3 no Simbad')
 
 """
 Fazer o diagrama simbad_MV x simbad_B_V 
 """
 colors = ['deepskyblue', 'red', 'lime', 'gold', 'chocolate']
-HDs = ['HD 146233', 'HD 4628', 'HD 32147', 'HD 191408', 'HD 219134']
+hds = ['HD 146233', 'HD 4628', 'HD 32147', 'HD 191408', 'HD 219134']
 
 (query, query_emphasis) = sql_query('simbad_B_V', 'simbad_MV')
-f.diagram(cursor, query, query_emphasis, colors, HDs, '/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg', 0.125, 1.0, r'B-V (simbad)', r'M(V) (simbad)' , 6.0, 0.20, 2.0, 2.0, 'Objetos do Bright Star Supplement sem designação Gaia DR3 no Simbad')
+f.diagram(cursor, query, query_emphasis, colors, hds, '/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg', 0.125, 1.0, r'B-V (simbad)', r'M(V) (simbad)', 6.0, 0.20, 2.0, 2.0, 'Objetos do Bright Star Supplement sem designação Gaia DR3 no Simbad')
 
 # fechar conexão com o BD
 connection.close()

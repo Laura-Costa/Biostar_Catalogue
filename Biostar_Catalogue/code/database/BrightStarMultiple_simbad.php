@@ -1,71 +1,45 @@
 <?php
-    // criar um objeto client url para fazer tranferências
+    // criar um objeto client url para fazer transferências
     $ch = curl_init();
 
-    // definindo as variáveis para a conexão com o bando de dados
+    // definindo as variáveis para a conexão com o banco de dados
     $servername = "localhost";
     $username = "lh";
     $password = "ic2023";
     $dbname = "Biostar_Catalogue";
 
-    // criar conexão com o bando de dados
+    // criar conexão com o banco de dados
     $conn = mysqli_connect($servername, $username, $password, $dbname);
 
     // checar conexão
-    if ($conn -> connect_error){
+    if ($conn->connect_error){
         die("connection failed: " . $conn->connect_error);
     } else {
         echo "sucess";
     }
 
-    $query = mysqli_query($conn, "select ordinal_number, HD, DM_Cat, DM from BrightStarSupplement");
+    $query = mysqli_query($conn, "select ordinal_number, identifier from BrightStarMultiple");
     while($row = mysqli_fetch_array($query)) {
 
-        // inicializando variáveis
-        $ordinal_number = null;
-        $identifier = null;
-        $HD = null;
-        $DM_Cat = null;
-        $DM = null;
-        $column_key_name = null;
+        // pegar o ordinal_number e o identifier do BD
+        $last_ordinal_number = $row[0];
+        $identifier = "";
 
-        // pegar o ordinal_number do banco de dados
-        $ordinal_number = trim($row[0]);
-        // pegar HD do banco de dados
-        $HD = trim($row[1]);
-        // pegar DM_Cat do banco de dados
-        $DM_Cat = trim($row[2]);
-        // pegar DM do banco de dados
-        $DM = trim($row[3]);
-
-        if (!str_contains($HD, "HD ")){
-            print("\nHD FALTANTE====================== " . $HD);
-            $identifier = $DM_Cat . " " . $DM;
-        } else {
-            $identifier = $HD;
+        foreach (explode(" ", $row[1]) as $piece){
+            $identifier .= $piece;
         }
 
-        // configurar a url
-        if (str_contains($identifier, "HD ")){
-            curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=" . substr($identifier, 0, 2) . "+" . substr($identifier, 3));
-        }
-        if (str_contains($identifier, "CP -60  980")){
-            curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=CP+-60++980");
-        }
-        if (str_contains($identifier, "BD +20 3283")){
-            curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=+BD+%2B20+3283");
-        }
-        if (str_contains($identifier, "CP -61 3926")){
-            curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=CP+-61+3926");
-        }
 
-        // retornar a tranferência como uma string
+        // configurar URL
+        curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=" . $identifier);
+
+        // retornar a transferência como uma string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         // executar a requisição
         $output = curl_exec($ch);
 
-        // criar um array de strings com a strings única retornada pela tranferência
+        // criar um array de strings com a string única retornada pela tranferência
         $string_array = explode(" ", $output);
 
         // definindo variáveis para o processamento dos dados
@@ -83,9 +57,8 @@
         $simbad_B = null;
         $simbad_V = null;
 
-        // inicio do processamento da página
+        // início do processamento da página
         foreach($string_array as $word){
-
             if(str_contains($word, "Identifiers")){
                 $identifiers_started = True;
             }
@@ -127,7 +100,6 @@
             $cont++;
         }
 
-
         printf("\nidentifier: " . $identifier);
         printf("\nsimbad_parallax: " . $simbad_parallax);
         printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
@@ -136,41 +108,40 @@
 
         // carregar os dados obtidos na web para o BD, caso existam
         if(!is_null($simbad_DR1)){
-            mysqli_query($conn, "update BrightStarSupplement set simbad_DR1 = '" . $simbad_DR1 . "' where ordinal_number = " . $ordinal_number);
+            mysqli_query($conn, "update BrightStarMultiple set simbad_DR1 = '" . $simbad_DR1 . "' where ordinal_number = " . $last_ordinal_number);
         }
         if(!is_null($simbad_DR2)){
-            mysqli_query($conn, "update BrightStarSupplement set simbad_DR2 = '" . $simbad_DR2 . "' where ordinal_number = " . $ordinal_number);
+            mysqli_query($conn, "update BrightStarMultiple set simbad_DR2 = '" . $simbad_DR2 . "' where ordinal_number = " . $last_ordinal_number);
         }
         if(!is_null($simbad_DR3)){
-            mysqli_query($conn, "update BrightStarSupplement set simbad_DR3 = '" . $simbad_DR3 . "' where ordinal_number = " . $ordinal_number);
+            mysqli_query($conn, "update BrightStarMultiple set simbad_DR3 = '" . $simbad_DR3 . "' where ordinal_number = " . $last_ordinal_number);
         }
         if(!is_null($simbad_HIP)){
-            mysqli_query($conn, "update BrightStarSupplement set simbad_HIP = '" . $simbad_HIP . "' where ordinal_number = " . $ordinal_number);
+            mysqli_query($conn, "update BrightStarMultiple set simbad_HIP = '" . $simbad_HIP . "' where ordinal_number = " . $last_ordinal_number);
         }
         if(!is_null($simbad_parallax) && !str_contains($simbad_parallax, "~")){
-            $parallax_query = ("update BrightStarSupplement set simbad_parallax = " . $simbad_parallax . " where ordinal_number = " . $ordinal_number);
+            $parallax_query = ("update BrightStarMultiple set simbad_parallax = " . $simbad_parallax . " where ordinal_number = " . $last_ordinal_number);
             mysqli_query($conn, $parallax_query);
         }
         if(!is_null($simbad_parallax_error) && !str_contains($simbad_parallax_error, "~")){
-            $parallax_error_query = ("update BrightStarSupplement set simbad_parallax_error = " . $simbad_parallax_error . " where ordinal_number = " . $ordinal_number);
+            $parallax_error_query = ("update BrightStarMultiple set simbad_parallax_error = " . $simbad_parallax_error . " where ordinal_number = " . $last_ordinal_number);
             mysqli_query($conn, $parallax_error_query);
         }
         if(!is_null($simbad_B) && !str_contains($simbad_B, "~")){
-            $simbad_B_query = ("update BrightStarSupplement set simbad_B = " . $simbad_B . " where ordinal_number = " . $ordinal_number);
+            $simbad_B_query = ("update BrightStarMultiple set simbad_B = " . $simbad_B . " where ordinal_number = " . $last_ordinal_number);
             mysqli_query($conn, $simbad_B_query);
         }
         if(!is_null($simbad_V) && !str_contains($simbad_V, "~")){
-            $simbad_V_query = ("update BrightStarSupplement set simbad_V = " . $simbad_V . " where ordinal_number = " . $ordinal_number);
+            $simbad_V_query = ("update BrightStarMultiple set simbad_V = " . $simbad_V . " where ordinal_number = " . $last_ordinal_number);
             mysqli_query($conn, $simbad_V_query);
         }
 
         // atualizar chaves estrangeiras (HIP e designation) da tabela BrightStar
-        mysqli_query($conn, "update BrightStarSupplement set BrightStarSupplement.HIP = BrightStarSupplement.simbad_HIP where BrightStarSupplement.simbad_HIP in (select Hipparcos.HIP from Hipparcos)");
-        mysqli_query($conn, "update BrightStarSupplement set BrightStarSupplement.designation = BrightStarSupplement.simbad_DR3 where BrightStarSupplement.simbad_DR3 in (select Gaia30pc.designation from Gaia30pc)");
-
+        mysqli_query($conn, "update BrightStarMultiple set BrightStarMultiple.HIP = BrightStarMultiple.simbad_HIP where BrightStarMultiple.simbad_HIP in (select Hipparcos.HIP from Hipparcos)");
+        mysqli_query($conn, "update BrightStarMultiple set BrightStarMultiple.designation = BrightStarMultiple.simbad_DR3 where BrightStarMultiple.simbad_DR3 in (select Gaia30pc.designation from Gaia30pc)");
     }
 
-    // fechar a instância do client url
+    // fechar instância do client url
     curl_close($ch);
 
     // fechar a conexão com o banco de dados
