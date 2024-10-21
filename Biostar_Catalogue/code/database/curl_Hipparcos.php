@@ -37,49 +37,78 @@
         $string_array = explode(" ", $output);
 
         // definindo variáveis para o processamento dos dados
-        $started = False;
-        $ended = False;
+        $identifiers_started = False;
+        $basic_data_started = False;
+        $identifiers_ended = False;
+        $basic_data_ended = False;
+
         $cont = 0;
-        $simbad_DR1 = "";
-        $simbad_DR2 = "";
-        $simbad_DR3 = "";
-        $simbad_HIP = "";
+        $simbad_DR1 = null;
+        $simbad_DR2 = null;
+        $simbad_DR3 = null;
+        $simbad_HIP = null;
+        $simbad_parallax = null;
+        $simbad_parallax_error = null;
 
         // início do processamento da pagina
         foreach($string_array as $word){
             if(str_contains($word, "Identifiers")){
-                $started = True;
+                $identifiers_started = True;
             }
-            if($started && str_contains($word, "Bibcodes")){
-                $ended = True;
+            if(str_contains($word, "Object")){
+                $basic_data_started = True;
             }
-            if(!$ended && $started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR1")){
+            if($identifiers_started && str_contains($word, "Bibcodes")){
+                $identifiers_ended = True;
+            }
+            if($basic_data_started && str_contains($word, "Identifiers")){
+                $basic_data_ended = True;
+            }
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR1")){
                 $simbad_DR1 = $word . " " . $string_array[$cont+1] . " " . $string_array[$cont+2];
             }
-            if(!$ended && $started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR2")){
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR2")){
                 $simbad_DR2 = $word . " " . $string_array[$cont+1] . " " . $string_array[$cont+2];
             }
-            if(!$ended && $started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR3")){
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR3")){
                 $simbad_DR3 = $word . " " . $string_array[$cont+1] . " " . $string_array[$cont+2];
             }
-            if(!$ended && $started && str_contains($word, "HIP")){
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "HIP")){
                 $simbad_HIP = $word . " " . $string_array[$cont+1];
+            }
+            // ler dados numéricos do Simbad
+            if(!$basic_data_ended && $basic_data_started && str_contains($word, "Parallax:")){
+                $simbad_parallax = $string_array[$cont + 1];
+                $simbad_parallax_error = substr($string_array[$cont + 2], 1, -1);
             }
             $cont++;
         }
+        /*
+        printf("\nsimbad_DR1: " . $simbad_DR1);
+        printf("\nsimbad_DR2: " . $simbad_DR2);
+        printf("\nsimbad_DR3: " . $simbad_DR3);
+        printf("\nsimbad_HIP: " . $simbad_HIP);
+        printf("\nsimbad_parallax: " . $simbad_parallax);
+        printf("\nsimbad_parallax_error: " . $simbad_parallax_error);*/
 
         // carregar os dados obtidos na web para o BD, caso existam
-        if(strlen($simbad_DR1) != 0){
+        if(!is_null($simbad_DR1)){
             mysqli_query($conn, "update Hipparcos set simbad_DR1 = '" . $simbad_DR1 . "' where HIP = 'HIP " . $id . "'");
         }
-        if(strlen($simbad_DR2) != 0){
+        if(!is_null($simbad_DR2)){
             mysqli_query($conn, "update Hipparcos set simbad_DR2 = '" . $simbad_DR2 . "' where HIP = 'HIP " . $id . "'");
         }
-        if(strlen($simbad_DR3) != 0){
+        if(!is_null($simbad_DR3)){
             mysqli_query($conn, "update Hipparcos set simbad_DR3 = '" . $simbad_DR3 . "' where HIP = 'HIP " . $id . "'");
         }
-        if(strlen($simbad_HIP) != 0){
+        if(!is_null($simbad_HIP)){
             mysqli_query($conn, "update Hipparcos set in_simbad = 1 where HIP = 'HIP " . $id . "'");
+        }
+        if(!is_null($simbad_parallax) && !str_contains($simbad_parallax, "~")){
+            mysqli_query($conn, "update Hipparcos set simbad_parallax = " . $simbad_parallax . "where HIP = 'HIP " . $id . "'");
+        }
+        if(!is_null($simbad_parallax_error) && !str_contains($simbad_parallax_error, "~")){
+            mysqli_query($conn, "update Hipparcos set simbad_parallax_error = " . $simbad_parallax_error . "where HIP = 'HIP " . $id . "'");
         }
     }
 
@@ -95,6 +124,8 @@
     simbad_DR1,
     simbad_DR2,
     simbad_DR3,
+    trim(simbad_parallax)+0,
+    trim(simbad_parallax_error)+0,
     trim(Vmag)+0,
     trim(RAdeg)+0,
     trim(DEdeg)+0,

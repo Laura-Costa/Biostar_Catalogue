@@ -24,7 +24,7 @@ query = ("select trim({father_table}.parallax)+0, "
          "({father_table}.parallax < 50.00 and ({father_table}.parallax + 3*{father_table}.parallax_error) >= 50.00) "
          ")".format(father_table=father_table))
 
-f.histogram(query, cursor, 'paralaxes', 'paralaxe', 4, '/CAT1/pyplot_histogram/CAT1_parallax.svg', yfontsize=5, xfontsize=0.5, ylog=True)
+f.histogram(query, cursor, 'paralaxes', 'paralaxe', 4, '/CAT1/pyplot_histogram/svg/CAT1_parallax.svg', yfontsize=5, xfontsize=0.5, ylog=True)
 
 """
 Histograma de sigma(pi)
@@ -42,11 +42,11 @@ query = ("select trim({father_table}.parallax)+0, "
          "({father_table}.parallax < 50.00 and ({father_table}.parallax + 3*{father_table}.parallax_error) >= 50.00) "
          ")".format(father_table=father_table))
 
-f.histogram(query, cursor, "CAT1", r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_log.svg', yfontsize=5, xfontsize=5, xrot=30, ylog=True, yticks_not_heights=True)
-f.histogram(query, cursor, "CAT1",  r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe.svg', yfontsize=5, xfontsize=5, xrot=30, yticks_not_heights=True, yticks_step=204)
+f.histogram(query, cursor, "CAT1", r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/jpg/histograma_dos_erros_de_paralaxe_log.jpg', yfontsize=5, xfontsize=5, xrot=30, ylog=True, yticks_not_heights=True)
+f.histogram(query, cursor, "CAT1",  r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.15), '/CAT1/pyplot_histogram/jpg/histograma_dos_erros_de_paralaxe.jpg', yfontsize=5, xfontsize=5, xrot=30, yticks_not_heights=True, yticks_step=204)
 
-f.histogram(query, cursor, "CAT1", r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.01), '/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_detalhado_log.svg', yfontsize=3, xfontsize=0.01, xrot=30, ylog=True, yticks_not_heights=True, xticks_not_edges=True, xticks_step=0.03)
-f.histogram(query, cursor, "CAT1",  r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.01), '/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_detalhado.svg', yfontsize=3, xfontsize=0.01, xrot=30, yticks_not_heights=True, xticks_not_edges=True, yticks_step=20, xticks_step=0.03)
+f.histogram(query, cursor, "CAT1", r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.01), '/CAT1/pyplot_histogram/svg/histograma_dos_erros_de_paralaxe_detalhado_log.svg', yfontsize=3, xfontsize=0.01, xrot=30, ylog=True, yticks_not_heights=True, xticks_not_edges=True, xticks_step=0.03)
+f.histogram(query, cursor, "CAT1",  r"$σ$($π$) em milissegundos de arco", np.arange(0.0, 4.57095, 0.01), '/CAT1/pyplot_histogram/svg/histograma_dos_erros_de_paralaxe_detalhado.svg', yfontsize=3, xfontsize=0.01, xrot=30, yticks_not_heights=True, xticks_not_edges=True, yticks_step=20, xticks_step=0.03)
 """
 Histograma de sigma(pi)
 para estrelas da borda
@@ -76,7 +76,5 @@ for i, bins in enumerate([10, 80]):
     ax[i].set_ylabel('frequency')
     ax[i].set_title(f'plt.hist(parallax_error, bins={bins})', fontdict=dict(family='monospace'))
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_histogram/sigma_pi_borda.svg')
+plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_histogram/svg/sigma_pi_borda.svg')
 plt.close()
-
-

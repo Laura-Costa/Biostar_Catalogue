@@ -103,7 +103,7 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
     plt.grid(color='grey', linestyle='solid', which='major', linewidth=0.1, axis='y', zorder=0)
 
     # salvar figura
-    plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files{path}".format(path=path))
+    plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files{path}".format(path=path), dpi=1200)
 
     # fechar p matplotlib.pyplot
     plt.close()

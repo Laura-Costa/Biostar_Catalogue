@@ -84,7 +84,7 @@ def scatterplot(cursor, query, ymargim_bottom, ymargim_upper, xmargim_bottom, xm
 
 
     # salvar diagrama
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path))
+    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path), dpi=1200)
 
     # close matplotlib.pyplot as plt object
     plt.close()

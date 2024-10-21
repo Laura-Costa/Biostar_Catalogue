@@ -10,7 +10,7 @@ cursor = connection.cursor()
 son_table = 'BrightStarSupplement'
 son_key_column = 'ordinal_number'
 father_table_Hipparcos = 'Hipparcos'
-father_table_Gaia = 'Gaia30pc'
+father_table_Gaia = 'CAT1'
 
 # apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))

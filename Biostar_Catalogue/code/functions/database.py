@@ -92,21 +92,8 @@ def insert_key(cursor, table_name, column_key_name, data_structure, index, preff
     else:
         data_value = data_structure[index]
 
-    """
-    # validação desnecessária para a chave primária
-    # todas atendem a estes requisitos
-    
-    if type(data_structure[index]) == int and data_structure[index] < 1:
-        cursor.execute("insert into {table_name}({column_key_name}) values(null)".format(table_name=table_name,
-                                                                                         column_key_name=column_key_name))
-        return
-    elif len(data_value) == 0 or data_value == '\n' or data_value == '\r' or data_value == '\r\n':
-        cursor.execute("insert into {table_name}({column_key_name}) values(null)".format(table_name=table_name,
-                                                                                         column_key_name=column_key_name))
-        return
-    """
-
     if preffix: data_value = column_key_name + " " + data_value
+
     cursor.execute("insert into {table_name}({column_key_name}) values('{data_value}')".format(table_name=table_name,
                                                                                                column_key_name=column_key_name,
                                                                                                data_value=data_value))

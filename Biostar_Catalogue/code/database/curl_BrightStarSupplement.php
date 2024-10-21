@@ -166,7 +166,7 @@
 
         // atualizar chaves estrangeiras (HIP e designation) da tabela BrightStar
         mysqli_query($conn, "update BrightStarSupplement set BrightStarSupplement.HIP = BrightStarSupplement.simbad_HIP where BrightStarSupplement.simbad_HIP in (select Hipparcos.HIP from Hipparcos)");
-        mysqli_query($conn, "update BrightStarSupplement set BrightStarSupplement.designation = BrightStarSupplement.simbad_DR3 where BrightStarSupplement.simbad_DR3 in (select Gaia30pc.designation from Gaia30pc)");
+        mysqli_query($conn, "update BrightStarSupplement set BrightStarSupplement.designation = BrightStarSupplement.simbad_DR3 where BrightStarSupplement.simbad_DR3 in (select CAT1.designation from CAT1)");
 
     }
 
