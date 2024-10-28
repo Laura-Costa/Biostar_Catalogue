@@ -7,6 +7,8 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
     for line in file:
         list_HD.append("HD {}".format(line.rstrip()))
 
+print(list_HD)
+
 def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, size, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0, redx=-1, redy=-1, error_bars=False):
 
     fig, ax = plt.subplots()
@@ -50,22 +52,24 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                 y_error_list.append(y_error_value)
 
         # reta y = x
-        ax.axline((0, 0), slope=1, linewidth=0.5, color='red', label='f(x) = x') # label='f(x) = x',
+        ax.axline((0, 0), slope=1, linewidth=0.5, color='red', label='y = x') # label='f(x) = x',
 
+    # a distância no título do diagrama não leva em conta as estrelas da legenda,
+    # a menos que elas também estejam na seleção principal
     min_parallax = min(parallax_list)
     max_parallax = max(parallax_list)
 
+
     if 'LNA' in path:
         for (simbad_HD_value, x, y) in zip(simbad_HD_list, x_axis, y_axis):
-            if x <= 1.500 and y <= 9.00 and simbad_HD_value not in list_HD:
+            if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD:
                 ax.scatter([x], [y], s=size, color='black', edgecolor='none', marker='o', zorder=2)
             else:
                 ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', marker='o', zorder=2)
     elif not error_bars:
         ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o', zorder=2)
     elif error_bars:
-        ax.errorbar(x_axis, y_axis, ms=2.0, color='black', mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list,
-                    xerr=x_error_list, ecolor='blue', zorder=2)
+        ax.errorbar(x_axis, y_axis, ms=2.0, color='black', mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list, xerr=x_error_list, ecolor='blue', zorder=2)
 
     if "HR" in path: # Se o diagrama é HR, o eixo y é invertido
         plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
@@ -73,9 +77,24 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         plt.ylim(min(y_axis) - ymargin_bottom, max(y_axis) + ymargin_upper)
     plt.xlim(min(x_axis) - xmargin_left, max(x_axis) + xmargin_right)
 
-    ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle, len(value), 1000.0/min_parallax, min_parallax, max_parallax), fontsize=7, y=1.04)
-    plt.xlabel(xlabel, fontsize=7)
-    plt.ylabel(ylabel, fontsize=7)
+    if 'error_bars' in path: # os títulos dos diagramas com barras de erro é diferente (tinha ficado com distância negativa)
+        ax.set_title("{}\n{} estrelas, {:.4f} ≤ π ≤ {:.4f} mas ({})".format(suptitle,
+                                                                            len(value),
+                                                                            min_parallax,
+                                                                            max_parallax,
+                                                                            xlabel),
+                                                                            fontsize=6,
+                                                                            y=1.05)
+    else: # esse é o título dos diagramas sem barras de erro
+        ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
+                                                                                                              len(value),
+                                                                                                              1000.0/min_parallax,
+                                                                                                              min_parallax,
+                                                                                                              max_parallax),
+                                                                                                              fontsize=6,
+                                                                                                              y=1.04)
+    plt.xlabel(xlabel, fontsize=6)
+    plt.ylabel(ylabel, fontsize=6)
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
@@ -128,18 +147,22 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
     for (HD_value, color) in zip(hds, colors):
         cursor.execute(query_emphasis + "'{}'".format(HD_value))
         value_emphasis = cursor.fetchall()
+        print(value_emphasis)
         '''
         if error_bars:
-            ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=4.0, color=color, mec='none', fmt='o', elinewidth=0.3, yerr=value_emphasis[0][4],
+            ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=3.0, color=color, mec='none', fmt='o', elinewidth=0.3, yerr=value_emphasis[0][4],
                         xerr=value_emphasis[0][3], ecolor='blue', label=value_emphasis[0][0])             
-        else:
-        '''
+        else:'''
+        if HD_value == "HD 131976" and "39mas" in path:
+            ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=3.0, color=color, mec='none', fmt='o',
+                        elinewidth=0.3, yerr=value_emphasis[0][4],
+                        xerr=value_emphasis[0][3], ecolor='blue')
         ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=10, color=color, edgecolor='none', marker='o', zorder=3, label=value_emphasis[0][0])
 
     # configurar legenda
     lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='best')
 
-    if path == '/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.jpg': # a legenda desta figura em específico não foi localizada adequadamente por loc='best'
+    if 'simbad_MV_simbad_B_V' in path: # a legenda desta figura em específico não foi localizada adequadamente por loc='best'
         lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower right')
 
     # configurar tamanho dos marcadores da legenda

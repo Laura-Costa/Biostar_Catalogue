@@ -7,44 +7,14 @@
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/CAT1_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/csv/without_g_bp_rp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_histogram/pyplot_histogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_histogram/pyplot_histogram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_pi.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_pi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarMultiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarMultiple_simbad.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple_simbad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStarSupplement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplementMultiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStarSupplementMultiple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStar_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia30pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/CAT1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia30pc_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/CAT1_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_BrightStar.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_BrightStarSupplement.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/curl_BrightStarSupplement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_Hipparcos.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/curl_Hipparcos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/input_files/Gaia30pc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/input_files/Gaia50pc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/functions/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/LNA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/csv/LNA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_Bp_Rp.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_Bp_Rp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Hipparcos/pyplot_scatterplot/error_bars_emphasis.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Hipparcos/pyplot_scatterplot/error_bars_emphasis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/functions/pyplot_histogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_histogram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/functions/pyplot_scatterplot.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_scatterplot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/teste/string_format.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/teste/string_format.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/MV_B_V.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/without_Rp_Bp_G.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/MG_Bp_Rp_ampliado.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/CAT1_parallax.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_detalhado.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_detalhado_log.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/histograma_dos_erros_de_paralaxe_log.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_histogram/sigma_pi_borda.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/erro_da_paralaxe_contra_paralaxe.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/erro_da_paralaxe_contra_paralaxe_log.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/Hipparcos/pyplot_scatterplot/error_bars_emphasis.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/Hipparcos/pyplot_scatterplot/error_bars_emphasis.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +41,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.20pc.executor": "Run",
+    "Python.211 estrelas.executor": "Run",
     "Python.BrightStar.executor": "Run",
     "Python.BrightStarMultiple.executor": "Run",
     "Python.BrightStarMultiple_csv.executor": "Run",
@@ -91,6 +63,8 @@
     "Python.Hipparcos.executor": "Run",
     "Python.Hipparcos_product.executor": "Run",
     "Python.LNA.executor": "Run",
+    "Python.LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.executor": "Run",
+    "Python.LNA_estrelas_entre_211_e_sem_HIP.executor": "Run",
     "Python.LNA_round.executor": "Run",
     "Python.astropy_histogram.executor": "Run",
     "Python.create_database.executor": "Run",
@@ -98,17 +72,30 @@
     "Python.deg2hms.executor": "Run",
     "Python.error_bars.executor": "Run",
     "Python.error_bars_emphasis.executor": "Run",
+    "Python.estrelas_sem_Bp_Rp.executor": "Run",
+    "Python.estrelas_sem_G.executor": "Run",
+    "Python.estrelas_sem_G_ou_sem_Bp_Rp.executor": "Run",
+    "Python.excel.executor": "Run",
+    "Python.origin_lab.executor": "Run",
     "Python.parallax_plots.executor": "Run",
     "Python.pyplot_HRdiagram.executor": "Run",
     "Python.pyplot_histogram.executor": "Run",
     "Python.pyplot_scatterplot.executor": "Run",
+    "Python.query_around_xlsx.executor": "Run",
     "Python.ra.executor": "Run",
+    "Python.sem_ADS_Comp_e_sem_DR3.executor": "Run",
+    "Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor": "Run",
+    "Python.sem_ADS_Comp_sem_DR3_xlsx.executor": "Run",
+    "Python.sem_DR3.executor": "Run",
+    "Python.sem_DR3_e_sem_HIP.executor": "Run",
+    "Python.sem_HD.executor": "Run",
     "Python.sigmaPi_vs_Bp_Rp.executor": "Run",
     "Python.sigmaPi_vs_G.executor": "Run",
     "Python.sigmaPi_vs_MG.executor": "Run",
     "Python.sigmaPi_vs_pi.executor": "Run",
     "Python.sigma_pi_x_pi.executor": "Run",
     "Python.testeBrightStar.executor": "Run",
+    "Python.upper_lower.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main"
   }

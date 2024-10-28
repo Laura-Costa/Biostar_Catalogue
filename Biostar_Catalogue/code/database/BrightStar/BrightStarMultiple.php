@@ -91,9 +91,20 @@
             for($i=1; $i<=$number_of_objects; $i++){
                 if (strlen($line) == 0) {continue;}
                 if($line[0] == $i){
+                    // line is like: | 1 | simbad_name | -- | -- | -- | -- |
                     $simbad_name = substr($line, strpos($line, "|")+1);
                     $simbad_name = substr($simbad_name, strpos($simbad_name, "|")+1);
                     $simbad_name = trim(substr($simbad_name, 0, strpos($simbad_name, "|")-1));
+                    // retirar possíveis espaços entre as palavras
+                    $simbad_name_list = explode(" ", $simbad_name);
+                    $cont_simbad_name = 0;
+                    foreach($simbad_name_list as $piece){
+                        if($cont_simbad_name == 0){
+                            $simbad_name = $piece;
+                        }
+                        $simbad_name = $simbad_name . " " . $piece;
+                        $cont_simbad_name++;
+                    }
 
                     // aqui eu tenho o identificador da múltipla
                     mysqli_query($conn, "insert into BrightStarMultiple(simbad_name) values('" . $simbad_name . "')");

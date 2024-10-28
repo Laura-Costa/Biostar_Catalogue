@@ -145,9 +145,9 @@ def sql_query_zoom(y_axis, x_axis):
 fazer o diagrama de parallax_error x MG
 """
 (query, query_emphasis) = sql_query('parallax_error', 'Bp_Rp')
-f.diagram(cursor, query, query_emphasis, colors, HDs,'CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp.jpg', 1.25, 0.5, r'$B_p-R_p$', r'$σ(π)$', 2.0, 0.20, 0.20, 0.20, 0.20, 'CAT1')
+f.diagram(cursor, query, query_emphasis, colors, HDs,'CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp.jpg', 0.625, 0.5, r'$B_p-R_p$', r'$σ(π)$', 2.0, 0.20, 0.20, 0.20, 0.20, 'CAT1')
 (query, query_emphasis) = sql_query_zoom('parallax_error', 'Bp_Rp')
-diagram(cursor, query, query_emphasis, colors, [],'CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp_ampliado.jpg', 1.25, 0.5, r'$B_p-R_p$', 'σ(π)', 6.0, 0.20, 0.20, 0.20, 0.20, 'CAT1: estrelas com σ(π) > 1.0 (mas)')
+diagram(cursor, query, query_emphasis, colors, [],'CAT1/pyplot_scatterplot/jpg/parallax_error_Bp_Rp_ampliado.jpg', 0.625, 0.5, r'$B_p-R_p$', 'σ(π)', 6.0, 0.20, 0.20, 0.20, 0.20, 'CAT1: estrelas com σ(π) > 1.0 (mas)')
 
 # fechar a conexão com o BD
 connection.close()
