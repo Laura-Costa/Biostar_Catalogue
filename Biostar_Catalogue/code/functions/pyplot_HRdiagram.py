@@ -9,7 +9,7 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
 
 print(list_HD)
 
-def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, size, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0, redx=-1, redy=-1, error_bars=False):
+def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5, dp = -1, axeslabelsize=6):
 
     fig, ax = plt.subplots()
     cursor.execute(query)
@@ -62,15 +62,15 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     if 'LNA' in path:
         for (simbad_HD_value, x, y) in zip(simbad_HD_list, x_axis, y_axis):
             if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD and simbad_HD_value not in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
-                ax.scatter([x], [y], s=size, color='black', edgecolor='none', marker='o', zorder=2)
+                ax.scatter([x], [y], s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
             elif simbad_HD_value in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
-                ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', linewidth=0.6, marker='o', zorder=1)
+                ax.scatter([x], [y], s=markersize, color='#95a5a6', edgecolor='none', linewidth=0.6, marker='o', zorder=2)
             else:
-                ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', marker='o', zorder=1)
+                ax.scatter([x], [y], s=markersize, color='#95a5a6', edgecolor='none', marker='o', zorder=2)
     elif not error_bars:
-        ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o', zorder=2)
+        ax.scatter(x_axis, y_axis, s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
     elif error_bars:
-        ax.errorbar(x_axis, y_axis, ms=2.0, color='black', mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list, xerr=x_error_list, ecolor='blue', zorder=2)
+        ax.errorbar(x_axis, y_axis, ms=2.0, color='black', mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list, xerr=x_error_list, ecolor='blue', zorder=3)
 
     if "HR" in path: # Se o diagrama é HR, o eixo y é invertido
         plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
@@ -87,14 +87,15 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                                                                             fontsize=7,
                                                                             y=1.05)
     else: # esse é o título dos diagramas sem barras de erro
-        ax.set_title("CAT1: {} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(len(value),
-                                                                                                              1000.0/min_parallax,
-                                                                                                              min_parallax,
-                                                                                                              max_parallax),
-                                                                                                              fontsize=7.5,
-                                                                                                              y=1.07)
-    plt.xlabel(xlabel, fontsize=8)
-    plt.ylabel(ylabel, fontsize=8)
+        ax.set_title("{}: {} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
+                                                                                                      len(value),
+                                                                                                      1000.0/min_parallax,
+                                                                                                      min_parallax,
+                                                                                                      max_parallax),
+                                                                                                      fontsize=7.5,
+                                                                                                      y=1.07)
+    plt.xlabel(xlabel, fontsize=axeslabelsize)
+    plt.ylabel(ylabel, fontsize=axeslabelsize)
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
@@ -102,22 +103,33 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
     ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
 
+    # configurar ambos os axis (xaxis e yaxis) com labels com dp (decimal_places) casas decimais
+    if dp != -1:
+        ax.xaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dp)))
+        ax.yaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dp)))
+
     # configurar labels do major e minor ticks de ambos os eixos
     ax.tick_params(axis='both', which='both', labelsize=10, color='black', labeltop=True, top=True,
                                                                           labelright=True, right=True,
-                                                                          tickdir='out', width=1.0)
+                                                                          tickdir='out')
+
+    # configurar largura dos minor ticks dos eixos x e y
+    ax.tick_params(axis='both', which='minor', width=minortickwidth)
+
+    # configurar largura dos major ticks dos eixos x e y
+    ax.tick_params(axis='both', which='major', width=majortickwidth)
 
     # rotacionar label do eixo x
     plt.xticks(rotation=0)
 
     # configurar uma major grid atrás do plot
-    plt.grid(color='#aeaeae', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.1)
+    plt.grid(color='#aeaeae', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.1, zorder=1)
 
     # configurar uma minor grid atrás do plot
-    plt.grid(color='lightgrey', linestyle='dashed', dashes=(2,2), which='minor', linewidth=0.1)
+    plt.grid(color='lightgrey', linestyle='dashed', dashes=(2,2), which='minor', linewidth=0.1, zorder=1)
 
     # grid vermelha em Bp-Rp=1.500 e M(G)=7
-    if 'MG_Bp_Rp' in path and redx != -1 and redy != -1:
+    if redx != -1 and redy != -1:
         # a = [tick.gridline for tick in ax.xaxis.get_minor_ticks()] # para se quiser a linha partindo do minor tick
         a = ax.get_xgridlines()
         b = a[redx]
@@ -128,10 +140,6 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         b = a[redy]
         b.set_color('red')
         b.set_linewidth(1.0)
-
-        # configurar ambos os axis com labels com 2 casas decimais
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
-        ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
 
         # colocar o tick e o label do x = 1.50 em vermelho
         xTicks = plt.xticks([0.25, 0.50, 0.75, 1.00, 1.25, 1.50])
@@ -144,11 +152,13 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)
 
-    # salvar a figura
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path, dpi=1200)
+    # salvar a figura em várias extensões diferentes
+    for ext in ['jpg', 'eps']:
+        temp_path = path.replace("#", ext)
+        plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
 
     # marcar a HD 146233 e as 5 anãs K
-    if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, size)
+    if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, markersize)
 
     # fechar plt
     plt.close()
@@ -167,7 +177,7 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
         if HD_value == "HD 131976" and "39mas" in path:
             ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=3.0, color=color, mec='none', fmt='o',
                         elinewidth=0.3, yerr=value_emphasis[0][4],
-                        xerr=value_emphasis[0][3], ecolor='blue')
+                        xerr=value_emphasis[0][3], ecolor='blue', zorder=4)
         ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=10, color=color, edgecolor='none', marker='o', zorder=4, label=value_emphasis[0][0])
 
     # configurar legenda
@@ -183,10 +193,9 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
             handle.set_sizes([25])
 
     # expor legenda no axes
-    frame = lgnd.get_frame()
+    lgnd.get_frame()
 
-    # mudar o tamanho da figura em polegadas
-    # plt.gcf().set_size_inches(10.40, 8.80)
-
-    # salvar a figura
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path, dpi=1200)
+    # salvar a figura em várias extensões diferentes
+    for ext in ['jpg', 'eps']:
+        temp_path = path.replace("#", ext)
+        plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)

@@ -6,15 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/LNA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/LNA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple_simbad.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple_simbad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/LNA2_MG_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/LNA2_MG_Bp_Rp.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
