@@ -76,12 +76,12 @@
         // executar a requisição
         $output = curl_exec($ch);
 
-        // criar um array de strings com a string única rtornada pela tranferência
+        // criar um array de strings com a string única retornada pela tranferência
         $lines_array = explode("\n", $output);
 
         // inicio do processamento da página
         $number_of_objects = null;
-        $simbad_name = null;
+        $simbad_main_identifier = null;
         foreach($lines_array as $line){
             if(str_contains($line, "Number")) {
                 $number_of_objects = trim(substr($line, strpos($line, ":")+1));
@@ -92,22 +92,23 @@
                 if (strlen($line) == 0) {continue;}
                 if($line[0] == $i){
                     // line is like: | 1 | simbad_name | -- | -- | -- | -- |
-                    $simbad_name = substr($line, strpos($line, "|")+1);
-                    $simbad_name = substr($simbad_name, strpos($simbad_name, "|")+1);
-                    $simbad_name = trim(substr($simbad_name, 0, strpos($simbad_name, "|")-1));
+                    $simbad_main_identifier = substr($line, strpos($line, "|")+1);
+                    $simbad_main_identifier = substr($simbad_main_identifier, strpos($simbad_main_identifier, "|")+1);
+                    $simbad_main_identifier = trim(substr($simbad_main_identifier, 0, strpos($simbad_main_identifier, "|")-1));
                     // retirar possíveis espaços entre as palavras
-                    $simbad_name_list = explode(" ", $simbad_name);
-                    $cont_simbad_name = 0;
-                    foreach($simbad_name_list as $piece){
-                        if($cont_simbad_name == 0){
-                            $simbad_name = $piece;
+                    $simbad_main_identifier_list = explode(" ", $simbad_main_identifier);
+                    $cont_simbad_main_identifier = 0;
+                    foreach($simbad_main_identifier_list as $piece){
+                        if($cont_simbad_main_identifier == 0){
+                            $simbad_main_identifier = $piece; // se é a primeira vez, põe direto
+                        } else {
+                            $simbad_main_identifier = $simbad_main_identifier . " " . $piece; // se não é a primeira vez, coloca " " antes
                         }
-                        $simbad_name = $simbad_name . " " . $piece;
-                        $cont_simbad_name++;
+                        $cont_simbad_main_identifier++;
                     }
 
                     // aqui eu tenho o identificador da múltipla
-                    mysqli_query($conn, "insert into BrightStarMultiple(simbad_name) values('" . $simbad_name . "')");
+                    mysqli_query($conn, "insert into BrightStarMultiple(simbad_main_identifier) values('" . $simbad_main_identifier . "')");
                     $last_ordinal_number++;
 
                     // carregar a chave estrangeira HR

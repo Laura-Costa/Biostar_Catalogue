@@ -203,7 +203,7 @@ hds = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 (BrightStar_plus_Multiple, BrightStar, Multiple, emphasis) = sql_query('B_V', 'MV')
 diagram(cursor, Multiple, emphasis, colors, hds, '/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V \; (simbad)$', r'$M(V) \; (simbad)$', 6.0, 0.20, 0.20, 2.0, 2.0, 'Objetos do Query Around (Bright Star) sem designação Gaia DR3 no Simbad', xrot=20)
-diagram(cursor, BrightStar, emphasis, colors, hds, '/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Objetos do Bright Star sem ADS_Comp e sem designação Gaia DR3 no Simbad', xrot=20)
+diagram(cursor, BrightStar, emphasis, colors, hds, '/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Objetos do Bright Star com ADS_Comp vazio e sem designação Gaia DR3 no Simbad', xrot=20)
 diagram(cursor, BrightStar_plus_Multiple, emphasis, colors, hds, '/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Objetos do Bright Star + Query Around sem designação Gaia DR3 no Simbad', xrot=20)
 
 # fechar conexão com o BD

@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator, FormatStrFormatter)
 
 list_HD = []
 
@@ -59,13 +59,14 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     min_parallax = min(parallax_list)
     max_parallax = max(parallax_list)
 
-
     if 'LNA' in path:
         for (simbad_HD_value, x, y) in zip(simbad_HD_list, x_axis, y_axis):
-            if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD:
+            if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD and simbad_HD_value not in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
                 ax.scatter([x], [y], s=size, color='black', edgecolor='none', marker='o', zorder=2)
+            elif simbad_HD_value in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
+                ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', linewidth=0.6, marker='o', zorder=1)
             else:
-                ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', marker='o', zorder=2)
+                ax.scatter([x], [y], s=size, color='#95a5a6', edgecolor='none', marker='o', zorder=1)
     elif not error_bars:
         ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o', zorder=2)
     elif error_bars:
@@ -83,18 +84,17 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                                                                             min_parallax,
                                                                             max_parallax,
                                                                             xlabel),
-                                                                            fontsize=6,
+                                                                            fontsize=7,
                                                                             y=1.05)
     else: # esse é o título dos diagramas sem barras de erro
-        ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
-                                                                                                              len(value),
+        ax.set_title("CAT1: {} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(len(value),
                                                                                                               1000.0/min_parallax,
                                                                                                               min_parallax,
                                                                                                               max_parallax),
-                                                                                                              fontsize=6,
-                                                                                                              y=1.04)
-    plt.xlabel(xlabel, fontsize=6)
-    plt.ylabel(ylabel, fontsize=6)
+                                                                                                              fontsize=7.5,
+                                                                                                              y=1.07)
+    plt.xlabel(xlabel, fontsize=8)
+    plt.ylabel(ylabel, fontsize=8)
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
@@ -103,9 +103,9 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
 
     # configurar labels do major e minor ticks de ambos os eixos
-    ax.tick_params(axis='both', which='both', labelsize=3, color='black', labeltop=True, top=True,
+    ax.tick_params(axis='both', which='both', labelsize=10, color='black', labeltop=True, top=True,
                                                                           labelright=True, right=True,
-                                                                          tickdir='out', width=0.5)
+                                                                          tickdir='out', width=1.0)
 
     # rotacionar label do eixo x
     plt.xticks(rotation=0)
@@ -122,13 +122,24 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         a = ax.get_xgridlines()
         b = a[redx]
         b.set_color('red')
-        b.set_linewidth(0.6)
+        b.set_linewidth(1.0)
 
         a = ax.get_ygridlines()
         b = a[redy]
         b.set_color('red')
-        b.set_linewidth(0.6)
+        b.set_linewidth(1.0)
 
+        # configurar ambos os axis com labels com 2 casas decimais
+        ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+        ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+
+        # colocar o tick e o label do x = 1.50 em vermelho
+        xTicks = plt.xticks([0.25, 0.50, 0.75, 1.00, 1.25, 1.50])
+        xTicks[0][5]._apply_params(color='r', labelcolor='r')
+
+        # colocar o tick e o label do y = 9.00 em vermelho
+        yTicks = plt.yticks([2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0])
+        yTicks[0][7]._apply_params(color='r', labelcolor='r')
 
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)
@@ -157,14 +168,15 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
             ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=3.0, color=color, mec='none', fmt='o',
                         elinewidth=0.3, yerr=value_emphasis[0][4],
                         xerr=value_emphasis[0][3], ecolor='blue')
-        ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=10, color=color, edgecolor='none', marker='o', zorder=3, label=value_emphasis[0][0])
+        ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=10, color=color, edgecolor='none', marker='o', zorder=4, label=value_emphasis[0][0])
 
     # configurar legenda
     lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='best')
 
     if 'simbad_MV_simbad_B_V' in path: # a legenda desta figura em específico não foi localizada adequadamente por loc='best'
         lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower right')
-
+    if  'LNA2_MG_Bp_Rp' in path:
+        lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower left')
     # configurar tamanho dos marcadores da legenda
     for handle in lgnd.legend_handles:
         if not error_bars:

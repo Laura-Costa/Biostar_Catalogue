@@ -35,11 +35,12 @@ cursor.execute("create table {son_table}( "
                "V numeric(65, 30) null, "
                "B_V numeric(65, 30) null, "
                "SpType char(100) null, "
+               "Parallax numeric(65, 30) null, "
                "Mult_MDiff numeric(65, 30) null, "
                "Mult_Sep numeric(65, 30) null, "
                "Mult_ID char(100) null, "
                "Mult_Cnt int null, "
-               "simbad_name char(100) null, "
+               "simbad_main_identifier char(100) null, "
                "simbad_DR1 char(100) null, "
                "simbad_DR2 char(100) null, "
                "simbad_DR3 char(100) null, "
@@ -107,6 +108,9 @@ with open("../input_files/BSC5_edited.DAT", "r") as dat_file:
 
         # load SpType
         f.update_table(cursor, son_table, 'SpType', line, 127, son_column_key, lastrowid, False, 147)
+
+        # load Parallax
+        f.update_table(cursor, son_table, 'Parallax', line, 161, son_column_key, lastrowid, False, 166)
 
         # load Mult_MDiff
         f.update_table(cursor, son_table, 'Mult_MDiff', line, 180, son_column_key, lastrowid, False, 184)

@@ -18,23 +18,23 @@
         echo "sucess";
     }
 
-    $query = mysqli_query($conn, "select ordinal_number, simbad_name from BrightStarMultiple");
+    $query = mysqli_query($conn, "select ordinal_number, simbad_main_identifier from BrightStarMultiple");
     while($row = mysqli_fetch_array($query)) {
 
         // pegar o ordinal_number e o identifier do BD
         $last_ordinal_number = $row[0];
-        $simbad_name = null;
+        $simbad_main_identifier = null;
 
         foreach (explode(" ", $row[1]) as $piece){
-            if(is_null($simbad_name)) {
-                $simbad_name = $piece;
+            if(is_null($simbad_main_identifier)) {
+                $simbad_main_identifier = $piece;
             } else {
-                $simbad_name = $simbad_name . "+" . $piece;
+                $simbad_main_identifier = $simbad_main_identifier . "+" . $piece;
             }
         }
 
         // configurar URL
-        curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=" . $simbad_name);
+        curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=" . $simbad_main_identifier);
 
         // retornar a transferência como uma string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -113,7 +113,7 @@
             $cont++;
         }
 
-        printf("\nsimbad_name: " . $simbad_name);
+        printf("\nsimbad_main_identifier: " . $simbad_main_identifier);
         printf("\nsimbad_parallax: " . $simbad_parallax);
         printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
         printf("\nsimbad_parallax_source: " . $simbad_parallax_source);

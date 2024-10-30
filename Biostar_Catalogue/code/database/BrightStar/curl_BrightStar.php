@@ -52,7 +52,7 @@
         $identifiers_ended = False;
         $basic_data_ended = False;
         $cont = 0;
-        $simbad_name = null;
+        $simbad_main_identifier = null;
         $simbad_DR1 = null;
         $simbad_DR2 = null;
         $simbad_DR3 = null;
@@ -97,11 +97,11 @@
             // ler dados do basic data do Simbad
             // Nome principal do Simbad
             if(!$basic_data_ended && $basic_data_started && str_contains($word, "Object")){
-                $simbad_name = $string_array[$cont + 1];
-                $cont_name = $cont + 2;
-                while(!str_contains($string_array[$cont_name], "---")){
-                    $simbad_name = $simbad_name . " " . trim($string_array[$cont_name]);
-                    $cont_name += 1;
+                $simbad_main_identifier = $string_array[$cont + 1];
+                $cont_main_identifier = $cont + 2;
+                while(!str_contains($string_array[$cont_main_identifier], "---")){
+                    $simbad_main_identifier = $simbad_main_identifier . " " . trim($string_array[$cont_main_identifier]);
+                    $cont_main_identifier += 1;
                 }
             }
             // parallax, parallax_error e parallax_source do Simbad
@@ -126,7 +126,7 @@
         }
 
         /*
-        printf("\nsimbad_name: " . $simbad_name);
+        printf("\nsimbad_main_identifier: " . $simbad_main_identifier);
         printf("\nHR: " . $HR);
         printf("\nsimbad_parallax: " . $simbad_parallax);
         printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
@@ -148,8 +148,8 @@
         if(!is_null($simbad_HIP)){
             mysqli_query($conn, "update BrightStar set simbad_HIP = '" . $simbad_HIP . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
         }
-        if(!is_null($simbad_name)){
-            mysqli_query($conn, "update BrightStar set simbad_name = '" . $simbad_name . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+        if(!is_null($simbad_main_identifier)){
+            mysqli_query($conn, "update BrightStar set simbad_main_identifier = '" . $simbad_main_identifier . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
         }
         if(!is_null($simbad_parallax) && !str_contains($simbad_parallax, "~")){
             $simbad_parallax_query = ("update BrightStar set simbad_parallax = " . $simbad_parallax . " where " . substr($id, 0, 2) . " = '" . $id . "'");
