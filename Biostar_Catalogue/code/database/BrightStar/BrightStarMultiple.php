@@ -17,8 +17,8 @@
     } else{
         echo "sucess";
     }
-    $last_ordinal_number = 0;
-    $query = mysqli_query($conn, "select HR, HD, ADS_Comp from BrightStar");
+
+    $query = mysqli_query($conn, "select HR, HD, ADS_Comp, simbad_main_identifier from BrightStar");
     while($row = mysqli_fetch_array($query)) {
         $ADS_Comp = $row[2];
 
@@ -27,6 +27,7 @@
 
         $HR = $row[0];
         $HD = $row[1];
+        $simbad_main_identifier = $row[3];
 
         // configurar url
         curl_setopt($ch, CURLOPT_URL, "https://simbad.u-strasbg.fr/simbad/sim-id?output.format=ASCII&Ident=" . substr($HD, 0, 2) . "+" . substr($HD, 3));
@@ -81,39 +82,49 @@
 
         // inicio do processamento da página
         $number_of_objects = null;
-        $simbad_main_identifier = null;
         foreach($lines_array as $line){
-            if(str_contains($line, "Number")) {
+            if(str_contains($line, "Number of objects :")) {
                 $number_of_objects = trim(substr($line, strpos($line, ":")+1));
             }
         }
-        foreach($lines_array as $line){
-            for($i=1; $i<=$number_of_objects; $i++){
-                if (strlen($line) == 0) {continue;}
-                if($line[0] == $i){
-                    // line is like: | 1 | simbad_name | -- | -- | -- | -- |
-                    $simbad_main_identifier = substr($line, strpos($line, "|")+1);
-                    $simbad_main_identifier = substr($simbad_main_identifier, strpos($simbad_main_identifier, "|")+1);
-                    $simbad_main_identifier = trim(substr($simbad_main_identifier, 0, strpos($simbad_main_identifier, "|")-1));
-                    // retirar possíveis espaços entre as palavras
-                    $simbad_main_identifier_list = explode(" ", $simbad_main_identifier);
-                    $cont_simbad_main_identifier = 0;
-                    foreach($simbad_main_identifier_list as $piece){
-                        if($cont_simbad_main_identifier == 0){
-                            $simbad_main_identifier = $piece; // se é a primeira vez, põe direto
-                        } else {
-                            $simbad_main_identifier = $simbad_main_identifier . " " . $piece; // se não é a primeira vez, coloca " " antes
+
+        $last_ordinal_number = 0;
+        // coloca o HR e o main_identifier na tabela BrightStarMultiple
+        if (is_null($number_of_objects)) {
+            // copiar o main_identifier do BrightStar para o BrightStarMultiple
+            mysqli_query($conn, "insert into BrightStarMultiple(simbad_main_identifier) values('" . $simbad_main_identifier . "')");
+            $last_ordinal_number++;
+            // copiar a chave estrangeira HR do BrightStar para o BrightStarMultiple
+            mysqli_query($conn, "update BrightStarMultiple set HR = '" . $HR . "' where ordinal_number = " . $last_ordinal_number);
+        } else {
+            foreach($lines_array as $line){
+                for($i=1; $i<=$number_of_objects; $i++){
+                    if (strlen($line) == 0) {continue;}
+                    if($line[0] == $i){
+                        // line is like: | 1 | simbad_name | -- | -- | -- | -- |
+                        $simbad_main_identifier = substr($line, strpos($line, "|")+1);
+                        $simbad_main_identifier = substr($simbad_main_identifier, strpos($simbad_main_identifier, "|")+1);
+                        $simbad_main_identifier = trim(substr($simbad_main_identifier, 0, strpos($simbad_main_identifier, "|")-1));
+                        // retirar possíveis espaços entre as palavras
+                        $simbad_main_identifier_list = explode(" ", $simbad_main_identifier);
+                        $cont_simbad_main_identifier = 0;
+                        foreach($simbad_main_identifier_list as $piece){
+                            if($cont_simbad_main_identifier == 0){
+                                $simbad_main_identifier = $piece; // se é a primeira vez, põe direto
+                            } else {
+                                $simbad_main_identifier = $simbad_main_identifier . " " . $piece; // se não é a primeira vez, coloca " " antes
+                            }
+                            $cont_simbad_main_identifier++;
                         }
-                        $cont_simbad_main_identifier++;
+
+                        // aqui eu tenho o identificador da múltipla
+                        mysqli_query($conn, "insert into BrightStarMultiple(simbad_main_identifier) values('" . $simbad_main_identifier . "')");
+                        $last_ordinal_number++;
+
+                        // carregar a chave estrangeira HR
+                        mysqli_query($conn, "update BrightStarMultiple set HR = '" . $HR . "' where ordinal_number = " . $last_ordinal_number);
+
                     }
-
-                    // aqui eu tenho o identificador da múltipla
-                    mysqli_query($conn, "insert into BrightStarMultiple(simbad_main_identifier) values('" . $simbad_main_identifier . "')");
-                    $last_ordinal_number++;
-
-                    // carregar a chave estrangeira HR
-                    mysqli_query($conn, "update BrightStarMultiple set HR = '" . $HR . "' where ordinal_number = " . $last_ordinal_number);
-
                 }
             }
         }

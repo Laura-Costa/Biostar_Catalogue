@@ -17,7 +17,7 @@ cursor.execute("""select {father_table}.HR, """
                """trim({father_table}.B_V)+0, """
                """{father_table}.Name, """
                """{father_table}.simbad_SpType, """
-               """{father_table}.simbad_name """
+               """{father_table}.simbad_main_identifier """
                """from {father_table}, {son_table} """
                """where {father_table}.HR = {son_table}.HR and """
                """{father_table}.ADS_Comp is null and  """
@@ -36,10 +36,10 @@ MV = []
 B_V = []
 Name = []
 simbad_SpType = []
-simbad_name = []
+simbad_main_identifier = []
 
 for (HR_value, HD_value, simbad_parallax_value, simbad_parallax_source_value, V_value, MV_value, B_V_value,
-     Name_value, simbad_SpType_value, simbad_name_value) in value:
+     Name_value, simbad_SpType_value, simbad_main_identifier_value) in value:
     HR.append(HR_value)
     HD.append(HD_value)
     simbad_parallax.append(simbad_parallax_value)
@@ -49,7 +49,7 @@ for (HR_value, HD_value, simbad_parallax_value, simbad_parallax_source_value, V_
     B_V.append(B_V_value)
     Name.append(Name_value)
     simbad_SpType.append(simbad_SpType_value)
-    simbad_name.append(simbad_name_value)
+    simbad_main_identifier.append(simbad_main_identifier_value)
 
 HR.insert(0, "HR")
 HD.insert(0, "HD")
@@ -60,10 +60,10 @@ MV.insert(0, "MV")
 B_V.insert(0, "B_V")
 Name.insert(0, "Name")
 simbad_SpType.insert(0, "simbad_SpType")
-simbad_name.insert(0, "simbad_main_identifier")
+simbad_main_identifier.insert(0, "simbad_main_identifier")
 
 workbook = xlsxwriter.Workbook('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/BrightStar/csv/BrightStar_estrelas_sem_ADS_Comp_e_sem_DR3.xlsx')
-sheet_plotadas = workbook.add_worksheet("plotadas")
+sheet_plotadas = workbook.add_worksheet("plotadas_no_diagrama_HR")
 
 sheet_plotadas.write_column(0, 0, HR)
 sheet_plotadas.write_column(0, 1, HD)
@@ -74,7 +74,7 @@ sheet_plotadas.write_column(0, 5, MV)
 sheet_plotadas.write_column(0, 6, B_V)
 sheet_plotadas.write_column(0, 7, Name)
 sheet_plotadas.write_column(0, 8, simbad_SpType)
-sheet_plotadas.write_column(0, 9, simbad_name)
+sheet_plotadas.write_column(0, 9, simbad_main_identifier)
 
 # sheet não plotadas
 cursor.execute("""select {father_table}.HR, """
@@ -86,7 +86,7 @@ cursor.execute("""select {father_table}.HR, """
                """trim({father_table}.B_V)+0, """
                """{father_table}.Name, """
                """{father_table}.simbad_SpType, """
-               """{father_table}.simbad_name """
+               """{father_table}.simbad_main_identifier """
                """from {father_table}, {son_table} """
                """where {father_table}.HR = {son_table}.HR and """
                """{father_table}.ADS_Comp is null and  """
@@ -105,10 +105,10 @@ MV = []
 B_V = []
 Name = []
 simbad_SpType = []
-simbad_name = []
+simbad_main_identifier = []
 
 for (HR_value, HD_value, simbad_parallax_value, simbad_parallax_source_value, V_value, MV_value, B_V_value,
-     Name_value, simbad_SpType_value, simbad_name_value) in value:
+     Name_value, simbad_SpType_value, simbad_main_identifier_value) in value:
     HR.append(HR_value)
     HD.append(HD_value)
     simbad_parallax.append(simbad_parallax_value)
@@ -118,7 +118,7 @@ for (HR_value, HD_value, simbad_parallax_value, simbad_parallax_source_value, V_
     B_V.append(B_V_value)
     Name.append(Name_value)
     simbad_SpType.append(simbad_SpType_value)
-    simbad_name.append(simbad_name_value)
+    simbad_main_identifier.append(simbad_main_identifier_value)
 
 HR.insert(0, "HR")
 HD.insert(0, "HD")
@@ -129,9 +129,9 @@ MV.insert(0, "MV")
 B_V.insert(0, "B_V")
 Name.insert(0, "Name")
 simbad_SpType.insert(0, "simbad_SpType")
-simbad_name.insert(0, "simbad_main_identifier")
+simbad_main_identifier.insert(0, "simbad_main_identifier")
 
-sheet_plotadas = workbook.add_worksheet("nao_plotadas")
+sheet_plotadas = workbook.add_worksheet("nao_plotadas_no_diagrama_HR")
 
 sheet_plotadas.write_column(0, 0, HR)
 sheet_plotadas.write_column(0, 1, HD)
@@ -142,8 +142,8 @@ sheet_plotadas.write_column(0, 5, MV)
 sheet_plotadas.write_column(0, 6, B_V)
 sheet_plotadas.write_column(0, 7, Name)
 sheet_plotadas.write_column(0, 8, simbad_SpType)
-sheet_plotadas.write_column(0, 9, simbad_name)
-
+sheet_plotadas.write_column(0, 9, simbad_main_identifier)
+'''
 # sheet sem HD
 cursor.execute("""select {father_table}.HR, """
                """{father_table}.HD, """
@@ -208,7 +208,7 @@ sheet_plotadas.write_column(0, 6, B_V)
 sheet_plotadas.write_column(0, 7, Name)
 sheet_plotadas.write_column(0, 8, simbad_SpType)
 sheet_plotadas.write_column(0, 9, simbad_name)
-
+'''
 workbook.close()
 connection.close()
 cursor.close()

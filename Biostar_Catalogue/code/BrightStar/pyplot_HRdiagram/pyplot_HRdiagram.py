@@ -2,7 +2,7 @@ import mysql.connector
 # import code.functions.pyplot_HRdiagram as f
 
 import matplotlib.pyplot as plt
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator, FormatStrFormatter)
 
 def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, size, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0):
 
@@ -42,15 +42,15 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
     plt.xlim(min(x_axis) - xmargin_left, max(x_axis) + xmargin_right)
 
-    ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
+    ax.set_title("{}: {} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
                                                                                                   len(parallax_list),
                                                                                                   1000.0/min_parallax,
                                                                                                   min_parallax,
                                                                                                   max_parallax),
-                                                                                                  fontsize=6,
-                                                                                                  y=1.05)
-    plt.xlabel(xlabel, fontsize=6)
-    plt.ylabel(ylabel, fontsize=6)
+                                                                                                  fontsize=7.5,
+                                                                                                  y=1.07)
+    plt.xlabel(xlabel, fontsize=10)
+    plt.ylabel(ylabel, fontsize=10)
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
@@ -58,16 +58,25 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
     ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
 
+    ax.xaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(2)))
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(2)))
+
     # configurar labels do major e minor ticks de ambos os eixos
-    ax.tick_params(axis='both', which='both', labelsize=3, color='black', labeltop=True, top=True,
+    ax.tick_params(axis='both', which='both', labelsize=10, color='black', labeltop=True, top=True,
                                                                           labelright=True, right=True,
-                                                                          tickdir='out', width=0.5)
+                                                                          tickdir='out')
+
+    # configurar largura dos minor ticks dos eixos x e y
+    ax.tick_params(axis='both', which='minor', width=1.0)
+
+    # configurar largura dos major ticks dos eixos x e y
+    ax.tick_params(axis='both', which='major', width=1.3)
 
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)
 
     # configurar uma major grid atrás do plot
-    plt.grid(color='#aeaeae', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.1)
+    plt.grid(color='gray', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.1)
 
     # configurar uma minor grid atrás do plot
     plt.grid(color='lightgrey', linestyle='dashed', dashes=(2,2), which='minor', linewidth=0.1)
@@ -112,7 +121,7 @@ cursor = connection.cursor()
 
 def sql_query(x_axis, y_axis):
 
-    BrightStar_plus_Multiple = ("(select BrightStar.simbad_name, "
+    BrightStar_plus_Multiple = ("(select BrightStar.simbad_main_identifier, "
              "BrightStar.HD, "
              "trim(BrightStar.simbad_parallax)+0, "
              "trim(BrightStar_product.{x_axis})+0, "
@@ -124,7 +133,7 @@ def sql_query(x_axis, y_axis):
              "BrightStar.simbad_DR3 is null and "
              "BrightStar.ADS_Comp is null) "
              "union all "
-             "(select BrightStar.simbad_name, "
+             "(select BrightStar.simbad_main_identifier, "
              "BrightStar.HD, "
              "trim(BrightStarMultiple.simbad_parallax)+0, "
              "trim(BrightStarMultiple_product.simbad_{x_axis})+0, "
@@ -136,7 +145,7 @@ def sql_query(x_axis, y_axis):
              "BrightStarMultiple_product.simbad_{y_axis} is not null and "
              "BrightStarMultiple.simbad_DR3 is null)".format(x_axis=x_axis, y_axis=y_axis))
 
-    BrightStar = ("(select BrightStar.simbad_name, "
+    BrightStar = ("(select BrightStar.simbad_main_identifier, "
              "BrightStar.HD, "
              "trim(BrightStar.simbad_parallax)+0, "
              "trim(BrightStar_product.{x_axis})+0, "
@@ -148,7 +157,7 @@ def sql_query(x_axis, y_axis):
              "BrightStar.simbad_DR3 is null and "
              "BrightStar.ADS_Comp is null)".format(x_axis=x_axis, y_axis=y_axis))
 
-    Multiple = ("select BrightStarMultiple.simbad_name, "
+    Multiple = ("select BrightStarMultiple.simbad_main_identifier, "
             "BrightStar.HD, "
             "trim(BrightStarMultiple.simbad_parallax)+0, "
             "trim(BrightStarMultiple_product.simbad_{x_axis})+0, "
@@ -160,7 +169,7 @@ def sql_query(x_axis, y_axis):
             "BrightStarMultiple_product.simbad_{y_axis} is not null and "
             "BrightStarMultiple.simbad_DR3 is null".format(x_axis=x_axis, y_axis=y_axis))
 
-    BrightStar_plus_Multiple = ("(select BrightStar.simbad_name, "
+    BrightStar_plus_Multiple = ("(select BrightStar.simbad_main_identifier, "
                                 "BrightStar.HD, "
                                 "trim(BrightStar.simbad_parallax)+0, "
                                 "trim(BrightStar_product.{x_axis})+0, "
@@ -172,7 +181,7 @@ def sql_query(x_axis, y_axis):
                                 "BrightStar.simbad_DR3 is null and "
                                 "BrightStar.ADS_Comp is null) "
                                 "union all "
-                                "(select BrightStarMultiple.simbad_name, "
+                                "(select BrightStarMultiple.simbad_main_identifier, "
                                 "BrightStar.HD, "
                                 "trim(BrightStarMultiple.simbad_parallax)+0, "
                                 "trim(BrightStarMultiple_product.simbad_{x_axis})+0, "
@@ -202,9 +211,9 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 hds = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 (BrightStar_plus_Multiple, BrightStar, Multiple, emphasis) = sql_query('B_V', 'MV')
-diagram(cursor, Multiple, emphasis, colors, hds, '/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V \; (simbad)$', r'$M(V) \; (simbad)$', 6.0, 0.20, 0.20, 2.0, 2.0, 'Objetos do Query Around (Bright Star) sem designação Gaia DR3 no Simbad', xrot=20)
-diagram(cursor, BrightStar, emphasis, colors, hds, '/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Objetos do Bright Star com ADS_Comp vazio e sem designação Gaia DR3 no Simbad', xrot=20)
-diagram(cursor, BrightStar_plus_Multiple, emphasis, colors, hds, '/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.125, 1.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Objetos do Bright Star + Query Around sem designação Gaia DR3 no Simbad', xrot=20)
+diagram(cursor, Multiple, emphasis, colors, hds, '/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg', 0.25, 2.0, r'$B-V \; (simbad)$', r'$M(V) \; (simbad)$', 6.0, 0.20, 0.20, 2.0, 2.0, 'Query Around (Bright Star)', xrot=0)
+diagram(cursor, BrightStar, emphasis, colors, hds, '/BrightStar/pyplot_HRdiagram/jpg/Bright_Star_MV_B_V.jpg', 0.25, 2.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Bright Star', xrot=0)
+diagram(cursor, BrightStar_plus_Multiple, emphasis, colors, hds, '/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg', 0.25, 2.0, r'$B-V$', r'$M(V)$', 6.0, 0.20, 0.20, 1.0, 2.0, 'Bright Star + Query Around', xrot=0)
 
 # fechar conexão com o BD
 connection.close()
