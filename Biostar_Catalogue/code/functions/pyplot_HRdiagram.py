@@ -7,8 +7,6 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
     for line in file:
         list_HD.append("HD {}".format(line.rstrip()))
 
-print(list_HD)
-
 def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5, dp = -1, axeslabelsize=6):
 
     fig, ax = plt.subplots()
@@ -56,6 +54,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
 
     # a distância no título do diagrama não leva em conta as estrelas da legenda,
     # a menos que elas também estejam na seleção principal
+
     min_parallax = min(parallax_list)
     max_parallax = max(parallax_list)
 
@@ -101,7 +100,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
     ax.xaxis.set_minor_locator(MultipleLocator(xgap/5))
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
-    ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
+    ax.yaxis.set_minor_locator(MultipleLocator(ygap/10))
 
     # configurar ambos os axis (xaxis e yaxis) com labels com dp (decimal_places) casas decimais
     if dp != -1:
@@ -123,7 +122,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     plt.xticks(rotation=0)
 
     # configurar uma major grid atrás do plot
-    plt.grid(color='#aeaeae', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.1, zorder=1)
+    plt.grid(color='gray', linestyle='dashed', dashes=(2, 2), which='major', linewidth=0.4, zorder=1)
 
     # configurar uma minor grid atrás do plot
     plt.grid(color='lightgrey', linestyle='dashed', dashes=(2,2), which='minor', linewidth=0.1, zorder=1)
@@ -153,7 +152,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     plt.xticks(rotation=xrot)
 
     # salvar a figura em várias extensões diferentes
-    for ext in ['jpg', 'eps']:
+    for ext in ['jpg', 'eps', 'pdf', 'jpeg', 'svg', 'png']:
         temp_path = path.replace("#", ext)
         plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
 
@@ -178,7 +177,7 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
             ax.errorbar(value_emphasis[0][1], value_emphasis[0][2], ms=3.0, color=color, mec='none', fmt='o',
                         elinewidth=0.3, yerr=value_emphasis[0][4],
                         xerr=value_emphasis[0][3], ecolor='blue', zorder=4)
-        ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=10, color=color, edgecolor='none', marker='o', zorder=4, label=value_emphasis[0][0])
+        ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=14, color=color, edgecolor='none', marker='o', zorder=4, label=value_emphasis[0][0])
 
     # configurar legenda
     lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='best')
@@ -196,6 +195,6 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
     lgnd.get_frame()
 
     # salvar a figura em várias extensões diferentes
-    for ext in ['jpg', 'eps']:
+    for ext in ['jpg', 'eps', 'pdf', 'jpeg', 'svg', 'png']:
         temp_path = path.replace("#", ext)
         plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)

@@ -111,7 +111,7 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, size):
         handle.set_sizes([25])
 
     # expor legenda no axes
-    frame = lgnd.get_frame()
+    lgnd.get_frame()
 
     # salvar a figura
     plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path, dpi=1200)

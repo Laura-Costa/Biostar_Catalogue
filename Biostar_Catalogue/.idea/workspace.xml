@@ -6,19 +6,42 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStar/csv/sem_ADS_Comp_sem_DR3_xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStar/csv/sem_ADS_Comp_sem_DR3_xlsx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_around_xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_around_xlsx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/20pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/csv/20pc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_round_por_estrela.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_round_por_estrela.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/BrightStarSupplement/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Supplement/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_G.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_G.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple_simbad.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around_data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar_data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/Supplement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplementMultiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/SupplementMultiple.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplement_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/Supplement_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/CAT1.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/CAT1_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/Hipparcos.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/Hipparcos_product.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/curl_BrightStarSupplement.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/curl_Supplement_data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/curl_Hipparcos.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/curl_Hipparcos.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/curl_Hipparcos_Gaia.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/curl_Hipparcos_Gaia.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/functions/xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/xlsx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/teste/string_format.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/teste/string_format.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/csv/BrightStar_estrelas_sem_ADS_Comp_e_sem_DR3.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/csv/BrightStar_estrelas_sem_ADS_Comp_e_sem_DR3.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_sem_DR3.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_round_por_estrela.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_round_por_estrela.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarSupplement/pyplot_HRdiagram/MV_B_V.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/eps/LNA2_MG_Bp_Rp.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/eps/LNA2_MG_Bp_Rp.eps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,76 +66,84 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.20pc.executor": "Run",
-    "Python.211 estrelas.executor": "Run",
-    "Python.BrightStar.executor": "Run",
-    "Python.BrightStarMultiple.executor": "Run",
-    "Python.BrightStarMultiple_csv.executor": "Run",
-    "Python.BrightStarMultiple_product.executor": "Run",
-    "Python.BrightStarSupplement.executor": "Run",
-    "Python.BrightStarSupplementMultiple.executor": "Run",
-    "Python.BrightStarSupplement_product.executor": "Run",
-    "Python.BrightStar_product.executor": "Run",
-    "Python.CAT1.executor": "Run",
-    "Python.CAT1_csv.executor": "Run",
-    "Python.CAT1_product.executor": "Run",
-    "Python.Gaia.executor": "Run",
-    "Python.Gaia30pc.executor": "Run",
-    "Python.Gaia30pc_product.executor": "Run",
-    "Python.Gaia50pc.executor": "Run",
-    "Python.Gaia50pc_product.executor": "Run",
-    "Python.GaiaDR3.executor": "Run",
-    "Python.Hipparcos.executor": "Run",
-    "Python.Hipparcos_product.executor": "Run",
-    "Python.LNA.executor": "Run",
-    "Python.LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.executor": "Run",
-    "Python.LNA_estrelas_entre_211_e_sem_HIP.executor": "Run",
-    "Python.LNA_round.executor": "Run",
-    "Python.MG_contra_Bp_Rp.executor": "Run",
-    "Python.astropy_histogram.executor": "Run",
-    "Python.create_database.executor": "Run",
-    "Python.csv.executor": "Run",
-    "Python.deg2hms.executor": "Run",
-    "Python.error_bars.executor": "Run",
-    "Python.error_bars_emphasis.executor": "Run",
-    "Python.estrelas_sem_Bp_Rp.executor": "Run",
-    "Python.estrelas_sem_G.executor": "Run",
-    "Python.estrelas_sem_G_ou_sem_Bp_Rp.executor": "Run",
-    "Python.excel.executor": "Run",
-    "Python.origin_lab.executor": "Run",
-    "Python.parallax_plots.executor": "Run",
-    "Python.pyplot_HRdiagram.executor": "Run",
-    "Python.pyplot_histogram.executor": "Run",
-    "Python.pyplot_scatterplot.executor": "Run",
-    "Python.query_around_xlsx.executor": "Run",
-    "Python.query_round_por_estrela.executor": "Run",
-    "Python.ra.executor": "Run",
-    "Python.sem_ADS_Comp_e_sem_DR3.executor": "Run",
-    "Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor": "Run",
-    "Python.sem_ADS_Comp_sem_DR3_xlsx.executor": "Run",
-    "Python.sem_DR3.executor": "Run",
-    "Python.sem_DR3_e_sem_HIP.executor": "Run",
-    "Python.sem_HD.executor": "Run",
-    "Python.sigmaPi_vs_Bp_Rp.executor": "Run",
-    "Python.sigmaPi_vs_G.executor": "Run",
-    "Python.sigmaPi_vs_MG.executor": "Run",
-    "Python.sigmaPi_vs_pi.executor": "Run",
-    "Python.sigma_pi_x_pi.executor": "Run",
-    "Python.testeBrightStar.executor": "Run",
-    "Python.upper_lower.executor": "Run",
-    "Python.xlsx.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.20pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.211 estrelas.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStar.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplement.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplementMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplement_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStar_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia30pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia30pc_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia50pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia50pc_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GaiaDR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Hipparcos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Hipparcos_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_estrelas_entre_211_e_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_round.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MG_contra_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Supplement.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SupplementMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SupplementMultiple_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Supplement_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.astropy_histogram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_database.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.deg2hms.executor&quot;: &quot;Run&quot;,
+    &quot;Python.error_bars.executor&quot;: &quot;Run&quot;,
+    &quot;Python.error_bars_emphasis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G_ou_sem_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.excel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.origin_lab.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parallax_plots.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_HRdiagram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_histogram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_scatterplot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_por_estrela.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_round_por_estrela.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ra.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_e_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_sem_DR3_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_DR3_e_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_G.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_MG.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_pi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigma_pi_x_pi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testeBrightStar.executor&quot;: &quot;Run&quot;,
+    &quot;Python.upper_lower.executor&quot;: &quot;Run&quot;,
+    &quot;Python.xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/code/database/Supplement" />
+      <recent name="$PROJECT_DIR$/code/database/Hipparcos" />
+      <recent name="$PROJECT_DIR$/code/database/Gaia" />
       <recent name="$PROJECT_DIR$/code/database/BrightStar" />
       <recent name="$PROJECT_DIR$/code/CAT1/HRdiagram" />
-      <recent name="$PROJECT_DIR$/code/functions" />
-      <recent name="$PROJECT_DIR$/code/database" />
     </key>
   </component>
   <component name="SharedIndexes">
