@@ -4,45 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStar/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_round_por_estrela.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_round_por_estrela.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStarSupplement/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Supplement/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_G.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_scatterplot/sigmaPi_vs_G.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/BrightStar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/BrightStarMultiple_simbad.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplement.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/Supplement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplementMultiple.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/SupplementMultiple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStarSupplement_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/Supplement_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/CAT1.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/CAT1_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/Hipparcos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Hipparcos_product.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/Hipparcos_product.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/backup_files/backup_Hipparcos.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_BrightStarSupplement.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/curl_Supplement_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_Hipparcos.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/curl_Hipparcos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/curl_Hipparcos_Gaia.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Hipparcos/curl_Hipparcos_Gaia.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/functions/xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/xlsx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/teste/string_format.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/teste/string_format.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_round_por_estrela.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_round_por_estrela.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V-deprecado2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarSupplement/pyplot_HRdiagram/MV_B_V.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarSupplement/pyplot_HRdiagram/simbad_MV_simbad_B_V.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg" afterDir="false" />
-    </list>
+    <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
