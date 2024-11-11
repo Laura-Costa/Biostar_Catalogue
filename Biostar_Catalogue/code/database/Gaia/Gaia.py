@@ -30,9 +30,14 @@ cursor.execute("create table {son_table}( "
                "pmra numeric(65, 30) null, "
                "pmdec numeric(65, 30) null, "
                "ruwe numeric(65, 30) null, "
+               "phot_variable_flag char(100) null, "
+               "non_single_star int null,"
                "phot_g_mean_mag numeric(65, 30) null, "
                "phot_bp_mean_mag numeric(65, 30) null, "
                "phot_rp_mean_mag numeric(65, 30) null, "
+               "bp_rp numeric(65, 30) null, "
+               "bp_g numeric(65, 30) null, "
+               "g_rp numeric(65, 30) null, "
                "teff_gspphot numeric(65, 30) null, "
                "teff_gspphot_lower numeric(65, 30) null, "
                "teff_gspphot_upper numeric(65, 30) null, "
@@ -45,11 +50,14 @@ cursor.execute("create table {son_table}( "
                "distance_gspphot numeric(65, 30) null, "
                "distance_gspphot_lower numeric(65, 30) null, "
                "distance_gspphot_upper numeric(65, 30) null, "
+               "azero_gspphot numeric(65, 30) null, "
+               "azero_gspphot_lower numeric(65, 30) null, "
+               "azero_gspphot_upper numeric(65, 30) null, "
                "foreign key(HIP) references {father_table}(HIP) on delete restrict)".format(son_table=son_table,
                                                                                             father_table=father_table))
 
 # carregar os dados de table_name.csv na tabela table_name
-with open("../input_files/CAT1-result.csv", "r") as csv_file:
+with open("../input_files/Gaia-result.csv", "r") as csv_file:
 
     next(csv_file) # pular a linha do header do csv
 
@@ -69,28 +77,15 @@ with open("../input_files/CAT1-result.csv", "r") as csv_file:
         f.insert_key(cursor, son_table, column_key_name, line, 0)
         lastrowid = line[0].strip() # .strip() para retirar os espaços vazios da designation
 
-        # load HIP
-        cursor.execute("update {son_table} set {son_table}.HIP = {son_table}.simbad_HIP "
-                       "where {son_table}.simbad_HIP in (select {father_table}.HIP from {father_table})".format(son_table=son_table,
-                                                                                                                father_table=father_table))
-
-        # load simbad_HIP
-        tab = Simbad.query_objectids(lastrowid)
-        f.simbad_search_id_by_id(cursor, tab, 'HIP', son_table, 'simbad_HIP', column_key_name, lastrowid)
-
-        # load simbad_HD
-        f.simbad_search_id_by_id(cursor, tab, 'HD', son_table, 'simbad_HD', column_key_name, lastrowid)
-
-        # load in_simbad
-        f.search_id_in_simbad(tab, cursor, son_table, 'in_simbad', column_key_name, lastrowid)
-
         columns_names_and_indexes = [('right_ascension', 1), ('declination', 2), ('parallax', 3), ('parallax_error', 4),
-                                     ('pm', 5), ('pmra', 6), ('pmdec', 7), ('ruwe', 8), ('phot_g_mean_mag', 9),
-                                     ('phot_bp_mean_mag', 10), ('phot_rp_mean_mag', 11), ('teff_gspphot', 12),
-                                     ('teff_gspphot_lower', 13), ('teff_gspphot_upper', 14), ('logg_gspphot', 15),
-                                     ('logg_gspphot_lower', 16), ('logg_gspphot_upper', 17), ('mh_gspphot', 18),
-                                     ('mh_gspphot_lower', 19), ('mh_gspphot_upper', 20), ('distance_gspphot', 21),
-                                     ('distance_gspphot_lower', 22), ('distance_gspphot_upper', 23)]
+                                     ('pm', 5), ('pmra', 6), ('pmdec', 7), ('ruwe', 8), ('phot_variable_flag', 9),
+                                     ('non_single_star', 10), ('phot_g_mean_mag', 11), ('phot_bp_mean_mag', 12),
+                                     ('phot_rp_mean_mag', 13), ('bp_rp', 14), ('bp_g', 15), ('g_rp', 16), ('teff_gspphot', 17),
+                                     ('teff_gspphot_lower', 18), ('teff_gspphot_upper', 19), ('logg_gspphot', 20),
+                                     ('logg_gspphot_lower', 21), ('logg_gspphot_upper', 22), ('mh_gspphot', 23),
+                                     ('mh_gspphot_lower', 24), ('mh_gspphot_upper', 25), ('distance_gspphot', 26),
+                                     ('distance_gspphot_lower', 27), ('distance_gspphot_upper', 28), ('azero_gspphot', 29),
+                                     ('azero_gspphot_lower', 30), ('azero_gspphot_upper', 31)]
         for(column_name, index) in columns_names_and_indexes:
             f.update_table(cursor, son_table, column_name, line, index, column_key_name, lastrowid)
 
@@ -104,41 +99,3 @@ cursor.close()
 
 # fechar conexão com o BD
 connection.close()
-
-# consulta feita no Gaia Archive:
-'''
-select 
-designation, 
-ra, 
-dec, 
-parallax, 
-parallax_error, 
-pm, 
-pmra, 
-pmdec, 
-ruwe, 
-phot_g_mean_mag, 
-phot_bp_mean_mag, 
-phot_rp_mean_mag, 
-teff_gspphot, 
-teff_gspphot_lower, 
-teff_gspphot_upper, 
-logg_gspphot, 
-logg_gspphot_lower, 
-logg_gspphot_upper, 
-mh_gspphot, 
-mh_gspphot_lower, 
-mh_gspphot_upper, 
-distance_gspphot, 
-distance_gspphot_lower, 
-distance_gspphot_upper
-from gaiadr3.gaia_source
-where
-(
-parallax >= 50.00 or (parallax < 50.00 and parallax+3*parallax_error >= 50.00)
-)
-or
-(
-distance_gspphot <= 20.00 or (distance_gspphot > 20.0000 and distance_gspphot - (2.0/2.0)*(distance_gspphot_upper-distance_gspphot_lower) <= 20.0000)
-)
-'''

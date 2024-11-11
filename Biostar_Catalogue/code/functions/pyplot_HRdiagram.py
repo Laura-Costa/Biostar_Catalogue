@@ -100,7 +100,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
     ax.xaxis.set_minor_locator(MultipleLocator(xgap/5))
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
-    ax.yaxis.set_minor_locator(MultipleLocator(ygap/10))
+    ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
 
     # configurar ambos os axis (xaxis e yaxis) com labels com dp (decimal_places) casas decimais
     if dp != -1:

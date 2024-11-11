@@ -122,9 +122,3 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT
         else:
             lista = [designation, ra, dec, G, Bp_Rp, MG, "G", "nearby_star", "star"]
             text_file.write("{0[0]:<30}{0[1]:<13}{0[2]:<14}{0[3]:<7}{0[4]:<7}{0[5]:<7}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(lista))
-
-'''
-file = pd.read_csv('/var/lib/mysql-files/LNA.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/csv/LNA.csv", header=header, index=None)
-os.remove("/var/lib/mysql-files/LNA.csv")
-'''

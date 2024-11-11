@@ -25,9 +25,8 @@ cursor.execute("create table {son_table}( "
                "MBp_error numeric(65, 30) null, "
                "MG numeric(65, 30) null, "
                "MG_error numeric(65, 30) null, "
-               "Bp_Rp numeric(65, 30) null, "
-               "G_Rp numeric(65, 30) null, "
-               "Bp_G numeric(65, 30) null, "
+               "distance_gspphot_error numeric(65, 30) null, "
+               "azero_gspphot_error numeric(65, 30) null, "
                "foreign key({son_key_column}) references {father_table}({father_key_column}) on delete restrict "
                ")".format(son_table=son_table,
                           son_key_column=son_key_column,
@@ -125,35 +124,25 @@ value = cursor.fetchall()
 for my_tuple in value:
     f.update_product(cursor, son_table, 'MG_error', son_key_column, my_tuple)
 
-# load Bp_Rp
+# load distance_gspphot_error
 cursor.execute("select designation, "
-               "phot_bp_mean_mag - phot_rp_mean_mag as Bp_Rp "
+               "(1.0/2.0)*(distance_gspphot_upper - distance_gspphot_lower) as distance_gspphot_error "
                "from {father_table} "
-               "where phot_bp_mean_mag is not null and "
-               "phot_rp_mean_mag is not null".format(father_table=father_table))
+               "where distance_gspphot_upper is not null and "
+               "distance_gspphot_lower is not null".format(father_table=father_table))
 value = cursor.fetchall()
 for my_tuple in value:
-    f.update_product(cursor, son_table, 'Bp_Rp', son_key_column, my_tuple)
+    f.update_product(cursor, son_table, 'distance_gspphot_error', son_key_column, my_tuple)
 
-# load G_Rp
+# load azero_gspphot_error
 cursor.execute("select designation, "
-               "phot_g_mean_mag - phot_rp_mean_mag as G_Rp "
+               "(1.0/2.0)*(azero_gspphot_upper - azero_gspphot_lower) as azero_gspphot_error "
                "from {father_table} "
-               "where phot_g_mean_mag is not null and "
-               "phot_rp_mean_mag is not null".format(father_table=father_table))
+               "where azero_gspphot_upper is not null and "
+               "azero_gspphot_lower is not null".format(father_table=father_table))
 value = cursor.fetchall()
 for my_tuple in value:
-    f.update_product(cursor, son_table, 'G_Rp', son_key_column, my_tuple)
-
-# load Bp_G
-cursor.execute("select designation, "
-               "phot_bp_mean_mag - phot_g_mean_mag as Bp_G "
-               "from {father_table} "
-               "where phot_bp_mean_mag is not null and "
-               "phot_g_mean_mag is not null".format(father_table=father_table))
-value = cursor.fetchall()
-for my_tuple in value:
-    f.update_product(cursor, son_table, 'Bp_G', son_key_column, my_tuple)
+    f.update_product(cursor, son_table, 'azero_gspphot_error', son_key_column, my_tuple)
 
 # certificar de que os dados foram gravados no BD
 connection.commit()
