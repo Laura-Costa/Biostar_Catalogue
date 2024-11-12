@@ -18,31 +18,31 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
             stringHD += "'HD {}')".format(line.rstrip())
 
 cursor.execute("""select {father_table}.simbad_HD, """
-               """trim({father_table}.parallax)+0, """
-               """trim({father_table}.parallax_error)+0, """
-               """trim({father_table}.phot_g_mean_mag)+0, """
-               """trim({son_table}.MG)+0, """
-               """trim({son_table}.MG_error)+0, """
-               """trim({father_table}.phot_bp_mean_mag)+0, """
-               """trim({son_table}.MBp)+0, """
-               """trim({son_table}.MBp_error)+0, """
-               """trim({father_table}.phot_rp_mean_mag)+0, """
-               """trim({son_table}.MRp)+0, """
-               """trim({son_table}.MRp_error)+0, """
-               """trim({father_table}.bp_rp)+0, """
-               """trim({father_table}.bp_g)+0, """
-               """trim({father_table}.g_rp)+0, """
-               """trim({father_table}.ruwe)+0, """
+               """round({father_table}.parallax,4), """
+               """round({father_table}.parallax_error, 4), """
+               """round({father_table}.phot_g_mean_mag, 4), """
+               """round({son_table}.MG, 4), """
+               """round({son_table}.MG_error, 4), """
+               """round({father_table}.phot_bp_mean_mag, 4), """
+               """round({son_table}.MBp, 4), """
+               """round({son_table}.MBp_error, 4), """
+               """round({father_table}.phot_rp_mean_mag, 4), """
+               """round({son_table}.MRp, 4), """
+               """round({son_table}.MRp_error, 4), """
+               """round({father_table}.bp_rp, 4), """
+               """round({father_table}.bp_g, 4), """
+               """round({father_table}.g_rp, 4), """
+               """round({father_table}.ruwe, 4), """
                """{father_table}.phot_variable_flag, """
                """{father_table}.non_single_star, """
-               """trim({father_table}.distance_gspphot)+0, """
-               """trim({father_table}.distance_gspphot_lower)+0, """
-               """trim({father_table}.distance_gspphot_upper)+0, """
-               """trim({son_table}.distance_gspphot_error)+0, """
-               """trim({father_table}.azero_gspphot)+0, """
-               """trim({father_table}.azero_gspphot_lower)+0, """
-               """trim({father_table}.azero_gspphot_upper)+0, """
-               """trim({son_table}.azero_gspphot_error)+0 """
+               """round({father_table}.distance_gspphot, 4), """
+               """round({father_table}.distance_gspphot_lower, 4), """
+               """round({father_table}.distance_gspphot_upper, 4), """
+               """round({son_table}.distance_gspphot_error, 4), """
+               """round({father_table}.azero_gspphot, 4), """
+               """round({father_table}.azero_gspphot_lower, 4), """
+               """round({father_table}.azero_gspphot_upper, 4), """
+               """round({son_table}.azero_gspphot_error, 4) """
                """from {father_table}, {son_table} """
                """where {father_table}.designation = {son_table}.designation and """
                """(simbad_HD is not null and """
@@ -119,121 +119,82 @@ for (simbad_HD_value, parallax_value, parallax_error_value,
 
 # process parallax
 for i in range(len(parallax_list)):
-    parallax_list[i] = round(parallax_list[i], 4)
     parallax_list[i] = f"{parallax_list[i]:07.4f}"
 
 # process parallax_error
 for i in range(len(parallax_error_list)):
-    parallax_error_list[i] = round(parallax_error_list[i], 4)
     parallax_error_list[i] = f"{parallax_error_list[i]:06.4f}"
 
 # process phot_g_mean_mag
 for i in range(len(phot_g_mean_mag_list)):
-    phot_g_mean_mag_list[i] = round(phot_g_mean_mag_list[i], 4)
     phot_g_mean_mag_list[i] = f"{phot_g_mean_mag_list[i]:06.4f}"
 
 # process MG
 for i in range(len(MG_list)):
-    MG_list[i] = round(MG_list[i], 4)
     MG_list[i] = f"{MG_list[i]:06.4f}"
 
 # process MG_error
 for i in range(len(MG_error_list)):
-    MG_error_list[i] = round(MG_error_list[i], 4)
     MG_error_list[i] = f"{MG_error_list[i]:06.4f}"
 
 # process phot_bp_mean_mag
 for i in range(len(phot_bp_mean_mag_list)):
-    phot_bp_mean_mag_list[i] = round(phot_bp_mean_mag_list[i], 4)
     phot_bp_mean_mag_list[i] = f"{phot_bp_mean_mag_list[i]:06.4f}"
 
 # process MBp
 for i in range(len(MBp_list)):
-    MBp_list[i] = round(MBp_list[i], 4)
     MBp_list[i] = f"{MBp_list[i]:06.4f}"
 
 # process MBp_error
 for i in range(len(MBp_error_list)):
-    MBp_error_list[i] = round(MBp_error_list[i], 4)
     MBp_error_list[i] = f"{MBp_error_list[i]:06.4f}"
 
 # process phot_rp_mean_mag
 for i in range(len(phot_rp_mean_mag_list)):
-    phot_rp_mean_mag_list[i] = round(phot_rp_mean_mag_list[i], 4)
     phot_rp_mean_mag_list[i] = f"{phot_rp_mean_mag_list[i]:06.4f}"
 
 # process MRp
 for i in range(len(MRp_list)):
-    MRp_list[i] = round(MRp_list[i], 4)
     MRp_list[i] = f"{MRp_list[i]:06.4f}"
 
 # process MRp_error
 for i in range(len(MRp_error_list)):
-    MRp_error_list[i] = round(MRp_error_list[i], 4)
     MRp_error_list[i] = f"{MRp_error_list[i]:06.4f}"
 
 # process bp_rp
 for i in range(len(bp_rp_list)):
-    bp_rp_list[i] = round(bp_rp_list[i], 4)
     bp_rp_list[i] = f"{bp_rp_list[i]:06.4f}"
 
 # process bp_g
 for i in range(len(bp_g_list)):
-    bp_g_list[i] = round(bp_g_list[i], 4)
     bp_g_list[i] = f"{bp_g_list[i]:06.4f}"
 
 # process g_rp
 for i in range(len(g_rp_list)):
-    g_rp_list[i] = round(g_rp_list[i], 4)
     g_rp_list[i] = f"{g_rp_list[i]:06.4f}"
 
 # process ruwe
 for i in range(len(ruwe_list)):
-    ruwe_list[i] = round(ruwe_list[i], 4)
     ruwe_list[i] = f"{ruwe_list[i]:07.4f}"
 
 # process distance_gspphot
 for i in range(len(distance_gspphot_list)):
-    distance_gspphot_list[i] = round(distance_gspphot_list[i], 4)
     distance_gspphot_list[i] = f"{distance_gspphot_list[i]:07.4f}"
-
-# process distance_gspphot_upper
-for i in range(len(distance_gspphot_upper_list)):
-    distance_gspphot_upper_list[i] = round(distance_gspphot_upper_list[i], 4)
-    distance_gspphot_upper_list[i] = f"{distance_gspphot_upper_list[i]:07.4f}"
-
-# process distance_gspphot_lower
-for i in range(len(distance_gspphot_lower_list)):
-    distance_gspphot_lower_list[i] = round(distance_gspphot_lower_list[i], 4)
-    distance_gspphot_lower_list[i] = f"{distance_gspphot_lower_list[i]:07.4f}"
 
 # process distance_gspphot_error
 for i in range(len(distance_gspphot_error_list)):
-    distance_gspphot_error_list[i] = round(distance_gspphot_error_list[i], 4)
     distance_gspphot_error_list[i] = f"{distance_gspphot_error_list[i]:06.4f}"
 
 # process azero_gspphot
 for i in range(len(azero_gspphot_list)):
-    azero_gspphot_list[i] = round(azero_gspphot_list[i], 4)
     azero_gspphot_list[i] = f"{azero_gspphot_list[i]:06.4f}"
-
-# process azero_gspphot_upper
-for i in range(len(azero_gspphot_upper_list)):
-    azero_gspphot_upper_list[i] = round(azero_gspphot_upper_list[i], 4)
-    azero_gspphot_upper_list[i] = f"{azero_gspphot_upper_list[i]:07.4f}"
-
-# process azero_gspphot_lower
-for i in range(len(azero_gspphot_lower_list)):
-    azero_gspphot_lower_list[i] = round(azero_gspphot_lower_list[i], 4)
-    azero_gspphot_lower_list[i] = f"{azero_gspphot_lower_list[i]:07.4f}"
 
 print(azero_gspphot_error_list)
 # process azero_gspphot_error
 for i in range(len(azero_gspphot_error_list)):
-    azero_gspphot_error_list[i] = round(azero_gspphot_error_list[i], 5)
-    azero_gspphot_error_list[i] = f"{azero_gspphot_error_list[i]:07.5f}"
+    azero_gspphot_error_list[i] = f"{azero_gspphot_error_list[i]:06.4f}"
 
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/solar_twins/csv/gemeas_solares.txt", "w") as text_file:
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/solar_twins/csv/solar_twins.txt", "w") as text_file:
     header = ["HD", "parallax",
               "G", "MG",
               "Bp", "MBp",

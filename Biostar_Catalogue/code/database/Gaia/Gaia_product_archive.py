@@ -19,14 +19,14 @@ cursor.execute("drop table if exists {son_table}".format(son_table=son_table))
 
 cursor.execute("create table {son_table}( "
                "designation char(100) primary key, "
-               "MRp numeric(65, 30) null, "
-               "MRp_error numeric(65, 30) null, "
-               "MBp numeric(65, 30) null, "
-               "MBp_error numeric(65, 30) null, "
-               "MG numeric(65, 30) null, "
-               "MG_error numeric(65, 30) null, "
-               "distance_gspphot_error numeric(65, 30) null, "
-               "azero_gspphot_error numeric(65, 30) null, "
+               "MRp decimal(65, 30) null, "
+               "MRp_error decimal(65, 30) null, "
+               "MBp decimal(65, 30) null, "
+               "MBp_error decimal(65, 30) null, "
+               "MG decimal(65, 30) null, "
+               "MG_error decimal(65, 30) null, "
+               "distance_gspphot_error decimal(65, 30) null, "
+               "azero_gspphot_error decimal(65, 30) null, "
                "foreign key({son_key_column}) references {father_table}({father_key_column}) on delete restrict "
                ")".format(son_table=son_table,
                           son_key_column=son_key_column,
