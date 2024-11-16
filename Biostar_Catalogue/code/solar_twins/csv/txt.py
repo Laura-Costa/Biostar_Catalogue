@@ -12,47 +12,49 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
     cont = 0
     for line in file:
         cont += 1
-        if cont != 5:
+        if cont != 9:
             stringHD += "'HD {}', ".format(line.rstrip())
         else:
             stringHD += "'HD {}')".format(line.rstrip())
 
 cursor.execute("""select {father_table}.simbad_HD, """
-               """round({father_table}.parallax,4), """
-               """round({father_table}.parallax_error, 4), """
-               """round({father_table}.phot_g_mean_mag, 4), """
-               """round({son_table}.MG, 4), """
-               """round({son_table}.MG_error, 4), """
-               """round({father_table}.phot_bp_mean_mag, 4), """
-               """round({son_table}.MBp, 4), """
-               """round({son_table}.MBp_error, 4), """
-               """round({father_table}.phot_rp_mean_mag, 4), """
-               """round({son_table}.MRp, 4), """
-               """round({son_table}.MRp_error, 4), """
-               """round({father_table}.bp_rp, 4), """
-               """round({father_table}.bp_g, 4), """
-               """round({father_table}.g_rp, 4), """
-               """round({father_table}.ruwe, 4), """
+               """{father_table}.simbad_HIP, """
+               """trim({father_table}.parallax)+0, """
+               """trim({father_table}.parallax_error)+0, """
+               """trim({father_table}.phot_g_mean_mag)+0, """
+               """trim({son_table}.MG)+0, """
+               """trim({son_table}.MG_error)+0, """
+               """trim({father_table}.phot_bp_mean_mag)+0, """
+               """trim({son_table}.MBp)+0, """
+               """trim({son_table}.MBp_error)+0, """
+               """trim({father_table}.phot_rp_mean_mag)+0, """
+               """trim({son_table}.MRp)+0, """
+               """trim({son_table}.MRp_error)+0, """
+               """trim({father_table}.bp_rp)+0, """
+               """trim({father_table}.bp_g)+0, """
+               """trim({father_table}.g_rp)+0, """
+               """trim({father_table}.ruwe)+0, """
                """{father_table}.phot_variable_flag, """
                """{father_table}.non_single_star, """
-               """round({father_table}.distance_gspphot, 4), """
-               """round({father_table}.distance_gspphot_lower, 4), """
-               """round({father_table}.distance_gspphot_upper, 4), """
-               """round({son_table}.distance_gspphot_error, 4), """
-               """round({father_table}.azero_gspphot, 4), """
-               """round({father_table}.azero_gspphot_lower, 4), """
-               """round({father_table}.azero_gspphot_upper, 4), """
-               """round({son_table}.azero_gspphot_error, 4) """
+               """trim({father_table}.distance_gspphot)+0, """
+               """trim({father_table}.distance_gspphot_lower)+0, """
+               """trim({father_table}.distance_gspphot_upper)+0, """
+               """trim({son_table}.distance_gspphot_error)+0, """
+               """trim({father_table}.azero_gspphot)+0, """
+               """trim({father_table}.azero_gspphot_lower)+0, """
+               """trim({father_table}.azero_gspphot_upper)+0, """
+               """trim({son_table}.azero_gspphot_error)+0 """
                """from {father_table}, {son_table} """
                """where {father_table}.designation = {son_table}.designation and """
                """(simbad_HD is not null and """
                """simbad_HD in {stringHD}) """
-               """order by simbad_HD asc""".format(father_table=father_table,
+               """order by cast(substring(simbad_HD,3) as unsigned) asc""".format(father_table=father_table,
                                                    son_table=son_table, stringHD=stringHD))
 
 value = cursor.fetchall()
 
 simbad_HD_list = []
+simbad_HIP_list = []
 parallax_list = []
 parallax_error_list = []
 phot_g_mean_mag_list = []
@@ -79,7 +81,7 @@ azero_gspphot_lower_list = []
 azero_gspphot_upper_list = []
 azero_gspphot_error_list = []
 
-for (simbad_HD_value, parallax_value, parallax_error_value,
+for (simbad_HD_value, simbad_HIP_value, parallax_value, parallax_error_value,
     phot_g_mean_mag_value, MG_value, MG_error_value,
     phot_bp_mean_mag_value, MBp_value, MBp_error_value,
     phot_rp_mean_mag_value, MRp_value, MRp_error_value,
@@ -91,6 +93,7 @@ for (simbad_HD_value, parallax_value, parallax_error_value,
     azero_gspphot_value, azero_gspphot_lower_value, azero_gspphot_upper_value, azero_gspphot_error_value) in value:
 
     simbad_HD_list.append(simbad_HD_value)
+    simbad_HIP_list.append(simbad_HIP_value)
     parallax_list.append(parallax_value)
     parallax_error_list.append(parallax_error_value)
     phot_g_mean_mag_list.append(phot_g_mean_mag_value)
@@ -117,85 +120,8 @@ for (simbad_HD_value, parallax_value, parallax_error_value,
     azero_gspphot_upper_list.append(azero_gspphot_upper_value)
     azero_gspphot_error_list.append(azero_gspphot_error_value)
 
-# process parallax
-for i in range(len(parallax_list)):
-    parallax_list[i] = f"{parallax_list[i]:07.4f}"
-
-# process parallax_error
-for i in range(len(parallax_error_list)):
-    parallax_error_list[i] = f"{parallax_error_list[i]:06.4f}"
-
-# process phot_g_mean_mag
-for i in range(len(phot_g_mean_mag_list)):
-    phot_g_mean_mag_list[i] = f"{phot_g_mean_mag_list[i]:06.4f}"
-
-# process MG
-for i in range(len(MG_list)):
-    MG_list[i] = f"{MG_list[i]:06.4f}"
-
-# process MG_error
-for i in range(len(MG_error_list)):
-    MG_error_list[i] = f"{MG_error_list[i]:06.4f}"
-
-# process phot_bp_mean_mag
-for i in range(len(phot_bp_mean_mag_list)):
-    phot_bp_mean_mag_list[i] = f"{phot_bp_mean_mag_list[i]:06.4f}"
-
-# process MBp
-for i in range(len(MBp_list)):
-    MBp_list[i] = f"{MBp_list[i]:06.4f}"
-
-# process MBp_error
-for i in range(len(MBp_error_list)):
-    MBp_error_list[i] = f"{MBp_error_list[i]:06.4f}"
-
-# process phot_rp_mean_mag
-for i in range(len(phot_rp_mean_mag_list)):
-    phot_rp_mean_mag_list[i] = f"{phot_rp_mean_mag_list[i]:06.4f}"
-
-# process MRp
-for i in range(len(MRp_list)):
-    MRp_list[i] = f"{MRp_list[i]:06.4f}"
-
-# process MRp_error
-for i in range(len(MRp_error_list)):
-    MRp_error_list[i] = f"{MRp_error_list[i]:06.4f}"
-
-# process bp_rp
-for i in range(len(bp_rp_list)):
-    bp_rp_list[i] = f"{bp_rp_list[i]:06.4f}"
-
-# process bp_g
-for i in range(len(bp_g_list)):
-    bp_g_list[i] = f"{bp_g_list[i]:06.4f}"
-
-# process g_rp
-for i in range(len(g_rp_list)):
-    g_rp_list[i] = f"{g_rp_list[i]:06.4f}"
-
-# process ruwe
-for i in range(len(ruwe_list)):
-    ruwe_list[i] = f"{ruwe_list[i]:07.4f}"
-
-# process distance_gspphot
-for i in range(len(distance_gspphot_list)):
-    distance_gspphot_list[i] = f"{distance_gspphot_list[i]:07.4f}"
-
-# process distance_gspphot_error
-for i in range(len(distance_gspphot_error_list)):
-    distance_gspphot_error_list[i] = f"{distance_gspphot_error_list[i]:06.4f}"
-
-# process azero_gspphot
-for i in range(len(azero_gspphot_list)):
-    azero_gspphot_list[i] = f"{azero_gspphot_list[i]:06.4f}"
-
-print(azero_gspphot_error_list)
-# process azero_gspphot_error
-for i in range(len(azero_gspphot_error_list)):
-    azero_gspphot_error_list[i] = f"{azero_gspphot_error_list[i]:06.4f}"
-
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/solar_twins/csv/solar_twins.txt", "w") as text_file:
-    header = ["HD", "parallax",
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/solar_twins/csv/gemeas_solares.txt", "w") as text_file:
+    header = ["HD", "HIP", "parallax",
               "G", "MG",
               "Bp", "MBp",
               "Rp", "MRp",
@@ -210,23 +136,25 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/sol
     Header
     """
     text_file.write("{0[0]:<7}" # HD
-                    "{0[1]:<17}" # parallax +/- erro
-                    "{0[2]:<7}"
-                    "{0[3]:<16}"
-                    "{0[4]:<7}"
-                    "{0[5]:<16}"
-                    "{0[6]:<7}"
-                    "{0[7]:<16}"
-                    "{0[8]:<7}"
-                    "{0[9]:<7}"
-                    "{0[10]:<7}"
-                    "{0[11]:<8}"
-                    "{0[12]:<19}"
-                    "{0[13]:<16}"
-                    "{0[14]:<17}"
-                    "{0[15]:<20}\n".format(header))
+                    "{0[1]:<7}" # HIP
+                    "{0[2]:<33}" # parallax
+                    "{0[3]:<10}" # G
+                    "{0[4]:<43}" # MG
+                    "{0[5]:<10}" # Bp
+                    "{0[6]:<42}" # MBp
+                    "{0[7]:<10}" # Rp
+                    "{0[8]:<43}" # MRp
+                    "{0[9]:<11}" # Bp_Rp
+                    "{0[10]:<11}" # Bp_G
+                    "{0[11]:<11}" # G_Rp
+                    "{0[12]:<11}" # ruwe
+                    "{0[13]:<20}" # phot_variable_flag
+                    "{0[14]:<16}" # non_single_star
+                    "{0[15]:<31}" # distance_gspphot
+                    "{0[16]:<20}" # azero_gspphot
+                    "\n".format(header))
 
-    for (HD, parallax, parallax_error,
+    for (HD, HIP, parallax, parallax_error,
          G, MG, MG_error,
          Bp, MBp, MBp_error,
          Rp, MRp, MRp_error,
@@ -235,7 +163,7 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/sol
          phot_variable_flag,
          non_single_star,
          distance_gspphot, distance_gspphot_error,
-         azero_gspphot, azero_gspphot_error) in zip(simbad_HD_list, parallax_list, parallax_error_list,
+         azero_gspphot, azero_gspphot_error) in zip(simbad_HD_list, simbad_HIP_list, parallax_list, parallax_error_list,
                                                     phot_g_mean_mag_list, MG_list, MG_error_list,
                                                     phot_bp_mean_mag_list, MBp_list, MBp_error_list,
                                                     phot_rp_mean_mag_list, MRp_list, MRp_error_list,
@@ -245,7 +173,7 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/sol
                                                     non_single_star_list,
                                                     distance_gspphot_list, distance_gspphot_error_list,
                                                     azero_gspphot_list, azero_gspphot_error_list):
-        lista = [HD[3:], parallax, parallax_error,
+        lista = [HD[3:], HIP[4:], parallax, parallax_error,
                  G, MG, MG_error,
                  Bp, MBp, MBp_error,
                  Rp, MRp, MRp_error,
@@ -259,31 +187,33 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/sol
         """
         Dados
         """
-        text_file.write("{0[0]:<7}" # HD
-                        "{0[1]:<8}" # parallax
-                        "{0[22]:<2}" # simbolo
-                        "{0[2]:<7}" # parallax_error
-                        "{0[3]:<7}"
-                        "{0[4]:<7}"
-                        "{0[22]:<2}"
-                        "{0[5]:<7}"
-                        "{0[6]:<7}"
-                        "{0[7]:<7}"
-                        "{0[22]:<2}"
-                        "{0[8]:<7}"
-                        "{0[9]:<7}"
-                        "{0[10]:<7}"
-                        "{0[22]:<2}"
-                        "{0[11]:<7}"
-                        "{0[12]:<7}"
-                        "{0[13]:<7}"
-                        "{0[14]:<7}"
-                        "{0[15]:<8}"
-                        "{0[16]:<19}"
-                        "{0[17]:<16}"
-                        "{0[18]:<8}"
-                        "{0[22]:<2}"
-                        "{0[19]:<7}"
-                        "{0[20]:<7}"
-                        "{0[22]:<2}"
-                        "{0[21]:<20}\n".format(lista))
+        text_file.write("{0[0]:<7}"  # HD
+                        "{0[1]:<7}"  # HIP
+                        "{0[2]:<19}" # parallax
+                        "{0[23]:<2}" # sinal
+                        "{0[3]:<12}"  # parallax_error
+                        "{0[4]:<10}"  # G
+                        "{0[5]:<19}"  #  MG
+                        "{0[23]:<2}" # sinal
+                        "{0[6]:<22}" # MG_error
+                        "{0[7]:<10}" # Bp
+                        "{0[8]:<18}" # MBp
+                        "{0[23]:<2}" # sinal
+                        "{0[9]:<22}" # MBp_error
+                        "{0[10]:<10}" # Rp
+                        "{0[11]:<19}" # MRp
+                        "{0[23]:<2}" # sinal
+                        "{0[12]:<22}" # MRp_error
+                        "{0[13]:<11}" # Bp_Rp
+                        "{0[14]:<11}" # Bp_G
+                        "{0[15]:<11}" # G_Rp
+                        "{0[16]:<11}" # ruwe
+                        "{0[17]:<20}" # phot_variable_flag
+                        "{0[18]:<16}" # non_single_star
+                        "{0[19]:<8}" # distance_gspphot
+                        "{0[23]:<2}" # sinal
+                        "{0[20]:<21}" # distance_gspphot_error
+                        "{0[21]:<7}" # azero_gspphot
+                        "{0[23]:<2}" # sinal
+                        "{0[22]:<21}" # azero_gspphot_error
+                        "\n".format(lista))

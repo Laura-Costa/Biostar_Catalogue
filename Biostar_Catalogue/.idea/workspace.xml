@@ -6,10 +6,34 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia/Gaia_product_archive.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia_product_archive.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/pyplot_HRdiagram/pyplot_HRdiagram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Gaia/View.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/View.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/input_files/Gaia-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/input_files/Gaia-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/input_files/Gaia_product_algumas_estrelas_gaia-result.csv" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/input_files/Gaia_product_algumas_estrelas_gaia-result.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/input_files/solar_twins.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/input_files/solar_twins.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/pyplot_HRdiagram.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/solar_twins/csv/file_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/solar_twins/csv/file_excel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/solar_twins/csv/txt.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/solar_twins/csv/txt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/solar_twins/csv/gemeas_solares.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpeg/MG_Bp_Rp_ampliado.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpeg/MG_Bp_Rp_ampliado.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/LNA_MG_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/LNA_MG_Bp_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_G.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_G.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_G_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_G_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_Rp_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_Bp_Rp_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_G_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_G_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_G_Rp_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MBp_G_Rp_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MG_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MG_Bp_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_G.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_G.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_G_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_G_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_Rp_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_Bp_Rp_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_G_Rp.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_G_Rp.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_G_Rp_ampliado.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/jpg/MRp_G_Rp_ampliado.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/pdf/MG_Bp_Rp_ampliado.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/pdf/MG_Bp_Rp_ampliado.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/png/MG_Bp_Rp_ampliado.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/png/MG_Bp_Rp_ampliado.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/svg/MG_Bp_Rp_ampliado.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/pyplot_HRdiagram/svg/MG_Bp_Rp_ampliado.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/solar_twins/csv/solar_twins.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/solar_twins/csv/solar_twins.xlsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +116,7 @@
     &quot;Python.query_around_xlsx.executor&quot;: &quot;Run&quot;,
     &quot;Python.query_round_por_estrela.executor&quot;: &quot;Run&quot;,
     &quot;Python.ra.executor&quot;: &quot;Run&quot;,
+    &quot;Python.round.executor&quot;: &quot;Run&quot;,
     &quot;Python.sem_ADS_Comp_e_sem_DR3.executor&quot;: &quot;Run&quot;,
     &quot;Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor&quot;: &quot;Run&quot;,
     &quot;Python.sem_ADS_Comp_sem_DR3_xlsx.executor&quot;: &quot;Run&quot;,
@@ -105,6 +130,7 @@
     &quot;Python.sigma_pi_x_pi.executor&quot;: &quot;Run&quot;,
     &quot;Python.testeBrightStar.executor&quot;: &quot;Run&quot;,
     &quot;Python.txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.txt_round.executor&quot;: &quot;Run&quot;,
     &quot;Python.upper_lower.executor&quot;: &quot;Run&quot;,
     &quot;Python.xlsx.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,

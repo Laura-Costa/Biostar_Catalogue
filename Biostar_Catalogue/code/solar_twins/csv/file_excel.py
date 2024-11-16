@@ -13,12 +13,13 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
     cont = 0
     for line in file:
         cont += 1
-        if cont != 5:
+        if cont != 9:
             stringHD += "'HD {}', ".format(line.rstrip())
         else:
             stringHD += "'HD {}')".format(line.rstrip())
 
-query = ("""select substring({father_table}.simbad_HD, 3), """
+query = ("""select substring({father_table}.simbad_HD, 4), """
+        """substring({father_table}.simbad_HIP, 5), """
         """{father_table}.parallax, """
         """{father_table}.parallax_error, """
         """{father_table}.phot_g_mean_mag, """
@@ -48,10 +49,11 @@ query = ("""select substring({father_table}.simbad_HD, 3), """
         """where {father_table}.designation = {son_table}.designation and """
         """(simbad_HD is not null and """
         """simbad_HD in {stringHD}) """
-        """order by simbad_HD asc""".format(father_table=father_table,
+        """order by cast(substring(simbad_HD,3) as unsigned) asc""".format(father_table=father_table,
                                                    son_table=son_table, stringHD=stringHD))
 
 header = ["HD",
+          "HIP",
           "parallax",
           "parallax_error",
           "phot_g_mean_mag",
@@ -78,11 +80,11 @@ header = ["HD",
           "azero_gspphot_upper",
           "azero_gspphot_error"]
 
-path = "solar_twins/csv/solar_twins.xlsx"
+path = "solar_twins/csv/gemeas_solares.xlsx"
 queries = [query]
 
 # def xlsx(cursor, query, header, path, sheets):
-f.xlsx(cursor, queries, header, path, ["solar_twins"])
+f.xlsx(cursor, queries, header, path, ["gemeas_solares"])
 
 cursor.close()
 connection.close()
