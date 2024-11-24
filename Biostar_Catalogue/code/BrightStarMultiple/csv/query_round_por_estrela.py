@@ -9,17 +9,17 @@ query = ("select "
          "when BrightStar.HD is not null then BrightStar.HD "
          "else BrightStar.HR "
          "end) as id, "
-         "count(*)-1 as count from BrightStarMultiple, BrightStar "
+         "count(*) as count from BrightStarMultiple, BrightStar "
          "where BrightStar.HR = BrightStarMultiple.HR "
          "group by id "
          "order by count asc")
 
-header = ["identifier", "count"]
-path = "BrightStarMultiple/csv/query_round_por_estrela.xlsx"
+headers = ["HD", "count"]
+path = "BrightStarMultiple/csv/query_around_por_estrela.xlsx"
 queries = [query]
 
-# def xlsx(cursor, query, header, path, sheets):
-f.xlsx(cursor, queries, header, path, ["query_around_por_estrela"])
+# def xlsx(cursor, queries, headers, path, sheets):
+f.xlsx(cursor, queries, headers, path, ["query_around_por_estrela"])
 
 cursor.close()
 connection.close()

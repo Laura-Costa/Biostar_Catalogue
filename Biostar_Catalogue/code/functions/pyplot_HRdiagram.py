@@ -7,7 +7,10 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
     for line in file:
         list_HD.append("HD {}".format(line.rstrip()))
 
-def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel, markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle, xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5, dp = -1, axeslabelsize=6):
+def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel,
+            markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle,
+            xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5, dp = -1,
+            axeslabelsize=6, y_x=False, x_minor_gap=5, y_minor_gap=5, lgnd_loc="best"):
 
     fig, ax = plt.subplots()
     cursor.execute(query)
@@ -30,7 +33,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                     simbad_HD_list.append(simbad_HD_value)
             else:
                 x_axis.append(x_value)
-                y_axis.append(x_value)
+                y_axis.append(y_value)
                 simbad_HD_list.append(simbad_HD_value)
     elif error_bars:
         for (simbad_HD_value, parallax_value, x_value, y_value, x_error_value, y_error_value) in value:
@@ -49,8 +52,9 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                 x_error_list.append(x_error_value)
                 y_error_list.append(y_error_value)
 
+    if y_x or error_bars:
         # reta y = x
-        ax.axline((0, 0), slope=1, linewidth=0.5, color='red', label='y = x') # label='f(x) = x',
+        ax.axline((0, 0), slope=1, linewidth=0.5, color='red') # label='y = x'
 
     # a distância no título do diagrama não leva em conta as estrelas da legenda,
     # a menos que elas também estejam na seleção principal
@@ -62,10 +66,10 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         for (simbad_HD_value, x, y) in zip(simbad_HD_list, x_axis, y_axis):
             if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD and simbad_HD_value not in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
                 ax.scatter([x], [y], s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
-            elif simbad_HD_value in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
+            elif simbad_HD_value in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A") or simbad_HD_value in list_HD:
                 ax.scatter([x], [y], s=markersize, color='#95a5a6', edgecolor='none', linewidth=0.6, marker='o', zorder=2)
             else:
-                ax.scatter([x], [y], s=markersize, color='#95a5a6', edgecolor='none', marker='o', zorder=2)
+                ax.scatter([x], [y], s=markersize, color='black', edgecolor='none', marker='o', zorder=2)
     elif not error_bars:
         ax.scatter(x_axis, y_axis, s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
     elif error_bars:
@@ -98,9 +102,9 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
-    ax.xaxis.set_minor_locator(MultipleLocator(xgap/10))
+    ax.xaxis.set_minor_locator(MultipleLocator(xgap/x_minor_gap))
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
-    ax.yaxis.set_minor_locator(MultipleLocator(ygap/10))
+    ax.yaxis.set_minor_locator(MultipleLocator(ygap/y_minor_gap))
 
     # configurar ambos os axis (xaxis e yaxis) com labels com dp (decimal_places) casas decimais
     if dp != -1:
@@ -157,12 +161,12 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
 
     # marcar a HD 146233 e as 5 anãs K
-    if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, markersize)
+    if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, lgnd_loc)
 
     # fechar plt
     plt.close()
 
-def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, size):
+def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, lgnd_loc):
 
     for (HD_value, color) in zip(hds, colors):
         cursor.execute(query_emphasis + "'{}'".format(HD_value))
@@ -180,12 +184,8 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
         ax.scatter(value_emphasis[0][1], value_emphasis[0][2], s=14, color=color, edgecolor='none', marker='o', zorder=4, label=value_emphasis[0][0])
 
     # configurar legenda
-    lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='best')
+    lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc=lgnd_loc)
 
-    if 'simbad_MV_simbad_B_V' in path: # a legenda desta figura em específico não foi localizada adequadamente por loc='best'
-        lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower right')
-    if  'LNA2_MG_Bp_Rp' in path:
-        lgnd = plt.legend(scatterpoints=1, shadow=True, fontsize=5, loc='lower left')
     # configurar tamanho dos marcadores da legenda
     for handle in lgnd.legend_handles:
         if not error_bars:

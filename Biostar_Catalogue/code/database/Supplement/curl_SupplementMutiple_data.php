@@ -18,12 +18,17 @@
         echo "sucess";
     }
 
-    $query = mysqli_query($conn, "select ordinal_number, simbad_main_identifier from SupplementMultiple");
+    $query = mysqli_query($conn, "select SupplementMultiple.ordinal_number, SupplementMultiple.simbad_main_identifier, Supplement.HD, Supplement.HD_Suffix from SupplementMultiple, Supplement where SupplementMultiple.ordinal_number_Supplement = Supplement.ordinal_number");
     while($row = mysqli_fetch_array($query)) {
 
-        // pegar o ordinal_number e o identifier do BD
-        $ordinal_number = $row[0];
         $simbad_main_identifier = null;
+
+        // pegar o ordinal_number e o HD_Suffix do BD
+        $ordinal_number = $row[0];
+        $HD_Suffix = $row[3];
+
+        // somar uma unidade no número HD
+        $HD_mais_um = "HD " . (substr($row[2], 3))+1;
 
         foreach (explode(" ", $row[1]) as $piece){
             if(is_null($simbad_main_identifier)) {
@@ -77,6 +82,7 @@
         $simbad_DR2 = null;
         $simbad_DR3 = null;
         $simbad_HIP = null;
+        $simbad_HD = null;
         $simbad_parallax = null;
         $simbad_parallax_error = null;
         $simbad_parallax_source = null;
@@ -111,6 +117,12 @@
             }
             if(!$identifiers_ended && $identifiers_started && str_contains($word, "HIP")){
                 $simbad_HIP = $word . " " . $string_array[$cont+1];
+            }
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "HD") && str_contains($HD_Suffix, "/") && ("HD " . $string_array[$cont+1]) == $HD_mais_um){
+                $simbad_HD = $word . " " . $string_array[$cont+1];
+            }
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "HD") && !str_contains($HD_Suffix, "/")){
+                $simbad_HD = $word . " " . $string_array[$cont+1];
             }
 
             // ler dados do basic data no Simbad
@@ -155,6 +167,9 @@
         }
         if(!is_null($simbad_HIP)){
             mysqli_query($conn, "update SupplementMultiple set simbad_HIP = '" . $simbad_HIP . "' where ordinal_number = " . $ordinal_number);
+        }
+        if(!is_null($simbad_HD)){
+            mysqli_query($conn, "update SupplementMultiple set simbad_HD = '" . $simbad_HD . "' where ordinal_number = " . $ordinal_number);
         }
         if(!is_null($simbad_parallax) && !str_contains($simbad_parallax, "~")){
             $parallax_query = ("update SupplementMultiple set simbad_parallax = " . $simbad_parallax . " where ordinal_number = " . $ordinal_number);

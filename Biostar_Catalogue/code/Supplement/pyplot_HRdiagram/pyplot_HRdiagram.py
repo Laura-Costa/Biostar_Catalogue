@@ -21,7 +21,9 @@ def sql_query(x_axis, y_axis):
              "{son_table}.{y_axis} is not null and "
              "{father_table}.simbad_DR3 is null and "
              "( "
-             "{father_table}.HD_Suffix is null or "  #estrelas com '/' no HD_Suffix são incluídas aqui porque elas não vão para SupplementMultiple
+             "{father_table}.HD_Suffix is null or "  # estrelas com '/' no HD_Suffix são incluidas aqui porque elas não vão para SupplementMultiple
+                                                     # porem, nenhuma delas eh plotada aqui, porque nao tem os dados necessarios
+                                                     # a condicao poderia ser somente "HD_Suffix is null"
              "{father_table}.HD_Suffix like '%/%' "
              ") ".format(x_axis=x_axis,
                          y_axis=y_axis,
@@ -57,12 +59,14 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 hds = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 (Supplement, query_emphasis) = sql_query('B_V', 'MV')
+
 f.diagram(cursor, Supplement, query_emphasis, colors, hds, 'Supplement/pyplot_HRdiagram/#/MV_B_V.#',
           0.50, 5.0,
-          r'$B-V$', r'$M(V)$', 8,
-          0.03, 0.01, 0.20, 0.87,
-          'Supplement', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dp=2,
-          axeslabelsize=10)
+          r'$B-V$', r'$M(V)$', 13,
+          0.10, 0.10, 0.50, 0.50,
+          'Supplement', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dp=1,
+          axeslabelsize=10,
+          x_minor_gap=5, y_minor_gap=10)
 
 # fechar conexão com o BD
 connection.close()

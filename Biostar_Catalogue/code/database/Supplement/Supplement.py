@@ -30,6 +30,7 @@ cursor.execute("create table {son_table}( "
                "V numeric(65, 30) null, "
                "B_V numeric(65, 30) null, "
                "SpType char(100) null, "
+               "Parallax numeric(65, 30) null, "
                "Mult_MDiff numeric(65, 30) null, "
                "Mult_Flag char(100) null, "
                "Mult_Sep numeric(65, 30) null, "
@@ -105,6 +106,9 @@ with open("../input_files/BSC4S.DAT", "r") as dat_file:
 
         # load SpType
         f.update_table(cursor, son_table, 'SpType', line, 127, son_key_column, cont, False, 148)
+
+        # load Parallax
+        f.update_table(cursor, son_table, 'Parallax', line, 162, son_key_column, cont, False, 168)
 
         # load Mult_MDiff
         f.update_table(cursor, son_table, 'Mult_MDiff', line, 184, son_key_column, cont, False, 188)

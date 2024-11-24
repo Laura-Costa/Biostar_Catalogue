@@ -34,23 +34,32 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
 
     ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o', zorder=2)
 
+    # valores calculados manualmente para a figura ampliada ficar com mesmo aspecto da original
     plt.ylim(-0.19034899200000002 + 1.1, 4.69095)
     plt.xlim(2.4807318 + 1.1, 21.158179999999998)
 
-    ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle, len(value), 1000.0/min_parallax, min_parallax, max_parallax), fontsize=7, y=1.04)
-    plt.xlabel(xlabel, fontsize=7)
-    plt.ylabel(ylabel, fontsize=7)
+    ax.set_title("{}\n{} estrelas em um raio de {:.4f} parsecs {:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
+                                                                                                 len(value),
+                                                                                                 1000.0/min_parallax,
+                                                                                                 min_parallax, max_parallax),
+                                                                                                 fontsize=7, y=1.07)
+    plt.xlabel(xlabel, fontsize=10)
+    plt.ylabel(ylabel, fontsize=10)
 
     # definir os intervalos de major e minor ticks
     ax.xaxis.set_major_locator(MultipleLocator(xgap))
-    ax.xaxis.set_minor_locator(MultipleLocator(xgap/5))
+    ax.xaxis.set_minor_locator(MultipleLocator(xgap/10))
     ax.yaxis.set_major_locator(MultipleLocator(ygap))
-    ax.yaxis.set_minor_locator(MultipleLocator(ygap/5))
+    ax.yaxis.set_minor_locator(MultipleLocator(ygap/10))
 
     # configurar labels do major e minor ticks de ambos os eixos
-    ax.tick_params(axis='both', which='both', labelsize=3, color='black', labeltop=True, top=True,
+    ax.tick_params(axis='both', which='both', labelsize=10, color='black', labeltop=True, top=True,
                                                                           labelright=True, right=True,
-                                                                          tickdir='out', width=0.5)
+                                                                          tickdir='out')
+
+    # largura ticks
+    ax.tick_params(axis='both', which='minor', width=1.0)
+    ax.tick_params(axis='both', which='major', width=1.3)
 
     # rotacionar label do eixo x
     plt.xticks(rotation=0)
@@ -87,11 +96,12 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     # fechar plt
     plt.close()
 
+
 colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 def sql_query(y_axis, x_axis):
-    father_table = 'CAT1'
+    father_table = 'view_CAT1'
 
     query = ("select {father_table}.simbad_HD, "
              "trim({father_table}.parallax)+0, "
@@ -113,7 +123,7 @@ def sql_query(y_axis, x_axis):
     return (query, query_emphasis)
 
 def sql_query_zoom(y_axis, x_axis):
-    father_table = 'CAT1'
+    father_table = 'view_CAT1'
 
     query = ("select {father_table}.simbad_HD, "
              "trim({father_table}.parallax)+0, "
@@ -139,9 +149,17 @@ def sql_query_zoom(y_axis, x_axis):
 fazer o diagrama de M(Rp) x Bp-Rp
 """
 (query, query_emphasis) = sql_query('parallax_error', 'phot_g_mean_mag')
-f.diagram(cursor, query, query_emphasis, colors, HDs,'CAT1/pyplot_scatterplot/jpg/parallax_error_G.jpg', 1.0, 0.5, r'$G$', r'$σ(π)$', 2.0, 0.20, 0.20, 0.20, 0.20, 'CAT1')
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'CAT1/pyplot_scatterplot/#/parallax_error_G.#',
+          3.0, 1.0,
+          r'$G$', r'$σ(π)$', 8.0,
+          0.20, 0.20, 0.20, 0.20,
+          'CAT1', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dp=1,
+          axeslabelsize=10,
+          x_minor_gap=10, y_minor_gap=10)
 (query, query_emphasis) = sql_query_zoom('parallax_error', 'phot_g_mean_mag')
-diagram(cursor, query, query_emphasis, colors, [],'CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg', 1.0, 0.5, r'$G$', 'σ(π)', 6.0, 0.20, 0.20, 0.20, 0.20, 'CAT1: estrelas com σ(π) > 1.0 (mas)')
+diagram(cursor, query, query_emphasis, colors, [],'CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg',
+        1.0, 0.5, r'$G$', 'σ(π)', 6.0, 0.20, 0.20, 0.20,
+        0.20, 'CAT1: estrelas com σ(π) > 1.0 (mas)')
 
 # fechar a conexão com o BD
 connection.close()

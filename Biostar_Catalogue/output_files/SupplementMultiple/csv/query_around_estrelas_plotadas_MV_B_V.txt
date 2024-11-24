@@ -1,0 +1,7 @@
+identifier simbad_parallax simbad_parallax_source MV    B_V  simbad_SpType
+NGC 2169   000.98          2020A&A...633A..99C    -4.14 0.09 
+HD 71805   018.50          2007A&A...474..653V    +2.83 0.42 F5V
+HD 112361  012.34          2007A&A...474..653V    +4.07 0.30 F5IV/V
+* ksi Boo  148.98          2007A&A...474..653V    +5.46 0.78 G7Ve+K5Ve
+HD 195481  005.92          2007A&A...474..653V    +0.71 0.12 A2V
+HD 221839  022.40          2018yCat.1345....0G    +3.45 0.51 F7V+G3V
