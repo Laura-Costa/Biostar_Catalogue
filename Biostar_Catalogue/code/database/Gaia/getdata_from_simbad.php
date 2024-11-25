@@ -55,6 +55,7 @@
         // definindo variáveis para o processamento dos dados
         $identifiers_started = False;
         $identifiers_ended = False;
+        $simbad_DR3 = null;
         $simbad_HIP = null;
         $simbad_HD = null;
         $cont = 0;
@@ -70,7 +71,10 @@
                 $identifiers_ended = True;
             }
 
-            // buscar pelos identificadores (simbad_DR1, simbad_DR2, simbad_DR3 e simbad_HIP)
+            // buscar pelos identificadores (simbad_DR3, simbad_DR1, simbad_DR2, simbad_DR3 e simbad_HIP)
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR3")){
+                $simbad_DR3 = $word . " " . $string_array[$cont+1] . " " . $string_array[$cont+2];
+            }
             if(!$identifiers_ended && $identifiers_started && str_contains($word, "HD")){
                 $simbad_HD = $word . " " . $string_array[$cont+1];
             }
@@ -85,6 +89,9 @@
         printf("\nsimbad_HIP: " . $simbad_HIP);
         */
         // carregar os dados obtidos na web para o BD, caso existam
+        if(!is_null($simbad_DR3)){
+            mysqli_query($conn, "update Gaia set in_simbad = 1 where designation = '" . $designation  . "'");
+        }
         if(!is_null($simbad_HIP)){
             mysqli_query($conn, "update Gaia set simbad_HIP = '" . $simbad_HIP . "' where designation = '" . $designation  . "'");
         }
