@@ -9,6 +9,8 @@ cursor = connection.cursor()
 
 query_sem_G = ("select {father_table}.designation, "
               "{father_table}.simbad_HD, "
+              "trim({father_table}.parallax)+0, "
+              "trim({father_table}.parallax_error)+0, "
               "trim({father_table}.phot_g_mean_mag)+0, "
               "trim({father_table}.phot_bp_mean_mag)+0, "
               "trim({father_table}.phot_rp_mean_mag)+0, "
@@ -23,10 +25,13 @@ query_sem_G = ("select {father_table}.designation, "
               "trim({father_table}.bp_g)+0 "
               "from {father_table}, {son_table} " 
               "where phot_g_mean_mag is null and "
-              "{father_table}.designation = {son_table}.designation".format(father_table=father_table, son_table=son_table))
+              "{father_table}.designation = {son_table}.designation and "
+              "{father_table}.parallax + 3*{father_table}.parallax_error >= 50.00".format(father_table=father_table, son_table=son_table))
 
 query_sem_bp_rp = ("select {father_table}.designation, "
                    "{father_table}.simbad_HD, "
+                   "trim({father_table}.parallax)+0, "
+                   "trim({father_table}.parallax_error)+0, "
                    "trim({father_table}.phot_g_mean_mag)+0, "
                    "trim({father_table}.phot_bp_mean_mag)+0, "
                    "trim({father_table}.phot_rp_mean_mag)+0, "
@@ -41,9 +46,11 @@ query_sem_bp_rp = ("select {father_table}.designation, "
                    "trim({father_table}.bp_g)+0 "
                    "from {father_table}, {son_table} " 
                    "where {father_table}.bp_rp is null and "
-                   "{father_table}.designation = {son_table}.designation".format(father_table=father_table, son_table=son_table))
+                   "{father_table}.designation = {son_table}.designation and "
+                   "{father_table}.parallax + 3*{father_table}.parallax_error >= 50.00".format(father_table=father_table, son_table=son_table))
 
 headers = ['designation', 'simbad_HD',
+           'parallax', 'parallax_error',
            'phot_g_mean_mag', 'phot_bp_mean_mag', 'phot_rp_mean_mag',
            'MG', 'MG_error',
            'MBp', 'MBp_error',

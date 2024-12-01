@@ -75,7 +75,7 @@
             if(!$identifiers_ended && $identifiers_started && str_contains($word, "Gaia") && str_contains($string_array[$cont+1], "DR3")){
                 $simbad_DR3 = $word . " " . $string_array[$cont+1] . " " . $string_array[$cont+2];
             }
-            if(!$identifiers_ended && $identifiers_started && str_contains($word, "HD")){
+            if(!$identifiers_ended && $identifiers_started && str_contains($word, "HD") && str_contains($word[-1], "D")){
                 $simbad_HD = $word . " " . $string_array[$cont+1];
             }
             if(!$identifiers_ended && $identifiers_started && str_contains($word, "HIP")){
@@ -91,6 +91,8 @@
         // carregar os dados obtidos na web para o BD, caso existam
         if(!is_null($simbad_DR3)){
             mysqli_query($conn, "update Gaia set in_simbad = 1 where designation = '" . $designation  . "'");
+        } else{
+            mysqli_query($conn, "update Gaia set in_simbad = 0 where designation = '" . $designation  . "'");
         }
         if(!is_null($simbad_HIP)){
             mysqli_query($conn, "update Gaia set simbad_HIP = '" . $simbad_HIP . "' where designation = '" . $designation  . "'");

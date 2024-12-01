@@ -2,7 +2,6 @@ import mysql.connector
 import pandas as pd
 import os
 
-
 def deg2hms(ra):
     RA, rs = '', ''
     if ra < 0:
@@ -10,12 +9,12 @@ def deg2hms(ra):
 
     raH = int(ra / 15)
     raM = int(((ra / 15) - raH) * 60)
-    raS = ((((ra / 15) - raH) * 60) - raM) * 60
+    raS = round(((((ra / 15) - raH) * 60) - raM) * 60, 2)
+    raS = f"{raS:05.2f}"
 
-    RA = '{}{:02d}:{:02d}:{:02d}.{}'.format(rs, raH, raM, int(raS), str(raS)[str(raS).index(".") + 1:])  # [-2:]
+    RA = '{}{:02d}:{:02d}:{}'.format(rs, raH, raM, raS)
 
     return RA
-
 
 def deg2dms(dec):
     DEC, ds = '', ''
@@ -26,23 +25,21 @@ def deg2dms(dec):
 
     decD = int(dec)
     decM = int(((dec - decD) * 3600) / 60.0)
-    decS = ((dec - decD) * 3600) % 60.0
+    decS = round(((dec - decD) * 3600) % 60.0, 2)
+    decS = f"{decS:05.2f}"
 
-    DEC = '{}{:02d}:{:02d}:{:02d}.{}'.format(ds, decD, decM, int(decS), str(decS)[str(decS).index(".") + 1:])
+    DEC = '{}{:02d}:{:02d}:{}'.format(ds, decD, decM, decS)
 
     return DEC
-
 
 father_table = 'CAT1'
 son_table = 'CAT1_product'
 brother_table = 'Hipparcos'
 nephew_table = 'Hipparcos_product'
 
-connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh',
-                                     password='ic2023')
+connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
-header = ["designation", "simbad_HD", "ra", "dec", "phot_g_mean_mag", "Bp_Rp", "MG"]
 stringHD = "("
 
 with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/input_files/211_stars.txt") as file:
@@ -53,6 +50,8 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
             stringHD += "'HD {}', ".format(line.rstrip())
         else:
             stringHD += "'HD {}')".format(line.rstrip())
+        if(line.strip() == '146233' or line.strip() == '4628' or line.strip() == '16160' or line.strip() == '32147' or line.strip() == '191408' or line.strip() == '219134'):
+            print(line.rstrip())
 
 cursor.execute("""select {father_table}.designation, """
                """{father_table}.simbad_HD, """
@@ -62,14 +61,14 @@ cursor.execute("""select {father_table}.designation, """
                """trim({son_table}.Bp_Rp)+0, """
                """trim({son_table}.MG)+0 """
                """from {father_table}, {son_table} """
-               """where {father_table}.designation = {son_table}.designation and """
+               """where {father_table}.designation = {son_table}.designation and """ 
                """Bp_Rp <= 1.500 and """
                """MG <= 9.000 and """
+               """(simbad_HD is null or """
                """(simbad_HD is not null and """
-               """simbad_HD in {stringHD}) and """
-               """CAT1.HIP is null """ 
+               """simbad_HD not in {stringHD})) """
                """order by Bp_Rp asc""".format(father_table=father_table,
-                                               son_table=son_table, stringHD=stringHD))
+                                                          son_table=son_table, stringHD=stringHD))
 
 value = cursor.fetchall()
 designation_list = []
@@ -99,37 +98,27 @@ for i in range(len(dec_list)):
 
 # process G
 for i in range(len(G_list)):
-    n = len(str(G_list[i])[str(G_list[i]).index(".") + 1:])
-    G_list[i] = f"{G_list[i]:0{n + 3}.{n}f}"
+    G_list[i] = round(G_list[i], 2)
+    G_list[i] = f"{G_list[i]:05.2f}"
 
 # process Bp_Rp
 for i in range(len(Bp_Rp_list)):
-    n = len(str(Bp_Rp_list[i])[str(Bp_Rp_list[i]).index(".") + 1:])
-    Bp_Rp_list[i] = f"{Bp_Rp_list[i]:0{n + 3}.{n}f}"
+    Bp_Rp_list[i] = round(Bp_Rp_list[i], 2)
+    Bp_Rp_list[i] = f"{Bp_Rp_list[i]:05.2f}"
 
 # process MG
 for i in range(len(MG_list)):
-    n = len(str(MG_list[i])[str(MG_list[i]).index(".") + 1:])
-    MG_list[i] = f"{MG_list[i]:0{n + 3}.{n}f}"
+    MG_list[i] = round(MG_list[i], 2)
+    MG_list[i] = f"{MG_list[i]:05.2f}"
 
-cont = 0
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/csv/LNA_estrelas_entre_211_e_sem_HIP.txt", "w") as text_file:
+
+with open("/output_files/CAT1/text_files/LNA_round.txt", "w") as text_file:
     header = ["identifier", "ra", "dec", "G", "Bp_Rp", "MG", "mag", "object", "comment"]
-    text_file.write(
-        "{0[0]:<11}{0[1]:<26}{0[2]:<26}{0[3]:<12}{0[4]:<12}{0[5]:<21}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(header))
-    for (designation, simbad_HD, ra, dec, G, Bp_Rp, MG) in zip(designation_list, simbad_HD_list, ra_list, dec_list,
-                                                               G_list, Bp_Rp_list, MG_list):
+    text_file.write("{0[0]:<30}{0[1]:<13}{0[2]:<14}{0[3]:<7}{0[4]:<7}{0[5]:<7}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(header))
+    for (designation, simbad_HD, ra, dec, G, Bp_Rp, MG) in zip(designation_list, simbad_HD_list, ra_list, dec_list, G_list, Bp_Rp_list, MG_list):
         if simbad_HD is not None:
-            cont += 1
             lista = [simbad_HD, ra, dec, G, Bp_Rp, MG, "G", "nearby_star", "star"]
-            text_file.write(
-                "{0[0]:<11}{0[1]:<26}{0[2]:<26}{0[3]:<12}{0[4]:<12}{0[5]:<21}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(
-                    lista))
+            text_file.write("{0[0]:<30}{0[1]:<13}{0[2]:<14}{0[3]:<7}{0[4]:<7}{0[5]:<7}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(lista))
         else:
-            cont += 1
             lista = [designation, ra, dec, G, Bp_Rp, MG, "G", "nearby_star", "star"]
-            text_file.write(
-                "{0[0]:<11}{0[1]:<26}{0[2]:<26}{0[3]:<12}{0[4]:<12}{0[5]:<21}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(
-                    lista))
-
-print(cont)
+            text_file.write("{0[0]:<30}{0[1]:<13}{0[2]:<14}{0[3]:<7}{0[4]:<7}{0[5]:<7}{0[6]:<4}{0[7]:<13}{0[8]:<10}\n".format(lista))

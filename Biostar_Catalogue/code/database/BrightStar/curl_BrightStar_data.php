@@ -127,55 +127,62 @@
             $cont++;
         }
 
-        /*
-        printf("\nsimbad_main_identifier: " . $simbad_main_identifier);
-        printf("\nHR: " . $HR);
-        printf("\nsimbad_parallax: " . $simbad_parallax);
-        printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
-        printf("\nsimbad_parallax_source: " . $simbad_parallax_source);
-        printf("\nsimbad_B: " . $simbad_B);
-        printf("\nsimbad_V: " . $simbad_V);
-        printf("\nsimbad_SpType: " . $simbad_SpType);
-        */
+        if(str_contains($id, 'HD 163755') || str_contains($id, 'HD 206826') || str_contains($id, 'HD 206827')){
+            printf("\nsimbad_main_identifier: " . $simbad_main_identifier);
+            printf("\nHD: " . $HD);
+            printf("\nHR: " . $HR);
+            printf("\nid: " . $id);
+            printf("\nsimbad_HIP: " . $simbad_HIP);
+            printf("\nsimbad_DR1: " . $simbad_DR1);
+            printf("\nsimbad_DR2: " . $simbad_DR2);
+            printf("\nsimbad_DR3: " . $simbad_DR3);
+            printf("\nsimbad_parallax: " . $simbad_parallax);
+            printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
+            printf("\nsimbad_parallax_source: " . $simbad_parallax_source);
+            printf("\nsimbad_B: " . $simbad_B);
+            printf("\nsimbad_V: " . $simbad_V);
+            printf("\nsimbad_SpType: " . $simbad_SpType);
+            printf("\n");
+        }
 
         // carregar os dados obtidos na web para o BD, caso existam
         if(!is_null($simbad_DR1)){
-            mysqli_query($conn, "update BrightStar set simbad_DR1 = '" . $simbad_DR1 . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            mysqli_query($conn, "update BrightStar set simbad_DR1 = '" . $simbad_DR1 . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
         }
         if(!is_null($simbad_DR2)){
-            mysqli_query($conn, "update BrightStar set simbad_DR2 = '" . $simbad_DR2 . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            mysqli_query($conn, "update BrightStar set simbad_DR2 = '" . $simbad_DR2 . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
         }
         if(!is_null($simbad_DR3)){
-            mysqli_query($conn, "update BrightStar set simbad_DR3 = '" . $simbad_DR3 . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            mysqli_query($conn, "update BrightStar set simbad_DR3 = '" . $simbad_DR3 . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
         }
         if(!is_null($simbad_HIP)){
-            mysqli_query($conn, "update BrightStar set simbad_HIP = '" . $simbad_HIP . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            mysqli_query($conn, "update BrightStar set simbad_HIP = '" . $simbad_HIP . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
         }
         if(!is_null($simbad_main_identifier)){
-            mysqli_query($conn, "update BrightStar set simbad_main_identifier = '" . $simbad_main_identifier . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            mysqli_query($conn, "update BrightStar set simbad_main_identifier = '" . $simbad_main_identifier . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
         }
         if(!is_null($simbad_parallax) && !str_contains($simbad_parallax, "~")){
-            $simbad_parallax_query = ("update BrightStar set simbad_parallax = " . $simbad_parallax . " where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_parallax_query = ("update BrightStar set simbad_parallax = " . $simbad_parallax . " where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_parallax_query);
         }
         if(!is_null($simbad_parallax_error) && !str_contains($simbad_parallax_error, "~")){
-            $simbad_parallax_error_query = ("update BrightStar set simbad_parallax_error = " . $simbad_parallax_error . " where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_parallax_error_query = ("update BrightStar set simbad_parallax_error = " . $simbad_parallax_error . " where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_parallax_error_query);
         }
         if(!is_null($simbad_parallax_source) && !str_contains($simbad_parallax_source, "~")){
-            $simbad_parallax_source_query = ("update BrightStar set simbad_parallax_source = '" . $simbad_parallax_source . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_parallax_source_query = ("update BrightStar set simbad_parallax_source = '" . $simbad_parallax_source . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_parallax_source_query);
         }
         if(!is_null($simbad_B) && !str_contains($simbad_B, "~")){
-            $simbad_B_query = ("update BrightStar set simbad_B = " . $simbad_B . " where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_B_query = ("update BrightStar set simbad_B = " . $simbad_B . " where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_B_query);
         }
         if(!is_null($simbad_V) && !str_contains($simbad_V, "~")){
-            $simbad_V_query = ("update BrightStar set simbad_V = " . $simbad_V . " where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_V_query = ("update BrightStar set simbad_V = " . $simbad_V . " where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_V_query);
         }
         if(!is_null($simbad_SpType) && !str_contains($simbad_SpType, "~")){
-            $simbad_SpType_query = ("update BrightStar set simbad_SpType = '" . $simbad_SpType . "' where " . substr($id, 0, 2) . " = '" . $id . "'");
+            $simbad_SpType_query = ("update BrightStar set simbad_SpType = '" . $simbad_SpType . "' where " . substr($HR, 0, 2) . " = '" . $HR . "'");
             mysqli_query($conn, $simbad_SpType_query);
         }
 

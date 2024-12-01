@@ -36,11 +36,13 @@
         // quando o simbad_main_identifier tem +, esse + precisa ser substituido por %2B
         // isso porque o + é um símbolo reservado para espaços vazios da url
         if(str_contains($simbad_main_identifier, "+")){
+            print("\n\nCONTEM +: " . $simbad_main_identifier);
             $simbad_main_identifier = str_replace("+", "%2B", $simbad_main_identifier);
+            print("\ndepois de substituir o + por %2B: " . $simbad_main_identifier);
         }
 
         $temp = null;
-        foreach (explode(" ", $row[1]) as $piece){
+        foreach (explode(" ", $simbad_main_identifier) as $piece){
             if(is_null($temp)) {
                 $temp = $piece;
             } else {
@@ -128,7 +130,7 @@
             }
             $cont++;
         }
-
+        /*
         printf("\nsimbad_main_identifier: " . $simbad_main_identifier);
         printf("\nsimbad_parallax: " . $simbad_parallax);
         printf("\nsimbad_parallax_error: " . $simbad_parallax_error);
@@ -136,6 +138,7 @@
         printf("\nsimbad_B: " . $simbad_B);
         printf("\nsimbad_V: " . $simbad_V);
         printf("\nsimbad_SpType: " . $simbad_SpType);
+        */
 
         // carregar os dados obtidos na web para o BD, caso existam
         if(!is_null($simbad_DR1)){
