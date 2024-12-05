@@ -5,36 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/code/CAT1/text_files/estrelas_sem_G_xlsx.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/20pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/20pc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/LNA.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/LNA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/LNA_estrelas_entre_211_e_sem_HIP.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/LNA_estrelas_entre_211_e_sem_HIP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/LNA_round.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/LNA_round.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/estrelas_sem_Bp_Rp.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/estrelas_sem_Bp_Rp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/estrelas_sem_G.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/estrelas_sem_G_ou_sem_Bp_Rp.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/estrelas_sem_G_ou_sem_Bp_Rp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/CAT1/csv/without_g_bp_rp.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/without_g_bp_rp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around_data.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStarMultiple_query_around_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar_data.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/curl_BrightStar_data.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/Gaia.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/Gaia/getdata_from_simbad.php" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Gaia/getdata_from_simbad.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_nao_plotadas_MV_B_V.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_nao_plotadas_MV_B_V.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/.~lock.estrelas_sem_G.csv#" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/.~lock.estrelas_sem_G.csv#" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_20pc.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1_20pc.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/CAT1_estrelas_sem_G_e_estrelas_sem_Bp_Rp.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/LNA.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/LNA.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/LNA_estrelas_entre_211_e_sem_HIP.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/LNA_estrelas_entre_211_e_sem_HIP.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/LNA_round.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/LNA_round.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/LNA_simbadHD_nao_esta_entre_as_211_e_HipMainDatHD_esta_entre_as_211.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/LNA_simbadHD_nao_esta_entre_as_211_e_HipMainDatHD_esta_entre_as_211.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/estrelas_sem_Bp_Rp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/estrelas_sem_Bp_Rp.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/estrelas_sem_G.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/CAT1/csv/estrelas_sem_Rp_Bp_G.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/estrelas_sem_Rp_Bp_G.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/Hipparcos/csv/.~lock.MVt_Bt_Vt.xlsx#" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/text_files/20pc.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/20pc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/CAT1/text_files/tres_estrelas_da_borda_xlsx.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/CAT1/text_files/tres_estrelas_da_borda_xlsx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1_20pc.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/CAT1_20pc.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/CAT1/text_files/tres_estrelas_da_borda.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/CAT1/text_files/tres_estrelas_da_borda.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,120 +35,120 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.20pc.executor": "Run",
-    "Python.211 estrelas.executor": "Run",
-    "Python.BAR_query_around_sem_DR3.executor": "Run",
-    "Python.BrightStar.executor": "Run",
-    "Python.BrightStarMultiple.executor": "Run",
-    "Python.BrightStarMultiple_csv.executor": "Run",
-    "Python.BrightStarMultiple_product.executor": "Run",
-    "Python.BrightStarSupplement.executor": "Run",
-    "Python.BrightStarSupplementMultiple.executor": "Run",
-    "Python.BrightStarSupplement_product.executor": "Run",
-    "Python.BrightStar_product.executor": "Run",
-    "Python.CAT1.executor": "Run",
-    "Python.CAT1_csv.executor": "Run",
-    "Python.CAT1_product.executor": "Run",
-    "Python.CAT2a_dist_error_vs_dist.executor": "Run",
-    "Python.Gaia.executor": "Run",
-    "Python.Gaia30pc.executor": "Run",
-    "Python.Gaia30pc_product.executor": "Run",
-    "Python.Gaia50pc.executor": "Run",
-    "Python.Gaia50pc_product.executor": "Run",
-    "Python.GaiaDR3.executor": "Run",
-    "Python.Gaia_product.executor": "Run",
-    "Python.Gaia_product_archive.executor": "Run",
-    "Python.HD_Suffix_igual_a_barra_X.executor": "Run",
-    "Python.HD_formado_pela_soma_de_um.executor": "Run",
-    "Python.HDs_somados_em_uma_unidade.executor": "Run",
-    "Python.Hipparcos.executor": "Run",
-    "Python.Hipparcos_product.executor": "Run",
-    "Python.LETTER_query_around_sem_DR3.executor": "Run",
-    "Python.LETTER_query_around_sem_DR3_nao_plotadas_txt.executor": "Run",
-    "Python.LETTER_query_around_sem_DR3_plotadas_txt.executor": "Run",
-    "Python.LNA.executor": "Run",
-    "Python.LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.executor": "Run",
-    "Python.LNA_estrelas_entre_211_e_sem_HIP.executor": "Run",
-    "Python.LNA_round.executor": "Run",
-    "Python.MG_contra_Bp_Rp.executor": "Run",
-    "Python.MV_B_V_xlsx.executor": "Run",
-    "Python.MVt_Bt_Vt_xlsx.executor": "Run",
-    "Python.Supplement.executor": "Run",
-    "Python.SupplementMultiple.executor": "Run",
-    "Python.SupplementMultiple_product.executor": "Run",
-    "Python.Supplement_product.executor": "Run",
-    "Python.View.executor": "Run",
-    "Python.astropy_histogram.executor": "Run",
-    "Python.asynchronous_query.executor": "Run",
-    "Python.create_database.executor": "Run",
-    "Python.csv.executor": "Run",
-    "Python.deg2hms.executor": "Run",
-    "Python.dist_error_vs_dist.executor": "Run",
-    "Python.dist_error_vs_dist_20pc.executor": "Run",
-    "Python.error_bars.executor": "Run",
-    "Python.error_bars_emphasis.executor": "Run",
-    "Python.estrelas_do_cat1_nao_encontradas_no_simbad_txt.executor": "Run",
-    "Python.estrelas_do_cat1_nao_encontradas_no_simbad_xlsx.executor": "Run",
-    "Python.estrelas_nao_plotadas_MV_B_V.executor": "Run",
-    "Python.estrelas_nao_plotadas_MVt_Bt_Vt_txt.executor": "Run",
-    "Python.estrelas_plotadas_MV_B_V_txt.executor": "Run",
-    "Python.estrelas_plotadas_MVt_BT_VT_txt.executor": "Run",
-    "Python.estrelas_sem_Bp_Rp.executor": "Run",
-    "Python.estrelas_sem_DR3.executor": "Run",
-    "Python.estrelas_sem_G.executor": "Run",
-    "Python.estrelas_sem_G_ou_sem_Bp_Rp.executor": "Run",
-    "Python.estrelas_sem_G_txt.executor": "Run",
-    "Python.estrelas_sem_G_xlsx.executor": "Run",
-    "Python.estrelas_sem_dr3_txt.executor": "Run",
-    "Python.excel.executor": "Run",
-    "Python.file_excel.executor": "Run",
-    "Python.origin_lab.executor": "Run",
-    "Python.parallax_plots.executor": "Run",
-    "Python.pyplot_HRdiagram.executor": "Run",
-    "Python.pyplot_histogram.executor": "Run",
-    "Python.pyplot_scatterplot.executor": "Run",
-    "Python.query_around_por_estrela.executor": "Run",
-    "Python.query_around_por_estrela_txt.executor": "Run",
-    "Python.query_around_sem_DR3.executor": "Run",
-    "Python.query_around_sem_DR3_ao_plotadas_txt.executor": "Run",
-    "Python.query_around_sem_DR3_nao_plotadas_txt.executor": "Run",
-    "Python.query_around_sem_DR3_plotadas_txt.executor": "Run",
-    "Python.query_around_xlsx.executor": "Run",
-    "Python.query_round_por_estrela.executor": "Run",
-    "Python.ra.executor": "Run",
-    "Python.round.executor": "Run",
-    "Python.sem_ADS_Comp_e_sem_DR3.executor": "Run",
-    "Python.sem_ADS_Comp_e_sem_DR3_nao_plotadas_txt.executor": "Run",
-    "Python.sem_ADS_Comp_e_sem_DR3_plotadas_txt.executor": "Run",
-    "Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor": "Run",
-    "Python.sem_ADS_Comp_sem_DR3_xlsx.executor": "Run",
-    "Python.sem_DR3.executor": "Run",
-    "Python.sem_DR3_e_sem_HIP.executor": "Run",
-    "Python.sem_HD.executor": "Run",
-    "Python.sem_HD_Suffix_e_sem_DR3_nao_plotadas_txt.executor": "Run",
-    "Python.sem_HD_Suffix_e_sem_DR3_plotadas_txt.executor": "Run",
-    "Python.sem_HD_Suffix_sem_DR3.executor": "Run",
-    "Python.sem_HD_Suffix_sem_DR3_e_sem_HIP.executor": "Run",
-    "Python.sigmaPi_vs_Bp_Rp.executor": "Run",
-    "Python.sigmaPi_vs_G.executor": "Run",
-    "Python.sigmaPi_vs_MG.executor": "Run",
-    "Python.sigmaPi_vs_pi.executor": "Run",
-    "Python.sigma_pi_x_pi.executor": "Run",
-    "Python.testeBrightStar.executor": "Run",
-    "Python.tres_estrelas_da_borda_txt.executor": "Run",
-    "Python.tres_estrelas_da_borda_xlsx.executor": "Run",
-    "Python.txt.executor": "Run",
-    "Python.txt_HD_nulo.executor": "Run",
-    "Python.txt_query_around_por_estrela.executor": "Run",
-    "Python.txt_round.executor": "Run",
-    "Python.upper_lower.executor": "Run",
-    "Python.xlsx.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.20pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.211 estrelas.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BAR_query_around_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStar.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarMultiple_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplement.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplementMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStarSupplement_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.BrightStar_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT1_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.CAT2a_dist_error_vs_dist.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia30pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia30pc_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia50pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia50pc_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.GaiaDR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Gaia_product_archive.executor&quot;: &quot;Run&quot;,
+    &quot;Python.HD_Suffix_igual_a_barra_X.executor&quot;: &quot;Run&quot;,
+    &quot;Python.HD_formado_pela_soma_de_um.executor&quot;: &quot;Run&quot;,
+    &quot;Python.HDs_somados_em_uma_unidade.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Hipparcos.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Hipparcos_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LETTER_query_around_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LETTER_query_around_sem_DR3_nao_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LETTER_query_around_sem_DR3_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_estrelas_entre_211_desconsiderando_HD_Suffix_Simbad.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_estrelas_entre_211_e_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.LNA_round.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MG_contra_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MV_B_V_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MVt_Bt_Vt_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Supplement.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SupplementMultiple.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SupplementMultiple_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Supplement_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.View.executor&quot;: &quot;Run&quot;,
+    &quot;Python.astropy_histogram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.asynchronous_query.executor&quot;: &quot;Run&quot;,
+    &quot;Python.create_database.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.deg2hms.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dist_error_vs_dist.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dist_error_vs_dist_20pc.executor&quot;: &quot;Run&quot;,
+    &quot;Python.error_bars.executor&quot;: &quot;Run&quot;,
+    &quot;Python.error_bars_emphasis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_do_cat1_nao_encontradas_no_simbad_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_do_cat1_nao_encontradas_no_simbad_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_nao_plotadas_MV_B_V.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_nao_plotadas_MVt_Bt_Vt_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_plotadas_MV_B_V_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_plotadas_MVt_BT_VT_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G_ou_sem_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_G_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.estrelas_sem_dr3_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.excel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.file_excel.executor&quot;: &quot;Run&quot;,
+    &quot;Python.origin_lab.executor&quot;: &quot;Run&quot;,
+    &quot;Python.parallax_plots.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_HRdiagram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_histogram.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pyplot_scatterplot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_por_estrela.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_por_estrela_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_sem_DR3_ao_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_sem_DR3_nao_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_sem_DR3_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_around_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.query_round_por_estrela.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ra.executor&quot;: &quot;Run&quot;,
+    &quot;Python.round.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_e_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_e_sem_DR3_nao_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_e_sem_DR3_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_sem_DR3_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_ADS_Comp_sem_DR3_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_DR3_e_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD_Suffix_e_sem_DR3_nao_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD_Suffix_e_sem_DR3_plotadas_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD_Suffix_sem_DR3.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sem_HD_Suffix_sem_DR3_e_sem_HIP.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_Bp_Rp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_G.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_MG.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigmaPi_vs_pi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sigma_pi_x_pi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.testeBrightStar.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tres_estrelas_da_borda_txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tres_estrelas_da_borda_xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;Python.txt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.txt_HD_nulo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.txt_query_around_por_estrela.executor&quot;: &quot;Run&quot;,
+    &quot;Python.txt_round.executor&quot;: &quot;Run&quot;,
+    &quot;Python.upper_lower.executor&quot;: &quot;Run&quot;,
+    &quot;Python.xlsx.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/code/SupplementMultiple/csv" />

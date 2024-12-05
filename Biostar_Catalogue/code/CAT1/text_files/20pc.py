@@ -40,13 +40,14 @@ cursor.execute("""select {father_table}.designation, """
                """lines terminated by '\r\n' """.format(father_table=father_table, son_table=son_table))
 
 file = pd.read_csv('/var/lib/mysql-files/CAT1_20pc.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/csv/CAT1_20pc.csv", header=header, index=None)
+file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/text_files/CAT1_20pc.csv", header=header, index=None)
 os.remove("/var/lib/mysql-files/CAT1_20pc.csv")
 
 """ fazer o arquivo com o tipo xlsx """
 
 query_nucleo = ("select {father_table}.designation, "
                 "{father_table}.simbad_HD, "
+                "{father_table}.simbad_HIP, "
                 "trim({father_table}.parallax)+0, "
                 "trim({father_table}.parallax_error)+0, "
                 "trim({father_table}.phot_g_mean_mag)+0, "
@@ -67,6 +68,7 @@ query_nucleo = ("select {father_table}.designation, "
 
 query_borda = ("select {father_table}.designation, "
                "{father_table}.simbad_HD, "
+               "{father_table}.simbad_HIP, "
                "trim({father_table}.parallax)+0, "
                "trim({father_table}.parallax_error)+0, "
                "trim({father_table}.phot_g_mean_mag)+0, "
@@ -87,14 +89,14 @@ query_borda = ("select {father_table}.designation, "
                "{father_table}.designation = {son_table}.designation ".format(father_table=father_table, son_table=son_table))
 
 # declarar as variáveis que serão passadas para a função
-headers = ['designation', 'simbad_HD',
+headers = ['designation', 'simbad_HD', 'simbad_HIP',
            'parallax', 'parallax_error',
            'phot_g_mean_mag', 'phot_bp_mean_mag', 'phot_rp_mean_mag',
            'MG', 'MG_error',
            'MBp', 'MBp_error',
            'MRp', 'MRp_error',
            'bp_rp', 'g_rp', 'bp_g']
-path = 'CAT1/csv/CAT1.xlsx'
+path = 'CAT1/text_files/CAT1.xlsx'
 sheets = ["nucleo_de_20pc", "borda_de_3sigmas"]
 queries = [query_nucleo, query_borda]
 f.xlsx(cursor, queries, headers, path, sheets)

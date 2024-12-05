@@ -9,6 +9,7 @@ cursor = connection.cursor()
 
 query_tres_estrelas_da_borda = ("select {father_table}.designation, "
                                 "{father_table}.simbad_HD, "
+                                "{father_table}.simbad_HIP, "
                                 "trim({father_table}.parallax)+0, "
                                 "trim({father_table}.parallax_error)+0, "
                                 "trim({father_table}.phot_g_mean_mag)+0 as G, "
@@ -31,14 +32,14 @@ query_tres_estrelas_da_borda = ("select {father_table}.designation, "
                                 "{father_table}.phot_g_mean_mag <= 9.08 "
                                 "order by G asc".format(father_table=father_table, son_table=son_table))
 
-headers = ['designation', 'simbad_HD',
+headers = ['designation', 'simbad_HD', 'simbad_HIP',
            'parallax', 'parallax_error',
            'phot_g_mean_mag', 'phot_bp_mean_mag', 'phot_rp_mean_mag',
            'MG', 'MG_error',
            'MBp', 'MBp_error',
            'MRp', 'MRp_error',
            'bp_rp', 'g_rp', 'bp_g']
-path = 'CAT1/csv/tres_estrelas_da_borda.xlsx'
+path = 'CAT1/text_files/tres_estrelas_da_borda.xlsx'
 sheets = ['tres_estrelas_da_borda']
 queries = [query_tres_estrelas_da_borda]
 f.xlsx(cursor, queries, headers, path, sheets)
