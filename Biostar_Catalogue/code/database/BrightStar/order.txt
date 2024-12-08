@@ -1,3 +1,5 @@
+# Script executado em:
+
 BrightStar.py
 curl_BrightStar_data.php
 BrightStar_product.py

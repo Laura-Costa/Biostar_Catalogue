@@ -62,7 +62,7 @@ for i in range(len(B_V_list)):
 cont = 0
 with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/BrightStarMultiple/csv/query_around_estrelas_plotadas_MV_B_V.txt", "w") as text_file:
     header = ["identifier", "simbad_parallax", "simbad_parallax_source", "MV", "B_V", "simbad_SpType"]
-    text_file.write("{0[0]:<12}{0[1]:<16}{0[2]:<23}{0[3]:<6}{0[4]:<6}{0[5]:<20}\n".format(header))
+    text_file.write("{0[0]:<22}{0[1]:<16}{0[2]:<23}{0[3]:<6}{0[4]:<6}{0[5]:<20}\n".format(header))
     for (identifier, simbad_parallax, simbad_parallax_source, MV, B_V, simbad_SpType) in zip(identifier_list, simbad_parallax_list, simbad_parallax_source_list, MV_list, B_V_list, simbad_SpType_list):
         if simbad_parallax is None:
             simbad_parallax = ""
@@ -75,7 +75,7 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Bri
         if simbad_SpType is None:
             simbad_SpType = ""
         lista = [identifier, simbad_parallax, simbad_parallax_source, MV, B_V, simbad_SpType]
-        text_file.write("{0[0]:<12}{0[1]:<16}{0[2]:<23}{0[3]:<6}{0[4]:<6}{0[5]:<20}\n".format(lista))
+        text_file.write("{0[0]:<22}{0[1]:<16}{0[2]:<23}{0[3]:<6}{0[4]:<6}{0[5]:<20}\n".format(lista))
         cont += 1
 
 print("Quantidade de estrelas plotadas: ", cont)

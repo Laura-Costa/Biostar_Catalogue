@@ -1,3 +1,5 @@
+# Data da execução: 08/12/2024
+
 Supplement.py
 curl_Supplement_data.php
 Supplement_product.py
