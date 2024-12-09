@@ -6,31 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_around_sem_DR3_plotadas_txt.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/BrightStarMultiple/csv/query_around_sem_DR3_plotadas_txt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/database/BrightStar/order.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/BrightStar/order.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/eps/MV_B_V.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/eps/MV_B_V.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpeg/MV_B_V.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpeg/MV_B_V.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/jpg/MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/pdf/MV_B_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/pdf/MV_B_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/png/MV_B_V.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/png/MV_B_V.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/svg/MV_B_V.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar+BrightStarMultiple/pyplot_HRdiagram/svg/MV_B_V.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/csv/estrelas_nao_plotadas_MV_B_V.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/csv/estrelas_nao_plotadas_MV_B_V.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/eps/MV_B_V.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/eps/MV_B_V.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpeg/MV_B_V.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpeg/MV_B_V.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/jpg/MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/pdf/MV_B_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/pdf/MV_B_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/png/MV_B_V.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/png/MV_B_V.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/svg/MV_B_V.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStar/pyplot_HRdiagram/svg/MV_B_V.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/Bright Star.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_nao_plotadas_MV_B_V.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_nao_plotadas_MV_B_V.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_plotadas_MV_B_V.txt" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_estrelas_plotadas_MV_B_V.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_por_estrela.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/csv/query_around_por_estrela.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/eps/query_around_MV_B_V.eps" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/eps/query_around_MV_B_V.eps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpeg/query_around_MV_B_V.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpeg/query_around_MV_B_V.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/jpg/query_around_MV_B_V.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/pdf/query_around_MV_B_V.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/pdf/query_around_MV_B_V.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/png/query_around_MV_B_V.png" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/png/query_around_MV_B_V.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/svg/query_around_MV_B_V.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/BrightStarMultiple/pyplot_HRdiagram/svg/query_around_MV_B_V.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/database/Supplement/order.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/database/Supplement/order.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

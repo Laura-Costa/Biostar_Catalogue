@@ -1,4 +1,4 @@
-# Data da execução: 08/12/2024
+# Data da execução: 08/12/2024 e 09/12/2024
 
 Supplement.py
 curl_Supplement_data.php
