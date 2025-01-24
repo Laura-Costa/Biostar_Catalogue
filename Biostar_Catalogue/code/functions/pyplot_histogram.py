@@ -8,8 +8,13 @@ from scipy.stats import norm
 import numpy as np
 import math
 
-def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize, xrot=0, stdv=False, ylog=False, yticks_not_heights=False,
-              xticks_not_edges=False, yticks_step=None, xticks_step=None):
+def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
+              xrot=0, yrot=0,
+              stdv=False, ylog=False, xlog=False, yticks_not_heights=False,
+              xticks_not_edges=False, yticks_step=None, xticks_step=None,
+              ylabel_ycoord=0, ylabel_xcoord=0,
+              xlabel_ycoord=0, xlabel_xcoord=0,
+              ylabel_fontsize=10, xlabel_fontsize=10, minortickwidth=-1):
     """
     @param cursor: permite ao Python executar comandos SQL
     @param xlabel: rótulo do eixo x e grandeza da qual se quer ver a distribuição
@@ -33,32 +38,37 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
     max_parallax = max(parallax_list)
 
     fig, ax = plt.subplots()
-    (bin_heights, bin_edges, _) = plt.hist(data_list, bins=bins, edgecolor=None, rwidth=7, log=ylog, zorder=2)
+    (bin_heights, bin_edges, _) = plt.hist(data_list, bins=bins, edgecolor='black', rwidth=7, log=ylog, zorder=2)
     if ylog:
-        plt.ylabel('frequência (escala logarítmica)')
+        plt.ylabel('frequência (escala logarítmica)', fontsize=ylabel_fontsize, y=ylabel_ycoord, x=ylabel_xcoord)
     else:
-        plt.ylabel('frequência')
-    plt.xlabel('{xlabel}'.format(xlabel=xlabel))
-    plt.title('{:.4f} ≤ π ≤ {:.4f} (mas)'.format(min_parallax, max_parallax))
+        plt.ylabel('frequência', fontsize=ylabel_fontsize, y=ylabel_ycoord, x=ylabel_xcoord)
+
+    plt.xlabel('{xlabel}'.format(xlabel=xlabel), y=xlabel_ycoord, x=xlabel_xcoord, fontsize=xlabel_fontsize)
 
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)
 
-    # configurar yfontsie e xfotsize
+    # rotacionar label do eixo y
+    plt.yticks(rotation=yrot)
+
+    # configurar yfontsie e xfontsize
     plt.xticks(fontsize=xfontsize)
     plt.yticks(fontsize=yfontsize)
 
-    # colocar o média e desvio padrão no pyplot_histogram
+    # colocar a média e desvio padrão no pyplot_histogramylabel_ycoord= 0.45, xlabel_ycoord=-2,
     (mu, sigma) = norm.fit(data_list)
-    plt.axvline(mu, color='red', linestyle='dashed', linewidth=0.5, label=str(r"$\langle\,\sigma(\pi)\,\rangle$"))
+    plt.axvline(mu, color='red', linestyle='dashed', linewidth=1.0, label=str(r"$\langle\,\sigma_{\pi}\,\rangle$"))
     qtde_estrelas = len(value)
 
     if(stdv):
-        plt.suptitle(r'%s: %i estrelas, $\sigma(\pi)_{medio}$=%.5f (mas), desvio padrão=%.3f' %(suptitle, qtde_estrelas, mu, sigma))
+        plt.suptitle(r'%s: %i estrelas, $\sigma_{\pi}_{medio}$=%.5f (mas), desvio padrão=%.3f' %(suptitle, qtde_estrelas, mu, sigma))
         plt.axvline(mu + sigma, color='lightgreen', linestyle='dashed', linewidth=1.5, label=str(r"$\langle\,\sigma\,\rangle \pm$ desvio padrão"))
         plt.axvline(mu - sigma, color='lightgreen', linestyle='dashed', linewidth=1.5)
     else:
-        plt.suptitle(r'%s: %i estrelas, $\langle\,\sigma(\pi)\,\rangle$ = %.5f (mas)' % (suptitle, qtde_estrelas, mu))
+        # ax.set_title(r'{}: {} estrelas $\sigma_{\pi}$'.format(suptitle, qtde_estrelas), fontsize=7)
+        plt.suptitle(r'%s: $%i$ estrelas, $\langle\,\sigma_{\pi}\,\rangle = %.5f \; (mas)$' % (suptitle, qtde_estrelas, mu), fontsize=7, x=0.5)
+        plt.title(r'${:.4f} \; ≤ \; π \; ≤ \; {:.4f} \; (mas)$'.format(min_parallax, max_parallax), fontsize=7, x=0.5, y=1.04)
 
     # configurar legenda
     lgnd = plt.legend(facecolor='white', framealpha=1, shadow=True)
@@ -66,20 +76,20 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
     frame.set_facecolor('white')
     frame.set_edgecolor('lightgrey')
 
-    # se eixo y estiver em escala logarítmica, remover ticks no eixo y
+    # se o eixo y estiver em escala logarítmica, remover ticks no eixo y
     if ylog and not yticks_not_heights:
         # configurações necessárias para colocar os labels só nas alturas dos bins
         ax.tick_params(axis='y', left=False, which='minor', labelleft=False)
         # configurar largura ticks do eixo x e do eixo y
-        ax.tick_params(axis='both', which='both', width=0.1)
+        ax.tick_params(axis='both', which='both', width=minortickwidth)
 
     # configurar yticks_equally_spaced
-    if(yticks_not_heights and ylog):
+    if yticks_not_heights and ylog:
         ax.yaxis.set_major_formatter( lambda x, pos: f'{x:g}')
         ax.tick_params(axis='y', which='minor', left=False)
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.0f"))
 
-    elif(yticks_not_heights and not ylog):
+    elif yticks_not_heights and not ylog:
         ax.set_yticks(range(0, math.ceil(bin_heights.max())+yticks_step, yticks_step))
         ax.tick_params(axis='y', which='minor', left=False)
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.0f"))
@@ -88,7 +98,7 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
         ax.set_yticks(bin_heights)
         ax.yaxis.set_major_formatter(FormatStrFormatter('%i'))
 
-    if(xticks_not_edges):
+    if xticks_not_edges:
         # ax.xaxis.set_major_formatter( lambda x, pos: f'{x:g}')
         ax.set_xticks(np.arange(0, max(data_list) + xticks_step, xticks_step))
         ax.tick_params(axis='x', which='minor', left=False)
@@ -100,12 +110,10 @@ def histogram(query, cursor, suptitle, xlabel, bins, path, yfontsize, xfontsize,
         ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))
 
     # colocar a grid
-    plt.grid(color='grey', linestyle='solid', which='major', linewidth=0.1, axis='y', zorder=0)
+    plt.grid(color='grey', linestyle='solid', which='major', linewidth=0.2, axis='y', zorder=0)
 
     # salvar figura
     plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files{path}".format(path=path), dpi=1200)
 
-    # fechar p matplotlib.pyplot
+    # fechar o matplotlib.pyplot
     plt.close()
-
-

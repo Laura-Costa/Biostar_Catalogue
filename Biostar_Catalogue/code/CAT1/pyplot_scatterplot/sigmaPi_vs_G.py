@@ -146,16 +146,18 @@ def sql_query_zoom(y_axis, x_axis):
     return (query, query_emphasis)
 
 """
-fazer o diagrama de M(Rp) x Bp-Rp
+fazer o diagrama de sigma pi x pi
 """
 (query, query_emphasis) = sql_query('parallax_error', 'phot_g_mean_mag')
 f.diagram(cursor, query, query_emphasis, colors, HDs, 'CAT1/pyplot_scatterplot/#/parallax_error_G.#',
-          3.0, 1.0,
-          r'$G$', r'$σ(π)$', 8.0,
+          1.0, 0.5,
+          r'$G \; (mag)$', r'$\sigma_{\pi} \; (mas)$', 8.0,
           0.20, 0.20, 0.20, 0.20,
-          'CAT1', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dp=1,
+          'CAT1', xrot=0, minortickwidth=0.5, majortickwidth=1.0,
+          dpy=1,
           axeslabelsize=10,
-          x_minor_gap=10, y_minor_gap=10)
+          x_minor_gap=10, y_minor_gap=5)
+
 (query, query_emphasis) = sql_query_zoom('parallax_error', 'phot_g_mean_mag')
 diagram(cursor, query, query_emphasis, colors, [],'CAT1/pyplot_scatterplot/jpg/parallax_error_G_ampliado.jpg',
         1.0, 0.5, r'$G$', 'σ(π)', 6.0, 0.20, 0.20, 0.20,

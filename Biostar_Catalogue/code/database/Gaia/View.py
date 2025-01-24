@@ -51,10 +51,7 @@ cursor.execute("create view view_CAT1 as "
                "where "
                "Gaia.designation = Gaia_product.designation and "
                "( "
-               "(parallax >= 50.00 and phot_g_mean_mag is null and phot_bp_mean_mag is null and phot_rp_mean_mag is null) or " # unica estrela sem as 3 magnitudes
-               "(parallax >= 50.00 and phot_g_mean_mag is not null) or "
-               "(parallax >= 50.00 and phot_g_mean_mag is null and MRp < 8.0) or " # condição para incluir a estrela 'Gaia DR3 5443030200460964480'
-               "(parallax < 50.00 and parallax + 3*parallax_error >= 50.00 and MG <= 9.08) " # condição que seleciona as 3 estrelas da "borda" de 3*sigmas 
+               "(parallax + 3 * parallax_error >= 50.00) " # nucleo mais borda de 3 sigmas 
                ")")
 
 cursor.execute("create view view_CAT2 as "

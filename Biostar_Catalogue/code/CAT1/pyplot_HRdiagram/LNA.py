@@ -49,5 +49,8 @@ f.diagram(cursor, query, query_emphasis, colors, HDs, 'CAT1/pyplot_HRdiagram/#/L
           'CAT1', xrot=0, redx=5, redy=7, minortickwidth=1.0, majortickwidth=1.3, dp=2,
           axeslabelsize=10, lgnd_loc='lower left')
 
+# fechar o cursor
+cursor.close()
+
 # fechar a conexão com o BD
 connection.close()

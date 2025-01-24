@@ -9,7 +9,8 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
 
 def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel, ylabel,
             markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle,
-            xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5, dp = -1,
+            xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5,
+            dpx = -1, dpy = -1,
             axeslabelsize=6, y_x=False, x_minor_gap=5, y_minor_gap=5, lgnd_loc="best"):
 
     fig, ax = plt.subplots()
@@ -82,7 +83,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     plt.xlim(min(x_axis) - xmargin_left, max(x_axis) + xmargin_right)
 
     if 'error_bars' in path: # os títulos dos diagramas com barras de erro é diferente (tinha ficado com distância negativa)
-        ax.set_title("{}\n{} estrelas, {:.4f} ≤ π ≤ {:.4f} mas ({})".format(suptitle,
+        ax.set_title("{}\n{} estrelas, {:.4f} ≤ π ≤ {:.4f} [mas] ({})".format(suptitle,
                                                                             len(value),
                                                                             min_parallax,
                                                                             max_parallax,
@@ -90,7 +91,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
                                                                             fontsize=7,
                                                                             y=1.05)
     else: # esse é o título dos diagramas sem barras de erro
-        ax.set_title("{}: {} estrelas em um raio de {:.4f} parsecs\n{:.4f} ≤ π ≤ {:.4f} (mas)".format(suptitle,
+        ax.set_title("{}: {} estrelas em um raio de {:.1f} parsecs\n{:.4f} ≤ π ≤ {:.4f} [mas]".format(suptitle,
                                                                                                       len(value),
                                                                                                       1000.0/min_parallax,
                                                                                                       min_parallax,
@@ -107,9 +108,10 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     ax.yaxis.set_minor_locator(MultipleLocator(ygap/y_minor_gap))
 
     # configurar ambos os axis (xaxis e yaxis) com labels com dp (decimal_places) casas decimais
-    if dp != -1:
-        ax.xaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dp)))
-        ax.yaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dp)))
+    if dpx != -1:
+        ax.xaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dpx)))
+    if dpy != -1:
+        ax.yaxis.set_major_formatter(FormatStrFormatter('%.{}f'.format(dpy)))
 
     # configurar labels do major e minor ticks de ambos os eixos
     ax.tick_params(axis='both', which='both', labelsize=10, color='black', labeltop=True, top=True,
@@ -132,15 +134,10 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     plt.grid(color='lightgrey', linestyle='dashed', dashes=(2,2), which='minor', linewidth=0.1, zorder=1)
 
     # grid vermelha em Bp-Rp=1.500 e M(G)=7
-    if redx != -1 and redy != -1:
+    if redx != -1:
         # a = [tick.gridline for tick in ax.xaxis.get_minor_ticks()] # para se quiser a linha partindo do minor tick
         a = ax.get_xgridlines()
         b = a[redx]
-        b.set_color('red')
-        b.set_linewidth(1.0)
-
-        a = ax.get_ygridlines()
-        b = a[redy]
         b.set_color('red')
         b.set_linewidth(1.0)
 
@@ -148,9 +145,15 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
         xTicks = plt.xticks([0.25, 0.50, 0.75, 1.00, 1.25, 1.50])
         xTicks[0][5]._apply_params(color='r', labelcolor='r')
 
-        # colocar o tick e o label do y = 9.00 em vermelho
-        yTicks = plt.yticks([2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0])
-        yTicks[0][7]._apply_params(color='r', labelcolor='r')
+    if redy != -1:
+        a = ax.get_ygridlines()
+        b = a[redy]
+        b.set_color('red')
+        b.set_linewidth(1.0)
+
+        # colocar o tick e o label do y = 1.0 em vermelho
+        yTicks = plt.yticks([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        yTicks[0][10]._apply_params(color='r', labelcolor='r')
 
     # rotacionar label do eixo x
     plt.xticks(rotation=xrot)

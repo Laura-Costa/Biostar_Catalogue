@@ -40,9 +40,9 @@ f1.scatterplot(cursor, query, query_emphasis, colors, HDs,
 f2.diagram(cursor, query, query_emphasis, colors, HDs,
         'CAT1/pyplot_scatterplot/#/erro_da_paralaxe_contra_paralaxe2.#',
         100.0, 0.5,
-        'paralaxe em milissegundos de arco', 'erro da paralaxe em milissegundos de arco', 8.0,
+        r'$\pi \; (mas)$', r'$\sigma_{\pi} \; (mas)$', 8.0,
         25.0, 25.0, 0.20, 0.10,
-        'CAT1', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dp=1,
+        'CAT1', xrot=0, minortickwidth=1.0, majortickwidth=1.3, dpy=1,
         axeslabelsize=10,
         x_minor_gap=10, y_minor_gap=5)
 
