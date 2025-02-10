@@ -7,6 +7,17 @@ from matplotlib.ticker import MultipleLocator
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
+stringHIP = "("
+
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/input_files/stars_in_hip_main_dat_with_Dr3_at_Simbad.txt") as file:
+    cont = 0
+    for line in file:
+        cont += 1
+        if cont != 114072:
+            stringHIP += "'HIP {}', ".format(line.rstrip())
+        else:
+            stringHIP += "'HIP {}')".format(line.rstrip())
+
 father_table = 'Hipparcos'
 
 """
@@ -21,8 +32,9 @@ query = ("select trim({father_table}.Plx)+0, "
          "where "
          "( "
          "{father_table}.Plx > 0.0 and "
-         "{father_table}.simbad_DR3 is null "
-         ")".format(father_table=father_table))
+         "{father_table}.e_Plx is not null and "
+         "{father_table}.HIP not in {stringHIP} "
+         ")".format(father_table=father_table, stringHIP=stringHIP))
 
 cursor.execute(query)
 value = cursor.fetchall()
@@ -93,28 +105,7 @@ lin.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
 lin.set_ylabel(r'$N$')
 log.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
 log.set_ylabel(r'$N$')
-plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/pandas_histogram/jpg/histogramas.jpg", dpi=1200)
-
-plt.close()
-
-####################
-# Histograma duplo alpha:
-####################
-add = 1.5
-fig, (lin, log) = plt.subplots(1, 2, figsize=(6.4+add, 4.8+add))
-
-
-
-dataframe['e_Plx'].hist(grid=False, bins='auto', alpha=0.2, color='blue', edgecolor='blue', ax=lin)
-dataframe['e_Plx'].hist(grid=False, bins='auto', alpha=0.2, color='green', edgecolor='darkgreen', log=True, ax=log)
-plt.suptitle(r'Estrelas HIP sem número DR3 no Simbad: ${}$'.format(len(e_Plx_list)), fontsize=9, x=0.5)
-plt.title(r'Histogramas de $\sigma_{\pi}$', fontsize=9, y=1.05, x=-0.1)
-lin.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
-lin.set_ylabel('frequência')
-log.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
-log.set_ylabel('frequência')
-
-plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/pandas_histogram/jpg/histogramas_alpha.jpg", dpi=1200)
+plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/pandas_histogram/jpg/histogramas2.jpg", dpi=1200)
 
 plt.close()
 
