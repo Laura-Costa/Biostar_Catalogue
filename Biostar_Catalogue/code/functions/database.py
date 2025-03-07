@@ -6,7 +6,7 @@ def update_table(cursor, table_name, column_name, line, index, column_key_name, 
     @param column_name: nome da coluna da tabela a ser atualizada
     @param line: estrutura de dados (linha do arquivo, tupla) onde está o dado a ser inserido
     @param index: índice da linha do arquivo de entrada que contém o dado
-    @param column_key_name: nome da coluna que é chave primária na tabela onde está o registro a ser atualizado
+    @param column_key_name: nome da coluna que é chave primária na tabela table_name
     @param key_value: valor da chave primária do registro a ser atualizado
     @param preffix: True se o campo tem prefixo; False caso contrário
     @return: none
@@ -16,7 +16,7 @@ def update_table(cursor, table_name, column_name, line, index, column_key_name, 
     else:
         data_value = line[index].strip()
 
-    if len(data_value) == 0 or data_value == '\n':
+    if len(data_value) == 0 or data_value == '\n' or data_value == '\r\n' or data_value == '\r\r':
         cursor.execute("update {table_name} set {column_name} = null where {column_key_name} = '{key_value}'".format(table_name=table_name,
                                                                                                                      column_name=column_name,
                                                                                                                      column_key_name=column_key_name,
@@ -80,7 +80,8 @@ def insert_key(cursor, table_name, column_key_name, data_structure, index, preff
     :param column_key_name: nome da coluna que é chave primária em table_name
     :param data_structure: estrutura de dados (tuple, array, string) que contém a chave primária a ser inserida
     :param index: índice do qual a data_structure será indexada para se obter a chave primária a ser inserida
-    :param preffix: booleano que indica se a chave tem prefixo. Caso tenha, o prefixo será a column_key_name. Caso index2 != -1, é o primeiro índice do slice.
+    :param preffix: booleano que indica se a chave tem prefixo. Caso tenha, o prefixo será a column_key_name.
+                    Caso index2 != -1, ele será o segundo índice do slice que removerá o label da chave primária.
     :param index2: segundo número do slice
     :return:
     """

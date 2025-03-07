@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e8d47770-b5a8-440a-b657-72d629cab702" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Hipparcos/pyplot_HRdiagram/sigma_pi_versus_pi.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Hipparcos/pyplot_scatterplot/sigma_pi_versus_pi_and_V.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/Hipparcos/pyplot_histogram/pandas_histogram.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Hipparcos/pyplot_histogram/pandas_histogram.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/Hipparcos/pandas_histogram/jpg/histogramas.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/Hipparcos/pandas_histogram/jpg/histogramas.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_files/Hipparcos/pandas_histogram/jpg/histogramas_alpha.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/output_files/Hipparcos/pandas_histogram/jpg/histogramas_alpha.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Hipparcos/csv/Hips_do_arquivo_hip_main_dat_txt.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/Hipparcos/csv/Hips_do_arquivo_hip_main_dat_txt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/functions/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/functions/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_files/Hipparcos/csv/hips.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +37,8 @@
   &quot;keyToString&quot;: {
     &quot;Python.20pc.executor&quot;: &quot;Run&quot;,
     &quot;Python.211 estrelas.executor&quot;: &quot;Run&quot;,
+    &quot;Python.49_estrelas.executor&quot;: &quot;Run&quot;,
+    &quot;Python.73_estrelas.executor&quot;: &quot;Run&quot;,
     &quot;Python.BAR_query_around_sem_DR3.executor&quot;: &quot;Run&quot;,
     &quot;Python.BrightStar.executor&quot;: &quot;Run&quot;,
     &quot;Python.BrightStarMultiple.executor&quot;: &quot;Run&quot;,
@@ -82,6 +83,7 @@
     &quot;Python.View.executor&quot;: &quot;Run&quot;,
     &quot;Python.astropy_histogram.executor&quot;: &quot;Run&quot;,
     &quot;Python.asynchronous_query.executor&quot;: &quot;Run&quot;,
+    &quot;Python.asynchronous_query_public_hipparcos.executor&quot;: &quot;Run&quot;,
     &quot;Python.create_database.executor&quot;: &quot;Run&quot;,
     &quot;Python.cross_match.executor&quot;: &quot;Run&quot;,
     &quot;Python.csv.executor&quot;: &quot;Run&quot;,
@@ -112,6 +114,8 @@
     &quot;Python.pandas_histogram.executor&quot;: &quot;Run&quot;,
     &quot;Python.pandas_histogram_external_hips_list.executor&quot;: &quot;Run&quot;,
     &quot;Python.parallax_plots.executor&quot;: &quot;Run&quot;,
+    &quot;Python.public_hiparcos_product.executor&quot;: &quot;Run&quot;,
+    &quot;Python.public_hipparcos.executor&quot;: &quot;Run&quot;,
     &quot;Python.pyplot_HRdiagram.executor&quot;: &quot;Run&quot;,
     &quot;Python.pyplot_histogram.executor&quot;: &quot;Run&quot;,
     &quot;Python.pyplot_scatterplot.executor&quot;: &quot;Run&quot;,
@@ -157,10 +161,13 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue&quot;
+    &quot;last_opened_file_path&quot;: &quot;/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/Hipparcos&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/code/database/Hipparcos" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/code/Hipparcos/pyplot_scatterplot" />
       <recent name="$PROJECT_DIR$/code/SupplementMultiple/csv" />

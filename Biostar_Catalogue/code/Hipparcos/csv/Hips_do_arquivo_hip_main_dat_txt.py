@@ -18,7 +18,7 @@ for (HIP_value) in value:
 
 cont = 0
 print(len(HIP_list))
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/hips.txt", "w") as text_file:
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/HIP_MAIN_DAT_hips.txt", "w") as text_file:
     for (HIP,) in HIP_list:
         cont += 1
         lista = [HIP[4:]]
