@@ -1,9 +1,0 @@
-# Script executado em:
-
-BrightStar.py
-curl_BrightStar_data.php
-BrightStar_product.py
-BrightStarMultiple.py
-curl_BrightStarMultiple_query_around.php
-curl_BrightStarMultiple_query_around_data.php
-BrightStarMultiple_product.py

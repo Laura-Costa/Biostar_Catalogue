@@ -1,4 +1,0 @@
-HD     simbad_parallax simbad_parallax_source V    MV    B_V   simbad_SpType
-37115                                         7.07       -0.06 B7Ve         
-93129                                         7.03             O2If*+O3.5V((f))
-221237                                        7.08       +0.02 B9V          
