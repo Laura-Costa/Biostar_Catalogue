@@ -3,7 +3,7 @@ from matplotlib.ticker import (MultipleLocator, AutoMinorLocator, FormatStrForma
 
 list_HD = []
 
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/input_files/211_stars.txt") as file:
+with open("/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/code/database/input_files/211_stars.txt") as file:
     for line in file:
         list_HD.append("HD {}".format(line.rstrip()))
 
@@ -11,7 +11,8 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
             markersize, xmargin_left, xmargin_right, ymargin_upper, ymargin_bottom, suptitle,
             xrot=0, redx=-1, redy=-1, error_bars=False, minortickwidth=0.5, majortickwidth=0.5,
             dpx = -1, dpy = -1,
-            axeslabelsize=6, y_x=False, x_minor_gap=5, y_minor_gap=5, lgnd_loc="best"):
+            axeslabelsize=6, y_x=False, x_minor_gap=5, y_minor_gap=5, lgnd_loc="best",
+            color='black'):
 
     fig, ax = plt.subplots()
     cursor.execute(query)
@@ -66,15 +67,15 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     if 'LNA' in path:
         for (simbad_HD_value, x, y) in zip(simbad_HD_list, x_axis, y_axis):
             if x <= 1.500 and y <= 9.000 and simbad_HD_value not in list_HD and simbad_HD_value not in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A"):
-                ax.scatter([x], [y], s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
+                ax.scatter([x], [y], s=markersize, color=color, edgecolor='none', marker='o', zorder=3)
             elif simbad_HD_value in ("HD 1237A", "HD 115404A", "HD 140538A", "HD 189733A", "HD 202940A") or simbad_HD_value in list_HD:
                 ax.scatter([x], [y], s=markersize, color='#95a5a6', edgecolor='none', linewidth=0.6, marker='o', zorder=2)
             else:
-                ax.scatter([x], [y], s=markersize, color='black', edgecolor='none', marker='o', zorder=2)
+                ax.scatter([x], [y], s=markersize, color=color, edgecolor='none', marker='o', zorder=2)
     elif not error_bars:
-        ax.scatter(x_axis, y_axis, s=markersize, color='black', edgecolor='none', marker='o', zorder=3)
+        ax.scatter(x_axis, y_axis, s=markersize, color=color, edgecolor='none', marker='o', zorder=3)
     elif error_bars:
-        ax.errorbar(x_axis, y_axis, ms=2.0, color='black', mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list, xerr=x_error_list, ecolor='blue', zorder=3)
+        ax.errorbar(x_axis, y_axis, ms=2.0, color=color, mec='none', fmt='o', elinewidth=0.3, yerr=y_error_list, xerr=x_error_list, ecolor='blue', zorder=3)
 
     if "HR" in path: # Se o diagrama é HR, o eixo y é invertido
         plt.ylim(max(y_axis) + ymargin_bottom, min(y_axis) - ymargin_upper)
@@ -161,7 +162,7 @@ def diagram(cursor, query, query_emphasis, colors, hds, path, xgap, ygap, xlabel
     # salvar a figura em várias extensões diferentes
     for ext in ['jpg', 'eps', 'pdf', 'jpeg', 'svg', 'png']:
         temp_path = path.replace("#", ext)
-        plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
+        plt.savefig('/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
 
     # marcar a HD 146233 e as 5 anãs K
     if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, lgnd_loc)
@@ -200,4 +201,4 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
     # salvar a figura em várias extensões diferentes
     for ext in ['jpg', 'eps', 'pdf', 'jpeg', 'svg', 'png']:
         temp_path = path.replace("#", ext)
-        plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)
+        plt.savefig('/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/output_files/' + temp_path, dpi=1200)

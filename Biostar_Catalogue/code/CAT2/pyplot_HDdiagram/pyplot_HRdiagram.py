@@ -8,7 +8,7 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Gaia'
+    father_table = 'gaia'
     son_table = 'Gaia_product'
 
     query = ("select {father_table}.simbad_HD, "
@@ -36,7 +36,7 @@ def sql_query(y_axis, x_axis):
     return (query, query_emphasis)
 
 def sql_query_zoom(y_axis, x_axis):
-    father_table = 'Gaia'
+    father_table = 'gaia'
     son_table = 'Gaia_product'
 
     query = ("select {father_table}.simbad_HD, "

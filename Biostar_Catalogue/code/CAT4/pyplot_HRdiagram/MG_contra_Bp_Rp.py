@@ -40,7 +40,7 @@ fazer o diagrama de M(G) x Bp-Rp
 """
 (query, query_emphasis) = sql_query('MG', 'Bp_Rp')
 for ext in ['jpg']:
-    f.diagram(cursor, query, query_emphasis, colors, HDs, 'CAT4/pyplot_HRdiagram/' + ext + '/MG_Bp_Rp.' + ext, 0.25, 1.0, r'$B_p-R_p$', r'$M(G)$', 5, 0.20, 0.20, 0.25, 0.25, 'CAT4: CAT1 - Hipparcos', xrot=0, redx=8, redy=7)
+    f.diagram(cursor, query, query_emphasis, colors, HDs, 'CAT4/pyplot_HRdiagram/' + ext + '/MG_Bp_Rp.' + ext, 0.25, 1.0, r'$B_p-R_p$', r'$M(G)$', 5, 0.20, 0.20, 0.25, 0.25, 'CAT4: CAT1 - hipparcos', xrot=0, redx=8, redy=7)
 
 # fechar a conexão com o BD
 connection.close()

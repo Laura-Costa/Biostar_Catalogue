@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
-father_table = 'Hipparcos'
+father_table = 'hipparcos'
 
 """
 Histograma de sigma pi
-para as estrelas do Hipparcos 
+para as estrelas do hipparcos 
 """
 
 query = ("select trim({father_table}.Plx)+0, "
@@ -22,8 +22,8 @@ query = ("select trim({father_table}.Plx)+0, "
          "{father_table}.simbad_DR3 is null "
          ")".format(father_table=father_table))
 
-f.histogram(query, cursor, 'Hipparcos', r'$\sigma_{\pi} \; (mas)$', 3,
-            '/Hipparcos/pyplot_histogram/jpg/Hipparcos_Plx_log.jpg',
+f.histogram(query, cursor, 'hipparcos', r'$\sigma_{\pi} \; (mas)$', 3,
+            '/hipparcos/pyplot_histogram/jpg/Hipparcos_Plx_log.jpg',
             yfontsize=8.0, xfontsize=8.0,
             ylog=True, xlog=True,
             xrot=0, yrot=0,
@@ -33,7 +33,7 @@ f.histogram(query, cursor, 'Hipparcos', r'$\sigma_{\pi} \; (mas)$', 3,
             minortickwidth=1)
 
 f.histogram(query, cursor, "CAT1",  r'$\sigma_{\pi} \; (mas)$', 9,
-            '/Hipparcos/pyplot_histogram/jpg/Hipparcos_Plx.jpg',
+            '/hipparcos/pyplot_histogram/jpg/Hipparcos_Plx.jpg',
             yfontsize=8.0, xfontsize=8.0,
             xrot=0, yrot=0,
             ylabel_ycoord= 0.45, ylabel_xcoord=-2,

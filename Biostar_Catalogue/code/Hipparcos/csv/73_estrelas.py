@@ -62,7 +62,7 @@ query = ("select {father_table}.hip, "
 header = ["hip", "hd", "bd", "cod", "cpd", "vmag", "vtmag", "e_vtmag", "btmag", "e_btmag", "ra", "de",
           "sptype", "plx", "e_plx", "mv", "e_mv", "mvt", "e_mvt", "b_v", "e_b_v", "bt_vt"]
 
-path = "Hipparcos/csv/73_estrelas.xlsx"
+path = "hipparcos/csv/73_estrelas.xlsx"
 queries = [query]
 
 f.xlsx(cursor, queries, header, path, ["73_estrelas"])

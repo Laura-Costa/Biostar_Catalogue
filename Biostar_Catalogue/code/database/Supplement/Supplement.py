@@ -9,8 +9,8 @@ cursor = connection.cursor()
 
 son_table = 'Supplement'
 son_key_column = 'ordinal_number'
-father_table_Hipparcos = 'Hipparcos'
-father_table_Gaia = 'Gaia'
+father_table_Hipparcos = 'hipparcos'
+father_table_Gaia = 'gaia'
 
 # apagar a tabela son_table caso ela já exista
 cursor.execute("drop table if exists {son_table}".format(son_table=son_table))

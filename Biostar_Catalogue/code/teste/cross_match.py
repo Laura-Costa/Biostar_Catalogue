@@ -16,10 +16,10 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
 
 print(stringHIP)
 
-cursor.execute("""select Hipparcos.HIP """
-               """from Hipparcos """
-               """where Hipparcos.simbad_DR3 is null and """
-               """Hipparcos.HIP not in {stringHIP}""".format(stringHIP=stringHIP))
+cursor.execute("""select hipparcos.HIP """
+               """from hipparcos """
+               """where hipparcos.simbad_DR3 is null and """
+               """hipparcos.HIP not in {stringHIP}""".format(stringHIP=stringHIP))
 
 value = cursor.fetchall()
 HIP_list = []
@@ -32,7 +32,7 @@ print()
 print(HIP_list)
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Hipparcos'
+    father_table = 'hipparcos'
     son_table = 'Hipparcos_product'
 
     query = ("select {father_table}.HD, "
@@ -42,7 +42,7 @@ def sql_query(y_axis, x_axis):
              "from {father_table}, {son_table} "
              "where {father_table}.HIP = {son_table}.HIP and "
              "{father_table}.simbad_DR3 is null and "
-             "Hipparcos.HIP not in {stringHIP} and "
+             "hipparcos.HIP not in {stringHIP} and "
              "{son_table}.{x_axis} is not null and "
              "{son_table}.{y_axis} is not null".format(father_table=father_table,
                                                        son_table=son_table,
@@ -71,11 +71,11 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 (query, query_emphasis) = sql_query('MV', 'B_V')
-f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_HRdiagram/#/CROSS_MATCH_MV_B_V.#',
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'hipparcos/pyplot_HRdiagram/#/CROSS_MATCH_MV_B_V.#',
           0.5, 4.0,
           r'$B-V$', r'$M(V)$', 9,
           0.20, 0.20, 0.60, 0.60,
-          'Hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3,
+          'hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3,
           axeslabelsize=10, lgnd_loc='lower left',
           y_minor_gap=10)
 

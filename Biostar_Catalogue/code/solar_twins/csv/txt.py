@@ -1,6 +1,6 @@
 import mysql.connector
 
-father_table = 'Gaia'
+father_table = 'gaia'
 son_table = 'Gaia_product'
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')

@@ -9,9 +9,9 @@ cursor = connection.cursor()
 
 son_table = "SupplementMultiple"
 son_column_key = "ordinal_number"
-father_table_Hipparcos = "Hipparcos"
+father_table_Hipparcos = "hipparcos"
 father_table_Hipparcos_column_key = "HIP"
-father_table_Gaia = "Gaia"
+father_table_Gaia = "gaia"
 father_table_Gaia_column_key = "designation"
 father_table_Supplement = 'Supplement'
 father_table_Supplement_column_key = 'ordinal_number'

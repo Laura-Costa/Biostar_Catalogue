@@ -8,7 +8,7 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 def sql_query(y_axis, x_axis, y_error, x_error):
-    table = 'Hipparcos'
+    table = 'hipparcos'
 
     query_Hipparcos = ("select {table}.HD, "
              "trim({table}.{x_axis})+0, "
@@ -56,18 +56,18 @@ def sql_query(y_axis, x_axis, y_error, x_error):
 fazer o diagrama de Plx x GaiaDR3_parallax
 """
 (query_Hipparcos, query_Hiparcos39mas, query_emphasis) = sql_query('Plx', 'GaiaDR3_parallax', 'e_Plx', 'GaiaDR3_parallax_error')
-f.diagram(cursor, query_Hipparcos, query_emphasis, colors, HDs,'Hipparcos/pyplot_scatterplot/error_bars_emphasis.jpg', 40.00, 40.0, 'paralaxe Gaia DR3', 'paralaxe Hipparcos', 0.5, 15.00, 15.00, 70.00, 70.00, 'Estrelas do Hipparcos com paralaxe no Gaia DR3', xrot=0, error_bars=True)
+f.diagram(cursor, query_Hipparcos, query_emphasis, colors, HDs,'hipparcos/pyplot_scatterplot/error_bars_emphasis.jpg', 40.00, 40.0, 'paralaxe gaia DR3', 'paralaxe hipparcos', 0.5, 15.00, 15.00, 70.00, 70.00, 'Estrelas do hipparcos com paralaxe no gaia DR3', xrot=0, error_bars=True)
 
 """
 fazer o diagrama de Plx x simbad_parallax
 """
 (query_Hipparcos, query_Hipparcos39mas, query_emphasis) = sql_query('Plx', 'simbad_parallax', 'e_Plx', 'simbad_parallax_error')
-f.diagram(cursor, query_Hipparcos, query_emphasis, colors, HDs,'Hipparcos/pyplot_scatterplot/simbad_error_bars_emphasis.jpg', 40.00, 40.0, 'paralaxe Simbad', 'paralaxe Hipparcos', 0.5, 40.00, 15.00, 70.00, 70.00, 'Estrelas do Hipparcos com paralaxe no Simbad', xrot=0, error_bars=True)
+f.diagram(cursor, query_Hipparcos, query_emphasis, colors, HDs,'hipparcos/pyplot_scatterplot/simbad_error_bars_emphasis.jpg', 40.00, 40.0, 'paralaxe Simbad', 'paralaxe hipparcos', 0.5, 40.00, 15.00, 70.00, 70.00, 'Estrelas do hipparcos com paralaxe no Simbad', xrot=0, error_bars=True)
 
 colors = ['red', 'magenta', 'lime', '#95a5a6', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 131976', 'HD 146233', 'HD 191408', 'HD 219134']
 
-f.diagram(cursor, query_Hipparcos39mas, query_emphasis, colors, HDs,'Hipparcos/pyplot_scatterplot/simbad_error_bars_emphasis_39mas.jpg', 40.00, 40.0, 'paralaxe Simbad', 'paralaxe Hipparcos', 0.5, 15.00, 15.00, 70.00, 120.00, 'Estrelas do CAT2 (Plx ≥ 39.00 mas) com designação Gaia DR1, DR2 ou DR3 no Simbad', xrot=0, error_bars=True)
+f.diagram(cursor, query_Hipparcos39mas, query_emphasis, colors, HDs,'hipparcos/pyplot_scatterplot/simbad_error_bars_emphasis_39mas.jpg', 40.00, 40.0, 'paralaxe Simbad', 'paralaxe hipparcos', 0.5, 15.00, 15.00, 70.00, 120.00, 'Estrelas do CAT2 (Plx ≥ 39.00 mas) com designação gaia DR1, DR2 ou DR3 no Simbad', xrot=0, error_bars=True)
 
 # fechar a conexão com o BD
 connection.close()

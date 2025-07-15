@@ -7,7 +7,7 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Gaia'
+    father_table = 'gaia'
     son_table = 'Gaia_product'
 
     query = ("select {father_table}.simbad_HD, "

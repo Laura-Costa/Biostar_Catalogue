@@ -32,7 +32,7 @@ def deg2dms(dec):
 
 father_table = 'CAT1'
 son_table = 'CAT1_product'
-brother_table = 'Hipparcos'
+brother_table = 'hipparcos'
 nephew_table = 'Hipparcos_product'
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh',
@@ -58,10 +58,10 @@ cursor.execute("""select CAT1.designation, """
                """trim(CAT1.phot_g_mean_mag)+0, """
                """trim(CAT1_product.Bp_Rp)+0, """
                """trim(CAT1_product.MG)+0 """
-               """from Hipparcos, CAT1, CAT1_product """
+               """from hipparcos, CAT1, CAT1_product """
                """where CAT1.designation = CAT1_product.designation and """
-               """CAT1.HIP = Hipparcos.HIP and """
-               """Hipparcos.HD in {stringHD} and """
+               """CAT1.HIP = hipparcos.HIP and """
+               """hipparcos.HD in {stringHD} and """
                """CAT1.simbad_HD not in {stringHD}""".format(stringHD=stringHD))
 
 value = cursor.fetchall()

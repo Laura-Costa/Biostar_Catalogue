@@ -115,7 +115,7 @@ lgnd = ax1.legend(loc='lower left', fontsize=fontsize, shadow=True)
 for handle in lgnd.legend_handles:
   handle.set_sizes([80])
 
-plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/pyplot_HRdiagram/jpg/diagramas.jpg', dpi=1200)
+plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/pyplot_HRdiagram/jpg/diagramas.jpg', dpi=1200)
 
 # fechar o cursor
 cursor.close()

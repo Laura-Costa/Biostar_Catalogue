@@ -5,7 +5,7 @@ connection = mysql.connector.connect(host='localhost', port='3306', database='Bi
 cursor = connection.cursor()
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Hipparcos'
+    father_table = 'hipparcos'
     son_table = 'Hipparcos_product'
 
     query = ("select {father_table}.HD, "
@@ -42,11 +42,11 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 (query, query_emphasis) = sql_query('MV', 'B_V')
-f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_HRdiagram/#/MV_B_V.#',
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'hipparcos/pyplot_HRdiagram/#/MV_B_V.#',
           0.5, 4.0,
           r'$B-V$', r'$M(V)$', 9,
           0.20, 0.20, 0.60, 0.60,
-          'Hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3, dp=1,
+          'hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3, dp=1,
           axeslabelsize=10)
 
 """
@@ -56,11 +56,11 @@ colors = ['red', 'lime', 'deepskyblue']
 HDs = ['HD 4628', 'HD 32147', 'HD 146233']
 
 (query, query_emphasis) = sql_query('MVt', 'Bt_Vt')
-f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_HRdiagram/#/MVt_Bt_Vt.#',
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'hipparcos/pyplot_HRdiagram/#/MVt_Bt_Vt.#',
           0.5, 4.0,
           r'$B_t-V_t$', r'$M(V_t)$', 9,
           0.20, 0.20, 0.60, 0.60,
-          'Hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3, dp=1,
+          'hipparcos sem DR3', xrot=0, minortickwidth=1, majortickwidth=1.3, dp=1,
           axeslabelsize=10)
 
 # fechar o cursor

@@ -25,19 +25,19 @@ cursor.execute("""select CAT1.designation, """
                """CAT1_product.MG, """
                """CAT1_product.Bp_Rp, """
                """CAT1.simbad_HD, """
-               """Hipparcos.HD, """
-               """Hipparcos.HIP """
-               """from CAT1, CAT1_product, Hipparcos """
+               """hipparcos.HD, """
+               """hipparcos.HIP """
+               """from CAT1, CAT1_product, hipparcos """
                """where CAT1.designation = CAT1_product.designation and """
-               """CAT1.HIP = Hipparcos.HIP and """  
-               """Hipparcos.HD in {stringHD} """
+               """CAT1.HIP = hipparcos.HIP and """  
+               """hipparcos.HD in {stringHD} """
                """into outfile '/var/lib/mysql-files/211_CAT1.csv' """ 
                """fields optionally enclosed by '"' """
                """terminated by ',' """
                """lines terminated by '\n' """.format(stringHD=stringHD))
 
 file = pd.read_csv('/var/lib/mysql-files/211_CAT1.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/211_CAT1.csv", header=header, index=None)
+file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/211_CAT1.csv", header=header, index=None)
 os.remove("/var/lib/mysql-files/211_CAT1.csv")
 
 header = ["simbad_DR3", "GaiaDR3_parallax", "GaiaDR3_parallax_error", "HD", "HIP"]
@@ -45,17 +45,17 @@ header = ["simbad_DR3", "GaiaDR3_parallax", "GaiaDR3_parallax_error", "HD", "HIP
 cursor.execute("""select simbad_DR3, """
                """GaiaDR3_parallax, """
                """GaiaDR3_parallax_error, """
-               """Hipparcos.HD, """
-               """Hipparcos.HIP """
-               """from Hipparcos """
-               """where Hipparcos.HD in {stringHD} """
+               """hipparcos.HD, """
+               """hipparcos.HIP """
+               """from hipparcos """
+               """where hipparcos.HD in {stringHD} """
                """into outfile '/var/lib/mysql-files/211.csv' """ 
                """fields optionally enclosed by '"' """
                """terminated by ',' """
                """lines terminated by '\n' """.format(stringHD=stringHD))
 
 file = pd.read_csv('/var/lib/mysql-files/211.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/211.csv", header=header, index=None)
+file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/211.csv", header=header, index=None)
 os.remove("/var/lib/mysql-files/211.csv")
 
 header = ["designation", "right_ascension", "declination", "phot_g_mean_mag", "MG", "Bp_Rp", "simbad_HD"]
@@ -76,7 +76,7 @@ cursor.execute("""select CAT1.designation, """
                """lines terminated by '\n' """.format(stringHD=stringHD))
 
 file = pd.read_csv('/var/lib/mysql-files/211_plotado.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/211_plotado.csv", header=header, index=None)
+file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/211_plotado.csv", header=header, index=None)
 os.remove("/var/lib/mysql-files/211_plotado.csv")
 
 header = ["designation", "right_ascension", "declination", "phot_g_mean_mag", "MG", "Bp_Rp", "simbad_HD"]
@@ -98,5 +98,5 @@ cursor.execute("""select CAT1.designation, """
                """lines terminated by '\n' """.format(stringHD=stringHD))
 
 file = pd.read_csv('/var/lib/mysql-files/211_CAT1_HIP_null.csv', header=None)
-file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/211_CAT1_HIP_null.csv", header=header, index=None)
+file.to_csv("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/211_CAT1_HIP_null.csv", header=header, index=None)
 os.remove("/var/lib/mysql-files/211_CAT1_HIP_null.csv")

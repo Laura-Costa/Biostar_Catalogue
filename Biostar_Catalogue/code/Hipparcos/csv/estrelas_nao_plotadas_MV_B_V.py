@@ -3,7 +3,7 @@ import mysql.connector
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
-father_table = 'Hipparcos'
+father_table = 'hipparcos'
 son_table = 'Hipparcos_product'
 
 cursor.execute("select {father_table}.HIP as HIP_order, "
@@ -131,7 +131,7 @@ for i in range(len(MV_list)):
         MV_list[i] = sinal + MV_list[i]
 
 cont = 0
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/estrelas_nao_plotadas_MV_B_V.txt", "w") as text_file:
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/estrelas_nao_plotadas_MV_B_V.txt", "w") as text_file:
     header = ["HIP", "HD", "Vmag", "VTmag", "B_V", "Bt_Vt", "Plx ± e_Plx", "MVt", "MV", "SpType"]
     text_file.write("{0[0]:<7}" # HIP
                     "{0[1]:<7}" # HD

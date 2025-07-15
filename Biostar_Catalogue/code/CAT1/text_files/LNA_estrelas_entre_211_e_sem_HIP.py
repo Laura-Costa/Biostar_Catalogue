@@ -35,7 +35,7 @@ def deg2dms(dec):
 
 father_table = 'CAT1'
 son_table = 'CAT1_product'
-brother_table = 'Hipparcos'
+brother_table = 'hipparcos'
 nephew_table = 'Hipparcos_product'
 
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh',

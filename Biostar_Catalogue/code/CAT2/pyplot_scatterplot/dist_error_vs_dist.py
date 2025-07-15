@@ -10,7 +10,7 @@ colors = ['red', 'lime', 'deepskyblue']
 hds = ['HD 4628', 'HD 32147', 'HD 146233']
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Gaia'
+    father_table = 'gaia'
     son_table = 'Gaia_product'
 
     query = ("select {father_table}.simbad_HD, "

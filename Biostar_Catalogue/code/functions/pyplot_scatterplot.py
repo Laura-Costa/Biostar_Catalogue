@@ -8,7 +8,7 @@ def scatterplot(cursor, query, query_emphasis, colors, hds,
                 ymargim_bottom, ymargim_upper, xmargim_bottom, xmargim_upper, xlabel, ylabel,
                 y_num_labels, x_num_labels, path, suptitle, xrot=0, xlog=False, ylog=False,
                 labelsize=2, y_dp = 5, x_dp = 5, fontsize=7,
-                error_bars=False, lgnd_loc='best'):
+                error_bars=False, lgnd_loc='best', color='black'):
     cursor.execute(query)
     value = cursor.fetchall()
 
@@ -17,7 +17,7 @@ def scatterplot(cursor, query, query_emphasis, colors, hds,
     x_axis = []
     y_axis = []
 
-    size = 1.5
+    size = 8.0
 
     for (simbad_HD_value, parallax_value, x_value, y_value) in value:
         parallax_list.append(parallax_value)
@@ -34,7 +34,7 @@ def scatterplot(cursor, query, query_emphasis, colors, hds,
     min_parallax = min(parallax_list)
 
     fig, ax = plt.subplots()
-    ax.scatter(x_axis, y_axis, s=size, color='black', edgecolor='none', marker='o', zorder=2)
+    ax.scatter(x_axis, y_axis, s=size, color=color, edgecolor='none', marker='o', zorder=2)
     # configurando as dimensões de axes
     plt.xlim(min(x_axis) - xmargim_bottom, max(x_axis) + xmargim_upper)
     plt.ylim(min(y_axis) - ymargim_bottom, max(y_axis) + ymargim_upper)
@@ -76,13 +76,13 @@ def scatterplot(cursor, query, query_emphasis, colors, hds,
 
     else:
         # definir os intervalos dos minor e major ticks, dos eixos x e eixos y
-        ax.xaxis.set_major_locator(MultipleLocator(50.0))
-        ax.xaxis.set_minor_locator(MultipleLocator(50.0 / 10))
-        ax.yaxis.set_major_locator(MultipleLocator(0.5))
-        ax.yaxis.set_minor_locator(MultipleLocator(0.5 / 10))
+        ax.xaxis.set_major_locator(MultipleLocator(100.0))
+        ax.xaxis.set_minor_locator(MultipleLocator(100.0 / 10))
+        ax.yaxis.set_major_locator(MultipleLocator(100))
+        ax.yaxis.set_minor_locator(MultipleLocator(100 / 10))
 
         # configurar labels dos major e minor ticks de ambos os eixos
-        ax.tick_params(axis='both', which='both', labelsize=3, color="black", labeltop=True, top=True, labelright=True,
+        ax.tick_params(axis='both', which='both', labelsize=3, color=color, labeltop=True, top=True, labelright=True,
                        right=True, tickdir='out')
 
         # configurar as caracteristicas da grid
@@ -94,10 +94,8 @@ def scatterplot(cursor, query, query_emphasis, colors, hds,
     # colocar a grid atras do plot
     ax.set_axisbelow(True)
 
-
-
     # salvar diagrama
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path), dpi=1200)
+    plt.savefig('/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path), dpi=1200)
 
     # marcar a HD 146233 e as 5 anãs K
     if len(hds) != 0: emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, lgnd_loc)
@@ -135,4 +133,4 @@ def emphasis_diagram(ax, cursor, query_emphasis, path, colors, hds, error_bars, 
     lgnd.get_frame()
 
     # salvar diagrama
-    plt.savefig('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path), dpi=1200)
+    plt.savefig('/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/output_files/CAT1/pyplot_scatterplot/{}'.format(path), dpi=1200)

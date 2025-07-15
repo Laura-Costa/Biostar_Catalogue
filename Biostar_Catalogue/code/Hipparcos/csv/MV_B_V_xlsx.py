@@ -4,7 +4,7 @@ import code.functions.xlsx as f
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
-father_table = 'Hipparcos'
+father_table = 'hipparcos'
 son_table = 'Hipparcos_product'
 
 query_plotadas = ("select {father_table}.HIP as HIP_order, "
@@ -49,7 +49,7 @@ query_nao_plotadas = ("select {father_table}.HIP as HIP_order, "
                   "order by cast(substring(HIP_order,4) as unsigned) asc".format(father_table=father_table, son_table=son_table))
 
 header = ["HIP", "HD", "Vmag", "VTmag", "B_V", "BT_VT", "Plx", "e_Plx", "MVt", "MV", "SpType"]
-path = "Hipparcos/csv/MV_B_V.xlsx"
+path = "hipparcos/csv/MV_B_V.xlsx"
 queries = [query_plotadas, query_nao_plotadas]
 
 f.xlsx(cursor, queries, header, path, ["plotadas", "nao_plotadas"])

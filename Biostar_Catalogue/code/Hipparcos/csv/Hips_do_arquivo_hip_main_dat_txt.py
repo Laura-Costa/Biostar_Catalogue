@@ -3,7 +3,7 @@ import mysql.connector
 connection = mysql.connector.connect(host='localhost', port='3306', database='Biostar_Catalogue', user='lh', password='ic2023')
 cursor = connection.cursor()
 
-father_table = 'Hipparcos'
+father_table = 'hipparcos'
 son_table = 'Hipparcos_product'
 
 cursor.execute("select {father_table}.HIP as HIP_order "
@@ -18,7 +18,7 @@ for (HIP_value) in value:
 
 cont = 0
 print(len(HIP_list))
-with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/csv/HIP_MAIN_DAT_hips.txt", "w") as text_file:
+with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/csv/HIP_MAIN_DAT_hips.txt", "w") as text_file:
     for (HIP,) in HIP_list:
         cont += 1
         lista = [HIP[4:]]

@@ -1,6 +1,8 @@
+import decimal
+import math
+
 def update_table(cursor, table_name, column_name, line, index, column_key_name, key_value, preffix = False, index2=-1):
     """
-
     @param cursor: variável que permite ao Python executar comandos SQL
     @param table_name: nome da tabela cujo registro será atualizado
     @param column_name: nome da coluna da tabela a ser atualizada
@@ -16,7 +18,7 @@ def update_table(cursor, table_name, column_name, line, index, column_key_name, 
     else:
         data_value = line[index].strip()
 
-    if len(data_value) == 0 or data_value == '\n' or data_value == '\r\n' or data_value == '\r\r':
+    if len(data_value) == 0 or data_value == '~' or data_value == '\n' or data_value == '\r\n' or data_value == '\r\r':
         cursor.execute("update {table_name} set {column_name} = null where {column_key_name} = '{key_value}'".format(table_name=table_name,
                                                                                                                      column_name=column_name,
                                                                                                                      column_key_name=column_key_name,
@@ -54,7 +56,7 @@ def simbad_search_id_by_id(cursor, tab, catalogue, table_name, column_name, colu
 
     @param cursor: permite ao Python executar comandos SQL
     @param tab: tabela de identificadores retornada pela astroquery
-    @param data_release: lançamento Gaia onde se deseja procurar a designação (1, 2 ou 3)
+    @param data_release: lançamento gaia onde se deseja procurar a designação (1, 2 ou 3)
     @param table_name: nome da tabela cujo registro será atualizado
     @param column_key_name: nome da coluna chave da tabela
     @param key_value: valor da chave do registro
@@ -105,3 +107,63 @@ def search_id_in_simbad(tab, cursor, table_name, column_name, column_key_name, k
     else:
         in_simbad = 1
     cursor.execute("update {} set {} = {} where {} = '{}'".format(table_name, column_name, in_simbad, column_key_name, key_value))
+
+def strassen(ra, dec, vr, vt_alpha, vt_delta):
+
+    v = [
+        [vr],
+        [vt_alpha],
+        [vt_delta]
+        ]
+    T = [
+        [decimal.Decimal(-0.05487554), decimal.Decimal(-0.8734371), decimal.Decimal(-0.4838350)],
+        [decimal.Decimal(0.49410945), decimal.Decimal(-0.4448296), decimal.Decimal(0.7469822)],
+        [decimal.Decimal(-0.86766614), decimal.Decimal(-0.1980764), decimal.Decimal(0.4559838)]
+        ]
+    cos_alpha = decimal.Decimal(math.cos(ra))
+    cos_delta = decimal.Decimal(math.cos(dec))
+    sen_alpha = decimal.Decimal(math.sin(ra))
+    sen_delta = decimal.Decimal(math.sin(dec))
+    A = [
+        [cos_alpha*cos_delta, -sen_alpha, -cos_alpha*sen_delta],
+        [sen_alpha*cos_delta, cos_alpha, -sen_alpha*sen_delta],
+        [sen_delta, 0, cos_delta]
+        ]
+    A_v = [
+          [A[0][0]*v[0][0] + A[0][1]*v[1][0] + A[0][2]*v[2][0]],
+          [A[1][0]*v[0][0] + A[1][1]*v[1][0] + A[1][2]*v[2][0]],
+          [A[2][0]*v[0][0] + A[2][1]*v[1][0] + A[2][2]*v[2][0]]
+          ]
+    T_A_v = [
+            [T[0][0]*A_v[0][0] + T[0][1]*A_v[1][0] + T[0][2]*A_v[2][0]],
+            [T[1][0]*A_v[0][0] + T[1][1]*A_v[1][0] + T[1][2]*A_v[2][0]],
+            [T[2][0]*A_v[0][0] + T[2][1]*A_v[1][0] + T[2][2]*A_v[2][0]]
+            ]
+    u = T_A_v[0][0]
+    v = T_A_v[1][0]
+    w = T_A_v[2][0]
+
+    return (u, v, w)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

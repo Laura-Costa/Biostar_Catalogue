@@ -10,7 +10,7 @@ def xlsx(cursor, queries, header, path, sheets):
     :return:
     """
 
-    workbook = xlsxwriter.Workbook('/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path)
+    workbook = xlsxwriter.Workbook('/home/lh/Documents/Biostar_Catalogue/Biostar_Catalogue/output_files/' + path)
 
     for (sheet, query) in zip(sheets, queries):
 

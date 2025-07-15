@@ -18,11 +18,11 @@ with open("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/code/database/in
         else:
             stringHIP += "'HIP {}')".format(line.rstrip())
 
-father_table = 'Hipparcos'
+father_table = 'hipparcos'
 
 """
 Histograma de sigma pi
-para as estrelas do Hipparcos 
+para as estrelas do hipparcos 
 sem numero DR3 no Simbad
 """
 
@@ -105,7 +105,7 @@ lin.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
 lin.set_ylabel(r'$N$')
 log.set_xlabel(r'$\sigma_{\pi} \; [mas]$')
 log.set_ylabel(r'$N$')
-plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/Hipparcos/pandas_histogram/jpg/histogramas2.jpg", dpi=1200)
+plt.savefig("/home/lh/Desktop/Biostar_Catalogue/Biostar_Catalogue/output_files/hipparcos/pandas_histogram/jpg/histogramas2.jpg", dpi=1200)
 
 plt.close()
 

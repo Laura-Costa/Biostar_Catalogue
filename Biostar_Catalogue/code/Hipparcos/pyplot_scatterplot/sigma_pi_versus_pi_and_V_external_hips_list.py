@@ -19,7 +19,7 @@ colors = ['red', 'magenta', 'lime', 'deepskyblue', 'gold', 'chocolate']
 HDs = ['HD 4628', 'HD 16160', 'HD 32147', 'HD 146233', 'HD 191408', 'HD 219134']
 
 def sql_query(y_axis, x_axis):
-    father_table = 'Hipparcos'
+    father_table = 'hipparcos'
     son_table = 'Hipparcos_product'
 
     query = ("select {father_table}.HD, "
@@ -50,7 +50,7 @@ def sql_query(y_axis, x_axis):
 fazer o diagrama de sigma pi x pi
 """
 (query, query_emphasis) = sql_query('e_Plx', 'Plx')
-f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_scatterplot/#/sigma_pi_versus_pi_2.#',
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'hipparcos/pyplot_scatterplot/#/sigma_pi_versus_pi_2.#',
           100.0, 10.0,
           r'$\pi \; [mas]$', r'$\sigma_{\pi} \; [mas]$',
           8.0,
@@ -65,7 +65,7 @@ f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_scatterp
 fazer o diagrama de sigma pi x V
 """
 (query, query_emphasis) = sql_query('e_Plx', 'Vmag')
-f.diagram(cursor, query, query_emphasis, colors, HDs, 'Hipparcos/pyplot_scatterplot/#/sigma_pi_versus_V_2.#',
+f.diagram(cursor, query, query_emphasis, colors, HDs, 'hipparcos/pyplot_scatterplot/#/sigma_pi_versus_V_2.#',
           1.0, 10.0,
           r'$V \; [mag]$', r'$\sigma_{\pi} \; [mas]$',
           8.0,
